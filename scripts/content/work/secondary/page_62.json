@@ -1,0 +1,339 @@
+{
+ "pdf_page": 62,
+ "printed_page": "38",
+ "hindi_pdf_pages": [
+  82,
+  83
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "Compressor and Oxygen Turbo Compressor projects in October 2022 and the targeted level would be achieved from FY 2025-26 onwards after commissioning of the new Build Own and Operate plant. At IISCO Steel Plant, oxygen enrichment had gradually increased with increasing production level. Oxygen supply was reduced during COVID period. During the Exit conference (February 2025) Management informed that necessary steps like installation of new oxygen plants in different units was being done to address the issue",
+   "hi_reference": "एवं नए बिल्ट ओन एवम ओपरेट (बीओओ) प्लांट के चालू होने के बाद वित्त वर्ष 2025-26 से लक्षित स्तर प्राप्त किया जाएगा। इस्को स्टील प्लांट में उत्पादन स्तर बढ़ने के साथ ऑक्सीजन संवर्धन धीरे-धीरे बढ़ा है। कोविड काल के दौरान ऑक्सीजन की आपूर्ति कम हो गई थी। एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान प्रबंधन ने बताया कि इस समस्या के समाधान के लिए विभिन्न इकाइयों में नए ऑक्सीजन प्लांट लगाने जैसे आवश्यक कदम उठाए जा रहे हैं।"
+  },
+  {
+   "type": "body",
+   "en": "Reply of the Management may be viewed in the light of the fact that the management has accepted that there were delays in capital projects (as discussed in para 5.2) that impacted the oxygen enrichment. Besides, there was delay in award of contract of the new Oxygen Plant in Bokaro Steel Plant which was scheduled for completion in July 2024 but was commissioned in January 2025.",
+   "hi_reference": "प्रबंधन के उत्तर को इस तथ्य के आलोक में देखा जा सकता है कि प्रबंधन ने स्वीकार किया है कि पूंजीगत परियोजनाओं में विलंब हुआ (जैसा कि पैरा 5.2 में चर्चा की गई है) जिससे ऑक्सीजन संवर्धन प्रभावित हुआ। इसके अलावा, बोकारो स्टील प्लांट में नए ऑक्सीजन प्लांट का ठेका देने में देरी हुई, जिसे जुलाई 2024 में पूरा होना था, लेकिन इसे जनवरी 2025 में चालू किया गया।"
+  },
+  {
+   "type": "heading",
+   "en": "4.5.3 Blast Pressure and Blast Volume",
+   "hi_reference": "4.5.3 विस्फोट दबाव एवं विस्फोट मात्रा"
+  },
+  {
+   "type": "body",
+   "en": "Blast pressure⁴⁵ is the air pressure at which hot blast air is supplied from the stove system into the blast furnace through the tuyeres. Blast pressure ensures proper penetration of hot air through the burden (coke, sinter, pellets, ore) and improves gas permeability and drives the ascending reducing gases upward. Blast volume⁴⁶ is the quantity (flow rate) of hot blast air blown into the furnace, which controls the combustion of coke and injected fuel. Higher blast volume generates more reduction gas (CO, H₂) which supports higher productivity.",
+   "hi_reference": "ब्लास्ट प्रेशर वह वायु दबाव है जिस पर गर्म ब्लास्ट वायु को स्टोव सिस्टम से ट्यूयर्स के माध्यम से ब्लास्ट फर्नेस⁴⁵ में आपूर्ति की जाती है। विस्फोट दबाव, बोझ (कोक, सिंटर, पेलेट्स, अयस्क) के माध्यम से गर्म हवा के उचित प्रवेश को सुनिश्चित करता है एवं गैस पारगम्यता में सुधार करता है तथा आरोही अपचायक गैसों को ऊपर की ओर ले जाता है। विस्फोट मात्रा⁴⁶ भट्ठी में उड़ाए गए गर्म विस्फोट हवा की मात्रा (प्रवाह दर) है, जो कोक एवं इंजेक्ट किए गए ईंधन के दहन को नियंत्रित करती है। उच्च विस्फोट मात्रा अधिक अपचयन गैस (CO, H₂) उत्पन्न करती है जो उच्च उत्पादकता को समर्थन देती है।"
+  },
+  {
+   "type": "body",
+   "en": "The desired blast pressure and blast volume and actual achieved by the steel plants during 2017-2024 is as below:",
+   "hi_reference": "2017-2024 के दौरान इस्पात संयंत्रों द्वारा वांछित विस्फोट दबाव एवं विस्फोट मात्रा तथा वास्तविक प्राप्ति निम्नानुसार है:"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table-13: Blast Pressure and Blast Volume and Actual achieved by the steel plants during 2017-2024",
+     "hi_reference": "तालिका-13: 2017-2024 के दौरान इस्पात संयंत्रों द्वारा प्राप्त वांछित और वास्तविक विस्फोट दबाव और विस्फोट मात्रा"
+    },
+    "unit": null,
+    "columns": [
+     {
+      "en": "Name of Plant",
+      "hi_reference": "संयंत्र का नाम"
+     },
+     {
+      "en": "Desired Level",
+      "hi_reference": "वांछित स्तर"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "2017-18"
+      },
+      {
+       "en": "2018-19"
+      },
+      {
+       "en": "2019-20"
+      },
+      {
+       "en": "2020-21"
+      },
+      {
+       "en": "2021-22"
+      },
+      {
+       "en": "2022-23"
+      },
+      {
+       "en": "2023-24"
+      }
+     ],
+     [
+      {
+       "en": "Blast Pressure (Kg/cm²)_Old Plants",
+       "hi_reference": "विस्फोट दाब (किग्रा/सेमी²)_पुराने संयंत्र"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      }
+     ],
+     [
+      {
+       "en": "Bokaro Steel Plant",
+       "hi_reference": "बोकारो"
+      },
+      {
+       "en": "2.20-2.50*"
+      },
+      {
+       "en": "1.92-2.45"
+      },
+      {
+       "en": "1.95-2.48"
+      },
+      {
+       "en": "1.87-2.37"
+      },
+      {
+       "en": "1.87-2.22"
+      },
+      {
+       "en": "1.97-2.21"
+      },
+      {
+       "en": "1.70-2.20"
+      },
+      {
+       "en": "2.13-2.19"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1.10-2.12"
+      },
+      {
+       "en": "1.20-2.22"
+      },
+      {
+       "en": "1.23-2.61"
+      },
+      {
+       "en": "0.81-1.80"
+      },
+      {
+       "en": "1.54-2.05"
+      },
+      {
+       "en": "1.39-2.37"
+      },
+      {
+       "en": "1.57-2.49"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur Steel Plant",
+       "hi_reference": "दुर्गापुर"
+      },
+      {
+       "en": "1.65-1.70"
+      },
+      {
+       "en": "1.45-1.64"
+      },
+      {
+       "en": "1.46-1.60"
+      },
+      {
+       "en": "1.42-1.60"
+      },
+      {
+       "en": "1.57-1.85"
+      },
+      {
+       "en": "1.46-1.63"
+      },
+      {
+       "en": "1.53-1.62"
+      },
+      {
+       "en": "1.44-1.66"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "1.70-3.00"
+      },
+      {
+       "en": "1.48"
+      },
+      {
+       "en": "1.2-1.44"
+      },
+      {
+       "en": "1.30-2.32"
+      },
+      {
+       "en": "1.57-2.64"
+      },
+      {
+       "en": "1.56-2.75"
+      },
+      {
+       "en": "1.51-2.55"
+      },
+      {
+       "en": "1.58-2.80"
+      }
+     ],
+     [
+      {
+       "en": "Blast Pressure (Kg/cm²)_New Plants",
+       "hi_reference": "विस्फोट दाब (किग्रा/सेमी²)_नए संयंत्र"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      }
+     ],
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1.95"
+      },
+      {
+       "en": "2.77"
+      },
+      {
+       "en": "4.07"
+      },
+      {
+       "en": "3.48"
+      },
+      {
+       "en": "3.73"
+      },
+      {
+       "en": "3.97"
+      },
+      {
+       "en": "4.00"
+      }
+     ]
+    ],
+    "note": null,
+    "continued_on_next_page": true
+   }
+  },
+  {
+   "type": "footnote",
+   "en": "45 Blast pressure refers to the force measured in Kg/cm² with which the hot air (blast) is injected into the blast furnace through the tuyeres.",
+   "hi_reference": "45 विस्फोट दबाव से तात्पर्य किलोग्राम/सेमी² में मापे गए उस बल से है जिसके साथ गर्म हवा (विस्फोट) को ट्यूयर्स के माध्यम से विस्फोट भट्टी में इंजेक्ट किया जाता है।"
+  },
+  {
+   "type": "footnote",
+   "en": "46 Blast Volume refers to the amount of hot air (blast) that is blown into the blast furnace through the tuyeres per unit of time measured in Nm³/Hour.",
+   "hi_reference": "46 ब्लास्ट वॉल्यूम गर्म हवा (ब्लास्ट) की मात्रा को संदर्भित करता है जो प्रति इकाई समय में ट्यूयर्स के माध्यम से ब्लास्ट फर्नेस में उड़ाई जाती है, जिसे एनएम³/घंटा में मापा जाता है।"
+  },
+  {
+   "type": "page_number",
+   "en": "38"
+  }
+ ]
+}

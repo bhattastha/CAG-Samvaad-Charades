@@ -9,7 +9,7 @@ import { env } from "./env.js";
 import { loadPage, playerPage } from "./pages.js";
 import { grammarTip, say, sayRound, type Said } from "./sahayika/engine.js";
 
-export interface PlayerRow { id: string; email: string; name: string; mobile: string; office_id: string; office_address: string; registration_credits: string | number }
+export interface PlayerRow { id: string; email: string; name: string; mobile: string; office_id: string; office_address: string; registration_credits: string | number; registered_at?: string }
 export interface AttemptRow {
   id: string; player_id: string; round_key: RoundKey; chance_no: number; page_id: string;
   started_at: Date; deadline_at: Date; last_saved_at: Date | null; submitted_at: Date | null; auto_submitted: boolean;
@@ -223,8 +223,10 @@ export async function report(db: Db, a: AttemptRow) {
   };
   const round = roundOf(config(), a.round_key);
   const idx = config().rounds.findIndex((x) => x.key === a.round_key);
-  // suggest the next step: retry Trial until it is passed, then the first playable level not yet played
-  const next = !summary.trialPassed ? undefined
+  // suggest the next step: under the Trial-first rule, retry the Trial until it is passed; then (or always,
+  // when every level is open) the first playable level not yet played
+  const trialGated = config().levels.unlockRule !== "all-open" && !summary.trialPassed;
+  const next = trialGated ? undefined
     : config().rounds.find((x, i) => x.playable !== false && summary.rounds[i].played === 0 && summary.rounds[i].unlocked) ?? undefined;
   return {
     attemptId: a.id,
@@ -258,6 +260,7 @@ export async function report(db: Db, a: AttemptRow) {
     after: sel.after.map((id) => say(id, vars)).filter(Boolean),
     nextRound: next ? { key: next.key, name: next.name, unlocked: true } : null,
     trialPassed: summary.trialPassed,
+    trialGated,
     trialQualifyingScore: summary.trialQualifyingScore,
   };
 }

@@ -1,0 +1,628 @@
+{
+ "pdf_page": 23,
+ "printed_page": "5",
+ "hindi_pdf_pages": [
+  28,
+  29,
+  30
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "one was at Visvesvaraya Iron and Steel Plant (VISP), Bhadravati. Status of working Blast Furnaces in SAIL was as given in table:",
+   "hi_reference": "एक विश्वेश्वरैया लौह एवं इस्पात संयंत्र (वीआईएसपी), भद्रावती में था। सेल में कार्यरत ब्लास्ट फर्नेस की स्थिति तालिका-2 में दी गई है:",
+   "note": "Continues the sentence from pdf 22."
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table-2: Status of Blast Furnaces (BF) of SAIL as of March 2024",
+     "hi_reference": "तालिका-2: मार्च 2024 तक सेल के ब्लास्ट फर्नेस (बीएफ) की स्थिति"
+    },
+    "unit": null,
+    "column_groups": [
+     {
+      "en": "Year of Commissioning",
+      "hi_reference": "प्रारम्भ करने का वर्ष",
+      "columns": [
+       5,
+       12
+      ]
+     },
+     {
+      "en": "Re-commissioning",
+      "hi_reference": "पुनर्प्रारंभ करना",
+      "columns": [
+       5,
+       12
+      ]
+     }
+    ],
+    "columns": [
+     {
+      "en": "Plant",
+      "hi_reference": "संयंत्र"
+     },
+     {
+      "en": "No. of BF",
+      "hi_reference": "बीएफ की संख्या"
+     },
+     {
+      "en": "No. of Blast Furnace in operation",
+      "hi_reference": "प्रचालन में ब्लास्ट फर्नेस की संख्या"
+     },
+     {
+      "en": "Useful Volume¹⁴ (in m³)",
+      "hi_reference": "उपयोगी मात्रा¹⁴ (मी³ में)"
+     },
+     {
+      "en": "Working volume¹⁵ (in m³)",
+      "hi_reference": "कार्यरत मात्रा¹⁵ (मी³ में)"
+     },
+     {
+      "en": "BF#1",
+      "hi_reference": "बीएफ #1"
+     },
+     {
+      "en": "BF#2",
+      "hi_reference": "बीएफ #2"
+     },
+     {
+      "en": "BF#3",
+      "hi_reference": "बीएफ #3"
+     },
+     {
+      "en": "BF#4",
+      "hi_reference": "बीएफ #4"
+     },
+     {
+      "en": "BF#5",
+      "hi_reference": "बीएफ #5"
+     },
+     {
+      "en": "BF#6",
+      "hi_reference": "बीएफ #6"
+     },
+     {
+      "en": "BF#7",
+      "hi_reference": "बीएफ #7"
+     },
+     {
+      "en": "BF#8",
+      "hi_reference": "बीएफ #8"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Bokaro *",
+       "hi_reference": "बोकारो*"
+      },
+      {
+       "en": "5"
+      },
+      {
+       "en": "BF#1, 2, 4 & 5",
+       "hi_reference": "बीएफ#1, 2, 4 एवं 5"
+      },
+      {
+       "en": "10,500"
+      },
+      {
+       "en": "9,282"
+      },
+      {
+       "en": "1972"
+      },
+      {
+       "en": "1976"
+      },
+      {
+       "en": "1978"
+      },
+      {
+       "en": "1981"
+      },
+      {
+       "en": "1985"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "2010"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai *",
+       "hi_reference": "भिलाई*"
+      },
+      {
+       "en": "8"
+      },
+      {
+       "en": "BF#1, 4, 5, 7 & 8",
+       "hi_reference": "बीएफ#1, 4, 5, 7 एवं 8"
+      },
+      {
+       "en": "12,605"
+      },
+      {
+       "en": "10,909"
+      },
+      {
+       "en": "1959"
+      },
+      {
+       "en": "1959"
+      },
+      {
+       "en": "1960"
+      },
+      {
+       "en": "1964"
+      },
+      {
+       "en": "1966"
+      },
+      {
+       "en": "1971"
+      },
+      {
+       "en": "1987"
+      },
+      {
+       "en": "2018"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "1988"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1998"
+      },
+      {
+       "en": "1989"
+      },
+      {
+       "en": "1992"
+      },
+      {
+       "en": "1998"
+      },
+      {
+       "en": "2007"
+      },
+      {
+       "en": "-"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur*",
+       "hi_reference": "दुर्गापुर*"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "BF#2, 3 & 4",
+       "hi_reference": "बीएफ#2, 3 एवं 4"
+      },
+      {
+       "en": "4,600"
+      },
+      {
+       "en": "3,947"
+      },
+      {
+       "en": "1959"
+      },
+      {
+       "en": "1961"
+      },
+      {
+       "en": "1962"
+      },
+      {
+       "en": "1967"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1993"
+      },
+      {
+       "en": "2002"
+      },
+      {
+       "en": "1996"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela*",
+       "hi_reference": "राउरकेला*"
+      },
+      {
+       "en": "5"
+      },
+      {
+       "en": "BF#1, 4 & 5",
+       "hi_reference": "बीएफ#1, 4 एवं 5"
+      },
+      {
+       "en": "7,428"
+      },
+      {
+       "en": "6,409"
+      },
+      {
+       "en": "1959"
+      },
+      {
+       "en": "1960"
+      },
+      {
+       "en": "1962"
+      },
+      {
+       "en": "1967"
+      },
+      {
+       "en": "2013"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "2018"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      }
+     ],
+     [
+      {
+       "en": "Burnpur*",
+       "hi_reference": "बर्नपुर*"
+      },
+      {
+       "en": "5"
+      },
+      {
+       "en": "BF#5",
+       "hi_reference": "बीएफ #5"
+      },
+      {
+       "en": "4,161"
+      },
+      {
+       "en": "3,551"
+      },
+      {
+       "en": "1922"
+      },
+      {
+       "en": "1924"
+      },
+      {
+       "en": "1958"
+      },
+      {
+       "en": "1958"
+      },
+      {
+       "en": "2015"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      },
+      {
+       "en": "--"
+      }
+     ],
+     [
+      {
+       "en": "Bhadravati",
+       "hi_reference": "भद्रावती"
+      },
+      {
+       "en": "1"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "530"
+      },
+      {
+       "en": "450"
+      },
+      {
+       "en": "1995"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      }
+     ],
+     [
+      {
+       "en": "Total",
+       "hi_reference": "कुल"
+      },
+      {
+       "en": "28"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "39,824"
+      },
+      {
+       "en": "34,548"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      }
+     ]
+    ],
+    "row_note": "Each plant has two rows: first = year of commissioning, second = year of re-commissioning.",
+    "note": {
+     "en": "Source: Data furnished by Management. * BF#3 of Bokaro Steel Plant (30 September 2022) and BF#6 of Bhilai Steel Plant (20 August 2023) were under capital repair, BF#1, BF#2, BF#3 & BF#4 of IISCO Steel Plant, BF#2 & BF#3 each of Bhilai and Rourkela Steel Plant and BF#1 of Durgapur Steel Plant have been phased out.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े। * बोकारो इस्पात संयंत्र के बीएफ#3 (30 सितंबर 2022) एवं भिलाई इस्पात संयंत्र के बीएफ#6 (20 अगस्त 2023) पूंजीगत मरम्मत के अधीन थे, इस्को इस्पात संयंत्र के बीएफ#1, बीएफ#2, बीएफ#3 एवं बीएफ#4, भिलाई एवं राउरकेला इस्पात संयंत्र के बीएफ#2 एवं बीएफ#3 एवं दुर्गापुर इस्पात संयंत्र के बीएफ#1 को चरणबद्ध तरीके से समाप्त कर दिया गया है।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "Out of the above, one blast furnace each at Rourkela, IISCO and Bhilai Steel Plant were installed in August 2013, April 2015 and February 2018 respectively under modernization and expansion plan of SAIL. As of March 2024, 16 blast furnaces were in operation, two were under capital repair and nine were phased out due to ageing, beyond economic repair/ up-gradation and enhancement of production capacity with installation of new high capacity blast furnaces. Production from the blast furnace at VISP has been suspended since January 2017 due to difficulty in getting steady supply of Coke and Iron ore at optimum price and shortage of orders due to subdued market condition.",
+   "hi_reference": "उपरोक्त में से, राउरकेला, इस्को एवं भिलाई इस्पात संयंत्र में एक-एक ब्लास्ट फर्नेस क्रमशः अगस्त 2013, अप्रैल 2015 एवं फरवरी 2018 में सेल के आधुनिकीकरण एवं विस्तारीकरण योजना के अंतर्गत स्थापित किए गए थे। मार्च 2024 तक, 16 ब्लास्ट फर्नेस परिचालन में थे, दो पूंजीगत मरम्मत के अधीन थे एवं नौ को पुराने होने, आर्थिक मरम्मत/उन्नयन से परे होने एवं नई उच्च क्षमता वाली ब्लास्ट फर्नेस की स्थापना के साथ उत्पादन क्षमता में वृद्धि के कारण चरणबद्ध तरीके से बंद कर दिया गया था। इष्टतम मूल्य पर कोक एवं लौह अयस्क की स्थिर आपूर्ति प्राप्त करने में कठिनाई एवं बाजार की कमजोर स्थिति के कारण ऑर्डर की कमी के कारण जनवरी 2017 से वीआईएसपी में ब्लास्ट फर्नेस से उत्पादन निलंबित कर दिया गया है।"
+  },
+  {
+   "type": "heading",
+   "en": "1.8 Structure of the Report",
+   "hi_reference": "1.8 रिपोर्ट की संरचना"
+  },
+  {
+   "type": "body",
+   "en": "Chapter I: Introduction",
+   "hi_reference": "अध्याय I: परिचय"
+  },
+  {
+   "type": "body",
+   "en": "Chapter II: Audit Approach",
+   "hi_reference": "अध्याय II: लेखापरीक्षा दृष्टिकोण"
+  },
+  {
+   "type": "body",
+   "en": "Chapter III: Assessment, Availability and Consumption of Raw Materials, Fuel & Services",
+   "hi_reference": "अध्याय III: कच्चे माल एवं ईंधन तथा सेवाएं का आकलन, उपलब्धता एवं खपत"
+  },
+  {
+   "type": "body",
+   "en": "Chapter IV: Operational Performance of Blast Furnaces",
+   "hi_reference": "अध्याय IV: ब्लास्ट फर्नेस का प्रचालन निष्पादन"
+  },
+  {
+   "type": "body",
+   "en": "Chapter V: Blast Furnace Output",
+   "hi_reference": "अध्याय V: ब्लास्ट फर्नेस आउटपुट"
+  },
+  {
+   "type": "body",
+   "en": "Chapter VI: Safety and Environment Issues",
+   "hi_reference": "अध्याय VI: सुरक्षा एवं पर्यावरण संबंधी मुद्दे"
+  },
+  {
+   "type": "footnote",
+   "en": "14 Inner volume of blast furnace between a horizontal plane through the centre-line of the tap hole and stockline level.",
+   "hi_reference": "14 नल छिद्र की केंद्र रेखा और स्टॉकलाइन स्तर के माध्यम से एक क्षैतिज तल के बीच ब्लास्ट फर्नेस का आंतरिक आयतन।"
+  },
+  {
+   "type": "footnote",
+   "en": "15 Inner volume of blast furnace between a horizontal plane through the centre-line of the tuyeres and stockline level.",
+   "hi_reference": "15 ट्यूयर्स की केंद्र रेखा और स्टॉकलाइन स्तर के माध्यम से एक क्षैतिज विमान के बीच ब्लास्ट फर्नेस की आंतरिक मात्रा।"
+  },
+  {
+   "type": "page_number",
+   "en": "5"
+  }
+ ]
+}

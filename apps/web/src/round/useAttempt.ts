@@ -3,7 +3,7 @@ import type { Answers, ClientPart } from "@hc/shared";
 import { api, ApiError, clientId } from "../lib/api";
 
 export interface WatchWord { text: string; en?: string; hi?: string; options?: string[] }
-export interface SourceTerm { start: number; end: number; en: string; hi: string; variants: string[]; avoid: string[] }
+export interface SourceTerm { start: number; end: number; en: string; hi: string; variants: string[]; avoid: string[]; area?: string | null; alternatives?: { hi: string; area: string | null }[] }
 export interface AttemptView {
   id: string;
   roundKey: "trial" | "primary" | "secondary" | "pro";

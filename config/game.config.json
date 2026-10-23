@@ -180,6 +180,8 @@
   },
   "bhashiniServices": {
     "_comment": "Service IDs from BHASHINI's model list (23 Oct 2026).",
+    "translationProvider": "anuvaad",
+    "_translationProvider": "anuvaad = CAG Anuvaad document pipeline (anuvaad-backend.bhashini.co.in, optional ANUVAAD_XLIT_AUTH); dhruva = Dhruva inference API with DHRUVA_NMT_KEY",
     "translation": "ai4bharat/indictrans-v2-all-gpu--t4",
     "asrHindi": "ai4bharat/conformer-hi-gpu--t4",
     "ttsEnglish": "Bhashini/IITM/TTS",
@@ -209,7 +211,7 @@
   "levels": {
     "_comment": "Trial is the mandatory entry level. Passing it (best score >= trialQualifyingScore) unlocks Primary, Secondary and Pro, each independently playable.",
     "trialQualifyingScore": 33,
-    "unlockRule": "trial-pass-unlocks-all",
+    "unlockRule": "all-open",
     "trialWords": {
       "min": 300,
       "max": 400,

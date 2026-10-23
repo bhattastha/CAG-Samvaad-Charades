@@ -1,0 +1,36 @@
+{
+ "pdf_page": 81,
+ "printed_page": "53",
+ "hindi_pdf_pages": [105, 106],
+ "parts": [
+  {"type": "header", "en": "Report No. 38 of 2025", "hi_reference": "2025 की प्रतिवेदन संख्या 38"},
+  {"type": "heading", "en": "Safety and Environment Issues", "hi_reference": "सुरक्षा एवं पर्यावरण संबंधी मुद्दे",
+   "note": "Chapter VI title from the chapter banner; the banner graphic itself (CHAPTER VI tab) is dropped."},
+  {"type": "body",
+   "en": "6.1 Integrated Iron and Steel Industry has many inherent potential safety and environment issues which need to be mitigated and to ensure safe and environmental friendly operations, adherence to the safety and environmental laws is obligatory. Audit examined the safety and environment related issues based on Operational manual/Standard Operating Procedure of Blast Furnace Operations, Safety Audit reports on Blast Furnace operations, Corporate Environmental Policy and Consent to Operate issued by Central/State Pollution Control Board, etc. These issues and some other Plant specific issues have been discussed in detail in succeeding paragraphs.",
+   "hi_reference": "6.1 एकीकृत लौह एवं इस्पात उद्योग में कई अंतर्निहित संभावित सुरक्षा एवं पर्यावरण संबंधी मुद्दे हैं जिन्हें कम करने की आवश्यकता है एवं सुरक्षित एवं पर्यावरण अनुकूल संचालन सुनिश्चित करने हेतु, सुरक्षा एवं पर्यावरण कानूनों का पालन अनिवार्य है। लेखापरीक्षा ने ब्लास्ट फर्नेस संचालन की परिचालन नियमावली/मानक संचालन प्रक्रिया, ब्लास्ट फर्नेस संचालन पर सुरक्षा लेखापरीक्षा प्रतिवेदन, कॉर्पोरेट पर्यावरण नीति एवं केंद्रीय/राज्य प्रदूषण नियंत्रण बोर्ड द्वारा जारी संचालन सहमति आदि के आधार पर सुरक्षा एवं पर्यावरण संबंधी मुद्दों की जाँच की। इन मुद्दों एवं कुछ अन्य संयंत्र-विशिष्ट मुद्दों पर आगे के अनुच्छेदों में विस्तार से चर्चा की गई है।"},
+  {"type": "heading", "en": "6.1.1 Safety Audit", "hi_reference": "6.1.1 सुरक्षा लेखापरीक्षा"},
+  {"type": "body",
+   "en": "Corporate Safety Policy of SAIL stipulates safety audit to assess compliance to safety standards, mitigating plans, develop improvement plan and accountabilities for completion and follow up on timeline and recommendations. SAIL Safety Organization conducted safety audit of Blast Furnaces of all integrated steel plants during the years 2017-18 to 2023-24. Safety audit of blast furnaces was conducted once in Durgapur Steel Plant, twice in Bhilai, Rourkela and IISCO Steel Plant, and four times in Bokaro Steel Plant by SAIL Safety Organisation during 2017-24 as shown in table below:",
+   "hi_reference": "सेल की कॉर्पोरेट सुरक्षा नीति में सुरक्षा मानकों के अनुपालन का निर्धारण, शमन योजनाएँ, सुधार योजनाएँ विकसित करना एवं उन्हें पूरा करने के लिए जवाबदेही तय करना, समय-सीमा एवं अनुशंसाओं पर अनुवर्ती कार्रवाई करना सम्मिलित है। सेल सुरक्षा संगठन ने वर्ष 2017-18 से 2023-24 तक सभी एकीकृत इस्पात संयंत्रों की ब्लास्ट फर्नेस की सुरक्षा लेखापरीक्षा किया। वर्ष 2017-24 के दौरान सेल सुरक्षा संगठन द्वारा दुर्गापुर इस्पात संयंत्र में एक बार, भिलाई, राउरकेला एवं इस्को इस्पात संयंत्र में दो बार तथा बोकारो इस्पात संयंत्र में चार बार ब्लास्ट फर्नेस का सुरक्षा लेखापरीक्षा किया गया, जैसा कि नीचे दी गई तालिका में दर्शाया गया है:"},
+  {"type": "table", "layout": {
+    "title": {"en": "Table 16: Showing details of Safety Audit conducted by SAIL Safety Organisation during 2017-24",
+              "hi_reference": "2017-24 के दौरान सेल सुरक्षा संगठन द्वारा किए गए सुरक्षा लेखापरीक्षा का विवरण",
+              "note": "CAG Hindi title has no 'तालिका 16:' label."},
+    "unit": null,
+    "columns": [
+     {"en": "Name of the Steel Plant", "hi_reference": "इस्पात संयंत्र का नाम"},
+     {"en": "Safety Audit Period", "hi_reference": "सुरक्षा लेखापरीक्षा अवधि"},
+     {"en": "Status of implementation of recommendations", "hi_reference": "अनुशंसाओं के कार्यान्वयन की स्थिति"}
+    ],
+    "rows": [
+     [{"en": "Bhilai Steel Plant", "hi_reference": "भिलाई इस्पात संयंत्र"}, {"en": "February 2019 & July 2023", "hi_reference": "फरवरी 2019 एवं जुलाई 2023"}, {"en": "All 158 complied", "hi_reference": "सभी 158 का अनुपालन किया गया"}],
+     [{"en": "Rourkela Steel Plant", "hi_reference": "राउरकेला इस्पात संयंत्र"}, {"en": "February 2021 & October 2022", "hi_reference": "फरवरी 2021 एवं अक्टूबर 2022"}, {"en": "All 140 complied", "hi_reference": "सभी 140 का अनुपालन किया गया"}],
+     [{"en": "Durgapur Steel Plant", "hi_reference": "दुर्गापुर इस्पात संयंत्र"}, {"en": "March 2021", "hi_reference": "मार्च 2021"}, {"en": "All 22 complied", "hi_reference": "सभी 22 का अनुपालन किया गया"}],
+     [{"en": "IISCO Steel Plant", "hi_reference": "इस्को स्टील प्लांट"}, {"en": "October 2019 & November 2022", "hi_reference": "अक्टूबर 2019 एवं नवंबर 2022"}, {"en": "83 out of total 84 recommendations complied.", "hi_reference": "कुल 84 अनुशंसाओं में से 83 का अनुपालन किया गया।"}],
+     [{"en": "Bokaro Steel Plant", "hi_reference": "बोकारो इस्पात संयंत्र"}, {"en": "January 2018, July 2019, February 2021 and August 2022", "hi_reference": "जनवरी 2018, जुलाई 2019, फरवरी 2021 एवं अगस्त 2022"}, {"en": "30 out of 40 recommendations were complied.", "hi_reference": "40 में से 30 अनुशंसाओं का अनुपालन किया गया।"}]
+    ],
+    "note": {"en": "Source: Data furnished by Management.", "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"}}},
+  {"type": "page_number", "en": "53"}
+ ]
+}

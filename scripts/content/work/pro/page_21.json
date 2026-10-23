@@ -1,0 +1,201 @@
+{
+ "pdf_page": 21,
+ "printed_page": "3",
+ "hindi_pdf_pages": [
+  25,
+  26,
+  27
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "achieve the production target using the latest technologies, project management capabilities for efficient, optimum and smooth implementation of the projects. Operation Directorate headed by Executive Director (Operations) at corporate office monitors the plant level production and flags the issues to the top management for corrective action. They also facilitate coordination between plants and Logistics & Infrastructure for timely movement of supply and inputs/services so as to avoid deviation from the Annual Business Plan/Perspective (ABP).",
+   "hi_reference": "परियोजनाओं के कुशल, इष्टतम एवं सुचारू कार्यान्वयन के लिए नवीनतम प्रौद्योगिकियों, परियोजना प्रबंधन क्षमताओं का उपयोग करके उत्पादन लक्ष्य को प्राप्त करने के लिए परिचालन रणनीतियों को प्रभावी ढंग से अपनाने को सुनिश्चित करने का उत्तरदायित्व भी उनका है। निगमित कार्यालय में कार्यकारी निदेशक (संचालन) की अध्यक्षता में परिचालन निदेशालय संयंत्र स्तर पर उत्पादन की निगरानी करता है तथा सुधारात्मक कार्रवाई के लिए शीर्ष प्रबंधन को मुद्दों से अवगत कराता है। वे आपूर्ति एवं आगत/सेवाओं के समय पर संचालन के लिए संयंत्रों एवं लॉजिस्टिक्स एवं अवसंरचना के मध्य समन्वय की सुविधा भी प्रदान करते हैं, ताकि वार्षिक व्यवसाय योजना/परिप्रेक्ष्य (एबीपी) से विचलन से बचा जा सके।",
+   "note": "Starts mid-sentence (continued from pdf 20). The Hindi sentence is ordered differently, so its tail clause (from परियोजनाओं के कुशल…) is repeated here; the full sentence also appears on page_20."
+  },
+  {
+   "type": "body",
+   "en": "Executive Director (Works) is the head of the entire operation of respective steel plant who reports to the respective Director In-charge/Head of the Plant. The Blast Furnace department headed by a Chief General Manager/General Manager of the respective plants is responsible for production of hot metal and repair & maintenance of blast furnaces.",
+   "hi_reference": "कार्यकारी निदेशक (कार्य) संबंधित इस्पात संयंत्र के संपूर्ण परिचालन के प्रमुख होते हैं, जो संबंधित प्रभारी निदेशक/संयंत्र प्रमुख को रिपोर्ट करते हैं। संबंधित संयंत्रों के मुख्य महाप्रबंधक/महाप्रबंधक के नेतृत्व में ब्लास्ट फर्नेस विभाग, तप्त धातु के उत्पादन तथा ब्लास्ट फर्नेस की मरम्मत एवं रखरखाव के लिए उत्तरदायी हैं।"
+  },
+  {
+   "type": "body",
+   "en": "The Company has an Internal Audit Department which conducts Compliance Audit and reviews operations. Internal Auditors advise Management and the Board of Directors how to better execute their responsibilities. The significant findings of internal audit are discussed by the Audit Committee. During last seven years, internal audit of Blast Furnace department was conducted nine times in Bhilai Steel Plant, five times in IISCO Steel Plant, four times each in Bokaro and Durgapur Steel Plant, and twice in Rourkela Steel Plant.",
+   "hi_reference": "कंपनी में एक आंतरिक लेखापरीक्षा विभाग है जो अनुपालन लेखापरीक्षा करता है एवं परिचालनों की समीक्षा करता है। आंतरिक लेखापरीक्षक, प्रबंधन एवं निदेशक मंडल को सलाह देते हैं कि वे अपनी जिम्मेदारियों का बेहतर ढंग से निर्वहन कैसे करें। आंतरिक लेखापरीक्षा के महत्वपूर्ण निष्कर्षों पर लेखापरीक्षा समिति द्वारा चर्चा की जाती है। पिछले सात वर्षों के दौरान, भिलाई इस्पात संयंत्र में ब्लास्ट फर्नेस विभाग का आंतरिक लेखापरीक्षण नौ बार, इस्को इस्पात संयंत्र में पांच बार, बोकारो एवं दुर्गापुर इस्पात संयंत्र में चार-चार बार तथा राउरकेला इस्पात संयंत्र में दो बार किया गया।"
+  },
+  {
+   "type": "heading",
+   "en": "1.6 Process of running of Blast Furnace",
+   "hi_reference": "1.6 ब्लास्ट फर्नेस संचालन की प्रक्रिया"
+  },
+  {
+   "type": "body",
+   "en": "Blast Furnace is a key unit in the production process of a steel plant which produces hot metal, the primary raw material for steel making. It is a vertical shaft furnace, in which solid raw materials like Iron ore, Sinter⁵, Pellet⁶, Linz-Donawitz (LD) slag⁷, Quartzite and fuel like Coke⁸ are charged from top of the furnace and hot blast⁹ and Coal Dust",
+   "hi_reference": "ब्लास्ट फर्नेस, इस्पात संयंत्र की उत्पादन प्रक्रिया में एक प्रमुख इकाई है जो तप्त धातु का उत्पादन करती है, जो इस्पात निर्माण के लिए प्राथमिक कच्चा माल है। यह एक ऊर्ध्वाधर शाफ्ट भट्ठी है, जिसमें लौह अयस्क, सिंटर⁵, पेलेट,⁶ लिंज़-डोनाविट्ज़ (एलडी) स्लैग⁷, क्वार्टजाइट एवं कोक⁸ जैसे ईंधन जैसे ठोस कच्चे माल को भट्ठी के ऊपर से आवेशित किया जाता है एवं ट्यूयर्स¹¹ से गर्म विस्फोट⁹ एवं कोयला डस्ट",
+   "note": "Sentence continues on pdf 22. Hindi footnote markers renumbered to the English numbers (Hindi prints ट्यूयर्स⁹, गर्म विस्फोट¹⁰, इंजेक्शन¹¹)."
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_21_1.png",
+    "title": {
+     "en": "Figure 1: Blast Furnace Process Layout",
+     "hi_reference": "चित्र 1: ब्लास्ट फर्नेस प्रक्रिया"
+    },
+    "labels": [
+     {
+      "en": "Coke",
+      "hi_reference": "कोक"
+     },
+     {
+      "en": "Iron Ore (Lump)",
+      "hi_reference": "लौह अयस्क (लंप)"
+     },
+     {
+      "en": "Sinter",
+      "hi_reference": "सिंटर"
+     },
+     {
+      "en": "CHARGING",
+      "hi_reference": "चार्जिंग",
+      "uncertain": true
+     },
+     {
+      "en": "Coke Ovens",
+      "hi_reference": "कोक ओवन"
+     },
+     {
+      "en": "Iron ore",
+      "hi_reference": "लौह अयस्क"
+     },
+     {
+      "en": "Raw Material Handling Plant",
+      "hi_reference": "कच्चा माल प्रबंधन संयंत्र"
+     },
+     {
+      "en": "Sinter Plant",
+      "hi_reference": "सिंटर संयंत्र"
+     },
+     {
+      "en": "Throat",
+      "hi_reference": "थ्रॉट"
+     },
+     {
+      "en": "Stack",
+      "hi_reference": "स्टैक"
+     },
+     {
+      "en": "BLAST FURNACE",
+      "hi_reference": "ब्लास्ट फर्नेस"
+     },
+     {
+      "en": "Turbo Blower Station (TBS)",
+      "hi_reference": "टर्बो ब्लोअर स्टेशन (टीबीएस)"
+     },
+     {
+      "en": "Belly",
+      "hi_reference": "बेली"
+     },
+     {
+      "en": "Cold Air",
+      "hi_reference": "ठंडी हवा"
+     },
+     {
+      "en": "Steam",
+      "hi_reference": "भाप"
+     },
+     {
+      "en": "Thermal Power Plant (TPP) Boilers",
+      "hi_reference": "थर्मल पावर प्लांट (टीपीपी) बॉयलर"
+     },
+     {
+      "en": "Tuyeres",
+      "hi_reference": "ट्यूयर्स"
+     },
+     {
+      "en": "Hot air & Steam",
+      "hi_reference": "गर्म हवा और भाप"
+     },
+     {
+      "en": "Bosh",
+      "hi_reference": "बोश"
+     },
+     {
+      "en": "Tap Hole",
+      "hi_reference": "टैप होल"
+     },
+     {
+      "en": "Hearth",
+      "hi_reference": "फर्नेस",
+      "note": "Hindi figure prints फर्नेस at the Hearth label"
+     },
+     {
+      "en": "Steam & Hot Air",
+      "hi_reference": "भाप और गर्म हवा"
+     },
+     {
+      "en": "Stoves",
+      "hi_reference": "स्टोव"
+     },
+     {
+      "en": "Slag Granulation Plant (SGP)",
+      "hi_reference": "स्लैग ग्रैनुलेशन प्लांट (एसजीपी)"
+     },
+     {
+      "en": "Liquid Slag",
+      "hi_reference": "लिक्विड स्लैग"
+     },
+     {
+      "en": "CAST HOUSE",
+      "hi_reference": "कास्ट हाउस"
+     },
+     {
+      "en": "Hot Metal",
+      "hi_reference": "तप्त धातु"
+     },
+     {
+      "en": "Steel Melting Shop (SMS)",
+      "hi_reference": "स्टील मेल्टिंग शॉप (एसएमएस)",
+      "uncertain": true
+     }
+    ],
+    "source": null
+   }
+  },
+  {
+   "type": "footnote",
+   "en": "5 Sinter is an agglomeration of iron ore fines, flux materials (Limestone and Dolomite) and coke breeze prepared in a Sintering Plant.",
+   "hi_reference": "5 सिंटर, लौह अयस्क के चूर्ण, फ्लक्स पदार्थों (चूना पत्थर और डोलोमाइट) और कोक ब्रिज का मिश्रण है, जिसे सिंटरिंग संयंत्र में तैयार किया जाता है।"
+  },
+  {
+   "type": "footnote",
+   "en": "6 Thermally agglomerated substance formed by heating a variable mixture of iron ore, limestone, dolomite, binder and miscellaneous iron bearing materials.",
+   "hi_reference": "6 लौह अयस्क, चूना पत्थर, डोलोमाइट, बंधक और विविध लौह युक्त सामग्रियों के परिवर्तनशील मिश्रण को गर्म करके बनाया गया तापीय रूप से एकत्रित पदार्थ।"
+  },
+  {
+   "type": "footnote",
+   "en": "7 It is a by-product generated during the steelmaking process due to oxidation of impurities in molten iron.",
+   "hi_reference": "7 यह पिघले हुए लोहे में अशुद्धियों के ऑक्सीकरण के कारण इस्पात निर्माण प्रक्रिया के दौरान उत्पन्न एक उप-उत्पाद है।"
+  },
+  {
+   "type": "footnote",
+   "en": "8 A fuel used in the iron making process that is created by heating coal in the absence of air.",
+   "hi_reference": "8 लोहा बनाने की प्रक्रिया में प्रयुक्त एक ईंधन जो हवा की अनुपस्थिति में कोयले को गर्म करके बनाया जाता है।"
+  },
+  {
+   "type": "footnote",
+   "en": "9 The air which is heated in the hot blast stoves and fed into the blast furnace through the tuyeres for combustion of fuel.",
+   "hi_reference": "9 गर्म ब्लास्ट स्टोव में गर्म की गई हवा को ईंधन के दहन के लिए ट्यूयर्स के माध्यम से ब्लास्ट फर्नेस में भेजा जाता है।",
+   "note": "Hindi edition numbers this footnote 10"
+  },
+  {
+   "type": "page_number",
+   "en": "3"
+  }
+ ]
+}

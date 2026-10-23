@@ -86,3 +86,6 @@ ALTER TABLE page_parts ADD COLUMN IF NOT EXISTS page_no int;
 ALTER TABLE attempts ADD COLUMN IF NOT EXISTS session_id text;
 
 CREATE TABLE IF NOT EXISTS audit_logs (id serial PRIMARY KEY, actor text NOT NULL, action text NOT NULL, target text NOT NULL, at timestamptz NOT NULL DEFAULT now(), meta jsonb);
+
+-- Anuvaad glossary sectors (sector widens, never narrows); null = general entry
+ALTER TABLE glossary_terms ADD COLUMN IF NOT EXISTS sector text;

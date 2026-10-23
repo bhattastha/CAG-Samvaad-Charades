@@ -125493,18 +125493,14 @@
   "english_term": "staff",
   "hindi_term": "कर्मचारी वर्ग",
   "accepted_variants": [
-   "कर्मचारी",
-   "कार्मिक"
+   "कर्मचारी"
   ],
   "avoid_forms": [
    "स्टाफ"
   ],
-  "flags": [
-   "merged_case_or_duplicate_rows"
-  ],
+  "flags": [],
   "source_record_ids": [
-   "6a0a05ff5eb728cbb19697c0",
-   "6a967676e53c0ab82db59e47"
+   "6a0a05ff5eb728cbb19697c0"
   ]
  },
  {
@@ -148382,5 +148378,16 @@
   "source_record_ids": [
    "6a0a05ff5eb728cbb1969e7b"
   ]
+ },
+ {
+  "english_term": "staff",
+  "hindi_term": "कार्मिक",
+  "accepted_variants": [],
+  "avoid_forms": [],
+  "flags": [],
+  "source_record_ids": [
+   "6a967676e53c0ab82db59e47"
+  ],
+  "sector": "Railways"
  }
 ]

@@ -18,7 +18,9 @@ import { GlossaryDrawer } from "../editor/GlossaryDrawer";
 import { VoiceTyping } from "../editor/voice";
 import { useAttempt } from "../round/useAttempt";
 import { useFairPlay } from "../round/useFairPlay";
-import { DraftPanel, fk, GlossPopover, SourcePanel, type FieldKey, type PopoverState } from "../round/PageViews";
+import { fk, GlossPopover, SourcePanel, type DraftProps, type FieldKey, type PopoverState } from "../round/PageViews";
+import { ContextPanel, SegmentRows } from "../round/Workbench";
+import { Icon } from "../components/Icon";
 import { ChatPanel } from "../round/ChatPanel";
 import { enterFullscreen } from "./PreRound";
 
@@ -213,11 +215,37 @@ export function Round() {
 
   const isTrial = view.roundKey === "trial";
   const confirming = Date.now() < confirmUntil;
+  const focusField = (pid: string): FieldKey | null => {
+    if (lastField?.startsWith(`${pid}:`)) return lastField;
+    const f = view.page.parts.find((p) => p.id === pid)?.fields.find((x) => !x.numeric);
+    return f ? fk(pid, f.key) : null;
+  };
   const insertGlossary = (hi: string) => {
-    const k = lastField ?? (isTrial ? fk("passage", "t") : null);
+    const k = (focusedPart && !isTrial ? focusField(focusedPart) : null) ?? lastField ?? (isTrial ? fk("passage", "t") : null);
     const h = k ? editors.current.get(k) : null;
     if (h && !readOnly) { h.insertText(hi, "glossary"); setGlossOpen(false); }
   };
+
+  const onTermPick = (pid: string, key: string, tm: { en: string; hi: string; variants: string[]; avoid: string[] }, rect: DOMRect) => {
+    const part = view.page.parts.find((p) => p.id === pid);
+    const target = isTrial ? fk("passage", "t") : part?.fields.some((f) => f.key === key && !f.numeric) ? fk(pid, key) : null;
+    setPop({ rect, title: `${tm.en} → ${tm.hi}`, options: [tm.hi, ...tm.variants].filter(Boolean).slice(0, 5), avoid: tm.avoid, mode: "insert", target });
+  };
+  const draftProps: DraftProps = {
+    parts: visibleParts, answers, readOnly, watch: watchTexts, focusedPart, register,
+    onField: (pid, key, v) => at.update(pid, { field: [key, v] }),
+    onTick: (pid, done) => { at.update(pid, { done }); if (!done) sfx("tap"); },
+    onFocus, onBlocked, onTyping, onXlit: xlitAccept,
+    onWatchClick: (pid, key, w) => {
+      const ww = watchWords.find((x) => x.text === w.word);
+      setPop({ rect: w.rect, title: ww?.en ? `${w.word} · ${ww.en}` : w.word, options: ww?.options ?? [], mode: "replace", target: fk(pid, key), range: { from: w.from, to: w.to } });
+      if (!ww?.options?.length) { setGlossQuery(ww?.en ?? ""); }
+    },
+  };
+  const editable = view.page.parts.filter((p) => p.editable);
+  const focused = editable.find((p) => p.id === focusedPart) ?? null;
+  const focusedTerms = focused ? Object.values(view.page.sourceTerms[focused.id] ?? {}).flat() : isTrial ? Object.values(view.page.sourceTerms.passage ?? {}).flat() : [];
+  const pageParts = visibleParts.filter((p) => p.editable && p.tickGroup);
 
   const modeOptions: [KeyboardMode, string][] = [["roman", t("round.keyboardPhonetic").replace(/^.*:\s*/, "")], ["inscript", t("round.keyboardInscript")], ["device", t("round.keyboardDevice")]];
   const leftLine = (moment: string) => lines?.find((l) => l.id === `${view.roundKey}.in_round.${moment}`) ?? null;
@@ -228,7 +256,7 @@ export function Round() {
       <div className="sr-only" aria-live="assertive">{srNote}</div>
 
       {/* HUD (non-diegetic) + last-minute edge glow (meta) */}
-      <div data-hud-progress className="sticky top-14 z-20">
+      <div data-hud-progress className="sticky top-[59px] z-20">
         <Hud round={round} chanceNo={view.chanceNo} maxChances={cfg.maxChancesPerRound} remaining={remaining} limit={limitS}
           warn5={cfg.fairPlay.warnAtMinutesLeft * 60} warn1={cfg.fairPlay.warnAtMinutesLeftSecond * 60}
           progress={prog.done} total={prog.total} isTrial={isTrial} creditCap={view.creditCap} save={at.save} sample={view.page.sample} />
@@ -238,10 +266,10 @@ export function Round() {
       )}
       <Burst fire={burst} count={36} spread={300} />
       {/* phone: switch panels */}
-      <div className="lg:hidden mx-auto w-full px-3 mt-3">
-        <div className="grid grid-cols-2 rounded-full bg-gray-100 p-1 text-[15px] font-semibold">
+      <div className={`lg:hidden mx-auto w-full px-3 mt-3 ${isTrial ? "" : "hidden"}`}>
+        <div className="grid grid-cols-2 rounded-ui bg-slate-100 p-1 text-[15px] font-semibold">
           {(["src", "dst"] as const).map((k) => (
-            <button key={k} onClick={() => setMobilePane(k)} className={`rounded-full py-2 ${mobilePane === k ? "bg-white shadow text-primary-strong" : "text-muted"}`}>
+            <button key={k} onClick={() => setMobilePane(k)} className={`rounded-md py-2 ${mobilePane === k ? "bg-white shadow text-navy" : "text-muted"}`}>
               {k === "src" ? t("round.sourceLabel") : t("round.yourTranslation")}
             </button>
           ))}
@@ -250,40 +278,36 @@ export function Round() {
 
       {pageNos.length > 1 && (
         <nav className="mx-auto w-full max-w-[1400px] px-3 sm:px-6 mt-3 flex items-center gap-3" aria-label={t("round.pageNav", { n: pageIdx + 1, total: pageNos.length })}>
-          <button className="btn-ghost py-1.5 px-4 text-base" disabled={pageIdx === 0} onClick={() => { setPageIdx(pageIdx - 1); sfx("whoosh"); }}>← {t("round.prevPage")}</button>
+          <button className="btn-ghost py-1.5 px-3 text-sm" disabled={pageIdx === 0} onClick={() => { setPageIdx(pageIdx - 1); sfx("whoosh"); }}><Icon name="chevronLeft" size={16} />{t("round.prevPage")}</button>
           <div className="flex-1 flex items-center gap-1 overflow-x-auto py-1">
             {pageNos.map((n, i) => (
               <button key={n} onClick={() => { setPageIdx(i); sfx("tap"); }} aria-current={i === pageIdx}
-                className={`shrink-0 min-w-8 h-8 px-2 rounded-full text-xs font-extrabold border-2 ${i === pageIdx ? "bg-primary border-primary text-white" : pageDone(n) ? "bg-success-soft border-green-300 text-green-800" : "bg-white border-gray-200 text-muted"}`}>
-                {pageDone(n) && i !== pageIdx ? "✓" : n}
+                className={`shrink-0 min-w-8 h-8 px-2 rounded-md text-xs font-bold tnum border ${i === pageIdx ? "bg-navy border-navy text-white" : pageDone(n) ? "bg-success-soft border-success/40 text-success" : "bg-white border-slate-200 text-muted"}`}>
+                {pageDone(n) && i !== pageIdx ? <Icon name="check" size={14} stroke={2.6} className="mx-auto" /> : n}
               </button>
             ))}
           </div>
           <span className="text-sm font-bold whitespace-nowrap">{t("round.pageNav", { n: pageIdx + 1, total: pageNos.length })}</span>
-          <button className="btn-primary py-1.5 px-4 text-base" disabled={pageIdx === pageNos.length - 1} onClick={() => { setPageIdx(pageIdx + 1); sfx("whoosh"); }}>{t("round.nextPage")} →</button>
+          <button className="btn-primary py-1.5 px-3 text-sm" disabled={pageIdx === pageNos.length - 1} onClick={() => { setPageIdx(pageIdx + 1); sfx("whoosh"); window.scrollTo({ top: 0 }); }}>{t("round.nextPage")}<Icon name="chevronRight" size={16} /></button>
         </nav>
       )}
+      {isTrial ? (
       <main className="mx-auto w-full max-w-[1400px] flex-1 px-3 sm:px-6 py-3 grid lg:grid-cols-2 gap-4 pb-40">
         <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabel")}>
-          <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50 rounded-t-card flex items-center gap-2">
-            <span className="font-bold">📄 {t("round.sourceLabel")}</span><span className="text-sm text-muted">{t("round.sourceLabelEn")}</span>
-            <span className="ml-auto text-xs text-royal hidden sm:inline">{t("round.glossaryHint")}</span>
+          <div className="px-4 py-2.5 border-b border-slate-200 bg-slate-50 rounded-t-card flex items-center gap-2">
+            <span className="font-bold inline-flex items-center gap-1.5"><Icon name="file" size={16} />{t("round.sourceLabel")}</span><span className="text-sm text-muted">{t("round.sourceLabelEn")}</span>
+            <span className="ml-auto text-xs text-navy-600 hidden sm:inline">{t("round.glossaryHint")}</span>
           </div>
           <div className="p-4 sm:p-5 overflow-y-auto max-h-[calc(100vh-260px)]">
             <SourcePanel parts={visibleParts} terms={view.page.sourceTerms} focusedPart={focusedPart} sentenceIndex={isTrial ? sentenceIdx : null}
               onPartClick={(pid) => { setFocusedPart(pid); const f = view.page.parts.find((p) => p.id === pid)?.fields.find((x) => !x.numeric); if (f) editors.current.get(fk(pid, f.key))?.focus(); }}
-              onTerm={(pid, key, tm, rect) => {
-                const part = view.page.parts.find((p) => p.id === pid);
-                const target = isTrial ? fk("passage", "t") : part?.fields.some((f) => f.key === key && !f.numeric) ? fk(pid, key) : null;
-                setPop({ rect, title: `${tm.en} → ${tm.hi}`, options: [tm.hi, ...tm.variants].filter(Boolean).slice(0, 5), avoid: tm.avoid, mode: "insert", target });
-              }} />
+              onTerm={onTermPick} />
           </div>
         </section>
 
-        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] border-primary/60 ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
-          <div className="px-4 py-2.5 border-b border-orange-100 bg-cream rounded-t-card flex items-center gap-2">
-            <span className="font-bold">✍️ {isTrial ? t("round.yourTranslation") : t("round.draftLabel").split("·")[0]}</span>
-            {!isTrial && <span className="text-sm text-primary-strong">{t("round.draftLabel").split("·")[1]}</span>}
+        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
+          <div className="px-4 py-2.5 border-b border-slate-200 bg-navy-50 rounded-t-card flex items-center gap-2">
+            <span className="font-bold inline-flex items-center gap-1.5"><Icon name="edit" size={16} />{t("round.yourTranslation")}</span>
             {readOnly && <span className="ml-auto chip-plain text-xs">{t("round.readOnly")}</span>}
           </div>
           <div className="p-4 sm:p-5 overflow-y-auto max-h-[calc(100vh-260px)] flex-1">
@@ -303,20 +327,30 @@ export function Round() {
                 onCaretSentence={setSentenceIdx}
                 onXlitAccept={xlitAccept}
               />
-            ) : (
-              <DraftPanel parts={visibleParts} answers={answers} readOnly={readOnly} watch={watchTexts} focusedPart={focusedPart} register={register}
-                onField={(pid, key, v) => at.update(pid, { field: [key, v] })}
-                onTick={(pid, done) => { at.update(pid, { done }); if (!done) sfx("tap"); }}
-                onFocus={onFocus} onBlocked={onBlocked} onTyping={onTyping} onXlit={xlitAccept}
-                onWatchClick={(pid, key, w) => {
-                  const ww = watchWords.find((x) => x.text === w.word);
-                  setPop({ rect: w.rect, title: ww?.en ? `${w.word} · ${ww.en}` : w.word, options: ww?.options ?? [], mode: "replace", target: fk(pid, key), range: { from: w.from, to: w.to } });
-                  if (!ww?.options?.length) { setGlossQuery(ww?.en ?? ""); }
-                }} />
-            )}
+            ) : null}
           </div>
         </section>
       </main>
+      ) : (
+        <main className="mx-auto w-full max-w-[1500px] flex-1 px-3 sm:px-6 py-3 grid xl:grid-cols-[minmax(0,1fr)_20rem] gap-4 pb-40 items-start">
+          <section className="card overflow-hidden" aria-label={t("round.workbench")}>
+            <div className="hidden md:grid grid-cols-2 bg-slate-50 border-b border-slate-200 text-[12px] font-bold uppercase tracking-[0.12em] text-muted">
+              <div className="px-4 py-2.5 flex items-center gap-2 border-r border-slate-200"><Icon name="file" size={14} />{t("round.sourceLabel")} <span className="normal-case tracking-normal font-semibold">· {t("round.sourceLabelEn")}</span></div>
+              <div className="px-4 py-2.5 flex items-center gap-2"><Icon name="edit" size={14} />{t("round.draftLabel")}{readOnly && <span className="ml-auto chip-plain normal-case tracking-normal">{t("round.readOnly")}</span>}</div>
+            </div>
+            <div className="md:hidden px-4 py-2.5 bg-slate-50 border-b border-slate-200 text-[12px] font-bold uppercase tracking-[0.12em] text-muted flex items-center gap-2">
+              <Icon name="edit" size={14} />{t("round.draftLabel")}{readOnly && <span className="ml-auto chip-plain normal-case tracking-normal">{t("round.readOnly")}</span>}
+            </div>
+            <SegmentRows parts={visibleParts} allParts={view.page.parts} terms={view.page.sourceTerms} onTerm={onTermPick} focusedPart={focusedPart}
+              onSelect={(pid) => setFocusedPart(pid)} d={draftProps} />
+          </section>
+          <div className="hidden xl:block sticky top-[8.75rem]">
+            <ContextPanel part={focused} index={focused ? editable.indexOf(focused) + 1 : 0} total={editable.length} terms={focusedTerms} answers={answers} watch={watchTexts} readOnly={readOnly}
+              onInsert={insertGlossary} onGlossary={(q) => { setGlossQuery(q); setGlossOpen(true); }}
+              pageDone={pageParts.filter((p) => answers[p.id]?.done).length} pageTotal={pageParts.length} />
+          </div>
+        </main>
+      )}
 
       {pop && (
         <GlossPopover s={pop} onClose={() => setPop(null)} onPick={(v) => {
@@ -327,7 +361,7 @@ export function Round() {
       )}
 
       {/* bottom bar */}
-      <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-orange-100 shadow-[0_-8px_24px_-12px_rgba(34,41,59,.18)]">
+      <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-slate-200 shadow-[0_-8px_24px_-12px_rgba(11,37,69,.18)]">
         <div className="mx-auto max-w-[1400px] px-3 sm:px-6">
           {slim && <div className="pt-2"><SahayikaLine line={slim} autoSpeak={false} clamp onClose={() => setSlim(null)} /></div>}
           {keyboard === "inscript" && !readOnly && (
@@ -335,17 +369,17 @@ export function Round() {
           )}
           <div className="py-2.5 flex flex-wrap items-center gap-2">
             <label className="sr-only" htmlFor="kbd">{t("round.keyboardPhonetic")}</label>
-            <select id="kbd" value={keyboard} onChange={(e) => setKeyboard(e.target.value as KeyboardMode)} className="rounded-full border-2 border-gray-200 bg-white px-3 py-2 text-[15px] font-semibold">
-              {modeOptions.map(([k, l]) => <option key={k} value={k}>⌨ {l}</option>)}
+            <select id="kbd" value={keyboard} onChange={(e) => setKeyboard(e.target.value as KeyboardMode)} className="rounded-ui border border-slate-300 bg-white px-3 py-2 text-[15px] font-semibold">
+              {modeOptions.map(([k, l]) => <option key={k} value={k}>{l}</option>)}
             </select>
             {round.voiceTyping && (
-              <button onClick={toggleVoice} disabled={readOnly} className={`rounded-full px-4 py-2 text-[15px] font-bold text-white ${listening ? "bg-timer-text animate-pulse" : "bg-primary-strong"}`}>
-                🎤 {listening ? t("round.listening") : t("round.speak")}
+              <button onClick={toggleVoice} disabled={readOnly} className={`rounded-ui inline-flex items-center gap-1.5 px-4 py-2 text-[15px] font-bold text-white ${listening ? "bg-timer-text animate-pulse" : "bg-primary-strong"}`}>
+                <Icon name="mic" size={17} /> {listening ? t("round.listening") : t("round.speak")}
               </button>
             )}
-            <button onClick={() => setGlossOpen(true)} aria-label={t("common.glossaryButton")} className="rounded-full border-2 border-primary/60 px-4 py-2 text-[15px] font-semibold text-primary-strong hover:bg-primary-soft">📖 <span className="hidden sm:inline">{t("common.glossaryButton")}</span></button>
-            <button onClick={() => setChatOpen(true)} aria-label={t("common.sahayikaButton")} className="rounded-full border-2 border-royal-bright/60 px-4 py-2 text-[15px] font-semibold text-royal hover:bg-royal-soft">💬 <span className="hidden sm:inline">{t("common.sahayikaButton")}</span></button>
-            <span className="chip bg-timer-bg border-red-200 text-timer-text hidden md:inline-flex">🔒 {t("common.copyPasteOffBadge")}</span>
+            <button onClick={() => setGlossOpen(true)} aria-label={t("common.glossaryButton")} className="rounded-ui inline-flex items-center gap-1.5 border border-slate-300 px-3.5 py-2 text-[15px] font-semibold text-navy hover:bg-navy-50"><Icon name="book" size={17} /> <span className="hidden sm:inline">{t("common.glossaryButton")}</span></button>
+            <button onClick={() => setChatOpen(true)} aria-label={t("common.sahayikaButton")} className="rounded-ui inline-flex items-center gap-1.5 border border-slate-300 px-3.5 py-2 text-[15px] font-semibold text-navy hover:bg-navy-50"><Icon name="chat" size={17} /> <span className="hidden sm:inline">{t("common.sahayikaButton")}</span></button>
+            <span className="chip bg-timer-bg border-red-200 text-timer-text hidden md:inline-flex"><Icon name="lock" size={13} /> {t("common.copyPasteOffBadge")}</span>
             <div className="flex-1 min-w-[10rem] flex items-center gap-3">
               <span className="text-[14px] sm:text-[15px] font-semibold whitespace-nowrap">{isTrial ? t("round.sentencesDone", { done: prog.done, total: prog.total }) : t("round.paragraphsDone", { done: prog.done, total: prog.total })}</span>
               <ProgressBar value={prog.done / (prog.total || 1)} striped />
@@ -369,8 +403,8 @@ export function Round() {
       {fair.left && active && (
         <div className="fixed inset-0 z-[95] bg-navy/50 grid place-items-center p-4" role="alertdialog" aria-modal="true">
           <div className="card max-w-md w-full p-6 animate-pop text-center">
-            <div className="text-5xl">👀</div>
-            <h2 className="mt-2 text-2xl font-bold text-primary">{leftLine("left_popup_title")?.hi}</h2>
+            <div className="mx-auto w-14 h-14 rounded-full bg-primary-soft text-primary-strong grid place-items-center"><Icon name="eye" size={28} /></div>
+            <h2 className="mt-3 text-2xl font-bold text-navy">{leftLine("left_popup_title")?.hi}</h2>
             <SahayikaLine line={leftLine(fair.left.kind === "left_fullscreen" ? "left_fullscreen" : "left_tab")} />
             <p className="mt-3 text-[16px]">{t("round.leftPageCard")}</p>
             <p className="mt-2 font-semibold text-timer-text">{fill(leftLine("left_count_note")?.hi ?? "", { leaves: fair.count })}</p>
@@ -380,7 +414,7 @@ export function Round() {
       )}
 
       {at.save === "other_window" && view.status === "active" && (
-        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[90] rounded-card bg-navy text-white px-5 py-3 shadow-pop font-semibold">🪟 {t("round.otherWindow")}</div>
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[90] rounded-card bg-navy text-white px-5 py-3 shadow-pop font-semibold inline-flex items-center gap-2"><Icon name="window" size={18} /> {t("round.otherWindow")}</div>
       )}
     </div>
   );

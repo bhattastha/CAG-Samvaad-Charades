@@ -59,8 +59,21 @@ export function applyOverrides(terms: GlossaryEntry[], overrides: GlossaryEntry[
 }
 
 /**
- * Find glossary entries whose English occurs in a source text, longest match first,
- * non-overlapping. `index` maps lower-cased English → entry.
+ * Glossary matching, as in CAG Anuvaad's `GlossaryService.match_document` (reference/glossary-matching-algorithm.md):
+ * ONE normaliser for both the glossary's source terms and the document text — lowercase, every character that is
+ * not a (Unicode) word character becomes a space, whitespace collapsed. Punctuation separates, it is not deleted,
+ * so "F.E.-R.A." → "f e r a". Index keys MUST be built with this function or lookups silently miss.
+ */
+export const glossaryKey = (s: string) =>
+  s.normalize("NFC").toLowerCase().replace(/[^\p{L}\p{M}\p{N}_\s]/gu, " ").replace(/\s+/g, " ").trim();
+
+const WORD = /[\p{L}\p{M}\p{N}_]+/gu;
+
+/**
+ * Find glossary terms in a source text. N-gram matching, longest phrase first across the WHOLE text, and no token
+ * matched twice (Phases 4–5): "foreign exchange regulation act" beats "foreign exchange", which beats "exchange".
+ * Unlike Anuvaad's Phase 7, character offsets are kept so the workbench can underline terms in place.
+ * `index` maps glossaryKey(english) → entry (detection index: one entry per key).
  */
 export function matchSourceTerms(
   text: string,
@@ -68,23 +81,27 @@ export function matchSourceTerms(
   maxWords = 6,
 ): { start: number; end: number; entry: GlossaryEntry }[] {
   const tokens: { w: string; start: number; end: number }[] = [];
-  const re = /[A-Za-z][A-Za-z'’-]*/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(text))) tokens.push({ w: m[0].toLowerCase().replace(/’/g, "'"), start: m.index, end: m.index + m[0].length });
+  for (const m of text.normalize("NFC").matchAll(WORD)) tokens.push({ w: m[0].toLowerCase(), start: m.index!, end: m.index! + m[0].length });
+  const claimed = new Uint8Array(tokens.length);
   const out: { start: number; end: number; entry: GlossaryEntry }[] = [];
-  for (let i = 0; i < tokens.length; ) {
-    let hit: { n: number; entry: GlossaryEntry } | null = null;
-    for (let n = Math.min(maxWords, tokens.length - i); n >= 1; n--) {
-      // the source must be contiguous: only spaces between tokens
-      const span = text.slice(tokens[i].start, tokens[i + n - 1].end);
-      const key = span.toLowerCase().replace(/’/g, "'").replace(/\s+/g, " ");
+  for (let size = Math.min(maxWords, tokens.length); size >= 1; size--) {
+    for (let i = 0; i + size <= tokens.length; i++) {
+      let free = true;
+      for (let k = i; k < i + size; k++) if (claimed[k]) { free = false; break; }
+      if (!free) continue;
+      const key = tokens.slice(i, i + size).map((t) => t.w).join(" ");
       const e = index.get(key);
-      if (e) { hit = { n, entry: e }; break; }
+      if (!e) continue;
+      claimed.fill(1, i, i + size);
+      out.push({ start: tokens[i].start, end: tokens[i + size - 1].end, entry: e });
     }
-    if (hit) {
-      out.push({ start: tokens[i].start, end: tokens[i + hit.n - 1].end, entry: hit.entry });
-      i += hit.n;
-    } else i++;
   }
-  return out;
+  return out.sort((a, b) => a.start - b.start);
+}
+
+/** Phase 6–7: all entries for one detected term, sector-specific before general; sector widens, never narrows. */
+export function entriesForSector(all: GlossaryEntry[] | undefined, sector: string | null | undefined): GlossaryEntry[] {
+  if (!all?.length) return [];
+  const s = (sector ?? "").toLowerCase();
+  return all.filter((e) => !e.sector || e.sector.toLowerCase() === s).sort((a, b) => Number(!a.sector) - Number(!b.sector));
 }

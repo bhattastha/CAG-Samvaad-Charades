@@ -15,6 +15,9 @@
 ## Iteration 2 — English, voice control, game feel (23 Oct)
 ✅ English UI (strings.en.json), BHASHINI plugin hook with the workbench protected · ✅ Sahayika voice under player control (default: tap to listen) · ✅ journey map, briefing + countdown, HUD, mission-complete/scoring interstitials, rewards, Hall of Fame, SFX/haptics, settings · ⚠ waiting for `DHRUVA_API_KEY` in `.env` to switch drafts/TTS/ASR/LLM to live BHASHINI.
 
+## Iteration 4 — professional portal + real bundles (23 Oct)
+✅ Professional portal UI (tokens, icons, insignia, header profile menu, profile + leaderboard pages) · ✅ recruitment-style landing and gamified registration · ✅ all levels open (console switch) · ✅ Report 38 bundles: Primary 10 / Secondary 20 / Pro 30 pages with CAG Hindi references + Anuvaad-pipeline drafts · ✅ Anuvaad glossary algorithm · ✅ Anuvaad-style workbench (segment rows + context panel + QA) · ✅ manager console dashboard/KPIs/settings/players/library · ✅ copy rewrite (UI + Sahayak) · ⚠ bundle references need manager verification.
+
 ## Test commands
 - `corepack pnpm --filter @hc/shared test` · `corepack pnpm --filter @hc/api test`
 - e2e (needs `pnpm dev` running): `corepack pnpm exec playwright test --project=chrome --project=phone-chrome`

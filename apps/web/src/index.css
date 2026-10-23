@@ -11,32 +11,44 @@
 :root { color-scheme: light; }
 html, body, #root { min-height: 100%; }
 body {
-  @apply bg-white text-navy font-sans antialiased;
+  @apply bg-[#F5F7FB] text-ink font-sans antialiased;
   background-image:
-    radial-gradient(circle at 8% -10%, #FFE8D6 0, transparent 38%),
-    radial-gradient(circle at 105% 20%, #E3EDFF 0, transparent 34%),
-    radial-gradient(#E8590C14 1px, transparent 1px);
-  background-size: auto, auto, 22px 22px;
+    linear-gradient(180deg, #EAF0F8 0, rgba(245,247,251,0) 420px),
+    linear-gradient(rgba(11,37,69,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11,37,69,.035) 1px, transparent 1px);
+  background-size: auto, 40px 40px, 40px 40px;
   background-attachment: fixed;
 }
 .en { font-family: "Noto Sans", system-ui, sans-serif; }
+.tnum { font-variant-numeric: tabular-nums; }
 
 @layer components {
-  .card { @apply bg-white rounded-card shadow-card border border-orange-100/70; }
-  /* orange buttons always carry ≥ 18px bold labels (white on #E8590C is 3.6:1) */
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-lg font-bold transition active:scale-[.97] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4; }
-  .btn-primary { @apply btn bg-primary text-white shadow-glow hover:bg-primary-strong focus-visible:ring-primary-ring; }
-  .btn-blue { @apply btn bg-royal-bright text-white hover:bg-royal focus-visible:ring-blue-300; }
-  .btn-ghost { @apply btn bg-white text-primary-strong border-2 border-primary/70 hover:bg-primary-soft focus-visible:ring-primary-ring; }
-  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-semibold border; }
-  .chip-plain { @apply chip bg-white border-gray-200 text-navy; }
+  .card { @apply bg-white rounded-card shadow-card border border-slate-200/80; }
+  .card-dark { @apply rounded-card text-white shadow-pop border border-white/10; background: radial-gradient(120% 140% at 100% 0%, #1D4E89 0%, #0B2545 45%, #071A33 100%); }
+  .kicker { @apply text-[11px] font-bold uppercase tracking-[0.18em] text-navy-600; }
+  /* orange buttons always carry ≥ 18px bold labels (white on #E85A1A is 3.6:1) */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-ui px-5 py-2.5 text-[1.06rem] font-bold transition disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4; }
+  .btn-primary { @apply btn bg-primary text-white shadow-glow hover:bg-primary-strong focus-visible:ring-primary-ring; background-image: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,0)); }
+  .btn-blue { @apply btn bg-navy text-white hover:bg-navy-700 focus-visible:ring-blue-200; }
+  .btn-ghost { @apply btn bg-white text-navy border border-slate-300 hover:border-navy hover:bg-navy-50 focus-visible:ring-blue-100; }
+  .btn-gold { @apply btn text-navy-900 shadow-gold focus-visible:ring-gold-light; background: linear-gradient(180deg, #E9D7A6, #C49B3D); }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[13px] font-semibold border; }
+  .chip-plain { @apply chip bg-white border-slate-200 text-navy; }
   .chip-timer { @apply chip bg-timer-bg border-red-200 text-timer-text tabular-nums; }
-  .chip-credit { @apply chip bg-primary-soft border-orange-200 text-primary-strong; }
-  .input { @apply w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-2.5 text-[17px] outline-none transition focus:border-royal-bright focus:ring-4 focus:ring-blue-100; }
-  .label { @apply block text-[15px] font-semibold text-navy mb-1; }
+  .chip-credit { @apply chip bg-gold-soft border-gold-light text-gold-deep; }
+  .input { @apply w-full rounded-ui border border-slate-300 bg-white px-3.5 py-2.5 text-[16px] outline-none transition focus:border-navy-600 focus:ring-4 focus:ring-blue-100; }
+  .label { @apply block text-[14px] font-semibold text-navy mb-1; }
   .err { @apply mt-1 text-sm font-semibold text-timer-text; }
-  .sahayika-panel { @apply rounded-card text-white shadow-pop; background: linear-gradient(140deg, #1E3A8A 0%, #2563EB 62%, #3B82F6 100%); }
-  .stripe { background-image: linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.22) 75%, transparent 75%); background-size: 18px 18px; }
+  .sahayika-panel { @apply rounded-card text-white shadow-pop border border-white/10; background: radial-gradient(120% 140% at 100% 0%, #1D4E89 0%, #0B2545 50%, #071A33 100%); }
+  .stripe { background-image: linear-gradient(45deg, rgba(255,255,255,.18) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.18) 50%, rgba(255,255,255,.18) 75%, transparent 75%); background-size: 18px 18px; }
+  .hud-grid { background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 28px 28px; }
+  /* dark surfaces keep their gradient under the grid */
+  .card-dark.hud-grid, .sahayika-panel.hud-grid {
+    background-color: #0B2545;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), radial-gradient(120% 140% at 100% 0%, #1D4E89 0%, #0B2545 50%, #071A33 100%);
+    background-size: 28px 28px, 28px 28px, auto;
+  }
+  .bg-navy.hud-grid { background-color: #0B2545; }
 }
 
 /* translation editor */
@@ -60,12 +72,12 @@ body {
 /* accessibility: high contrast and reduced motion (settings) */
 .hc-contrast body { background-image: none; background: #fff; }
 .hc-contrast .text-muted { color: #374151 !important; }
-.hc-contrast .card, .hc-contrast .chip-plain { border-color: #22293B !important; }
+.hc-contrast .card, .hc-contrast .chip-plain { border-color: #0B2545 !important; }
 .hc-contrast .hc-ambient { display: none; }
-.hc-contrast .sahayika-panel { background: #1E3A8A !important; }
+.hc-contrast .sahayika-panel, .hc-contrast .card-dark { background: #0B2545 !important; }
 .hc-reduce-motion *, .hc-reduce-motion *::before, .hc-reduce-motion *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 .hc-reduce-motion .hc-ambient { display: none; }
 .btn { will-change: transform; }
-.btn:active { transform: scale(.94); }
+.btn:active { transform: scale(.97); }
 /* nothing may widen the page on phones (particles, floating text, drifting letters) */
 html, body { overflow-x: clip; }

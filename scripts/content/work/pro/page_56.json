@@ -1,0 +1,76 @@
+{
+ "pdf_page": 56,
+ "printed_page": "32",
+ "hindi_pdf_pages": [
+  74,
+  75
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "High off blast/idle hours were noted in three years up to March 2020 while it improved marginally during 2020-24. Improvement of 43 per cent in idle hours in 2023-24 was noted as compared to the year 2019-20. Out of total 8,90,694 available hours for plant operation, the blast furnaces were utilised for 8,20,969 hours and for balance 69,725 hours (8 per cent) the blast furnaces remained off blast on account of unplanned shutdowns during 2017-24 (Table 7). Among the steel plants, maximum duration of unplanned shutdown was noted in Bhilai Steel Plant for 30,290 hours followed by Bokaro Steel Plant (14,927 hours), Rourkela Steel Plant (12,655 hours), Durgapur Steel Plant (9,028 hours) and IISCO Steel Plant (2,825 hours).",
+   "hi_reference": "मार्च 2020 तक तीन वर्षों में उच्च ऑफ ब्लास्ट /निष्क्रिय घंटे दर्ज किए गए, जबकि 2020-24 के दौरान इसमें मामूली सुधार हुआ। वर्ष 2019-20 की तुलना में 2023-24 में निष्क्रिय घंटों में 43 प्रतिशत का सुधार देखा गया। संयंत्र प्रचालन के लिए उपलब्ध कुल 8,90,694 घंटों में से 8,20,969 घंटों के लिए ब्लास्ट फर्नेस का उपयोग किया गया तथा शेष 69,725 घंटों (8 प्रतिशत) के लिए ब्लास्ट फर्नेस 2017-24 के दौरान अनियोजित शटडाउन के कारण बंद रही (तालिका 7)। इस्पात संयंत्रों में, अनियोजित शटडाउन की अधिकतम अवधि भिलाई स्टील प्लांट में 30,290 घंटे दर्ज की गई, जिसके बाद बोकारो स्टील प्लांट (14,927 घंटे), राउरकेला स्टील प्लांट (12,655 घंटे), दुर्गापुर स्टील प्लांट (9,028 घंटे) एवं ईस्को स्टील प्लांट (2,825 घंटे) का स्थान रहा।"
+  },
+  {
+   "type": "body",
+   "en": "Details of break-up of reasons of unplanned shutdown hours in SAIL steel plants (except IISCO Steel Plant⁴¹) is given in the chart below.",
+   "hi_reference": "सेल इस्पात संयंत्रों (ईस्को स्टील प्लांट को छोड़कर⁴¹) में अनियोजित शटडाउन घंटों के कारणों का विवरण नीचे दिए गए चार्ट में दिया गया है।"
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_56_1.png",
+    "title": {
+     "en": "Chart 5: Percentage of Unplanned shutdown hours in SAIL during 2017-2024",
+     "hi_reference": "चार्ट 5: 2017-2024 के दौरान सेल में अनियोजित शटडाउन घंटों का प्रतिशत"
+    },
+    "labels": [
+     {
+      "en": "Technical",
+      "hi_reference": "तकनीकी"
+     },
+     {
+      "en": "Raw Material Shortage",
+      "hi_reference": "कच्चे माल की कमी"
+     },
+     {
+      "en": "Poor Offtake",
+      "hi_reference": "खराब उठाव"
+     },
+     {
+      "en": "Miscellaneous",
+      "hi_reference": "विविध"
+     }
+    ],
+    "source": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "High unplanned shutdown hours left less hours for plant utilization for hot metal production. Audit noted that these were mainly attributable to the shortage of raw materials, poor off take of hot metal by Steel Melting Shops, technical (electrical/mechanical/ operational/ instrumentation failures) and other miscellaneous issues. It was noted that Bhilai, Bokaro, Rourkela and Durgapur Steel Plant did not separately identify the reasons in 47 per cent of the delay hours. During unplanned shutdowns production from blast furnaces remained temporarily ceased which resulted in inability to produce 6.993 million tonne of hot metal and inability to gain potential contribution margin of ₹ 7,986.97 crore⁴² during 2017-24.",
+   "hi_reference": "अनियोजित शटडाउन के उच्च घंटों के कारण तप्त धातु उत्पादन हेतु संयंत्र के उपयोग हेतु कम घंटे बचे। लेखापरीक्षा ने पाया कि ये मुख्यतः कच्चे माल की कमी, स्टील मेल्टिंग शॉप्स द्वारा तप्त धातु की कम आपूर्ति, तकनीकी (विद्युत/यांत्रिक/परिचालन/यंत्र संबंधी विफलताएँ) एवं अन्य विविध समस्याओं के कारण थे। यह पाया गया कि भिलाई, बोकारो, राउरकेला एवं दुर्गापुर स्टील प्लांट ने 47 प्रतिशत विलंब घंटों के कारणों की अलग से पहचान नहीं की। अनियोजित शटडाउन के दौरान ब्लास्ट फर्नेस से उत्पादन अस्थायी रूप से बंद रहा, जिसके परिणामस्वरूप 6.993 मिलियन टन तप्त धातु का उत्पादन करने में असमर्थता रही एवं 2017-24 के दौरान ₹7,986.97 करोड़⁴² का संभावित योगदान मार्जिन प्राप्त करने में असमर्थता रही।"
+  },
+  {
+   "type": "footnote",
+   "en": "41 IISCO Steel Plant did not segregate the reasons for delays till 2019-20 and all delay hours were put under miscellaneous reasons. Though reasons for delay were identified during 2020-22, 98 per cent of delay was attributed to miscellaneous reasons without analysis of the exact reasons.",
+   "hi_reference": "41 इस्को स्टील प्लांट ने 2019-20 तक विलंब के कारणों को अलग-अलग नहीं किया और सभी देरी के घंटों को विविध कारणों में डाल दिया। हालाँकि 2020-22 के दौरान विलंब के कारणों की पहचान की गई, लेकिन 98 प्रतिशत देरी के सटीक कारणों का विश्लेषण किए बिना ही विविध कारणों को जिम्मेदार ठहराया गया।"
+  },
+  {
+   "type": "footnote",
+   "en": "42 Considering loss of production of hot metal (Average hot metal production per hour * Unplanned shutdown hours) and loss of contribution on saleable steel (quantity of saleable steel that could have been produced from the hot metal * Contribution per tonne of saleable steel). This excludes the loss of production of 1.513 million tonne of hot metal with contribution margin of ₹1,728.01 crore on account of shortage of raw materials as this was included in Para 3.3(A) of CAG Report No. 10 of 2025 ‘PA report on Inventory Management in SAIL’.",
+   "hi_reference": "42 तप्त धातु के उत्पादन में हुई हानि (प्रति घंटा औसत हॉट मेटल उत्पादन * अनियोजित शटडाउन घंटे) और विक्रय योग्य स्टील पर योगदान की हानि (हॉट मेटल से उत्पादित हो सकने वाले विक्रय योग्य स्टील की मात्रा * विक्रय योग्य स्टील के प्रति टन योगदान) को ध्यान में रखते हुए। इसमें कच्चे माल की कमी के कारण ₹ 1,728.01 करोड़ के योगदान मार्जिन के साथ 1.513 मिलियन टन हॉट मेटल के उत्पादन की हानि शामिल नहीं है, क्योंकि इसे सीएजी रिपोर्ट संख्या 10/2025 'सेल में इन्वेंट्री प्रबंधन पर पीए रिपोर्ट' के पैरा 3.3(ए) में शामिल किया गया था।"
+  },
+  {
+   "type": "page_number",
+   "en": "32"
+  }
+ ]
+}

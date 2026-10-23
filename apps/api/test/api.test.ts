@@ -33,6 +33,8 @@ beforeAll(async () => {
   (env as any).SEED_ALLOW_UNVERIFIED = true;
   db = await openDb("pglite:memory");
   await seedAll(db, () => {});
+  // the journey below exercises the Trial-first rule; the review build ships "all-open" (tested in @hc/shared)
+  await db.query("INSERT INTO config_overrides (key, value, by, at) VALUES ('settings', $1, 'test', now())", [JSON.stringify({ unlockRule: "trial-pass-unlocks-all" })]);
   app = await buildApp(db, { jobs: false });
 });
 afterAll(async () => { await app.close(); await db.close(); });

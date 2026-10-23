@@ -1,0 +1,648 @@
+{
+ "pdf_page": 48,
+ "printed_page": "24",
+ "hindi_pdf_pages": [
+  63,
+  64
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table 5: Details of the total targeted production of Hot Metal as against the total actual production achieved during 2017-2024",
+     "hi_reference": "तालिका 5: 2017-2024 के दौरान कुल लक्षित तप्त धातु के उत्पादन की तुलना में वास्तविक रुप से उत्पादित तप्त धातु का विवरण"
+    },
+    "unit": {
+     "en": "(Qty in million tonne)",
+     "hi_reference": "(मिलियन टन में मात्रा)"
+    },
+    "columns": [
+     {
+      "en": "Steel plant",
+      "hi_reference": "इस्पात संयंत्र"
+     },
+     {
+      "en": "Annual Business Perspective Target for Hot Metal",
+      "hi_reference": "तप्त धातु के लिए वार्षिक व्यवसाय परिप्रेक्ष्य लक्ष्य"
+     },
+     {
+      "en": "MoU Target for Hot Metal",
+      "hi_reference": "तप्त धातु के लिए समझौता ज्ञापन लक्ष्य"
+     },
+     {
+      "en": "Production of Hot Metal",
+      "hi_reference": "तप्त धातु का उत्पादन"
+     },
+     {
+      "en": "Percentage of actual production of Hot Metal with respect to Annual Business Perspective",
+      "hi_reference": "वार्षिक व्यावसायिक परिप्रेक्ष्य के संबंध में तप्त धातु के वास्तविक उत्पादन का प्रतिशत"
+     },
+     {
+      "en": "Percentage of actual production of Hot Metal with respect to MoU",
+      "hi_reference": "समझौता ज्ञापन के संबंध में तप्त धातु के वास्तविक उत्पादन का प्रतिशत"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Bokaro",
+       "hi_reference": "बोकारो"
+      },
+      {
+       "en": "32.71"
+      },
+      {
+       "en": "30.56"
+      },
+      {
+       "en": "29.64"
+      },
+      {
+       "en": "91"
+      },
+      {
+       "en": "97"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "43.35"
+      },
+      {
+       "en": "39.28"
+      },
+      {
+       "en": "35.14"
+      },
+      {
+       "en": "81"
+      },
+      {
+       "en": "89"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur",
+       "hi_reference": "दुर्गापुर"
+      },
+      {
+       "en": "17.57"
+      },
+      {
+       "en": "16.22"
+      },
+      {
+       "en": "17.05"
+      },
+      {
+       "en": "97"
+      },
+      {
+       "en": "105"
+      }
+     ],
+     [
+      {
+       "en": "Burnpur",
+       "hi_reference": "बर्नपुर"
+      },
+      {
+       "en": "18.43"
+      },
+      {
+       "en": "17.21"
+      },
+      {
+       "en": "16.57"
+      },
+      {
+       "en": "90"
+      },
+      {
+       "en": "96"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "28.82"
+      },
+      {
+       "en": "27.60"
+      },
+      {
+       "en": "27.75"
+      },
+      {
+       "en": "96"
+      },
+      {
+       "en": "101"
+      }
+     ],
+     [
+      {
+       "en": "Bhadravati",
+       "hi_reference": "भद्रावती"
+      },
+      {
+       "en": "0.00*"
+      },
+      {
+       "en": "0.09"
+      },
+      {
+       "en": "0.00"
+      },
+      {
+       "en": "0"
+      },
+      {
+       "en": "0"
+      }
+     ],
+     [
+      {
+       "en": "Total",
+       "hi_reference": "कुल"
+      },
+      {
+       "en": "140.88"
+      },
+      {
+       "en": "130.96"
+      },
+      {
+       "en": "126.15"
+      },
+      {
+       "en": "90"
+      },
+      {
+       "en": "96"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.\n* Blast Furnace at VISP, Bhadravati has been closed since January 2017; Hot metal is not produced in Salem Steel Plant",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा प्रस्तुत आंकड़ा\n* वीआईएसपी, भद्रावती में ब्लास्ट फर्नेस जनवरी 2017 से बंद है; सेलम स्टील प्लांट में तप्त धातु का उत्पादन नहीं किया जाता है।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "The percentage of actual production vis-à-vis the Annual Business Perspective targets ranged between 81 per cent (Bhilai Steel Plant) and 97 per cent (Durgapur Steel Plant) during the period 2017-2024. The performance of the steel plants with respect to the MoU targets were better and ranged between 89 per cent (Bhilai Steel Plant) and 105 per cent (Durgapur Steel Plant) during this period.",
+   "hi_reference": "2017-2024 की अवधि के दौरान वार्षिक व्यावसायिक परिप्रेक्ष्य लक्ष्यों की तुलना में वास्तविक उत्पादन का प्रतिशत 81 प्रतिशत (भिलाई स्टील प्लांट) एवं 97 प्रतिशत (दुर्गापुर स्टील प्लांट) के मध्य था। समझौता ज्ञापन लक्ष्यों के संबंध में इस्पात संयंत्रों का निष्पादन बेहतर था एवं इस अवधि के दौरान 89 प्रतिशत (भिलाई स्टील प्लांट) एवं 105 प्रतिशत (दुर्गापुर स्टील प्लांट) के मध्य था।"
+  },
+  {
+   "type": "heading",
+   "en": "Productivity of Blast Furnace",
+   "hi_reference": "ब्लास्ट फर्नेस की उत्पादकता"
+  },
+  {
+   "type": "body",
+   "en": "Blast Furnace productivity is a performance indicator of the blast furnace measured in terms of hot metal produced per cubic meter of blast furnace working volume per day (tonnes/m³/day). The Company prepares Annual Business Perspective wherein the Blast Furnace productivity is fixed considering operating conditions of the blast furnace. The table below summarizes the Annual Business Perspective target and average productivity of the blast furnaces of SAIL steel plants.",
+   "hi_reference": "ब्लास्ट फर्नेस उत्पादकता ब्लास्ट फर्नेस का एक निष्पादन संकेतक है जिसे प्रति दिन ब्लास्ट फर्नेस के प्रति घन मीटर काम करने की मात्रा (टन/m³/दिन) में उत्पादित तप्त धातु के संदर्भ में मापा जाता है। कंपनी वार्षिक व्यवसाय परिप्रेक्ष्य तैयार करती है जिसमें ब्लास्ट फर्नेस की प्रचालन स्थितियों को ध्यान में रखते हुए ब्लास्ट फर्नेस उत्पादकता तय की जाती है। तालिका 6 सेल इस्पात संयंत्रों की ब्लास्ट फर्नेस के वार्षिक व्यावसायिक परिप्रेक्ष्य लक्ष्य एवं औसत उत्पादकता को सारांशित करती है।"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table 6: Blast Furnace Productivity at steel plants during the period 2017-24",
+     "hi_reference": "तालिका 6: 2017-24 की अवधि के दौरान इस्पात संयंत्रों में ब्लास्ट फर्नेस उत्पादकता"
+    },
+    "unit": {
+     "en": "(tonnes/m³/day)",
+     "hi_reference": "(टन /m³/ दिन)"
+    },
+    "columns": [
+     {
+      "en": "Plant",
+      "hi_reference": "संयंत्र"
+     },
+     {
+      "en": "2017-18"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "2018-19"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "2019-20"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "2020-21"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "2021-22"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "2022-23"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "2023-24"
+     },
+     {
+      "en": ""
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": "ABP",
+       "hi_reference": "एबीपी"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      }
+     ],
+     [
+      {
+       "en": "Bokaro",
+       "hi_reference": "बोकारो"
+      },
+      {
+       "en": "1.70"
+      },
+      {
+       "en": "1.70"
+      },
+      {
+       "en": "1.89"
+      },
+      {
+       "en": "1.62"
+      },
+      {
+       "en": "1.78"
+      },
+      {
+       "en": "1.70"
+      },
+      {
+       "en": "1.80"
+      },
+      {
+       "en": "1.74"
+      },
+      {
+       "en": "1.89"
+      },
+      {
+       "en": "1.66"
+      },
+      {
+       "en": "1.90"
+      },
+      {
+       "en": "1.72"
+      },
+      {
+       "en": "1.92"
+      },
+      {
+       "en": "1.82"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "1.73"
+      },
+      {
+       "en": "1.56"
+      },
+      {
+       "en": "1.84"
+      },
+      {
+       "en": "1.50"
+      },
+      {
+       "en": "2.03"
+      },
+      {
+       "en": "1.81"
+      },
+      {
+       "en": "1.91"
+      },
+      {
+       "en": "1.79"
+      },
+      {
+       "en": "2.00"
+      },
+      {
+       "en": "1.73"
+      },
+      {
+       "en": "1.91"
+      },
+      {
+       "en": "1.78"
+      },
+      {
+       "en": "1.94"
+      },
+      {
+       "en": "1.78"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur",
+       "hi_reference": "दुर्गापुर"
+      },
+      {
+       "en": "1.72"
+      },
+      {
+       "en": "1.76"
+      },
+      {
+       "en": "1.92"
+      },
+      {
+       "en": "1.78"
+      },
+      {
+       "en": "1.92"
+      },
+      {
+       "en": "1.75"
+      },
+      {
+       "en": "1.75"
+      },
+      {
+       "en": "1.76"
+      },
+      {
+       "en": "1.86"
+      },
+      {
+       "en": "1.75"
+      },
+      {
+       "en": "1.88"
+      },
+      {
+       "en": "1.87"
+      },
+      {
+       "en": "1.92"
+      },
+      {
+       "en": "1.86"
+      }
+     ],
+     [
+      {
+       "en": "Burnpur",
+       "hi_reference": "बर्नपुर"
+      },
+      {
+       "en": "1.89"
+      },
+      {
+       "en": "1.62"
+      },
+      {
+       "en": "2.14"
+      },
+      {
+       "en": "1.74"
+      },
+      {
+       "en": "2.16"
+      },
+      {
+       "en": "2.01"
+      },
+      {
+       "en": "2.05"
+      },
+      {
+       "en": "1.75"
+      },
+      {
+       "en": "2.23"
+      },
+      {
+       "en": "2.02"
+      },
+      {
+       "en": "2.21"
+      },
+      {
+       "en": "2.09"
+      },
+      {
+       "en": "2.27"
+      },
+      {
+       "en": "2.18"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "1.93"
+      },
+      {
+       "en": "1.88"
+      },
+      {
+       "en": "2.09"
+      },
+      {
+       "en": "1.77"
+      },
+      {
+       "en": "2.08"
+      },
+      {
+       "en": "1.81"
+      },
+      {
+       "en": "1.88"
+      },
+      {
+       "en": "1.98"
+      },
+      {
+       "en": "2.00"
+      },
+      {
+       "en": "1.92"
+      },
+      {
+       "en": "2.01"
+      },
+      {
+       "en": "1.88"
+      },
+      {
+       "en": "2.05"
+      },
+      {
+       "en": "1.96"
+      }
+     ],
+     [
+      {
+       "en": "SAIL",
+       "hi_reference": "सेल"
+      },
+      {
+       "en": "1.78"
+      },
+      {
+       "en": "1.70"
+      },
+      {
+       "en": "1.94"
+      },
+      {
+       "en": "1.65"
+      },
+      {
+       "en": "1.98"
+      },
+      {
+       "en": "1.80"
+      },
+      {
+       "en": "1.87"
+      },
+      {
+       "en": "1.81"
+      },
+      {
+       "en": "1.98"
+      },
+      {
+       "en": "1.79"
+      },
+      {
+       "en": "1.96"
+      },
+      {
+       "en": "1.84"
+      },
+      {
+       "en": "2.00"
+      },
+      {
+       "en": "1.88"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा प्रस्तुत आंकड़ा।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "It was seen that Bokaro and Rourkela Steel Plant in 2017-18 and 2020-21 respectively and Durgapur Steel Plant in 2017-18 and 2020-21 could achieve the Annual Business Perspective target for Blast Furnace productivity and in rest of the period there was",
+   "hi_reference": "यह पाया गया कि 2017-18 एवं 2020-21 में क्रमशः बोकारो एवं राउरकेला स्टील प्लांट एवं 2017-18 एवं 2020-21 में दुर्गापुर स्टील प्लांट ब्लास्ट फर्नेस उत्पादकता के लिए वार्षिक व्यावसायिक परिप्रेक्ष्य लक्ष्य को प्राप्त कर सके एवं शेष अवधि में",
+   "continues_on_next_page": true
+  },
+  {
+   "type": "page_number",
+   "en": "24"
+  }
+ ]
+}

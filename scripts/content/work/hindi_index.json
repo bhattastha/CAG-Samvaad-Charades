@@ -1,0 +1,1416 @@
+[
+{
+"hindi_pdf_page": 3,
+"printed": null,
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 5,
+"printed": "i",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 7,
+"printed": "iii",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 11,
+"printed": "v",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"18.73",
+"19.41",
+"20.50",
+"35.80",
+"49.6",
+"35.6"
+]
+},
+{
+"hindi_pdf_page": 12,
+"printed": "vi",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 13,
+"printed": "vii",
+"sections": [
+"1.5",
+"2.34",
+"1.75",
+"1.98"
+],
+"tables": [],
+"sample_numbers": [
+"1.5",
+"2.945",
+"2.235",
+"6,259.25",
+"310.48",
+"2.34"
+]
+},
+{
+"hindi_pdf_page": 14,
+"printed": "viii",
+"sections": [
+"3.2",
+"3.7"
+],
+"tables": [],
+"sample_numbers": [
+"3.2",
+"3.7",
+"23.07",
+"140.88",
+"130.96",
+"126.15"
+]
+},
+{
+"hindi_pdf_page": 15,
+"printed": "ix",
+"sections": [
+"4.4.1",
+"4.4.2",
+"2.5"
+],
+"tables": [],
+"sample_numbers": [
+"4.4",
+"4.4",
+"2.5"
+]
+},
+{
+"hindi_pdf_page": 16,
+"printed": "x",
+"sections": [
+"1.65",
+"3.00",
+"0.81",
+"2.80",
+"4.5",
+"4.2",
+"3.7"
+],
+"tables": [],
+"sample_numbers": [
+"1.65",
+"3.00",
+"0.81",
+"2.80",
+"4.5",
+"4.2"
+]
+},
+{
+"hindi_pdf_page": 17,
+"printed": "xi",
+"sections": [
+"0.6",
+"5.77",
+"3.7",
+"5.2.1"
+],
+"tables": [],
+"sample_numbers": [
+"922.31",
+"0.6",
+"633.78",
+"5.77",
+"3.7",
+"653.85"
+]
+},
+{
+"hindi_pdf_page": 18,
+"printed": "xii",
+"sections": [
+"1.37",
+"5.81",
+"5.2.2",
+"5.3"
+],
+"tables": [],
+"sample_numbers": [
+"0.039",
+"0.111",
+"51.29",
+"35.90",
+"15.39",
+"51.33"
+]
+},
+{
+"hindi_pdf_page": 19,
+"printed": "xiii",
+"sections": [
+"6.1",
+"3.85",
+"6.2"
+],
+"tables": [],
+"sample_numbers": [
+"6.1",
+"3.85",
+"6.2"
+]
+},
+{
+"hindi_pdf_page": 23,
+"printed": "1",
+"sections": [
+"1.1",
+"1.2"
+],
+"tables": [],
+"sample_numbers": [
+"1.1",
+"18.73",
+"19.41",
+"20.50",
+"1.2",
+"35.80"
+]
+},
+{
+"hindi_pdf_page": 24,
+"printed": "2",
+"sections": [
+"1.2",
+"4.08",
+"2.43",
+"0.89",
+"1.3"
+],
+"tables": [],
+"sample_numbers": [
+"1.2",
+"4.08",
+"2.43",
+"0.89",
+"1.3",
+"15.98"
+]
+},
+{
+"hindi_pdf_page": 25,
+"printed": "3",
+"sections": [
+"1.4",
+"1.5"
+],
+"tables": [],
+"sample_numbers": [
+"1.4",
+"1.5"
+]
+},
+{
+"hindi_pdf_page": 26,
+"printed": "4",
+"sections": [
+"1.6"
+],
+"tables": [],
+"sample_numbers": [
+"1.6"
+]
+},
+{
+"hindi_pdf_page": 27,
+"printed": "5",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 28,
+"printed": "6",
+"sections": [
+"1.7"
+],
+"tables": [
+"2"
+],
+"sample_numbers": [
+"1.7",
+"23.07"
+]
+},
+{
+"hindi_pdf_page": 29,
+"printed": "7",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 30,
+"printed": "8",
+"sections": [
+"1.8",
+"1.9"
+],
+"tables": [],
+"sample_numbers": [
+"1.8",
+"1.9"
+]
+},
+{
+"hindi_pdf_page": 33,
+"printed": "9",
+"sections": [
+"2.1",
+"2.2"
+],
+"tables": [],
+"sample_numbers": [
+"2.1",
+"2.2"
+]
+},
+{
+"hindi_pdf_page": 34,
+"printed": "10",
+"sections": [
+"2.3",
+"2.4"
+],
+"tables": [],
+"sample_numbers": [
+"2.3",
+"2.4"
+]
+},
+{
+"hindi_pdf_page": 35,
+"printed": "11",
+"sections": [
+"2.5"
+],
+"tables": [],
+"sample_numbers": [
+"2.5"
+]
+},
+{
+"hindi_pdf_page": 37,
+"printed": null,
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 39,
+"printed": "13",
+"sections": [
+"3.1",
+"3.2"
+],
+"tables": [],
+"sample_numbers": [
+"3.1",
+"3.2"
+]
+},
+{
+"hindi_pdf_page": 40,
+"printed": "14",
+"sections": [
+"3.3"
+],
+"tables": [
+"3"
+],
+"sample_numbers": [
+"3.3"
+]
+},
+{
+"hindi_pdf_page": 41,
+"printed": "15",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"0.823",
+"186.26",
+"2.130",
+"1.307"
+]
+},
+{
+"hindi_pdf_page": 42,
+"printed": "16",
+"sections": [
+"3.4"
+],
+"tables": [],
+"sample_numbers": [
+"62.50",
+"64.00",
+"60.80",
+"64.17",
+"3.4"
+]
+},
+{
+"hindi_pdf_page": 43,
+"printed": "17",
+"sections": [
+"3.4",
+"1.5",
+"0.03",
+"1.10",
+"0.10",
+"9.54"
+],
+"tables": [],
+"sample_numbers": [
+"3.4",
+"1.5",
+"0.03",
+"1.10",
+"0.10",
+"9.54"
+]
+},
+{
+"hindi_pdf_page": 44,
+"printed": "18",
+"sections": [
+"3.4.1"
+],
+"tables": [],
+"sample_numbers": [
+"3.4",
+"504.90",
+"499.49"
+]
+},
+{
+"hindi_pdf_page": 45,
+"printed": "19",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 46,
+"printed": "20",
+"sections": [
+"3.5",
+"3.5.1"
+],
+"tables": [],
+"sample_numbers": [
+"3.5",
+"3.5"
+]
+},
+{
+"hindi_pdf_page": 47,
+"printed": "21",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"3.023",
+"1,636.41",
+"4.441",
+"1.418",
+"2301.72",
+"665.31"
+]
+},
+{
+"hindi_pdf_page": 48,
+"printed": "22",
+"sections": [
+"3.4",
+"3.5.2"
+],
+"tables": [],
+"sample_numbers": [
+"3.4",
+"3.5"
+]
+},
+{
+"hindi_pdf_page": 49,
+"printed": "23",
+"sections": [
+"3.6"
+],
+"tables": [],
+"sample_numbers": [
+"14.357",
+"1,003.71",
+"3.6",
+"4.956",
+"4.362",
+"3.272"
+]
+},
+{
+"hindi_pdf_page": 50,
+"printed": "24",
+"sections": [
+"0.8"
+],
+"tables": [],
+"sample_numbers": [
+"0.8",
+"2.945",
+"2.235",
+"6,259.25",
+"8,858.45",
+"2,599.20"
+]
+},
+{
+"hindi_pdf_page": 51,
+"printed": "25",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 52,
+"printed": "26",
+"sections": [
+"3.7",
+"3.7.1",
+"0.71",
+"1.31"
+],
+"tables": [],
+"sample_numbers": [
+"3.7",
+"3.7",
+"0.71",
+"1.31",
+"23.00",
+"50.90"
+]
+},
+{
+"hindi_pdf_page": 53,
+"printed": "27",
+"sections": [
+"3.7.2",
+"1.75",
+"1.98",
+"2.34"
+],
+"tables": [],
+"sample_numbers": [
+"3.7",
+"1.75",
+"1.98",
+"2.34"
+]
+},
+{
+"hindi_pdf_page": 54,
+"printed": "28",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"67.76",
+"55.73",
+"12.03"
+]
+},
+{
+"hindi_pdf_page": 55,
+"printed": "29",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"378.24"
+]
+},
+{
+"hindi_pdf_page": 57,
+"printed": null,
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 59,
+"printed": "31",
+"sections": [
+"4.1"
+],
+"tables": [],
+"sample_numbers": [
+"4.1"
+]
+},
+{
+"hindi_pdf_page": 60,
+"printed": "32",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"23.07",
+"140.88",
+"126.15",
+"19.22",
+"21.28",
+"19.22"
+]
+},
+{
+"hindi_pdf_page": 61,
+"printed": "33",
+"sections": [
+"4.2",
+"4.59",
+"5.77",
+"5.25",
+"4.08",
+"7.50",
+"7.80",
+"2.09",
+"2.45",
+"0.85",
+"2.91",
+"2.70",
+"2.00",
+"4.50",
+"4.65",
+"0.22",
+"0.33",
+"0.21"
+],
+"tables": [],
+"sample_numbers": [
+"4.2",
+"13.83",
+"23.46",
+"4.59",
+"5.77",
+"5.25"
+]
+},
+{
+"hindi_pdf_page": 62,
+"printed": "34",
+"sections": [
+"4.3",
+"4.81"
+],
+"tables": [
+"5"
+],
+"sample_numbers": [
+"4.3",
+"15.98",
+"20.50",
+"14.73",
+"4.81"
+]
+},
+{
+"hindi_pdf_page": 63,
+"printed": "35",
+"sections": [
+"0.00",
+"0.09"
+],
+"tables": [
+"6"
+],
+"sample_numbers": [
+"32.71",
+"30.56",
+"29.64",
+"43.35",
+"39.28",
+"35.14"
+]
+},
+{
+"hindi_pdf_page": 64,
+"printed": "36",
+"sections": [
+"1.70",
+"1.89",
+"1.62",
+"1.78",
+"1.80",
+"1.74",
+"1.66",
+"1.90",
+"1.72",
+"1.92",
+"1.82",
+"1.73",
+"1.56",
+"1.84",
+"1.50",
+"2.03",
+"1.81",
+"1.91",
+"1.79",
+"2.00",
+"1.94",
+"1.76",
+"1.75",
+"1.86",
+"1.88"
+],
+"tables": [],
+"sample_numbers": [
+"1.70",
+"1.70",
+"1.89",
+"1.62",
+"1.78",
+"1.70"
+]
+},
+{
+"hindi_pdf_page": 65,
+"printed": "37",
+"sections": [
+"1.88",
+"4.4"
+],
+"tables": [],
+"sample_numbers": [
+"1.88",
+"4.4"
+]
+},
+{
+"hindi_pdf_page": 66,
+"printed": "38",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 67,
+"printed": "39",
+"sections": [
+"4.4.1",
+"4.4.1.1"
+],
+"tables": [],
+"sample_numbers": [
+"4.4",
+"4.4",
+"1.1"
+]
+},
+{
+"hindi_pdf_page": 68,
+"printed": "40",
+"sections": [
+"4.4.1.2"
+],
+"tables": [],
+"sample_numbers": [
+"4.4",
+"1.2"
+]
+},
+{
+"hindi_pdf_page": 69,
+"printed": "41",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 70,
+"printed": "42",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"554.82",
+"195.82"
+]
+},
+{
+"hindi_pdf_page": 71,
+"printed": "43",
+"sections": [
+"0.31",
+"1.33",
+"1.64"
+],
+"tables": [],
+"sample_numbers": [
+"882.73",
+"0.503",
+"0.601",
+"0.31",
+"83.7",
+"0.31"
+]
+},
+{
+"hindi_pdf_page": 72,
+"printed": "44",
+"sections": [
+"0.26"
+],
+"tables": [],
+"sample_numbers": [
+"0.26",
+"1,579.01",
+"1.396",
+"1.147"
+]
+},
+{
+"hindi_pdf_page": 73,
+"printed": "45",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"882.73"
+]
+},
+{
+"hindi_pdf_page": 74,
+"printed": "46",
+"sections": [
+"4.4.2"
+],
+"tables": [
+"7"
+],
+"sample_numbers": [
+"4.4"
+]
+},
+{
+"hindi_pdf_page": 75,
+"printed": "47",
+"sections": [
+"3.3"
+],
+"tables": [],
+"sample_numbers": [
+"6.993",
+"7,986.97",
+"1,728.01",
+"1.513",
+"3.3"
+]
+},
+{
+"hindi_pdf_page": 76,
+"printed": "48",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 77,
+"printed": "49",
+"sections": [
+"4.5"
+],
+"tables": [],
+"sample_numbers": [
+"4.5"
+]
+},
+{
+"hindi_pdf_page": 78,
+"printed": "50",
+"sections": [
+"4.5.1"
+],
+"tables": [],
+"sample_numbers": [
+"4.5"
+]
+},
+{
+"hindi_pdf_page": 79,
+"printed": "51",
+"sections": [
+"4.4.1.2"
+],
+"tables": [],
+"sample_numbers": [
+"4.4",
+"1.2"
+]
+},
+{
+"hindi_pdf_page": 80,
+"printed": "52",
+"sections": [
+"4.5.2"
+],
+"tables": [],
+"sample_numbers": [
+"4.5"
+]
+},
+{
+"hindi_pdf_page": 81,
+"printed": "53",
+"sections": [
+"0.51",
+"0.77",
+"1.06",
+"1.40",
+"2.22",
+"1.69",
+"1.93",
+"1.12",
+"0.65",
+"1.46",
+"1.74",
+"2.46",
+"2.1",
+"2.28",
+"0.95",
+"1.79",
+"1.97",
+"1.43",
+"1.77",
+"1.19",
+"1.47",
+"1.87",
+"0.42",
+"1.44",
+"1.29"
+],
+"tables": [],
+"sample_numbers": [
+"0.51",
+"0.77",
+"1.06",
+"1.40",
+"2.22",
+"1.69"
+]
+},
+{
+"hindi_pdf_page": 82,
+"printed": "54",
+"sections": [
+"2.5",
+"3.5"
+],
+"tables": [],
+"sample_numbers": [
+"2.5",
+"2.5",
+"3.5"
+]
+},
+{
+"hindi_pdf_page": 83,
+"printed": "55",
+"sections": [
+"5.2",
+"4.5.3",
+"2.20",
+"2.50",
+"1.92",
+"2.45",
+"1.95",
+"2.48",
+"1.87",
+"2.37",
+"2.22",
+"1.97",
+"2.21",
+"1.70",
+"2.13",
+"2.19",
+"1.10",
+"2.12",
+"1.20",
+"1.23",
+"2.61",
+"0.81",
+"1.80",
+"1.54",
+"2.05"
+],
+"tables": [],
+"sample_numbers": [
+"5.2",
+"4.5",
+"2.20",
+"2.50",
+"1.92",
+"2.45"
+]
+},
+{
+"hindi_pdf_page": 84,
+"printed": "56",
+"sections": [
+"1.65",
+"1.70",
+"1.45",
+"1.64",
+"1.46",
+"1.60",
+"1.42",
+"1.57",
+"1.85",
+"1.63",
+"1.53",
+"1.62",
+"1.44",
+"1.66",
+"3.00",
+"1.48",
+"1.2",
+"1.30",
+"2.32",
+"2.64",
+"1.56",
+"2.75",
+"1.51",
+"2.55",
+"1.58"
+],
+"tables": [],
+"sample_numbers": [
+"1.65",
+"1.70",
+"1.45",
+"1.64",
+"1.46",
+"1.60"
+]
+},
+{
+"hindi_pdf_page": 85,
+"printed": "57",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 86,
+"printed": "58",
+"sections": [
+"4.81"
+],
+"tables": [],
+"sample_numbers": [
+"14.73",
+"4.81"
+]
+},
+{
+"hindi_pdf_page": 87,
+"printed": null,
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 89,
+"printed": "59",
+"sections": [
+"5.1"
+],
+"tables": [],
+"sample_numbers": [
+"5.1"
+]
+},
+{
+"hindi_pdf_page": 90,
+"printed": "60",
+"sections": [
+"5.2",
+"6.90",
+"3.48",
+"5.25",
+"4.36",
+"6.37",
+"4.90",
+"4.66",
+"3.30",
+"7.80",
+"5.50",
+"9.46",
+"7.28",
+"7.00",
+"4.50",
+"3.01",
+"1.66",
+"2.45",
+"2.20",
+"2.97",
+"2.29",
+"5.43",
+"3.88",
+"1.36",
+"2.70"
+],
+"tables": [
+"2017"
+],
+"sample_numbers": [
+"5.2",
+"11.00",
+"6.90",
+"3.48",
+"5.25",
+"4.36"
+]
+},
+{
+"hindi_pdf_page": 91,
+"printed": "61",
+"sections": [
+"5.2.1",
+"5.2.1.1",
+"4.65",
+"3.6",
+"4.53",
+"4.2",
+"3.1",
+"3.7",
+"1.01",
+"0.86",
+"2.78",
+"0.5",
+"0.53",
+"1.00",
+"3.00"
+],
+"tables": [],
+"sample_numbers": [
+"5.2",
+"5.2",
+"1.1",
+"4.65",
+"3.6",
+"4.53"
+]
+},
+{
+"hindi_pdf_page": 92,
+"printed": "62",
+"sections": [
+"0.6",
+"3.7",
+"3.1",
+"4.65",
+"1.01",
+"0.86",
+"2.78"
+],
+"tables": [],
+"sample_numbers": [
+"745.82",
+"922.31",
+"0.6",
+"3.7",
+"3.1",
+"633.78"
+]
+},
+{
+"hindi_pdf_page": 93,
+"printed": "63",
+"sections": [
+"0.6"
+],
+"tables": [],
+"sample_numbers": [
+"0.6"
+]
+},
+{
+"hindi_pdf_page": 94,
+"printed": "64",
+"sections": [
+"5.2.1.2",
+"7.44",
+"5.77",
+"6.90",
+"4.36",
+"4.66",
+"0.54",
+"0.24",
+"3.7"
+],
+"tables": [],
+"sample_numbers": [
+"5.2",
+"1.2",
+"7.44",
+"5.77",
+"6.90",
+"4.36"
+]
+},
+{
+"hindi_pdf_page": 95,
+"printed": "65",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"1.305",
+"0.818",
+"418.18",
+"539.16"
+]
+},
+{
+"hindi_pdf_page": 96,
+"printed": "66",
+"sections": [
+"2.5",
+"5.77"
+],
+"tables": [],
+"sample_numbers": [
+"248.16",
+"2.5",
+"5.77"
+]
+},
+{
+"hindi_pdf_page": 97,
+"printed": "67",
+"sections": [
+"5.2.2",
+"6.5",
+"5.2.2.1"
+],
+"tables": [],
+"sample_numbers": [
+"5.2",
+"6.5",
+"5.2",
+"2.1",
+"92.63",
+"92.63"
+]
+},
+{
+"hindi_pdf_page": 98,
+"printed": "68",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"92.63",
+"249.66",
+"83.5",
+"92.6"
+]
+},
+{
+"hindi_pdf_page": 99,
+"printed": "69",
+"sections": [
+"5.2.2.2"
+],
+"tables": [],
+"sample_numbers": [
+"5.2",
+"2.2",
+"13.166",
+"0.039",
+"0.111",
+"0.013"
+]
+},
+{
+"hindi_pdf_page": 100,
+"printed": "70",
+"sections": [
+"5.3",
+"6.2.3",
+"5.3.1",
+"1.31",
+"0.06",
+"5.93",
+"6.36"
+],
+"tables": [],
+"sample_numbers": [
+"0.098",
+"5.3",
+"6.2",
+"5.3",
+"51.33",
+"44.15"
+]
+},
+{
+"hindi_pdf_page": 101,
+"printed": "71",
+"sections": [
+"5.81",
+"3.89",
+"2.09",
+"1.92",
+"0.61",
+"0.74",
+"0.45"
+],
+"tables": [],
+"sample_numbers": [
+"5.81",
+"3.89",
+"290.27",
+"2.09",
+"1.92",
+"0.61"
+]
+},
+{
+"hindi_pdf_page": 102,
+"printed": "72",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"1,172.94",
+"633.78",
+"539.16",
+"290.27"
+]
+},
+{
+"hindi_pdf_page": 103,
+"printed": null,
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 105,
+"printed": "73",
+"sections": [
+"6.1",
+"6.1.1"
+],
+"tables": [],
+"sample_numbers": [
+"6.1",
+"6.1"
+]
+},
+{
+"hindi_pdf_page": 106,
+"printed": "74",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 107,
+"printed": "75",
+"sections": [
+"6.1.2"
+],
+"tables": [],
+"sample_numbers": [
+"6.1"
+]
+},
+{
+"hindi_pdf_page": 108,
+"printed": "76",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 109,
+"printed": "77",
+"sections": [
+"6.2",
+"6.2.1"
+],
+"tables": [],
+"sample_numbers": [
+"6.2",
+"6.2"
+]
+},
+{
+"hindi_pdf_page": 110,
+"printed": "78",
+"sections": [
+"3.85",
+"6.2.2",
+"2.53"
+],
+"tables": [],
+"sample_numbers": [
+"3.85",
+"34.33",
+"33.42",
+"36.92",
+"6.2",
+"2.53"
+]
+},
+{
+"hindi_pdf_page": 111,
+"printed": "79",
+"sections": [
+"5.52",
+"2.53",
+"4.4.2",
+"3.6",
+"6.2.3",
+"0.62",
+"2.50",
+"0.45",
+"1.34",
+"0.61"
+],
+"tables": [],
+"sample_numbers": [
+"5.52",
+"13.97",
+"5.52",
+"2.53",
+"4.4",
+"3.6"
+]
+},
+{
+"hindi_pdf_page": 112,
+"printed": "80",
+"sections": [],
+"tables": [],
+"sample_numbers": []
+},
+{
+"hindi_pdf_page": 113,
+"printed": "81",
+"sections": [],
+"tables": [],
+"sample_numbers": [
+"13.97"
+]
+}
+]

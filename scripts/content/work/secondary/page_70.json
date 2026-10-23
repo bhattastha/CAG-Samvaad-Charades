@@ -1,0 +1,412 @@
+{
+ "pdf_page": 70,
+ "printed_page": "44",
+ "hindi_pdf_pages": [
+  90,
+  91
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table 14: Year-wise capacity of blast furnace and its upstream and downstream facilities during 2017-24",
+     "hi_reference": "तालिका 14: वर्ष 2017-24 के दौरान ब्लास्ट फर्नेस एवं इसकी अपस्ट्रीम एवं डाउनस्ट्रीम सुविधाओं की वर्षवार क्षमता"
+    },
+    "unit": {
+     "en": "(in mtpa)",
+     "hi_reference": "(एमटीपीए में)"
+    },
+    "columns": [
+     {
+      "en": "Name of Steel Plant",
+      "hi_reference": "इस्पात संयंत्र का नाम"
+     },
+     {
+      "en": "Year",
+      "hi_reference": "वर्ष"
+     },
+     {
+      "en": "Existing Capacity (million tonne)",
+      "hi_reference": "मौजूदा क्षमता (मिलियन टन)"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "Required Capacity to match the BF capacity (million tonne)",
+      "hi_reference": "बीएफ क्षमता के अनुरूप आवश्यक क्षमता (मिलियन टन)"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": "Existing to Required Capacity (in %)",
+      "hi_reference": "मौजूदा से आवश्यक क्षमता (% में)"
+     },
+     {
+      "en": ""
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "RMHP⁴⁸",
+       "hi_reference": "आरएमएचपी⁴⁸"
+      },
+      {
+       "en": "Sinter Plant",
+       "hi_reference": "सिंटर संयंत्र"
+      },
+      {
+       "en": "Coke oven Batteries",
+       "hi_reference": "कोक ओवन बैटरियां"
+      },
+      {
+       "en": "BF",
+       "hi_reference": "बीएफ"
+      },
+      {
+       "en": "SMS",
+       "hi_reference": "एसएमएस"
+      },
+      {
+       "en": "Sinter Plant$",
+       "hi_reference": "सिंटर संयंत्र$"
+      },
+      {
+       "en": "SMS#",
+       "hi_reference": "एसएमएस#"
+      },
+      {
+       "en": "Sinter Plant",
+       "hi_reference": "सिंटर संयंत्र"
+      },
+      {
+       "en": "SMS",
+       "hi_reference": "एसएमएस"
+      }
+     ],
+     [
+      {
+       "en": "Bokaro",
+       "hi_reference": "बोकारो"
+      },
+      {
+       "en": "2017-22"
+      },
+      {
+       "en": "11.00"
+      },
+      {
+       "en": "6.90"
+      },
+      {
+       "en": "3.48"
+      },
+      {
+       "en": "5.25"
+      },
+      {
+       "en": "4.36"
+      },
+      {
+       "en": "6.37"
+      },
+      {
+       "en": "4.90"
+      },
+      {
+       "en": "108"
+      },
+      {
+       "en": "89"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "2022-24"
+      },
+      {
+       "en": "11.00"
+      },
+      {
+       "en": "6.90"
+      },
+      {
+       "en": "3.48"
+      },
+      {
+       "en": "5.25"
+      },
+      {
+       "en": "4.66"
+      },
+      {
+       "en": "6.37"
+      },
+      {
+       "en": "4.90"
+      },
+      {
+       "en": "108"
+      },
+      {
+       "en": "95"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "2017-18"
+      },
+      {
+       "en": "14.60"
+      },
+      {
+       "en": "10.00"
+      },
+      {
+       "en": "3.30"
+      },
+      {
+       "en": "7.80"
+      },
+      {
+       "en": "5.50"
+      },
+      {
+       "en": "9.46"
+      },
+      {
+       "en": "7.28"
+      },
+      {
+       "en": "106"
+      },
+      {
+       "en": "76"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "2018-24"
+      },
+      {
+       "en": "14.60"
+      },
+      {
+       "en": "10.00"
+      },
+      {
+       "en": "3.30"
+      },
+      {
+       "en": "7.80"
+      },
+      {
+       "en": "7.00"
+      },
+      {
+       "en": "9.46"
+      },
+      {
+       "en": "7.28"
+      },
+      {
+       "en": "106"
+      },
+      {
+       "en": "96"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur",
+       "hi_reference": "दुर्गापुर"
+      },
+      {
+       "en": "2017-24"
+      },
+      {
+       "en": "4.50"
+      },
+      {
+       "en": "3.01"
+      },
+      {
+       "en": "1.66"
+      },
+      {
+       "en": "2.45"
+      },
+      {
+       "en": "2.20"
+      },
+      {
+       "en": "2.97"
+      },
+      {
+       "en": "2.29"
+      },
+      {
+       "en": "101"
+      },
+      {
+       "en": "96"
+      }
+     ],
+     [
+      {
+       "en": "IISCO",
+       "hi_reference": "इस्को"
+      },
+      {
+       "en": "2017-24"
+      },
+      {
+       "en": "5.43"
+      },
+      {
+       "en": "3.88"
+      },
+      {
+       "en": "1.36"
+      },
+      {
+       "en": "2.70"
+      },
+      {
+       "en": "2.50"
+      },
+      {
+       "en": "3.28"
+      },
+      {
+       "en": "2.52"
+      },
+      {
+       "en": "118"
+      },
+      {
+       "en": "99"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "2017-24"
+      },
+      {
+       "en": "12.00"
+      },
+      {
+       "en": "6.76"
+      },
+      {
+       "en": "2.17"
+      },
+      {
+       "en": "4.65"
+      },
+      {
+       "en": "3.60"
+      },
+      {
+       "en": "5.64"
+      },
+      {
+       "en": "4.34"
+      },
+      {
+       "en": "120"
+      },
+      {
+       "en": "83"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Information furnished by Plant Management $ As per MEP-2008: Sinter capacity of 7 million tonne for Hot Metal capacity of 5.77 million tonne of Blast furnace in case of Bokaro Steel Plant (@121.32 per cent of hot metal i.e. 7/5.77*100) # As per MEP-2008: Steel Melting Shop of 4.2 million tonne for Hot Metal capacity of 4.5 million tonne of Blast furnace in case of Rourkela Steel Plant (@93.33 per cent of hot metal i.e. 4.2/4.5*100)",
+     "hi_reference": "स्रोत: संयंत्र प्रबंधन द्वारा प्रदान की गई जानकारी $ एमईपी-2008 के अनुसार: बोकारो इस्पात संयंत्र के मामले में ब्लास्ट फर्नेस की 5.77 मिलियन टन हॉट मेटल क्षमता हेतु 7 मिलियन टन सिंटर क्षमता (हॉट मेटल का 121.32 प्रतिशत यानी 7/5.77*100) # एमईपी-2008 के अनुसार: राउरकेला इस्पात संयंत्र के मामले में ब्लास्ट फर्नेस की 4.5 मिलियन टन हॉट मेटल क्षमता हेतु 4.2 मिलियन टन इस्पात मेल्टिंग शॉप (हॉट मेटल का 93.33 प्रतिशत यानी 4.2/4.5*100)"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "As seen from the table above, the upstream facilities of Raw Material Handling Plant, Coke oven batteries and Sinter Plant were commensurate to meet the requirements of the Blast Furnaces in all the Steel plants. However, in the downstream, capacity of the Steel melting shops could not meet the capacity of the Blast furnace at Bokaro and Rourkela Steel Plants. Such imbalance in the downstream capacity would lead to throttling of the blast furnace regime or generation of Pig iron and consequent loss of production of hot metal and contribution margin. Reasons for the capacity imbalance in the upstream and downstream facilities at Rourkela and Bokaro Steel Plant⁴⁹ are discussed below.",
+   "hi_reference": "जैसा कि ऊपर दी गई तालिका से देखा जा सकता है, कच्चा माल हैंडलिंग संयंत्र, कोक ओवन बैटरियाँ एवं सिंटर संयंत्र की अपस्ट्रीम सुविधाएँ सभी इस्पात संयंत्रों में ब्लास्ट फर्नेस की आवश्यकताओं को पूरा करने के लिए पर्याप्त थीं। हालाँकि, डाउनस्ट्रीम में, बोकारो एवं राउरकेला इस्पात संयंत्रों में इस्पात मेल्टिंग शॉप्स की क्षमता ब्लास्ट फर्नेस की क्षमता के बराबर नहीं थी। डाउनस्ट्रीम क्षमता में इस तरह के असंतुलन से ब्लास्ट फर्नेस व्यवस्था या पिग आयरन के उत्पादन में बाधा उत्पन्न होगी एवं परिणामस्वरूप हॉट मेटल के उत्पादन एवं योगदान मार्जिन में कमी आएगी। राउरकेला एवं बोकारो इस्पात संयंत्रों⁴⁹ में अपस्ट्रीम एवं डाउनस्ट्रीम सुविधाओं में क्षमता असंतुलन के कारणों पर नीचे चर्चा की गई है।"
+  },
+  {
+   "type": "heading",
+   "en": "5.2.1 Delays in capital projects leading to capacity imbalance",
+   "hi_reference": "5.2.1 पूंजीगत परियोजनाओं में विलंब से क्षमता असंतुलन"
+  },
+  {
+   "type": "heading",
+   "en": "5.2.1.1 Capacity imbalance at Rourkela Steel Plant",
+   "hi_reference": "5.2.1.1 राउरकेला इस्पात संयंत्र में क्षमता असंतुलन"
+  },
+  {
+   "type": "body",
+   "en": "Rourkela Steel Plant has rated capacity of 4.65 mtpa⁵⁰ for production of hot metal, while the crude steel making capacity is 3.6 mtpa⁵¹, with the commissioning (March 2022) of",
+   "hi_reference": "राउरकेला इस्पात संयंत्र की निर्धारित क्षमता 4.65 एमटीपीए⁵⁰ है, जबकि कच्चे इस्पात निर्माण की क्षमता 3.6 एमटीपीए⁵¹ है। हॉट स्ट्रिप मिल-II के चालू होने (मार्च 2022) के साथ,"
+  },
+  {
+   "type": "footnote",
+   "en": "48 Raw Material Handling Plant supplies base mix to the Sintering Plant and coal to the Coke oven batteries and Iron ore lump to Blast Furnace.",
+   "hi_reference": "48 कच्चा माल हैंडलिंग संयंत्र सिंटरिंग संयंत्र को बेस मिक्स, कोक ओवन बैटरियों को कोयला तथा ब्लास्ट फर्नेस को लौह अयस्क की आपूर्ति करता है।"
+  },
+  {
+   "type": "footnote",
+   "en": "49 At Bhilai Steel Plant, imbalance in hot metal to crude steel capacity was noted only in 2017-18 and therefore, Bhilai Steel Plant was excluded.",
+   "hi_reference": "49 भिलाई इस्पात संयंत्र में, कच्चे इस्पात की क्षमता की तुलना में हॉट मेटल में असंतुलन केवल 2017-18 में देखा गया और इसलिए, भिलाई इस्पात संयंत्र को बाहर रखा गया।"
+  },
+  {
+   "type": "footnote",
+   "en": "50 BF#1: 1.01 mtpa, BF#4: 0.86 mtpa and BF#5: 2.78 mtpa.",
+   "hi_reference": "50 बीएफ #1: 1.01 एमटीपी, बीएफ 4: 0.86 एमटीपी और बीएफ 5: 2.78 एमटीपी।"
+  },
+  {
+   "type": "footnote",
+   "en": "51 SMS-I: 0.5 mtpa and SMS-II: 3.1 mtpa.",
+   "hi_reference": "51 एसएमएस-I: 0.5 एमटीपीए और एसएमएस-II: 3.1 एमटीपीए।"
+  },
+  {
+   "type": "page_number",
+   "en": "44"
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "pdf_page": 51,
+ "printed_page": "27",
+ "hindi_pdf_pages": [
+  67,
+  68
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table 8: Showing details of the types of Capital repair and activities involved",
+     "hi_reference": "तालिका 8: पूंजीगत मरम्मत के प्रकार एवं उसमें सम्मिलित गतिविधियों का विवरण"
+    },
+    "columns": [
+     {
+      "en": "Type of Repair",
+      "hi_reference": "मरम्मत का प्रकार"
+     },
+     {
+      "en": "Activities conducted",
+      "hi_reference": "आयोजित गतिविधियाँ"
+     },
+     {
+      "en": "Duration",
+      "hi_reference": "अवधि"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Category - I",
+       "hi_reference": "श्रेणी - I"
+      },
+      {
+       "en": "All Activities performed during Category II capital repair. In addition, the furnace hearth is further exposed and all the carbon blocks along with cooling plates in the hearth area are changed.",
+       "hi_reference": "सभी कार्य जो श्रेणी II कैपिटल रिपेयर के दौरान किया जाता है । इसके साथ साथ फर्नेस के स्टोव को और ज़्यादा खोला जाता है और स्टोव वाले एरिया में कूलिंग प्लेट्स के साथ सभी कार्बन ब्लॉक्स को बदल दिया जाता है।"
+      },
+      {
+       "en": "100-120 days",
+       "hi_reference": "100-120 दिन"
+      }
+     ],
+     [
+      {
+       "en": "Category - II",
+       "hi_reference": "श्रेणी - II"
+      },
+      {
+       "en": "Involves relining of furnace up to hearth level including changing of cooling plates, throat segments, dome liners & top charging equipment.",
+       "hi_reference": "इसमें भट्ठी की स्टोव स्तर तक रीलाइनिंग करना सम्मिलित है, जिसमें शीतलन प्लेट, थ्रोट सेगमेंट, डोम लाइनर एवं शीर्ष चार्जिंग उपकरण को बदलना सम्मिलित है।"
+      },
+      {
+       "en": "75-90 days",
+       "hi_reference": "75-90 दिन"
+      }
+     ],
+     [
+      {
+       "en": "Category - III",
+       "hi_reference": "श्रेणी - III"
+      },
+      {
+       "en": "It is conducted mainly to change top charging equipment.",
+       "hi_reference": "यह मुख्य रूप से शीर्ष चार्जिंग उपकरण को बदलने के लिए आयोजित किया जाता है।"
+      },
+      {
+       "en": "7 days",
+       "hi_reference": "7 दिन"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "type": "heading",
+   "en": "4.4.1.1 Policy for Capital Repair",
+   "hi_reference": "4.4.1.1 पूंजीगत मरम्मत के लिए नीति"
+  },
+  {
+   "type": "body",
+   "en": "The technical specification of the contract agreement of blast furnaces stipulated a defined campaign life in terms of number of years of operation of blast furnace or in terms of quantity of production. However, there was no structured policy/manual for capital repair of blast furnaces of SAIL plants. Audit observed that in absence of any structured policy/manual for capital repairs in SAIL, there was lack of clarity in taking up of repair work based on fixed years of operation or threshold limit of production. For example, Audit noted that the capital repair of BF#4 of Bokaro was deferred upto 2019-20 (planned to be taken up in 2015-16) due to delay in capital repair of BF#1, which led to operation of the BF#4 at lower productivity.",
+   "hi_reference": "ब्लास्ट फर्नेस के अनुबंध समझौते के तकनीकी विनिर्देशों में ब्लास्ट फर्नेस के संचालन वर्षों की संख्या अथवा उत्पादन की मात्रा के संदर्भ में एक परिभाषित अभियान अवधि निर्धारित की गयी थी। यद्यपि, सेल संयंत्रों के ब्लास्ट फर्नेस की पूंजीगत मरम्मत हेतु कोई संरचित नीति/ नियम-पुस्तक नहीं थी। लेखापरीक्षा ने पाया कि सेल में पूंजीगत मरम्मत हेतु किसी भी संरचित नीति/ नियम-पुस्तक के अभाव में, संचालन के निश्चित वर्षों अथवा उत्पादन की सीमा के आधार पर मरम्मत कार्य करने में स्पष्टता का अभाव था। उदाहरण के लिए, लेखापरीक्षा ने देखा कि बोकारो के बीएफ#4 की पूंजीगत मरम्मत बीएफ#1 की पूंजीगत मरम्मत में विलम्ब के कारण वर्ष 2019-20 तक स्थगित कर दी गई (वर्ष 2015-16 में आरम्भ करने की योजना बनाई गई), जिसके कारण बीएफ#4 का संचालन कम उत्पादकता पर हुआ।"
+  },
+  {
+   "type": "body",
+   "en": "Management replied (November 2023) that it was difficult to have a centralized uniform policy for repairs of blast furnaces because these were supplied by different suppliers with varied design, volumes, technology, and repair schedules. Ministry replied (July 2024/February 2025) that capital repair of blast furnace was being planned based on the actual condition of the equipment and its refractory regardless of the actual production volume and any uniform policy for the same would not be feasible. The Ministry, however, noted the suggestions of Audit for further study and to explore the possibility of implementation. During the Exit conference (February 2025) Management stated that the structured approach for planning of capital repairs of Blast furnaces by taking age and condition of Blast furnaces, existing broad guidelines and operational status of downstream facilities would continue.",
+   "hi_reference": "प्रबंधन ने उत्तर दिया (नवंबर 2023) कि ब्लास्ट फर्नेस की मरम्मत के लिए एक केंद्रीकृत समान नीति बनाना कठिन था क्योंकि ये विभिन्न आपूर्तिकर्ताओं द्वारा पृथक-पृथक डिजाइन, आयतन, तकनीक एवं मरम्मत कार्यक्रम सहित आपूर्ति की जाती थी। मंत्रालय ने प्रतिउत्तर दिया (जुलाई 2024/फरवरी 2025) कि ब्लास्ट फर्नेस की पूंजीगत मरम्मत की योजना उपकरण एवं उसके रिफ्रैक्टरी की वास्तविक स्थिति के आधार पर बनाई जा रही थी, भले ही वास्तविक उत्पादन मात्रा कुछ भी हो एवं इसके लिए कोई भी समान नीति संभव नहीं होगी। यद्यपि, मंत्रालय ने आगामी अध्ययन एवं कार्यान्वयन की संभावना का पता लगाने के लिए लेखापरीक्षा के सुझावों पर ध्यान दिया है। एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान प्रबंधन ने यह बताया कि ब्लास्ट फर्नेस की आयु एवं स्थिति, विद्यमान व्यापक दिशानिर्देश एवं अनुप्रवाह सुविधाओं की परिचालन स्थिति के ध्यानार्थ ब्लास्ट फर्नेस की पूंजीगत मरम्मत की योजना हेतु संरचित दृष्टिकोण जारी रहेगा।"
+  },
+  {
+   "type": "body",
+   "en": "The reply may be viewed in the light of the fact that structured policy for capital repair would ensure synchronized planned shutdowns of blast furnaces to avoid deferment of capital repairs and maximize the efficient operations of blast furnaces.",
+   "hi_reference": "प्रतिउत्तर को इस तथ्य के आलोक में देखा जा सकता है कि पूंजीगत मरम्मत हेतु संरचित नीति पूंजीगत मरम्मत को स्थगित करने से बचने एवं ब्लास्ट फर्नेस के कुशल संचालन को अधिकतम करने हेतु ब्लास्ट फर्नेस के समन्वित व नियोजित कार्यबंदी को सुनिश्चित करेगी।"
+  },
+  {
+   "type": "heading",
+   "en": "4.4.1.2 Annual Shutdown Plans",
+   "hi_reference": "4.4.1.2 वार्षिक कार्यबंदी योजनाएँ"
+  },
+  {
+   "type": "body",
+   "en": "Annual shutdown plans with respect to Capital repair and Preventive repair & maintenance of different components of blast furnaces is indicated in the Annual",
+   "hi_reference": "एकीकृत इस्पात संयंत्रों के वार्षिक व्यावसायिक परिप्रेक्ष्य में, ब्लास्ट फर्नेस के विभिन्न घटकों की पूंजीगत मरम्मत एवं निवारक मरम्मत एवं संरक्षण के संबंध में वार्षिक कार्यबंदी योजनाओं का उल्लेख किया गया है।",
+   "continues_on_next_page": true,
+   "note": "English sentence ends on the next page ('...Business Perspective of the integrated steel plants.'); Hindi word order puts that phrase first, so the whole Hindi sentence is given here."
+  },
+  {
+   "type": "page_number",
+   "en": "27"
+  }
+ ]
+}

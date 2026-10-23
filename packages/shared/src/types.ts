@@ -2,7 +2,7 @@ import type { RoundKey } from "./config.js";
 
 export type PartType =
   | "passage" | "header" | "heading" | "headnote" | "body" | "footnote" | "footer" | "page_number"
-  | "table" | "chart" | "annexure_ref";
+  | "table" | "chart" | "figure" | "annexure_ref";
 
 /** One editable (or read-only) string inside a part. Plain parts have a single field "t". */
 export interface Field {
@@ -20,7 +20,11 @@ export interface TableLayout {
   /** field keys, row-major; first row is the header */
   rows: string[][];
   title?: string;
+  /** e.g. "(Amount: ₹ in crore)" */
+  unit?: string;
   note?: string;
+  /** the table runs over from / onto the neighbouring page of the bundle */
+  continued?: boolean;
 }
 export interface ChartLayout {
   kind: "chart";
@@ -33,7 +37,18 @@ export interface ChartLayout {
   yTicks?: number[];
   valueDecimals?: number;
 }
-export type PartLayout = TableLayout | ChartLayout | null;
+/** A chart, diagram or photo kept as an image (Pro); its caption, word labels and source are editable fields. */
+export interface FigureLayout {
+  kind: "figure";
+  /** file under /figures/ (served as a static asset) */
+  image: string;
+  width?: number;
+  height?: number;
+  title?: string;
+  labels: string[];
+  source?: string;
+}
+export type PartLayout = TableLayout | ChartLayout | FigureLayout | null;
 
 export interface Part {
   id: string;
@@ -55,6 +70,8 @@ export interface GlossaryEntry {
   hi: string;
   variants: string[];
   avoid: string[];
+  /** subject area (e.g. "Railways"); null/undefined = general entry */
+  sector?: string | null;
 }
 
 export interface PlantedSlip {

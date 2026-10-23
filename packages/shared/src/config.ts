@@ -32,7 +32,7 @@ export const GameConfigSchema = z
     brand: z.object({ name: z.string(), short: z.string(), localized: z.record(z.string()) }).default({ name: "Samvaad Charades", short: "Samvaad", localized: {} }),
     levels: z.object({
       trialQualifyingScore: z.number().min(0).max(100).default(33),
-      unlockRule: z.string().default("trial-pass-unlocks-all"),
+      unlockRule: z.enum(["all-open", "trial-pass-unlocks-all"]).default("all-open"),
       trialWords: z.object({ min: z.number(), max: z.number(), sourceSection: z.string() }).default({ min: 300, max: 400, sourceSection: "Conclusion" }),
     }).default({}),
     maxCredits: z.number().positive(),
@@ -85,8 +85,8 @@ export const GameConfigSchema = z
       translationPlugin: z.object({ enabled: z.boolean(), scriptUrl: z.string(), languages: z.array(z.string()) }).default({ enabled: false, scriptUrl: "", languages: ["hi", "en"] }),
     }).default({}),
     bhashiniServices: z.object({
-      translation: z.string(), asrHindi: z.string(), ttsEnglish: z.string(), ttsGender: z.enum(["female", "male"]), transliteration: z.string(),
-    }).default({ translation: "ai4bharat/indictrans-v2-all-gpu--t4", asrHindi: "ai4bharat/conformer-hi-gpu--t4", ttsEnglish: "Bhashini/IITM/TTS", ttsGender: "female", transliteration: "ai4bharat/indicxlit--cpu-fsv2" }),
+      translation: z.string(), translationProvider: z.enum(["anuvaad", "dhruva"]).default("anuvaad"), asrHindi: z.string(), ttsEnglish: z.string(), ttsGender: z.enum(["female", "male"]), transliteration: z.string(),
+    }).default({ translationProvider: "anuvaad", translation: "ai4bharat/indictrans-v2-all-gpu--t4", asrHindi: "ai4bharat/conformer-hi-gpu--t4", ttsEnglish: "Bhashini/IITM/TTS", ttsGender: "female", transliteration: "ai4bharat/indicxlit--cpu-fsv2" }),
     transliteration: z.object({
       endpoint: z.string().url(),
       serviceId: z.string(),

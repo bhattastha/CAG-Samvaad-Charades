@@ -1,0 +1,19 @@
+{
+ "pdf_page": 28,
+ "printed_page": "8",
+ "hindi_pdf_pages": [34, 35],
+ "parts": [
+  {"type": "header", "en": "Report No. 38 of 2025", "hi_reference": "2025 की प्रतिवेदन संख्या 38"},
+  {"type": "body", "en": "relating to assessment of requirement, availability and consumption of raw material, production performance, up-gradation, capital repairs and preventive repair & maintenance of blast furnaces, operating indices, adherence to the safety & environmental laws. Audit examined electronic and paper records pertaining to all the integrated Steel plants and VISP, Bhadravati for a period from 2017-18 to 2023-24.",
+   "hi_reference": "लेखापरीक्षा में कच्चे माल की आवश्यकता, उपलब्धता एवं खपत के आकलन, उत्पादन निष्पादन, उन्नयन, पूंजीगत मरम्मत एवं ब्लास्ट फर्नेस की निवारक मरम्मत एवं अनुरक्षण, परिचालन सूचकांक, सुरक्षा एवं पर्यावरण कानूनों के पालन से संबंधित अभिलेखों की जाँच की गई। लेखापरीक्षा में 2017-18 से 2023-24 तक की अवधि के लिए सभी एकीकृत इस्पात संयंत्रों एवं वीआईएसपी, भद्रावती से संबंधित इलेक्ट्रॉनिक एवं कागजी अभिलेखों की जाँच की गई।",
+   "note": "English begins mid-sentence (starts on p. 7 with 'Audit examined records'); Hindi gives that whole sentence."},
+  {"type": "heading", "en": "2.4 Audit Methodology", "hi_reference": "2.4 लेखापरीक्षा पद्धति"},
+  {"type": "body", "en": "An entry conference was held with the Management and Ministry of Steel on 5 November 2022. Draft Performance Audit report was issued to SAIL Management on 15 September 2023. Exit meeting was held on 4 October 2023 with the Management. Draft Performance Audit report was issued to the Ministry of Steel on 26 April 2024. Replies of Management (November 2023) and Ministry (July 2024) have been duly incorporated in the report. The report was updated till March 2024 and issued to the Ministry of Steel on 22 November 2024. Exit conference with the Ministry was held on 13 February 2025. Response of Ministry after exit conference was received on 17 February 2025 and 7 April 2025, which has been duly incorporated in the report.",
+   "hi_reference": "5 नवंबर 2022 को प्रबंधन एवं इस्पात मंत्रालय के साथ एक इंट्री कांफ्रेंस आयोजित किया गया। 15 सितंबर 2023 को सेल प्रबंधन को मसौदा निष्पादन लेखापरीक्षा रिपोर्ट जारी की गई। प्रबंधन के साथ 4 अक्टूबर 2023 को एग्जिट मीटिंग आयोजित किया गया। 26 अप्रैल 2024 को मसौदा निष्पादन लेखापरीक्षा रिपोर्ट इस्पात मंत्रालय को निर्गत की गई। रिपोर्ट को मार्च 2024 तक अद्यतन किया गया एवं 22 नवंबर 2024 को इस्पात मंत्रालय को निर्गत की गई। प्रबंधन (नवम्बर 2023) और मंत्रालय (जुलाई 2024) के उत्तरो को रिपोर्ट में विधिवत सम्मिलित किया गया है। 13 फरवरी 2025 को मंत्रालय के साथ एग्जिट कॉनफेरेंस आयोजित किया गया। एग्जिट कॉनफेरेंस के पश्चात् मंत्रालय की प्रतिक्रिया क्रमशः 17 फ़रवरी 2025 एवं 7 अप्रैल 2025 को प्राप्त हुई, जिसे प्रतिवेदन में विधिवत सम्मिलित किया गया है।",
+   "note": "Hindi swaps the order of two sentences (report updated/issued before replies incorporated)."},
+  {"type": "heading", "en": "2.5 Acknowledgement", "hi_reference": "2.5 आभार"},
+  {"type": "body", "en": "Audit acknowledges the co-operation extended by the Management of the Company and the officials of Ministry of Steel in facilitating the conduct of this Performance Audit.",
+   "hi_reference": "लेखापरीक्षा इस निष्पादन लेखापरीक्षा के संचालन को सुविधाजनक बनाने में कंपनी के प्रबंधन एवं इस्पात मंत्रालय के अधिकारियों द्वारा दिए गए सहयोग के लिए आभार व्यक्त करती है।"},
+  {"type": "page_number", "en": "8"}
+ ]
+}

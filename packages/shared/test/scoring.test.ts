@@ -2,11 +2,13 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   chrF, parseGameConfig, roundCredits, roundOf, scoreAttempt, seedToPage, summarise, timeMeasure,
-  reportCardLines, romanToDevanagari, findForbidden, type Answers, type SeedPage,
+  reportCardLines, romanToDevanagari, findForbidden, matchSourceTerms, glossaryKey, entriesForSector, type Answers, type SeedPage, type GlossaryEntry,
 } from "../src/index.js";
 
 const root = new URL("../../../", import.meta.url);
 const config = parseGameConfig(JSON.parse(readFileSync(new URL("config/game.config.json", root), "utf8")));
+// Trial-first unlocking is a console option; the review build ships with every level open ("all-open")
+const trialFirst = { ...config, levels: { ...config.levels, unlockRule: "trial-pass-unlocks-all" as const } };
 const seed = JSON.parse(readFileSync(new URL("seed/pages/trial_r38_page_v.json", root), "utf8")) as SeedPage;
 const { page } = seedToPage(seed);
 const trial = roundOf(config, "trial");
@@ -66,7 +68,7 @@ describe("credits and totals", () => {
     expect(s.stars).toBe(5);
   });
   it("a lower later score never reduces credits; 4th chance refused; rounds unlock in order", () => {
-    const s = summarise(config, [
+    const s = summarise(trialFirst, [
       { roundKey: "trial", chanceNo: 1, status: "submitted", score: 70 },
       { roundKey: "trial", chanceNo: 2, status: "submitted", score: 20 },
       { roundKey: "trial", chanceNo: 3, status: "submitted", score: 50 },
@@ -82,12 +84,21 @@ describe("credits and totals", () => {
     expect(s.trialPassed).toBe(true);
   });
   it("a Trial below the qualifying score keeps every other level locked", () => {
-    const s = summarise(config, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 20 }]);
+    const s = summarise(trialFirst, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 20 }]);
     expect(s.trialPassed).toBe(false);
     expect(s.rounds.slice(1).some((r) => r.unlocked)).toBe(false);
     expect(s.nextRound).toBe("trial");
-    const lowered = summarise({ ...config, levels: { ...config.levels, trialQualifyingScore: 15 } }, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 20 }]);
+    const lowered = summarise({ ...trialFirst, levels: { ...trialFirst.levels, trialQualifyingScore: 15 } }, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 20 }]);
     expect(lowered.rounds[3].unlocked).toBe(true);
+  });
+  it("all-open: every playable level is open from the start, Trial still suggested first", () => {
+    const s = summarise(config, []);
+    expect(config.levels.unlockRule).toBe("all-open");
+    expect(s.rounds.slice(0, 4).every((r) => r.unlocked)).toBe(true);
+    expect(s.rounds[4].unlocked).toBe(false);
+    expect(s.nextRound).toBe("trial");
+    const after = summarise(config, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 10 }]);
+    expect(after.nextRound).toBe("primary");
   });
   it("Secondary or Pro can be played without Primary", () => {
     const s = summarise(config, [
@@ -119,6 +130,28 @@ describe("report card line selection (§10.3)", () => {
     expect(reportCardLines({ ...base, chanceNo: 1, score: 30, priorBest: null, chancesLeft: 2 }).announce[0]).toBe("primary.report_card.so_close");
     expect(reportCardLines({ ...base, chanceNo: 1, score: 10, priorBest: null, chancesLeft: 2 }).announce[0]).toBe("primary.report_card.below_pass_chances_left");
     expect(reportCardLines({ ...base, chanceNo: 3, score: 10, priorBest: 5, chancesLeft: 0 }).announce[0]).toBe("primary.report_card.below_pass_no_chances");
+  });
+});
+
+describe("glossary matching (Anuvaad algorithm)", () => {
+  const e = (en: string, hi: string, sector: string | null = null): GlossaryEntry => ({ en, hi, variants: [], avoid: [], sector });
+  const idx = new Map([e("foreign exchange regulation act", "विदेशी मुद्रा विनियमन अधिनियम"), e("foreign exchange", "विदेशी मुद्रा"), e("exchange", "विनिमय"), e("F.E.-R.A.", "फेरा")].map((x) => [glossaryKey(x.en), x]));
+  it("one normaliser: punctuation separates", () => {
+    expect(glossaryKey("F.E.-R.A.")).toBe("f e r a");
+    expect(glossaryKey("CAG’s  (DPC) Act")).toBe("cag s dpc act");
+  });
+  it("longest match wins and no token is matched twice", () => {
+    const m = matchSourceTerms("Breach of the Foreign Exchange Regulation Act and foreign exchange, exchange.", idx);
+    expect(m.map((x) => x.entry.en)).toEqual(["foreign exchange regulation act", "foreign exchange", "exchange"]);
+    expect(m[0].start).toBe(14);
+  });
+  it("punctuated terms match when stored the same way", () => {
+    expect(matchSourceTerms("under F.E.-R.A. rules", idx)[0].entry.hi).toBe("फेरा");
+  });
+  it("sector widens, never narrows; sector entry first", () => {
+    const all = [e("staff", "कर्मचारी वर्ग"), e("staff", "कार्मिक", "Railways")];
+    expect(entriesForSector(all, "Railways").map((x) => x.hi)).toEqual(["कार्मिक", "कर्मचारी वर्ग"]);
+    expect(entriesForSector(all, "commercial").map((x) => x.hi)).toEqual(["कर्मचारी वर्ग"]);
   });
 });
 

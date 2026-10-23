@@ -1,0 +1,61 @@
+{
+ "pdf_page": 55,
+ "printed_page": "31",
+ "hindi_pdf_pages": [
+  73,
+  74
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "conference (February 2025) Management accepted the views of Audit with respect to delays in capital repairs at BF#1 & 4 of Rourkela Steel Plant and BF#4 of Bhilai Steel Plant. With respect to BF#1 and 4 of Bokaro Steel Plant, during Exit conference (February 2025) Management stated that there was no actual loss of hot metal as the plant runs with four furnaces and one always remained under capital repair.",
+   "hi_reference": "एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान प्रबंधन ने राउरकेला स्टील प्लांट के बीएफ#1 एवं 4 एवं भिलाई स्टील प्लांट के बीएफ#4 में पूंजीगत मरम्मत में विलंब के संबंध में लेखापरीक्षा के निष्कर्षों को स्वीकार किया। बोकारो स्टील प्लांट के बीएफ#1 एवं 4 के संबंध में, एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान प्रबंधन ने कहा कि तप्त धातु की कोई वास्तविक हानि नहीं हुई है क्योंकि प्लांट चार भट्ठियों के साथ चलता है एवं एक हमेशा पूंजीगत मरम्मत के अधीन रहता है।",
+   "continues_from_previous_page": true
+  },
+  {
+   "type": "body",
+   "en": "The replies may be viewed in the light of the fact that Management was aware of the scope of work, the site condition and that the project of BF#1 at Rourkela was a brownfield project. Moreover, the potential loss of contribution has been calculated for the period December 2019 to September 2020 and not for the period 2017-18. The reply regarding BF#4 of Rourkela was silent on execution of the project on turnkey basis contrary to the decision of the Board. In respect of BF#1 of Bokaro Steel Plant, it was noted that there was growth in Steel industry between 2019 and 2023. Also, the potential loss of contribution due to delay in the capital repair of BF#1 at Bokaro has been calculated after considering the production of hot metal by BF#4 during the deferment period. In respect of BF#4 of Bhilai Steel Plant refractory material was to be supplied by Bhilai Steel Plant to the contractor and it did not hand over the stoves at planned intervals.",
+   "hi_reference": "उत्तरों को इस तथ्य के आलोक में देखा जा सकता है कि प्रबंधन को कार्य के दायरे, साइट की स्थिति की जानकारी थी एवं राउरकेला में बीएफ#1 की परियोजना एक ब्राउनफील्ड परियोजना थी। इसके अलावा, अंशदान की संभावित हानि की गणना दिसंबर 2019 से सितंबर 2020 की अवधि के लिए की गई है, न कि 2017-18 की अवधि के लिए। राउरकेला के बीएफ#4 के संबंध में उत्तर, बोर्ड के निर्णय के विपरीत, टर्नकी आधार पर परियोजना के निष्पादन पर मौन था। बोकारो स्टील प्लांट के बीएफ#1 के संबंध में, यह नोट किया गया कि 2019 एवं 2023 के मध्य इस्पात उद्योग में वृद्धि हुई थी। इसके अलावा, बोकारो में बीएफ#1 की पूंजीगत मरम्मत में विलंब के कारण योगदान की संभावित हानि की गणना आस्थगन अवधि के दौरान बीएफ#4 द्वारा तप्त धातु के उत्पादन पर विचार करने के बाद की गई है। भिलाई स्टील प्लांट के बीएफ#4 के संबंध में रिफ्रैक्टरी सामग्री की आपूर्ति भिलाई स्टील प्लांटद्वारा ठेकेदार को की जानी थी, तथा उसने नियोजित अंतराल पर स्टोव नहीं सौंपे।"
+  },
+  {
+   "type": "headnote",
+   "en": "Recommendation 2: The Company may prepare a structured policy for capital repair of blast furnaces and timely completion of capital repairs to ensure synchronized planned shutdowns of blast furnaces to avoid deferment of capital repairs and maximize the efficient operations of blast furnaces.",
+   "hi_reference": "अनुशंसा 2: कंपनी ब्लास्ट फर्नेस हेतु पूंजीगत मरम्मत एवम उसे समय पर पूरा करने के लिए एक संरचित नीति तैयार करे, ताकि पूंजीगत मरम्मत को स्थगित करने से बचने और ब्लास्ट फर्नेस के कुशल परिचालन को अधिकतम करने के लिए ब्लास्ट फर्नेस के समंवित नियोजित शटडाउन को सुनिश्चित किया जा सके।"
+  },
+  {
+   "type": "heading",
+   "en": "4.4.2 Unplanned Shutdown",
+   "hi_reference": "4.4.2 अनियोजित शटडाउन"
+  },
+  {
+   "type": "body",
+   "en": "Unplanned shutdowns is the off blast⁴⁰ period of the blast furnace which was not planned and directly impacts production performance.",
+   "hi_reference": "अनियोजित शटडाउन, ब्लास्ट फर्नेस की वह बंद अवधि⁴⁰ है, जिसकी योजना नहीं बनाई गई थी एवं इसका उत्पादन निष्पादन पर सीधा प्रभाव पड़ता है।"
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_55_1.png",
+    "title": {
+     "en": "Chart 4: Year-wise Unplanned Shutdown Hours for SAIL for the period 2017-2024",
+     "hi_reference": "चार्ट 4: 2017-2024 की अवधि के लिए सेल के लिए वर्ष-वार अनियोजित शटडाउन घंटे"
+    },
+    "labels": []
+   }
+  },
+  {
+   "type": "footnote",
+   "en": "40 Temporary period for which the blast furnace is not in operation for a situation when the full production capacity of the furnace is either not required or to perform various maintenance activities is termed as off blast period.",
+   "hi_reference": "40 अस्थायी अवधि जिसके लिए ब्लास्ट फर्नेस किसी स्थिति में प्रचालन में नहीं होती है, जब भट्ठी की पूर्ण उत्पादन क्षमता की या तो आवश्यकता नहीं होती है या विभिन्न रखरखाव गतिविधियों को करने की आवश्यकता होती है, उसे ऑफ ब्लास्ट अवधि कहा जाता है।"
+  },
+  {
+   "type": "page_number",
+   "en": "31"
+  }
+ ]
+}

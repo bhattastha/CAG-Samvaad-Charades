@@ -1,0 +1,444 @@
+{
+ "pdf_page": 63,
+ "printed_page": "39",
+ "hindi_pdf_pages": [
+  84,
+  85
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": null,
+    "unit": null,
+    "continues": "Table-13 (continued from previous page)",
+    "columns": [
+     {
+      "en": "Name of Plant",
+      "hi_reference": "संयंत्र का नाम"
+     },
+     {
+      "en": "Desired Level",
+      "hi_reference": "वांछित स्तर"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "2017-18"
+      },
+      {
+       "en": "2018-19"
+      },
+      {
+       "en": "2019-20"
+      },
+      {
+       "en": "2020-21"
+      },
+      {
+       "en": "2021-22"
+      },
+      {
+       "en": "2022-23"
+      },
+      {
+       "en": "2023-24"
+      }
+     ],
+     [
+      {
+       "en": "IISCO Steel Plant",
+       "hi_reference": "बर्नपुर"
+      },
+      {
+       "en": "4.00"
+      },
+      {
+       "en": "3.38"
+      },
+      {
+       "en": "3.51"
+      },
+      {
+       "en": "3.64"
+      },
+      {
+       "en": "3.47"
+      },
+      {
+       "en": "3.89"
+      },
+      {
+       "en": "3.90"
+      },
+      {
+       "en": "3.97"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "4.00"
+      },
+      {
+       "en": "3.87"
+      },
+      {
+       "en": "3.71"
+      },
+      {
+       "en": "3.7"
+      },
+      {
+       "en": "3.58"
+      },
+      {
+       "en": "3.86"
+      },
+      {
+       "en": "3.85"
+      },
+      {
+       "en": "3.92"
+      }
+     ],
+     [
+      {
+       "en": "Blast Volume (10³Nm³/hr)_Old Plants",
+       "hi_reference": "विस्फोट मात्रा (10³ एनएम³/घंटा)_पुराने संयंत्र"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      }
+     ],
+     [
+      {
+       "en": "Bokaro Steel Plant",
+       "hi_reference": "बोकारो"
+      },
+      {
+       "en": "162-240"
+      },
+      {
+       "en": "157-221"
+      },
+      {
+       "en": "165-222"
+      },
+      {
+       "en": "116-225"
+      },
+      {
+       "en": "173-219"
+      },
+      {
+       "en": "172-214"
+      },
+      {
+       "en": "161-223"
+      },
+      {
+       "en": "178-231"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "71-203"
+      },
+      {
+       "en": "95-210"
+      },
+      {
+       "en": "95-202"
+      },
+      {
+       "en": "93-192"
+      },
+      {
+       "en": "97-179"
+      },
+      {
+       "en": "96-202"
+      },
+      {
+       "en": "56-201"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur Steel Plant",
+       "hi_reference": "दुर्गापुर"
+      },
+      {
+       "en": "125-140*"
+      },
+      {
+       "en": "115-122"
+      },
+      {
+       "en": "116-124"
+      },
+      {
+       "en": "118-130"
+      },
+      {
+       "en": "113-129"
+      },
+      {
+       "en": "116-127"
+      },
+      {
+       "en": "117-130"
+      },
+      {
+       "en": "116-135"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "120-145"
+      },
+      {
+       "en": "123"
+      },
+      {
+       "en": "112-119"
+      },
+      {
+       "en": "104-135"
+      },
+      {
+       "en": "144-156"
+      },
+      {
+       "en": "118-144"
+      },
+      {
+       "en": "116-141"
+      },
+      {
+       "en": "126-147"
+      }
+     ],
+     [
+      {
+       "en": "Blast Volume (10³Nm³/hr)_New Plants",
+       "hi_reference": "विस्फोट मात्रा (10³ एनएम³/ घंटा)_नए संयंत्र"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      }
+     ],
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "330"
+      },
+      {
+       "en": "176"
+      },
+      {
+       "en": "296"
+      },
+      {
+       "en": "339"
+      },
+      {
+       "en": "341"
+      },
+      {
+       "en": "339"
+      },
+      {
+       "en": "356"
+      },
+      {
+       "en": "353"
+      }
+     ],
+     [
+      {
+       "en": "IISCO Steel Plant",
+       "hi_reference": "बर्नपुर"
+      },
+      {
+       "en": "306"
+      },
+      {
+       "en": "291"
+      },
+      {
+       "en": "302"
+      },
+      {
+       "en": "327"
+      },
+      {
+       "en": "313"
+      },
+      {
+       "en": "333"
+      },
+      {
+       "en": "340"
+      },
+      {
+       "en": "341"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "330"
+      },
+      {
+       "en": "306"
+      },
+      {
+       "en": "305"
+      },
+      {
+       "en": "303"
+      },
+      {
+       "en": "308"
+      },
+      {
+       "en": "310"
+      },
+      {
+       "en": "312"
+      },
+      {
+       "en": "344"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management. * For the period 2022-2024 only.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े। * केवल 2022-2024 की अवधि के लिए।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "Durgapur, Rourkela, IISCO Steel Plant and Bokaro Steel Plant (for 2022-24) had fixed the desired level of blast pressure for each of their blast furnaces while Bhilai Steel Plant had not fixed any norm. Audit noted low blast pressure between 0.81 and 2.80 Kg/cm² against the desired level between 1.65 and 3.00 Kg/cm² in old blast furnaces. The blast pressure was between 1.95 and 3.97 Kg/cm² against the desired level of 4 Kg/cm² in the new furnaces except BF#8 of Bhilai Steel Plant in 2019-20 and 2023-24 which achieved blast pressure of 4.07 Kg/cm² and 4 Kg/cm² respectively.",
+   "hi_reference": "दुर्गापुर, राउरकेला, ईस्को स्टील प्लांट एवं बोकारो स्टील प्लांट (2022-24 के लिए) ने अपने प्रत्येक ब्लास्ट फर्नेस के लिए ब्लास्ट प्रेशर का वांछित स्तर तय कर दिया था, जबकि भिलाई स्टील प्लांट ने कोई मानक तय नहीं किया था। लेखापरीक्षा में पाया गया कि पुरानी ब्लास्ट फर्नेस में वांछित स्तर 1.65 एवं 3.00 किग्रा/सेमी² के मुकाबले 0.81 एवं 2.80 किग्रा/सेमी² के मध्य कम ब्लास्ट दबाव था। 2019-20 एवं 2023-24 में भिलाई स्टील प्लांट के बीएफ#8 को छोड़कर नई भट्ठियों में विस्फोट दबाव 4 किलोग्राम/सेमी² के वांछित स्तर के मुकाबले 1.95 एवं 3.97 किलोग्राम/सेमी² के मध्य था, जिसने क्रमशः 4.07 किलोग्राम/सेमी² एवं 4 किलोग्राम/सेमी² का विस्फोट दबाव हासिल किया।"
+  },
+  {
+   "type": "body",
+   "en": "Desired level of blast volume was fixed by Rourkela and IISCO Steel Plant for 2017-24 and by Bokaro & Durgapur Steel Plant for 2022-24 whereas Bhilai Steel Plant for the entire period of 2017-24 and Bokaro & Durgapur Steel Plant for 2017-22 had not fixed the desired level of blast volume during 2017-24. Audit noted that blast volume was between 71 and 231 (10³ Nm³/hr) against the desired level of 120 and 240 (10³ Nm³/hr) in old furnaces and between 176 and 356 (10³ Nm³/hr) against the desired level of 306 and 330 (10³ Nm³/hr) in the new furnaces.",
+   "hi_reference": "राउरकेला एवं इस्को स्टील प्लांट द्वारा 2017-24 के लिए तथा बोकारो एवं दुर्गापुर स्टील प्लांट द्वारा 2022-24 के लिए विस्फोट मात्रा का वांछित स्तर निर्धारित किया गया था, जबकि भिलाई स्टील प्लांट ने 2017-24 की संपूर्ण अवधि के लिए तथा बोकारो एवं दुर्गापुर स्टील प्लांट ने 2017-22 के दौरान विस्फोट मात्रा का वांछित स्तर निर्धारित नहीं किया था। लेखापरीक्षा में पाया गया कि विस्फोट की मात्रा पुरानी भट्ठियों में 120 एवं 240 (10³ एनएम³/घंटा) के वांछित स्तर के मुकाबले 71 एवं 231 (10³ एनएम³/घंटा) के मध्य थी एवं नई भट्ठियों में 306 एवं 330 (10³ एनएम³/घंटा) के वांछित स्तर के मुकाबले 176 एवं 356 (10³ एनएम³/घंटा) के मध्य थी।"
+  },
+  {
+   "type": "body",
+   "en": "As stated by Management, low blast pressure and blast volume were attributable to furnace health, frequent breakdown of aged stoves and operating stoves with reduced capacity, raw material quality & availability and hot metal evacuation rate. Lower blast pressure and blast volume adversely impacted the Blast Furnace productivity, high coke rate and reduction in hot metal production.",
+   "hi_reference": "प्रबंधन द्वारा बताया गया कि, कम विस्फोट दबाव एवं विस्फोट मात्रा भट्ठी के स्वास्थ्य, पुराने स्टोवों के बार-बार टूटने एवं कम क्षमता वाले स्टोवों के संचालन, कच्चे माल की गुणवत्ता एवं उपलब्धता एवं तप्त धातु निकासी दर के कारण थे। कम विस्फोट दबाव एवं विस्फोट मात्रा के कारण ब्लास्ट फर्नेस की उत्पादकता पर प्रतिकूल प्रभाव पड़ा, कोक दर अधिक हो गई एवं तप्त धातु उत्पादन में कमी आई।"
+  },
+  {
+   "type": "body",
+   "en": "Management/ Ministry replied (November 2023/ February 2025/April 2025) that fixation of separate norms was not necessary relating to pressure and volume of air as",
+   "hi_reference": "प्रबंधन/मंत्रालय ने उत्तर दिया (नवंबर 2023/फरवरी 2025/अप्रैल 2025) कि वायु के दबाव एवं आयतन से संबंधित अलग-अलग मानदंडों का निर्धारण आवश्यक नहीं था क्योंकि"
+  },
+  {
+   "type": "page_number",
+   "en": "39"
+  }
+ ]
+}

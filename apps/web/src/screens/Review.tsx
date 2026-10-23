@@ -4,6 +4,7 @@ import { escapeRegExp, type Answers, type ClientPart, type Flag } from "@hc/shar
 import { api } from "../lib/api";
 import { t } from "../lib/strings";
 import { Header, Page, PageTitle, Spinner } from "../components/Layout";
+import { Icon } from "../components/Icon";
 
 interface ReviewData { roundKey: string; page: { parts: ClientPart[] }; answers: Answers; flags: Flag[]; termChecks: { en: string; hi: string; correct: boolean }[] }
 
@@ -29,14 +30,15 @@ export function Review() {
     <>
       <Header />
       <Page>
-        <PageTitle hi={t("reportCard.reviewHeading")} en="Your translation" right={<Link to={`/report/${id}`} className="btn-ghost">← {t("common.back")}</Link>} />
-        <p className="text-muted mb-4">{t("reportCard.reviewNote")}</p>
-        <div className="flex flex-wrap gap-4 mb-4 text-sm">
+        <PageTitle hi={t("reportCard.reviewHeading")} en="Your translation" right={<Link to={`/report/${id}`} className="btn-ghost"><Icon name="chevronLeft" size={18} /> {t("common.back")}</Link>} />
+        <p className="text-muted mb-4 flex items-start gap-2"><Icon name="info" size={17} className="mt-0.5 text-navy-600" />{t("reportCard.reviewNote")}</p>
+        <div className="flex flex-wrap gap-4 mb-4 text-sm rounded-ui border border-slate-200 bg-white px-4 py-2.5 items-center">
+          <Icon name="eye" size={16} className="text-navy-600" />
           <span><span className="hc-watch">शब्द</span> {t("reportCard.legendAvoid")} / {t("reportCard.legendSlip")}</span>
           <span><span className="hc-latin">word</span> {t("reportCard.legendLatin")}</span>
         </div>
         <div className="grid lg:grid-cols-[1.6fr_1fr] gap-6">
-          <div className="card p-5 space-y-3 text-[18px] leading-[1.8]" data-allow-select>
+          <div className="card p-5 sm:p-6 space-y-3 text-[18px] leading-[1.8] text-ink" data-allow-select>
             {data.page.parts.filter((p) => p.editable).map((p) => (
               <div key={p.id}>
                 {p.fields.filter((f) => !f.numeric).map((f) => {
@@ -47,11 +49,11 @@ export function Review() {
               </div>
             ))}
           </div>
-          <aside className="card p-5">
-            <h2 className="font-bold text-primary-strong">{t("reportCard.measureGlossary")}</h2>
-            <ul className="mt-2 space-y-1.5">
+          <aside className="card p-5 self-start">
+            <h2 className="font-bold text-navy flex items-center gap-2"><Icon name="book" size={18} className="text-navy-600" /> {t("reportCard.measureGlossary")}</h2>
+            <ul className="mt-3 divide-y divide-slate-100">
               {data.termChecks.map((x) => (
-                <li key={x.en} className="flex items-center gap-2"><span className={x.correct ? "text-success" : "text-timer-text"}>{x.correct ? "✓" : "✗"}</span><span className="en">{x.en}</span>{x.correct && <span>· {x.hi}</span>}</li>
+                <li key={x.en} className="flex items-center gap-2 py-1.5"><span className={`w-5 h-5 rounded-md grid place-items-center ${x.correct ? "bg-success-soft text-success" : "bg-timer-bg text-timer-text"}`} ><Icon name={x.correct ? "check" : "x"} size={13} stroke={2.4} /><span className="sr-only">{x.correct ? "\u2713" : "\u2717"}</span></span><span className="en">{x.en}</span>{x.correct && <span>· {x.hi}</span>}</li>
               ))}
             </ul>
             {missing.length > 0 && <p className="mt-3 text-sm text-muted">{t("reportCard.missingTerms")} <span className="en">{missing.map((m) => m.en).join(", ")}</span></p>}

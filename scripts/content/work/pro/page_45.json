@@ -1,0 +1,19 @@
+{
+  "pdf_page": 45,
+  "printed_page": "21",
+  "hindi_pdf_pages": [59, 60],
+  "parts": [
+    {"type": "header", "en": "Report No. 38 of 2025", "hi_reference": "2025 की प्रतिवेदन संख्या 38"},
+    {"type": "heading", "en": "Operational Performance of Blast Furnaces", "hi_reference": "ब्लास्ट फर्नेस का प्रचालन निष्पादन"},
+    {"type": "body", "en": "4.1 The Performance of Blast Furnace is assessed by the production of hot metal and the productivity of the Blast Furnace. The Annual Business Perspective lays down the production target of hot metal and the productivity considering operating condition of blast furnace, availability of furnaces, raw materials and market demand of finished products etc. The low production achieved will result in loss of contribution margin while low productivity indicated lower efficiency of blast furnace with higher cost of production.",
+     "hi_reference": "4.1 ब्लास्ट फर्नेस के निष्पादन का आकलन तप्त धातु के उत्पादन एवं ब्लास्ट फर्नेस की उत्पादकता द्वारा किया जाता है। वार्षिक व्यवसाय परिप्रेक्ष्य में ब्लास्ट फर्नेस की प्रचालन स्थिति, भट्ठियों की उपलब्धता, कच्चे माल एवं तैयार उत्पादों की बाजार में मांग आदि पर विचार करते हुए तप्त धातु के उत्पादन लक्ष्य एवं उत्पादकता को निर्धारित किया जाता है। कम उत्पादन के परिणामस्वरूप योगदान मार्जिन में कमी आएगी, जबकि कम उत्पादकता से उत्पादन की उच्च लागत के साथ ब्लास्ट फर्नेस की कम दक्षता का संकेत मिलेगा।"},
+    {"type": "figure", "layout": {"image": "fig_45_1.png",
+      "title": {"en": "Figure 6: Hot metal flowing through main trough from BF#8 of Bhilai Steel Plant", "hi_reference": "चित्र 6: भिलाई स्टील प्लांट के ब्लास्ट फर्नेस #8 से मुख्य गर्त से बहने वाला तप्त धातु"},
+      "labels": [], "source": null}},
+    {"type": "body", "en": "Steel plants are required to ensure availability of furnaces through scheduled repair & maintenance, undertaking and completing capital repairs of blast furnaces as per schedule and maximizing the utilization of the Plant available hours to achieve the production targets. The performance of a blast furnace depends on desired level of techno-economic parameters like hot blast temperature, oxygen enrichment, blast volume and blast pressure.",
+     "hi_reference": "इस्पात संयंत्रों को निर्धारित मरम्मत एवं रखरखाव के माध्यम से भट्ठियों की उपलब्धता सुनिश्चित करनी होती है, निर्धारित समय के अनुसार ब्लास्ट फर्नेस की बड़े स्तर पर मरम्मत करना एवं पूरा करना होता है, तथा उत्पादन लक्ष्यों को प्राप्त करने के लिए संयंत्र के उपलब्ध समय का अधिकतम उपयोग करना होता है। ब्लास्ट फर्नेस का निष्पादन, हॉट ब्लास्ट तापमान, ऑक्सीजन संवर्धन, ब्लास्ट आयतन एवं ब्लास्ट दाब जैसे तकनीकी-आर्थिक मापदंडों के वांछित स्तर पर निर्भर करता है।"},
+    {"type": "body", "en": "SAIL had the installed capacity to produce of 23.07 mtpa of hot metal (31 March 2024). During the period 2017-2024 the planned production as per Annual Business Perspective was 140.88 million tonne as against which the actual production achieved was 126.15 million tonne. Budgeted and actual production of hot metal in SAIL during 2017-2024 is given in the chart 3.",
+     "hi_reference": "सेल के पास 23.07 मिलियन टन प्रति वर्ष तप्त धातु (31 मार्च 2024) का उत्पादन करने की क्षमता थी। 2017-2024 की अवधि के दौरान वार्षिक व्यावसायिक परिप्रेक्ष्य के अनुसार नियोजित उत्पादन 140.88 मिलियन टन था, जबकि प्राप्त वास्तविक उत्पादन 126.15 मिलियन टन था। 2017-2024 के दौरान सेल में तप्त धातु का बजटीय उत्पादन एवं वास्तविक उत्पादन नीचे दिए चार्ट में दर्शाए गए हैं-"},
+    {"type": "page_number", "en": "21"}
+  ]
+}

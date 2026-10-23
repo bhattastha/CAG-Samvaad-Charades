@@ -9,7 +9,7 @@ export interface Progress {
   registered: boolean;
   role: "manager" | "viewer" | null;
   email?: string;
-  player?: { name: string; email: string; officeId: string };
+  player?: { name: string; email: string; officeId: string; office?: string };
   summary?: Summary;
   activeAttempt?: { id: string; roundKey: string } | null;
   next?: { action: "resume" | "preround" | "total"; roundKey?: string };

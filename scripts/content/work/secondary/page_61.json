@@ -1,0 +1,680 @@
+{
+ "pdf_page": 61,
+ "printed_page": "37",
+ "hindi_pdf_pages": [
+  81,
+  82
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": null,
+    "unit": null,
+    "continues": "Table-12 (continued from previous page)",
+    "columns": [
+     {
+      "en": "Name of Plant",
+      "hi_reference": "संयंत्र का नाम"
+     },
+     {
+      "en": "Blast Furnace",
+      "hi_reference": "ब्लास्ट फर्नेस"
+     },
+     {
+      "en": "Oxygen Enrichment (%)",
+      "hi_reference": "ऑक्सीजन संवर्धन (%)"
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     },
+     {
+      "en": ""
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "Desired",
+       "hi_reference": "इच्छित"
+      },
+      {
+       "en": "Actual",
+       "hi_reference": "वास्तविक"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "2017-18"
+      },
+      {
+       "en": "2018-19"
+      },
+      {
+       "en": "2019-20"
+      },
+      {
+       "en": "2020-21"
+      },
+      {
+       "en": "2021-22"
+      },
+      {
+       "en": "2022-23"
+      },
+      {
+       "en": "2023-24"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई स्टील प्लांट"
+      },
+      {
+       "en": "BF#1",
+       "hi_reference": "बीएफ#1"
+      },
+      {
+       "en": "2.5-3.5"
+      },
+      {
+       "en": "1.77"
+      },
+      {
+       "en": "1.64"
+      },
+      {
+       "en": "1.55"
+      },
+      {
+       "en": "1.64"
+      },
+      {
+       "en": "1.79"
+      },
+      {
+       "en": "1.82"
+      },
+      {
+       "en": "1.08"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#2",
+       "hi_reference": "बीएफ#2"
+      },
+      {
+       "en": "Phased out",
+       "hi_reference": "धीरे धीरे हटाया गया"
+      },
+      {
+       "en": "0.15"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#3",
+       "hi_reference": "बीएफ#3"
+      },
+      {
+       "en": "Phased out",
+       "hi_reference": "धीरे धीरे हटाया गया"
+      },
+      {
+       "en": "1.18"
+      },
+      {
+       "en": "0.44"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#4",
+       "hi_reference": "बीएफ#4"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "1.45"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1.4"
+      },
+      {
+       "en": "1.76"
+      },
+      {
+       "en": "1.93"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#5",
+       "hi_reference": "बीएफ#5"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "1.18"
+      },
+      {
+       "en": "0.56"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1.31"
+      },
+      {
+       "en": "1.97"
+      },
+      {
+       "en": "1.86"
+      },
+      {
+       "en": "1.79"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#6",
+       "hi_reference": "बीएफ#6"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "3.66"
+      },
+      {
+       "en": "1.5"
+      },
+      {
+       "en": "1.97"
+      },
+      {
+       "en": "1.5"
+      },
+      {
+       "en": "1.84"
+      },
+      {
+       "en": "1.60"
+      },
+      {
+       "en": "0.84"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#7",
+       "hi_reference": "बीएफ#7"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "2.8"
+      },
+      {
+       "en": "2.32"
+      },
+      {
+       "en": "1.95"
+      },
+      {
+       "en": "2.07"
+      },
+      {
+       "en": "1.02"
+      },
+      {
+       "en": "2.09"
+      },
+      {
+       "en": "3.28"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#8",
+       "hi_reference": "बीएफ#8"
+      },
+      {
+       "en": "4-6"
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "2.03"
+      },
+      {
+       "en": "3.77"
+      },
+      {
+       "en": "3.3"
+      },
+      {
+       "en": "4.41"
+      },
+      {
+       "en": "4.87"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur Steel Plant",
+       "hi_reference": "दुर्गापुर स्टील प्लांट"
+      },
+      {
+       "en": "BF#2",
+       "hi_reference": "बीएफ#2"
+      },
+      {
+       "en": "2.5-3.5"
+      },
+      {
+       "en": "2.5"
+      },
+      {
+       "en": "2.3"
+      },
+      {
+       "en": "2"
+      },
+      {
+       "en": "2"
+      },
+      {
+       "en": "2.4"
+      },
+      {
+       "en": "2.97"
+      },
+      {
+       "en": "2.69"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#3",
+       "hi_reference": "बीएफ#3"
+      },
+      {
+       "en": "3.5"
+      },
+      {
+       "en": "2.9"
+      },
+      {
+       "en": "3.3"
+      },
+      {
+       "en": "2.7"
+      },
+      {
+       "en": "3"
+      },
+      {
+       "en": "3.5"
+      },
+      {
+       "en": "3.57"
+      },
+      {
+       "en": "3.69"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#4",
+       "hi_reference": "बीएफ#4"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "2.8"
+      },
+      {
+       "en": "3.2"
+      },
+      {
+       "en": "2.9"
+      },
+      {
+       "en": "3.5"
+      },
+      {
+       "en": "3.8"
+      },
+      {
+       "en": "3.73"
+      },
+      {
+       "en": "3.65"
+      }
+     ],
+     [
+      {
+       "en": "IISCO Steel Plant",
+       "hi_reference": "ईस्को स्टील प्लांट"
+      },
+      {
+       "en": "BF#5",
+       "hi_reference": "बीएफ#5"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "1.8"
+      },
+      {
+       "en": "3.18"
+      },
+      {
+       "en": "3.37"
+      },
+      {
+       "en": "2.19"
+      },
+      {
+       "en": "3.65"
+      },
+      {
+       "en": "3.81"
+      },
+      {
+       "en": "4.34"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला स्टील प्लांट"
+      },
+      {
+       "en": "BF#1",
+       "hi_reference": "बीएफ#1"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "-"
+      },
+      {
+       "en": "1.3"
+      },
+      {
+       "en": "2.4"
+      },
+      {
+       "en": "2.77"
+      },
+      {
+       "en": "2.5"
+      },
+      {
+       "en": "1.8"
+      },
+      {
+       "en": "2.4"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#4",
+       "hi_reference": "बीएफ#4"
+      },
+      {
+       "en": "4"
+      },
+      {
+       "en": "1.52"
+      },
+      {
+       "en": "1.13"
+      },
+      {
+       "en": "1.31"
+      },
+      {
+       "en": "1.98"
+      },
+      {
+       "en": "2.35"
+      },
+      {
+       "en": "1.56"
+      },
+      {
+       "en": "1.73"
+      }
+     ],
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "BF#5",
+       "hi_reference": "बीएफ#5"
+      },
+      {
+       "en": "4 to 6",
+       "hi_reference": "4 से 6"
+      },
+      {
+       "en": "5.08"
+      },
+      {
+       "en": "4.32"
+      },
+      {
+       "en": "4.47"
+      },
+      {
+       "en": "4.08"
+      },
+      {
+       "en": "4.99"
+      },
+      {
+       "en": "4.8"
+      },
+      {
+       "en": "6.07"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Information furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा दी गई जानकारी।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "It was seen that all the steel plants except Bhilai Steel Plant⁴⁴ have fixed oxygen enrichment parameters depending on the capacity and age of blast furnaces which was between 2.5 per cent and 6 per cent. Oxygen enrichment was not achieved due to:",
+   "hi_reference": "यह देखा गया कि भिलाई इस्पात संयंत्र⁴⁴ को छोड़कर सभी इस्पात संयंत्रों ने ब्लास्ट फर्नेस की क्षमता एवं आयु के आधार पर ऑक्सीजन संवर्धन मापदंड तय कर रखे हैं, जो 2.5 प्रतिशत से 6 प्रतिशत के मध्य है। ऑक्सीजन संवर्धन निम्नलिखित कारणों से प्राप्त नहीं हो सका:"
+  },
+  {
+   "type": "body",
+   "en": "Lower capacity of the existing oxygen plant and delay in installation of new oxygen plant in Bokaro Steel Plant.",
+   "hi_reference": "बोकारो स्टील प्लांट में मौजूदा ऑक्सीजन प्लांट की कम क्षमता एवं नए ऑक्सीजन प्लांट की स्थापना में देरी।",
+   "bullet": true
+  },
+  {
+   "type": "body",
+   "en": "Limited availability of enrichment facility in Durgapur Steel Plant.",
+   "hi_reference": "दुर्गापुर स्टील प्लांट में संवर्धन सुविधा की सीमित उपलब्धता।",
+   "bullet": true
+  },
+  {
+   "type": "body",
+   "en": "Non-achievement of targeted production capacities in Rourkela Steel Plant.",
+   "hi_reference": "राउरकेला स्टील प्लांट में लक्षित उत्पादन क्षमता की प्राप्ति न होना।",
+   "bullet": true
+  },
+  {
+   "type": "body",
+   "en": "Non-operation of the blast furnace as per design capacity and low hot blast temperature in case of new blast furnaces at Bhilai Steel Plant and IISCO Steel Plant.",
+   "hi_reference": "भिलाई स्टील प्लांट एवं ईस्को स्टील प्लांट में नए ब्लास्ट फर्नेस के मामले में डिजाइन क्षमता के अनुसार ब्लास्ट फर्नेस का संचालन न होना एवं कम हॉट ब्लास्ट तापमान।",
+   "bullet": true
+  },
+  {
+   "type": "body",
+   "en": "The non-achievement of the desired level of oxygen enrichment during 2017-2024, while the Steel Plants of SAIL could not achieve the envisaged production targets as per Annual Business Perspective, indicates that the hot metal production could have been improved through better oxygen enrichment.",
+   "hi_reference": "वर्ष 2017-2024 के दौरान ऑक्सीजन संवर्धन के वांछित स्तर की प्राप्ति न होना, जबकि सेल के इस्पात संयंत्र वार्षिक व्यावसायिक परिप्रेक्ष्य के अनुसार परिकल्पित उत्पादन लक्ष्यों को प्राप्त नहीं कर सके, यह दर्शाता है कि बेहतर ऑक्सीजन संवर्धन के माध्यम से तप्त धातु उत्पादन में सुधार किया जा सकता था।"
+  },
+  {
+   "type": "body",
+   "en": "Management/ Ministry replied (November 2023/ July 2024 & February 2025) that low oxygen enrichment was due to delays in execution of projects related to blast furnaces, throttling of furnace regime due to weak furnace health. Oxygen enrichment has increased considerably in Bokaro Steel Plant after commissioning of Air Turbo",
+   "hi_reference": "प्रबंधन/मंत्रालय ने उत्तर दिया (नवंबर 2023/जुलाई 2024 एवं फरवरी 2025) कि कम ऑक्सीजन संवर्धन ब्लास्ट फर्नेस से संबंधित परियोजनाओं के निष्पादन में विलंब, कमजोर भट्ठी स्थिति के कारण भट्ठी व्यवस्था के थ्रॉटलिंग के कारण था। अक्टूबर 2022 में एयर टर्बो कंप्रेसर एवं ऑक्सीजन टर्बो कंप्रेसर परियोजनाओं के चालू होने के बाद बोकारो स्टील प्लांट में ऑक्सीजन संवर्धन में काफी वृद्धि हुई है"
+  },
+  {
+   "type": "footnote",
+   "en": "44 In case of Bhilai Steel Plant, Audit considered the desired level of oxygen enrichment as 4 per cent for BF# 4 to 7 in line with BF#1 installed at Rourkela Steel Plant. For BF#1 of Bhilai Steel Plant, Audit considered the lowest parameters 2.5 to 3.5 in line with BF#2 at Durgapur Steel Plant. For BF#8, Bhilai Steel Plant has fixed norms 4 to 6 per cent oxygen enrichment.",
+   "hi_reference": "44 भिलाई स्टील प्लांट के मामले में, लेखापरीक्षा ने राउरकेला स्टील प्लांट में स्थापित बीएफ#1 के अनुरूप, बीएफ#4 से 7 के लिए ऑक्सीजन संवर्धन का वांछित स्तर 4 प्रतिशत माना। भिलाई स्टील प्लांट के बीएफ#1 के लिए, लेखापरीक्षा ने दुर्गापुर स्टील प्लांट के बीएफ#2 के अनुरूप, न्यूनतम मानदंड 2.5 से 3.5 माना। बीएफ#8 के लिए, भिलाई स्टील प्लांट ने 4 से 6 प्रतिशत ऑक्सीजन संवर्धन के मानदंड निर्धारित किए हैं।"
+  },
+  {
+   "type": "page_number",
+   "en": "37"
+  }
+ ]
+}

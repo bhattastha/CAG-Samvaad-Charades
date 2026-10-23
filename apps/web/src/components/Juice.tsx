@@ -7,14 +7,14 @@ import { t } from "../lib/strings";
 const canHover = typeof window !== "undefined" && window.matchMedia?.("(hover: hover) and (pointer: fine)").matches;
 
 /** Springy button: compresses on press, lifts on hover (mouse only, so taps never miss), clicks with sound + haptic. */
-export const GameButton = forwardRef<HTMLButtonElement, HTMLMotionProps<"button"> & { sound?: Sfx | null; variant?: "primary" | "blue" | "ghost" | "light" | "plain" }>(
+export const GameButton = forwardRef<HTMLButtonElement, HTMLMotionProps<"button"> & { sound?: Sfx | null; variant?: "primary" | "blue" | "ghost" | "light" | "plain" | "gold" }>(
   function GameButton({ sound = "tap", variant = "primary", className = "", onClick, children, ...rest }, ref) {
-    const base = variant === "plain" ? "" : variant === "primary" ? "btn-primary" : variant === "blue" ? "btn-blue" : variant === "ghost" ? "btn-ghost" : "btn bg-white/90 text-navy border-2 border-white hover:bg-white";
+    const base = variant === "plain" ? "" : variant === "primary" ? "btn-primary" : variant === "blue" ? "btn-blue" : variant === "ghost" ? "btn-ghost" : variant === "gold" ? "btn-gold" : "btn bg-white text-navy border border-white/70 hover:bg-navy-50";
     return (
       <motion.button
         ref={ref}
-        whileHover={rest.disabled || !canHover ? undefined : { y: -2, scale: 1.02 }}
-        whileTap={rest.disabled ? undefined : { scale: 0.93, y: 1 }}
+        whileHover={rest.disabled || !canHover ? undefined : { y: -1 }}
+        whileTap={rest.disabled ? undefined : { scale: 0.97, y: 1 }}
         transition={{ type: "spring", stiffness: 500, damping: 18 }}
         className={`${base} ${className}`}
         onClick={(e) => { if (sound) sfx(sound); onClick?.(e); }}
@@ -45,7 +45,7 @@ export function FloatLayer() {
         {items.map((f) => (
           <motion.div key={f.id} initial={{ opacity: 0, y: 0, scale: 0.6 }} animate={{ opacity: 1, y: -60, scale: 1 }} exit={{ opacity: 0, y: -90 }}
             transition={{ type: "spring", stiffness: 260, damping: 16 }}
-            className={`absolute -translate-x-1/2 whitespace-nowrap rounded-full px-3 py-1 text-sm font-extrabold shadow-pop ${f.tone === "good" ? "bg-success text-white" : f.tone === "gold" ? "bg-gold text-navy" : "bg-timer-text text-white"}`}
+            className={`absolute -translate-x-1/2 whitespace-nowrap rounded-md px-2.5 py-1 text-sm font-bold tnum shadow-pop ${f.tone === "good" ? "bg-success text-white" : f.tone === "gold" ? "bg-gold text-navy-900" : "bg-timer-text text-white"}`}
             style={{ left: f.x, top: f.y }}>
             {f.text}
           </motion.div>
@@ -57,7 +57,7 @@ export function FloatLayer() {
 
 // ---------------- particle burst ----------------
 
-const BURST_COLORS = ["#E8590C", "#2563EB", "#F59E0B", "#16A34A", "#FDBA74", "#93C5FD", "#FDE047"];
+const BURST_COLORS = ["#E85A1A", "#C49B3D", "#E9D7A6", "#1D4E89", "#FFFFFF", "#15803D"];
 export function Burst({ fire, count = 28, spread = 220, origin }: { fire: number; count?: number; spread?: number; origin?: { x: number; y: number } }) {
   const parts = useMemo(() => Array.from({ length: count }, (_, i) => {
     const a = (i / count) * Math.PI * 2 + Math.random() * 0.4;
@@ -99,12 +99,12 @@ export function Countdown({ onDone }: { onDone(): void }) {
     return () => clearTimeout(tm);
   }, [n]);
   return (
-    <div className="fixed inset-0 z-[99] grid place-items-center bg-navy/70 backdrop-blur-sm" role="status" aria-live="assertive">
+    <div className="fixed inset-0 z-[99] grid place-items-center bg-navy-900/85 hud-grid backdrop-blur-sm" role="status" aria-live="assertive">
       <AnimatePresence mode="popLayout">
         {n >= 0 && (
           <motion.div key={n} initial={{ scale: 2.4, opacity: 0, rotate: -8 }} animate={{ scale: 1, opacity: 1, rotate: 0 }} exit={{ scale: 0.4, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 14 }}
-            className={`font-extrabold drop-shadow-[0_8px_30px_rgba(232,89,12,.6)] ${n === 0 ? "text-[7rem] text-gold" : "text-[10rem] text-white"}`}>
+            className={`font-extrabold tnum drop-shadow-[0_8px_30px_rgba(196,155,61,.45)] ${n === 0 ? "text-[6rem] tracking-[0.1em] text-gold-light" : "text-[9rem] text-white"}`}>
             {n === 0 ? t("preRound.countdownGo") : n}
           </motion.div>
         )}
@@ -119,48 +119,59 @@ export function Countdown({ onDone }: { onDone(): void }) {
 export function Stamp({ text, tone = "good" }: { text: string; tone?: "good" | "warn" }) {
   return (
     <motion.div initial={{ scale: 3, opacity: 0, rotate: -18 }} animate={{ scale: 1, opacity: 1, rotate: -6 }} transition={{ type: "spring", stiffness: 380, damping: 15 }}
-      className={`inline-block rounded-2xl border-[6px] px-8 py-4 text-5xl sm:text-6xl font-extrabold uppercase tracking-wide ${tone === "good" ? "border-success text-success bg-white/90" : "border-timer-text text-timer-text bg-white/90"}`}>
+      className={`inline-block rounded-md border-[5px] px-7 py-3 text-4xl sm:text-5xl font-extrabold uppercase tracking-[0.12em] ${tone === "good" ? "border-success text-success bg-white/90" : "border-timer-text text-timer-text bg-white/90"}`}>
       {text}
     </motion.div>
   );
 }
 
-// ---------------- title medal ----------------
+// ---------------- rank insignia (one per level title) ----------------
 
-const MEDAL: Record<string, [string, string, string]> = {
-  trial: ["#FDBA74", "#E8590C", "🌱"], primary: ["#93C5FD", "#2563EB", "📄"], secondary: ["#86EFAC", "#16A34A", "📊"], pro: ["#FDE047", "#D97706", "🏆"],
-  varchaspati: ["#D8B4FE", "#7C3AED", "📜"],
+/** Tier metals: bronze → silver → gold → sapphire → royal. Shape and numeral carry the meaning, not colour alone. */
+const TIER: Record<string, { a: string; b: string; edge: string; mark: string; glyph: string }> = {
+  trial: { a: "#E7B88C", b: "#9A5B2E", edge: "#6E3F1F", mark: "#FFF4E8", glyph: "T" },
+  primary: { a: "#E6EBF2", b: "#8C99AB", edge: "#5B6576", mark: "#0B2545", glyph: "I" },
+  secondary: { a: "#F3E2B0", b: "#B48A2C", edge: "#7A5A14", mark: "#0B2545", glyph: "II" },
+  pro: { a: "#7FB2E8", b: "#13315C", edge: "#071A33", mark: "#FFFFFF", glyph: "III" },
+  varchaspati: { a: "#C9B2F0", b: "#4C2A85", edge: "#2B1550", mark: "#FFFFFF", glyph: "V" },
 };
 export function Medal({ k, size = 72, locked = false, shine = false }: { k: string; size?: number; locked?: boolean; shine?: boolean }) {
-  const [a, b, icon] = MEDAL[k] ?? MEDAL.trial;
+  const t = TIER[k] ?? TIER.trial;
+  const id = `ins-${k}-${locked ? "l" : "u"}`;
   return (
-    <div className={`relative grid place-items-center ${locked ? "grayscale opacity-50" : ""}`} style={{ width: size, height: size }} aria-hidden>
-      <svg viewBox="0 0 64 64" width={size} height={size} className="absolute inset-0">
-        <defs><linearGradient id={`m-${k}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={a} /><stop offset="1" stopColor={b} /></linearGradient></defs>
-        <path d="M32 2l7 6 9-1 3 9 8 5-3 9 3 9-8 5-3 9-9-1-7 6-7-6-9 1-3-9-8-5 3-9-3-9 8-5 3-9 9 1z" fill={`url(#m-${k})`} stroke="#fff" strokeWidth="2" />
-        <circle cx="32" cy="32" r="17" fill="#fff" opacity=".92" />
+    <div className={`relative grid place-items-center ${locked ? "opacity-60" : ""}`} style={{ width: size, height: size }} aria-hidden>
+      <svg viewBox="0 0 64 64" width={size} height={size}>
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor={locked ? "#E2E8F0" : t.a} />
+            <stop offset="1" stopColor={locked ? "#94A3B8" : t.b} />
+          </linearGradient>
+          <linearGradient id={`${id}-s`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#fff" stopOpacity=".55" /><stop offset=".5" stopColor="#fff" stopOpacity="0" /></linearGradient>
+        </defs>
+        {/* laurel wings for earned titles */}
+        {!locked && k !== "trial" && <path d="M10 40c-4-6-4-14 0-20M54 40c4-6 4-14 0-20M7 34c-2-4-2-8 0-12M57 34c2-4 2-8 0-12" stroke={t.b} strokeWidth="2.2" strokeLinecap="round" fill="none" opacity=".8" />}
+        <path d="M32 4l20 7v15c0 14-8.6 26-20 31C20.6 52 12 40 12 26V11z" fill={`url(#${id})`} stroke={locked ? "#94A3B8" : t.edge} strokeWidth="1.6" />
+        <path d="M32 9l15.5 5.5V26c0 11-6.6 20.6-15.5 24.8C23.1 46.6 16.5 37 16.5 26V14.5z" fill="none" stroke={locked ? "#CBD5E1" : "#ffffff"} strokeOpacity=".55" strokeWidth="1.2" />
+        <path d="M32 4l20 7v15c0 2-.2 4-.5 6H12.5c-.3-2-.5-4-.5-6V11z" fill={`url(#${id}-s)`} />
+        {locked ? (
+          <path d="M26.5 31v-3.5a5.5 5.5 0 0111 0V31M24.5 31h15v10h-15z" stroke="#475569" strokeWidth="2" fill="none" strokeLinejoin="round" />
+        ) : (
+          <text x="32" y={t.glyph.length > 2 ? 35 : 36} textAnchor="middle" fontSize={t.glyph.length > 2 ? 14 : 17} fontWeight="800" fill={t.mark} fontFamily="Noto Sans, sans-serif" letterSpacing="0.5">{t.glyph}</text>
+        )}
+        {!locked && <path d="M24 44l8 4 8-4" stroke={t.mark} strokeOpacity=".7" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />}
       </svg>
-      <span className="relative" style={{ fontSize: size * 0.34 }}>{locked ? "🔒" : icon}</span>
-      {shine && !locked && <span className="absolute inset-0 rounded-full animate-shine" style={{ background: "linear-gradient(110deg,transparent 40%,rgba(255,255,255,.7) 50%,transparent 60%)", backgroundSize: "200% 100%" }} />}
+      {shine && !locked && <span className="absolute inset-0 animate-shine" style={{ clipPath: "polygon(50% 6%, 81% 17%, 81% 41%, 50% 89%, 19% 41%, 19% 17%)", background: "linear-gradient(110deg,transparent 40%,rgba(255,255,255,.65) 50%,transparent 60%)", backgroundSize: "200% 100%" }} />}
     </div>
   );
 }
 
-// ---------------- ambient background: drifting letters ----------------
+// ---------------- ambient background: a slow, faint scan line over the grid ----------------
 
-const GLYPHS = ["अ", "A", "क", "B", "ह", "ि", "॥", "C", "न", "।", "श", "R", "ज्ञ", "T", "प्र", "E"];
-export function Ambient({ density = 14 }: { density?: number }) {
-  const items = useMemo(() => Array.from({ length: density }, (_, i) => ({
-    g: GLYPHS[i % GLYPHS.length], left: (i * 61) % 100, size: 18 + ((i * 7) % 26), dur: 18 + (i % 6) * 4, delay: -(i * 2.3), blue: i % 3 === 0,
-  })), [density]);
+export function Ambient({ density: _density = 14 }: { density?: number }) {
   return (
     <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden hc-ambient" aria-hidden>
-      {items.map((x, i) => (
-        <motion.span key={i} className={`absolute font-bold ${x.blue ? "text-royal-bright/10" : "text-primary/10"}`} style={{ left: `${x.left}%`, fontSize: x.size }}
-          initial={{ y: "105vh" }} animate={{ y: "-10vh", rotate: [0, 12, -8, 0] }} transition={{ duration: x.dur, delay: x.delay, repeat: Infinity, ease: "linear" }}>
-          {x.g}
-        </motion.span>
-      ))}
+      <motion.div className="absolute inset-x-0 h-40 bg-gradient-to-b from-transparent via-navy-600/[0.05] to-transparent"
+        initial={{ y: "-20vh" }} animate={{ y: "110vh" }} transition={{ duration: 14, repeat: Infinity, ease: "linear" }} />
     </div>
   );
 }

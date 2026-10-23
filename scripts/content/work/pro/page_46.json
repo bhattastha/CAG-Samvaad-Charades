@@ -1,0 +1,158 @@
+{
+ "pdf_page": 46,
+ "printed_page": "22",
+ "hindi_pdf_pages": [
+  60,
+  61
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_46_1.png",
+    "title": {
+     "en": "Chart 3: Budgeted vis-à-vis Actual production of Hot Metal for SAIL for the period 2017 to 2024",
+     "hi_reference": "चार्ट 3: 2017 से 2024 की अवधि हेतु सेल के लिए तप्त धातु के बजटीय उत्पादन की तुलना में वास्तविक उत्पादन"
+    },
+    "labels": [
+     {
+      "en": "Budgeted Production (In million tonne)",
+      "hi_reference": "बजटीय उत्पादन (मिलियन टन में)"
+     },
+     {
+      "en": "Actual Production (In million tonne)",
+      "hi_reference": "वास्तविक उत्पादन (मिलियन टन में)"
+     }
+    ],
+    "source": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा प्रस्तुत आंकड़ा"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "The budgeted production of hot metal marginally increased over the years from 19.22 million tonne to 21.28 million tonne during 2017-2024. During this period the actual production also consistently showed marginal increase except during 2019-20. During 2020-21, Management reduced the budgeted production by 15 per cent considering the impact of Covid pandemic.",
+   "hi_reference": "तप्त धातु का बजटीय उत्पादन 2017-24 के दौरान 19.22 मिलियन टन से बढ़कर 21.28 मिलियन टन हो गया। इस अवधि के दौरान वास्तविक उत्पादन में भी 2019-20 को छोड़कर लगातार मामूली वृद्धि देखी गई थी। 2020-21 के दौरान, प्रबंधन ने कोविड महामारी के प्रभाव को देखते हुए बजटीय उत्पादन में 15 प्रतिशत की कमी की थी।"
+  },
+  {
+   "type": "body",
+   "en": "The audit was conducted with the objective to assess whether the blast furnaces were operated economically, efficiently, and effectively as per the Annual Business Plan/ Perspective. Capital repairs, preventive repairs & maintenance of blast furnaces were carried out as per schedule and techno-economic parameters were achieved. Audit examined records relating to production capacity of blast furnace, production performance of blast furnaces with respect to the Company’s Annual Business Plan/Perspective, Blast Furnace productivity, Shutdown plans and its adherence, capital repair projects and techno-economic parameters.",
+   "hi_reference": "लेखापरीक्षा यह आकलन करने के उद्देश्य से की गई थी कि क्या ब्लास्ट फर्नेस को वार्षिक व्यावसायिक योजना/परिप्रेक्ष्य के अनुसार आर्थिक, कुशलता एवं प्रभावी ढंग से संचालित किया गया था। बड़े स्तर पर मरम्मत, निवारक मरम्मत एवं ब्लास्ट फर्नेस का रखरखाव शेड्यूल के अनुसार किया गया था एवं तकनीकी-आर्थिक मापदंडों को प्राप्त किया गया था। लेखापरीक्षा ने ब्लास्ट फर्नेस की उत्पादन क्षमता, कंपनी की वार्षिक व्यावसायिक योजना/परिप्रेक्ष्य, के संदर्भ में ब्लास्ट फर्नेस के उत्पादन निष्पादन, ब्लास्ट फर्नेस उत्पादकता, शटडाउन योजनाओं एवं इसके पालन, बड़े स्तर पर मरम्मत परियोजनाओं एवं तकनीकी-आर्थिक मापदंडों से संबंधित अभिलेखों की जांच की।"
+  },
+  {
+   "type": "heading",
+   "en": "4.2 Production capacity of Blast furnace",
+   "hi_reference": "4.2 ब्लास्ट फर्नेस की उत्पादन क्षमता"
+  },
+  {
+   "type": "body",
+   "en": "SAIL implemented (2008) a Modernization and Expansion Plan of Bokaro, Bhilai, Durgapur, Rourkela, Salem and IISCO steel plant at a cost of ₹76,152 crore (incurred till February 2024). As per the plan, production capacity of hot metal in SAIL was to be increased from 13.83 mtpa (2006-07) to 23.46 mtpa (by 2010). Hot Metal production capacity vis a vis actual production during 2017-24 is given in the table below:",
+   "hi_reference": "सेल ने ₹76,152 करोड़ (फरवरी 2024 तक व्यय किया गया) की लागत से बोकारो, भिलाई, दुर्गापुर, राउरकेला, सेलम एवं इस्को स्टील प्लांट के आधुनिकीकरण एवं विस्तार योजना (2008) को लागू किया। योजना के अनुसार, सेल में तप्त धातु की उत्पादन क्षमता 13.83 मिलियन टन प्रति वर्ष (2006-07) से बढ़ाकर 23.46 मिलियन टन प्रति वर्ष (2010 तक) की जानी थी। 2017-24 के दौरान वास्तविक उत्पादन की तुलना में तप्त धातु उत्पादन क्षमता नीचे दी गई तालिका में दर्शायी गई है-"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table-4: Production capacity envisaged in MEP vis-à-vis actual",
+     "hi_reference": "तालिका-4: एमईपी में परिकल्पित उत्पादन क्षमता की तुलना में वास्तविक उत्पादन"
+    },
+    "unit": {
+     "en": "(Qty in million tonne)",
+     "hi_reference": "(मात्रा मिलियन टन में)"
+    },
+    "columns": [
+     {
+      "en": "Name of the Steel plant",
+      "hi_reference": "इस्पात संयंत्र का नाम"
+     },
+     {
+      "en": "Hot Metal Capacity before MEP (2006-07)",
+      "hi_reference": "एमईपी से पहले तप्त धातु की क्षमता (2006-07)"
+     },
+     {
+      "en": "Hot Metal capacity targeted after MEP (2009-10)",
+      "hi_reference": "एमईपी के बाद तप्त धातु की लक्षित क्षमता (2009-10)"
+     },
+     {
+      "en": "Hot Metal capacity as on 31 March 2024",
+      "hi_reference": "31 मार्च 2024 तक तप्त धातु क्षमता"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Bokaro",
+       "hi_reference": "बोकारो"
+      },
+      {
+       "en": "4.59"
+      },
+      {
+       "en": "5.77"
+      },
+      {
+       "en": "5.25"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai",
+       "hi_reference": "भिलाई"
+      },
+      {
+       "en": "4.08"
+      },
+      {
+       "en": "7.50"
+      },
+      {
+       "en": "7.80"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur",
+       "hi_reference": "दुर्गापुर"
+      },
+      {
+       "en": "2.09"
+      },
+      {
+       "en": "2.45"
+      },
+      {
+       "en": "2.45"
+      }
+     ],
+     [
+      {
+       "en": "Burnpur",
+       "hi_reference": "बर्नपुर"
+      },
+      {
+       "en": "0.85"
+      },
+      {
+       "en": "2.91"
+      },
+      {
+       "en": "2.70"
+      }
+     ]
+    ],
+    "note": null,
+    "continued": "Table continues on the next English page (pdf 47); source note appears there."
+   }
+  },
+  {
+   "type": "page_number",
+   "en": "22"
+  }
+ ]
+}

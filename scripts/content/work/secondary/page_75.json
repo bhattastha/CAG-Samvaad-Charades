@@ -1,0 +1,52 @@
+{
+ "pdf_page": 75,
+ "printed_page": "49",
+ "hindi_pdf_pages": [97, 98],
+ "parts": [
+  {"type": "header", "en": "Report No. 38 of 2025", "hi_reference": "2025 की प्रतिवेदन संख्या 38"},
+  {"type": "body",
+   "en": "Casting Machine was not fixed except at Rourkela Steel Plant (85 per cent) during 2017-24.",
+   "hi_reference": "लेखापरीक्षा में पाया गया कि 2017-24 के दौरान राउरकेला इस्पात संयंत्र (85 प्रतिशत) को छोड़कर पिग कास्टिंग मशीन में पिग आयरन की उपज के मानदंड निर्धारित नहीं किए गए।",
+   "note": "English starts mid-sentence (continues from previous page); Hindi gives the full sentence."},
+  {"type": "body",
+   "en": "Details of hot metal sent and production of pig iron vis-à-vis yield percentage during 2017-24 is depicted in table below:",
+   "hi_reference": "2017-24 के दौरान भेजे गए हॉट मेटल एवं पिग आयरन के उत्पादन का विवरण, उपज प्रतिशत के अनुसार नीचे दी गई तालिका में दर्शाया गया है:"},
+  {"type": "table", "layout": {
+    "title": {"en": "Table 15: Production of pig iron vis a vis yield percentage", "hi_reference": "तालिका 15: पिग आयरन का उत्पादन, यील्ड प्रतिशत के अनुसार"},
+    "unit": null,
+    "columns": [
+     {"en": "Name of the Steel Plant", "hi_reference": "इस्पात संयंत्र का नाम"},
+     {"en": "Hot metal sent to PCM (tonne)", "hi_reference": "पीसीएम को भेजी गई हॉट मेटल (टन)"},
+     {"en": "Production of Pig Iron (tonne)", "hi_reference": "पिग आयरन का उत्पादन (टन)"},
+     {"en": "Range of annual yield of Pig Iron (in per cent)", "hi_reference": "पिग आयरन की वार्षिक यील्ड की सीमा (प्रतिशत में)"},
+     {"en": "Average yield (in per cent)", "hi_reference": "औसत यील्ड (प्रतिशत में)"}
+    ],
+    "rows": [
+     [{"en": "Bhilai Steel Plant", "hi_reference": "भिलाई इस्पात संयंत्र"}, {"en": "6,93,867"}, {"en": "6,42,729"}, {"en": "92.63"}, {"en": "92.63"}],
+     [{"en": "Bokaro Steel Plant", "hi_reference": "बोकारो इस्पात संयंत्र"}, {"en": "10,16,782"}, {"en": "9,05,482"}, {"en": "84.00-93.00"}, {"en": "89.05"}],
+     [{"en": "Durgapur Steel Plant", "hi_reference": "दुर्गापुर इस्पात संयंत्र"}, {"en": "3,68,334"}, {"en": "3,31,506"}, {"en": "90.00"}, {"en": "90.00"}],
+     [{"en": "IISCO Steel Plant", "hi_reference": "इस्को इस्पात संयंत्र"}, {"en": "4,84,705"}, {"en": "4,26,728"}, {"en": "83.47-89.42"}, {"en": "88.04"}],
+     [{"en": "Rourkela Steel Plant", "hi_reference": "राउरकेला इस्पात संयंत्र"}, {"en": "10,03,311"}, {"en": "8,64,135"}, {"en": "84.81-88.00"}, {"en": "86.13"}]
+    ],
+    "note": {"en": "Source: Data furnished by Management.", "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"}}},
+  {"type": "body",
+   "en": "The average yield percentage of pig iron in the Steel Plants of SAIL ranged between 86 to 92 per cent during the period 2017-2024.",
+   "hi_reference": "सेल के इस्पात संयंत्रों में वर्ष 2017-2024 की अवधि के दौरान पिग आयरन का औसत उत्पादन प्रतिशत 86 से 92 प्रतिशत के बीच रहा।"},
+  {"type": "body",
+   "en": "It was noted that Bhilai and Durgapur Steel Plants fixed the yield percentage of pig iron (92.63 per cent and 90 per cent respectively) irrespective of the actual pig iron generated. Bokaro Steel Plant also fixed the yield percentage (93 per cent) up to 2020-21. Thereafter the yield percentage ranged between 84 -88 per cent during 2021-24. In the absence of assessment of the actual pig iron generated, the operational efficiency of the pig casting machines could not be assessed by Audit.",
+   "hi_reference": "यह देखा गया कि भिलाई एवं दुर्गापुर इस्पात संयंत्रों ने वास्तविक उत्पादन की परवाह किए बिना पिग आयरन का उत्पादन प्रतिशत (क्रमशः 92.63 प्रतिशत एवं 90 प्रतिशत) निर्धारित किया। बोकारो इस्पात संयंत्र ने भी वर्ष 2020-21 तक उत्पादन प्रतिशत (93 प्रतिशत) निर्धारित किया। इसके बाद वर्ष 2021-24 के दौरान उत्पादन प्रतिशत 84-88 प्रतिशत के मध्य रहा। वास्तविक उत्पादन के आकलन के अभाव में, लेखापरीक्षा द्वारा पिग कास्टिंग मशीनों की परिचालन दक्षता का आकलन नहीं किया जा सका।"},
+  {"type": "body",
+   "en": "Year wise average yield loss60 was between 7 and 17 per cent in the Pig Casting Machine across SAIL. There was less production of 77,870 tonne of pig iron in all the five steel plants (considering the norm in case of Rourkela Steel Plant and the minimum yield loss of 7 per cent in Bokaro Steel Plant achieved during 2017-21 for the other four steel plants) valuing ₹249.66 crore during 2017-24.",
+   "hi_reference": "सेल में पिग कास्टिंग मशीनों में वर्ष-वार औसत उत्पादन हानि60 7 से 17 प्रतिशत के मध्य रही। सभी पांचों इस्पात संयंत्रों में 2017-24 के दौरान 77,870 टन पिग आयरन का कम उत्पादन हुआ (राउरकेला इस्पात संयंत्र के मामले में मानक एवं अन्य चार इस्पात संयंत्रों के लिए 2017-21 के दौरान बोकारो इस्पात संयंत्र में प्राप्त 7 प्रतिशत की न्यूनतम यील्ड हानि को ध्यान में रखते हुए) जिसका मूल्य ₹249.66 करोड़ था।"},
+  {"type": "body",
+   "en": "Management/Ministry replied (November 2023/July 2024/February 2025) that the yield of Pig Casting Machine depends on design of Pig Casting Machine, grade & temperature of hot metal and health of equipment. During the Exit conference (February 2025) Management assured that norms for pig iron yield would be established. Ministry in its reply (April 2025) provided the yield norms fixed for Pig Casting Machines in different units of SAIL.",
+   "hi_reference": "प्रबंधन/मंत्रालय ने उत्तर दिया (नवंबर 2023/जुलाई 2024/फरवरी 2025) कि पिग कास्टिंग मशीन की यील्ड पिग कास्टिंग मशीन के डिजाइन, हॉट मेटल के ग्रेड एवं तापमान एवं उपकरणों की दशा पर निर्भर करती है। एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान प्रबंधन ने आश्वासन दिया कि पिग आयरन की उपज के मानदंड स्थापित किए जाएंगे। मंत्रालय ने अपने उत्तर (अप्रैल 2025) में सेल की विभिन्न इकाइयों में पिग कास्टिंग मशीनों के लिए निर्धारित उपज मानदंड प्रदान किए।"},
+  {"type": "body",
+   "en": "Replies may be viewed in the light of the fact that although there was no norm for the yield of pig iron from Pig Casting Machine during the period of audit in four out of five integrated steel plants, the same had been fixed by the Management subsequently (April 2025) and ranged between 83.5 per cent and 92.6 per cent.",
+   "hi_reference": "उत्तरों को इस तथ्य के आलोक में देखा जा सकता है कि हालांकि पांच में से चार एकीकृत इस्पात संयंत्रों में लेखापरीक्षा की अवधि के दौरान पिग कास्टिंग मशीन से पिग आयरन के उत्पादन के लिए कोई मानदंड नहीं था, जिसे प्रबंधन द्वारा बाद में तय किया गया (अप्रैल 2025) और 83.5 प्रतिशत और 92.6 प्रतिशत के बीच रखा गया।"},
+  {"type": "footnote",
+   "en": "60 It is the hot metal lost due to processes in the Pig Casting Machine expressed as a percentage of hot metal poured into the pig casting machine.",
+   "hi_reference": "60 यह पिग कास्टिंग मशीन में प्रक्रियाओं के कारण कम हुई गर्म धातु है, जिसे पिग कास्टिंग मशीन में डाली गई गर्म धातु के प्रतिशत के रूप में व्यक्त किया जाता है।"},
+  {"type": "page_number", "en": "49"}
+ ]
+}

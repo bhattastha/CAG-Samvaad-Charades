@@ -22,6 +22,8 @@ import { Round } from "./screens/Round";
 import { Report } from "./screens/Report";
 import { Review } from "./screens/Review";
 import { Total } from "./screens/Total";
+import { Leaderboard } from "./screens/Leaderboard";
+import { Profile } from "./screens/Profile";
 
 // The console is route-split so players never download it (§4).
 const Manager = lazy(() => import("./manager/Manager"));
@@ -73,6 +75,8 @@ function Scenes() {
           <Route path="/report/:id" element={<Player><Report /></Player>} />
           <Route path="/review/:id" element={<Player><Review /></Player>} />
           <Route path="/total" element={<Player><Total /></Player>} />
+          <Route path="/leaderboard" element={<Player><Leaderboard /></Player>} />
+          <Route path="/profile" element={<Player><Profile /></Player>} />
           <Route path="/manager/*" element={<Suspense fallback={<Spinner />}><Manager /></Suspense>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

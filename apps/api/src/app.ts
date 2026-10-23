@@ -1,3 +1,4 @@
+import compress from "@fastify/compress";
 import { existsSync } from "node:fs";
 import Fastify, { type FastifyInstance } from "fastify";
 import cookie from "@fastify/cookie";
@@ -27,6 +28,8 @@ export async function buildApp(db: Db, opts: { logger?: boolean; jobs?: boolean 
   const app = Fastify({ logger: opts.logger ?? false, bodyLimit: 6 * 1024 * 1024, trustProxy: true });
   await app.register(cookie);
   await app.register(multipart, { limits: { fileSize: 60 * 1024 * 1024 } });
+  // report bundles are large Hindi JSON (Pro ≈ 1 MB raw): gzip/brotli keeps rounds light on office links (§15.11)
+  await app.register(compress, { global: true, threshold: 1024 });
   await app.register(websocket);
   // sendBeacon posts text/plain
   app.addContentTypeParser("text/plain", { parseAs: "string" }, (_req, body, done) => done(null, body));
@@ -34,6 +37,8 @@ export async function buildApp(db: Db, opts: { logger?: boolean; jobs?: boolean 
   app.decorateRequest("session", null);
   app.addHook("onRequest", async (req, reply) => {
     req.session = await readSession(req);
+    // a player deleted from the console (reset / danger zone) is signed out, not left half-registered
+    if (req.session?.pid && !(await db.one("SELECT 1 FROM players WHERE id=$1", [req.session.pid]))) req.session = { ...req.session, pid: undefined };
     reply.header("X-Content-Type-Options", "nosniff");
     reply.header("Referrer-Policy", "same-origin");
     reply.header("Permissions-Policy", "microphone=(self), camera=()");

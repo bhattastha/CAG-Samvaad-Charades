@@ -4,6 +4,9 @@ import { env } from "../env.js";
 /** All BHASHINI calls go through here. Keys never leave the server (§9). */
 export const PIPELINE = "https://dhruva-api.bhashini.gov.in/services/inference/pipeline";
 export const LLM = "https://dhruva-api.bhashini.gov.in/services/inference/llm";
+/** CAG's Anuvaad document pipeline (same models, no Dhruva key needed); used for drafts when config says so. */
+export const ANUVAAD_PIPELINE = "https://anuvaad-backend.bhashini.co.in/v1/pipeline";
+const anuvaadDrafts = () => svc().translationProvider !== "dhruva";
 const svc = () => config().bhashiniServices;
 
 type Task = "translation" | "transliteration" | "asr" | "tts" | "llm";
@@ -18,24 +21,25 @@ export function health() {
   const now = Date.now();
   return (["translation", "transliteration", "asr", "tts", "llm"] as Task[]).map((t) => {
     const b = breaker.get(t);
-    return { task: t, configured: !!keyFor(t) || t === "transliteration", open: !!b && b.openUntil > now, recentFailures: b?.fails ?? 0 };
+    return { task: t, configured: isConfigured(t), open: !!b && b.openUntil > now, recentFailures: b?.fails ?? 0 };
   });
 }
 
 function keyFor(task: Task): string {
   switch (task) {
-    case "translation": return env.DHRUVA_NMT_KEY;
+    case "translation": return anuvaadDrafts() ? env.ANUVAAD_XLIT_AUTH : env.DHRUVA_NMT_KEY;
     case "asr": return env.DHRUVA_ASR_KEY;
     case "tts": return env.DHRUVA_TTS_KEY;
     case "llm": return env.DHRUVA_LLM_KEY;
     case "transliteration": return env.ANUVAAD_XLIT_AUTH;
   }
 }
-export const isConfigured = (task: Task) => (task === "transliteration" ? true : !!keyFor(task));
+const keyOptional = (task: Task) => task === "transliteration" || (task === "translation" && anuvaadDrafts());
+export const isConfigured = (task: Task) => (keyOptional(task) ? true : !!keyFor(task));
 
 export async function callService<T = any>(task: Task, url: string, body: unknown, opts: { timeoutMs?: number; signal?: AbortSignal } = {}): Promise<T> {
   const key = keyFor(task);
-  if (!key && task !== "transliteration") throw new ServiceUnavailable(task, `${task} key not configured`);
+  if (!key && !keyOptional(task)) throw new ServiceUnavailable(task, `${task} key not configured`);
   const b = breaker.get(task) ?? { fails: 0, openUntil: 0 };
   if (b.openUntil > Date.now()) throw new ServiceUnavailable(task, `${task} circuit open`);
   const timeoutMs = opts.timeoutMs ?? 8000;
@@ -73,14 +77,18 @@ export async function callService<T = any>(task: Task, url: string, body: unknow
 
 // ---------- Translation (console batch only, never during play) ----------
 
-/** Mask locked tokens as ⟦0⟧, ⟦1⟧… before sending; restore after. */
+/**
+ * Mask locked tokens before sending and restore after. The spec's ⟦0⟧ form is stripped by the live model
+ * (tested 23 Oct: it returns bare digits, and bare numbers get reordered), so tokens are sent as {0}, {1}…,
+ * which come back intact and in the right place.
+ */
 export function mask(text: string, locked: string[]) {
   let out = text;
   const used: string[] = [];
   [...locked].sort((a, b) => b.length - a.length).forEach((tok) => {
     if (!out.includes(tok)) return;
     const i = used.push(tok) - 1;
-    out = out.split(tok).join(`⟦${i}⟧`);
+    out = out.split(tok).join(`{${i}}`);
   });
   return { masked: out, tokens: used };
 }
@@ -88,11 +96,11 @@ export function unmask(text: string, tokens: string[]): { text: string; lost: bo
   let lost = false;
   let out = text;
   tokens.forEach((tok, i) => {
-    const re = new RegExp(`⟦\\s*${i}\\s*⟧`, "g");
+    const re = new RegExp(`(?:\\{\\s*${i}\\s*\\}|⟦\\s*${i}\\s*⟧)`, "g");
     if (!re.test(out)) lost = true;
     out = out.replace(re, tok);
   });
-  if (/⟦\s*\d+\s*⟧/.test(out)) lost = true;
+  if (/⟦\s*\d+\s*⟧|\{\s*\d+\s*\}/.test(out)) lost = true;
   return { text: out, lost };
 }
 
@@ -104,7 +112,7 @@ export async function translateBatch(items: { text: string; locked: string[] }[]
   for (let c = 0; c < chunks.length; c += 5) {
     await Promise.all(chunks.slice(c, c + 5).map(async (idx) => {
       const masked = idx.map((i) => mask(items[i].text, items[i].locked));
-      const res = await callService<any>("translation", PIPELINE, {
+      const res = await callService<any>("translation", anuvaadDrafts() ? ANUVAAD_PIPELINE : PIPELINE, {
         pipelineTasks: [{ taskType: "translation", config: { language: { sourceLanguage: "en", targetLanguage: "hi" }, serviceId: svc().translation } }],
         inputData: { input: masked.map((m) => ({ source: m.masked })) },
       });

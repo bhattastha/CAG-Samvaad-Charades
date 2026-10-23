@@ -1,0 +1,248 @@
+{
+ "pdf_page": 20,
+ "printed_page": "2",
+ "hindi_pdf_pages": [
+  24,
+  25
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "heading",
+   "en": "1.3 Production Performance",
+   "hi_reference": "1.3 उत्पादन निष्पादन"
+  },
+  {
+   "type": "body",
+   "en": "Production of Hot metal, Crude Steel and Saleable Steel in SAIL during 2017-18 to 2023-24 is as below:",
+   "hi_reference": "2017-18 से 2023-24 के दौरान सेल में तप्त धातु, क्रूड स्टील एवं विक्रय योग्य इस्पात का उत्पादन निम्नानुसार है:"
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_20_1.png",
+    "title": {
+     "en": "Chart-1 : Production of Hot metal, Crude steel and Saleable steel in SAIL during 2017-24 (Qty in million tonne)",
+     "hi_reference": "चार्ट-1: 2017-24 के दौरान सेल में तप्त धातु, क्रूड स्टील एवं विक्रय योग्य इस्पात का उत्पादन (मात्रा मिलियन टन में)"
+    },
+    "labels": [
+     {
+      "en": "Hot Metal",
+      "hi_reference": "तप्त धातु"
+     },
+     {
+      "en": "Crude Steel",
+      "hi_reference": "क्रूड स्टील"
+     },
+     {
+      "en": "Saleable Steel",
+      "hi_reference": "विक्रय योग्य इस्पात"
+     }
+    ],
+    "source": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "Production of hot metal in SAIL was 15.98 million tonne in 2017-18 which increased gradually to 20.50 million tonne in 2023-24 (except in 2019-20 and 2020-21 when the production was lower than the preceding year).",
+   "hi_reference": "सेल में तप्त धातु का उत्पादन 2017-18 में 15.98 मिलियन टन था जो धीरे-धीरे बढ़कर 2023-24 में 20.50 मिलियन टन हो गया (2019-20 एवं 2020-21 को छोड़कर जब उत्पादन पिछले वर्ष की तुलना में कम था)।"
+  },
+  {
+   "type": "heading",
+   "en": "1.4 Financial Performance",
+   "hi_reference": "1.4 वित्तीय प्रदर्शन"
+  },
+  {
+   "type": "body",
+   "en": "The financial performance of SAIL from 2017-18 to 2023-24 is as below.",
+   "hi_reference": "2017-18 से 2023-24 तक सेल का वित्तीय प्रदर्शन निम्नानुसार है।"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table 1: Financial Performance of SAIL",
+     "hi_reference": "तालिका 1: सेल का वित्तीय प्रदर्शन"
+    },
+    "unit": {
+     "en": "(Amount: ₹ in crore)",
+     "hi_reference": "(राशि: करोड़ ₹ में)"
+    },
+    "columns": [
+     {
+      "en": "Year",
+      "hi_reference": "वर्ष"
+     },
+     {
+      "en": "Turnover",
+      "hi_reference": "टर्नओवर"
+     },
+     {
+      "en": "Total Expense",
+      "hi_reference": "कुल व्यय"
+     },
+     {
+      "en": "Profit Before Tax",
+      "hi_reference": "कर से पहले का लाभ"
+     },
+     {
+      "en": "Net worth",
+      "hi_reference": "निवल मूल्य"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "2017-18"
+      },
+      {
+       "en": "58,297"
+      },
+      {
+       "en": "60,232"
+      },
+      {
+       "en": "(-)759"
+      },
+      {
+       "en": "35,714"
+      }
+     ],
+     [
+      {
+       "en": "2018-19"
+      },
+      {
+       "en": "66,267"
+      },
+      {
+       "en": "63,773"
+      },
+      {
+       "en": "3,338"
+      },
+      {
+       "en": "38,152"
+      }
+     ],
+     [
+      {
+       "en": "2019-20"
+      },
+      {
+       "en": "61,025"
+      },
+      {
+       "en": "58,703"
+      },
+      {
+       "en": "3,171"
+      },
+      {
+       "en": "39,777"
+      }
+     ],
+     [
+      {
+       "en": "2020-21"
+      },
+      {
+       "en": "68,452"
+      },
+      {
+       "en": "63,301"
+      },
+      {
+       "en": "6,879"
+      },
+      {
+       "en": "43,495"
+      }
+     ],
+     [
+      {
+       "en": "2021-22"
+      },
+      {
+       "en": "1,02,805"
+      },
+      {
+       "en": "88,123"
+      },
+      {
+       "en": "16,039"
+      },
+      {
+       "en": "52,017"
+      }
+     ],
+     [
+      {
+       "en": "2022-23"
+      },
+      {
+       "en": "1,03,729"
+      },
+      {
+       "en": "1,03,423"
+      },
+      {
+       "en": "2,637"
+      },
+      {
+       "en": "52,139"
+      }
+     ],
+     [
+      {
+       "en": "2023-24"
+      },
+      {
+       "en": "1,04,545"
+      },
+      {
+       "en": "1,01,994"
+      },
+      {
+       "en": "3,688"
+      },
+      {
+       "en": "54,131"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "SAIL was in loss in 2017-18 but became profitable from 2018-19 onwards. There was an increase of around 50 per cent in the turnover in 2021-22 over 2020-21 on account of increase in net sales realization of saleable steel, increase in sales, better technical parameters etc. Profit of SAIL came down drastically in 2022-23 in comparison to 2021-22 due to higher input cost, increase in stores & spares consumption, repairs & maintenance expenses, increased purchased power rates, higher usage of raw materials, higher interest, and depreciation etc. There was a marginal increase in profit in 2023-24.",
+   "hi_reference": "सेल 2017-18 में घाटे में थी लेकिन 2018-19 से लाभ में आ गयी। विक्रय योग्य इस्पात की निवल बिक्री प्राप्ति में वृद्धि, बिक्री में वृद्धि, बेहतर तकनीकी मापदंडों आदि के कारण 2020-21 की तुलना में 2021-22 में कारोबार में लगभग 50 प्रतिशत की वृद्धि हुई। उच्च इनपुट लागत, स्टोर एवं स्पेयर्स की खपत में वृद्धि, मरम्मत एवं रखरखाव खर्च, खरीदी गई बिजली दरों में वृद्धि, कच्चे माल का अधिक उपयोग, उच्च ब्याज एवं मूल्यह्रास आदि के कारण 2021-22 की तुलना में 2022-23 में सेल का लाभ काफी कम हो गया। 2023-24 में लाभ में मामूली वृद्धि हुई।"
+  },
+  {
+   "type": "heading",
+   "en": "1.5 Organizational Structure",
+   "hi_reference": "1.5 संगठनात्मक संरचना"
+  },
+  {
+   "type": "body",
+   "en": "Director (Technical, Projects and Raw Materials), SAIL who reports to Chairman, SAIL is responsible to monitor the production activities in the steel plants of the Company with responsibility of ensuring effective adoption of operational strategies to",
+   "hi_reference": "निदेशक (तकनीकी, परियोजनाएं एवं कच्चा माल) सेल, जो अध्यक्ष सेल, को रिपोर्ट करते हैं, कंपनी के इस्पात संयंत्रों में उत्पादन गतिविधियों की निगरानी करने के लिए उत्तरदायी हैं, साथ ही परियोजनाओं के कुशल, इष्टतम एवं सुचारू कार्यान्वयन के लिए नवीनतम प्रौद्योगिकियों, परियोजना प्रबंधन क्षमताओं का उपयोग करके उत्पादन लक्ष्य को प्राप्त करने के लिए परिचालन रणनीतियों को प्रभावी ढंग से अपनाने को सुनिश्चित करने का उत्तरदायित्व भी उनका है।",
+   "note": "English sentence continues on the next page (pdf 21); Hindi word order differs, so the whole Hindi sentence is given here."
+  },
+  {
+   "type": "page_number",
+   "en": "2"
+  }
+ ]
+}

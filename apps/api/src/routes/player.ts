@@ -107,10 +107,11 @@ export async function playerRoutes(app: FastifyInstance, db: Db) {
     const { player, attempts, summary } = await summaryFor(db, req.session.pid);
     if (!player) return reply.code(401).send({ error: "not_registered" });
     const active = attempts.find((a) => a.status === "active");
+    const office = await db.one<{ city: string; state: string }>("SELECT city, state FROM offices WHERE id=$1", [player.office_id]);
     return {
       registered: true,
       role: req.session.role ?? null,
-      player: { name: player.name, email: player.email, officeId: player.office_id },
+      player: { name: player.name, email: player.email, officeId: player.office_id, office: office ? `${office.city}, ${office.state}` : undefined },
       summary,
       activeAttempt: active ? { id: active.id, roundKey: active.round_key } : null,
       next: active ? { action: "resume", roundKey: active.round_key } : summary.nextRound ? { action: "preround", roundKey: summary.nextRound } : { action: "total" },
@@ -125,22 +126,92 @@ export async function playerRoutes(app: FastifyInstance, db: Db) {
     return { playerName: player!.name, summary, maxCredits: config().maxCredits, lines: totalScreenLines(summary).map((id) => say(id, vars)).filter(Boolean) };
   });
 
-  /** Leaderboard: top players by credits (then stars), with your own rank. Shows first name + initial and office city. */
-  app.get("/leaderboard", async (req, reply) => {
-    const pid = requirePlayer(req, reply);
-    if (!pid) return;
-    const players = await db.query<any>("SELECT p.id, p.name, p.registration_credits, o.city, o.state FROM players p JOIN offices o ON o.id=p.office_id");
+  /** Everyone's standings, computed (never stored). Names are shown as first name + initial; offices as "city, state". */
+  async function standings() {
+    const players = await db.query<any>("SELECT p.id, p.name, p.registration_credits, p.registered_at, p.office_id, o.name_en AS office_name, o.city, o.state FROM players p JOIN offices o ON o.id=p.office_id");
     const atts = await db.query<any>("SELECT player_id, round_key, chance_no, status, score FROM attempts");
     const byPlayer = new Map<string, any[]>();
     for (const a of atts) byPlayer.set(a.player_id, [...(byPlayer.get(a.player_id) ?? []), { roundKey: a.round_key, chanceNo: a.chance_no, status: a.status, score: a.score }]);
-    const rows = players.map((p) => {
+    return players.map((p) => {
       const s = summarise(config(), byPlayer.get(p.id) ?? [], Number(p.registration_credits));
       const [first, ...rest] = String(p.name).trim().split(/\s+/);
-      return { id: p.id, name: rest.length ? `${first} ${rest[rest.length - 1][0]}.` : first, office: `${p.city}, ${p.state}`, credits: s.totalCredits, stars: s.stars, titles: s.rounds.filter((r) => r.titleEarned).length };
-    }).sort((a, b) => b.credits - a.credits || b.stars - a.stars || a.name.localeCompare(b.name));
-    const ranked = rows.map((r, i) => ({ ...r, rank: i + 1 }));
+      const bestSum = s.rounds.reduce((t, r) => t + (r.best ?? 0), 0);
+      const top = [...s.rounds].reverse().find((r) => r.playable && r.titleEarned);
+      return {
+        id: p.id, officeId: p.office_id, state: p.state, name: rest.length ? `${first} ${rest[rest.length - 1][0]}.` : first,
+        office: `${p.city}, ${p.state}`, credits: s.totalCredits, stars: s.stars, titles: s.rounds.filter((r) => r.titleEarned).length,
+        bestSum, tier: top?.key ?? null, levelsPlayed: s.rounds.filter((r) => r.played > 0).length,
+      };
+    }).sort((a, b) => b.credits - a.credits || b.bestSum - a.bestSum || b.stars - a.stars || a.name.localeCompare(b.name));
+  }
+  const rankOf = <T extends { id: string }>(rows: T[]) => rows.map((r, i) => ({ ...r, rank: i + 1 }));
+
+  /** Leaderboard (§ portal): overall, my state or my office; top N plus your own row and the gap to the next rank. */
+  app.get("/leaderboard", async (req, reply) => {
+    const pid = requirePlayer(req, reply);
+    if (!pid) return;
+    const { scope, limit } = parse(z.object({ scope: z.enum(["all", "state", "office"]).default("all"), limit: z.coerce.number().int().min(3).max(100).default(10) }), req.query);
+    const all = await standings();
+    const mine = all.find((r) => r.id === pid);
+    const pool = scope === "office" ? all.filter((r) => r.officeId === mine?.officeId) : scope === "state" ? all.filter((r) => r.state === mine?.state) : all;
+    const ranked = rankOf(pool);
     const me = ranked.find((r) => r.id === pid);
-    return { top: ranked.slice(0, 10).map(({ id, ...r }) => ({ ...r, me: id === pid })), me: me ? { rank: me.rank, credits: me.credits, of: ranked.length } : null };
+    const ahead = me && me.rank > 1 ? ranked[me.rank - 2] : null;
+    const strip = ({ id, officeId: _o, state: _s, ...r }: (typeof ranked)[number]) => ({ ...r, me: id === pid });
+    return {
+      scope,
+      top: ranked.slice(0, limit).map(strip),
+      me: me ? { ...strip(me), of: ranked.length, gap: ahead ? Math.round((ahead.credits - me.credits) * 10) / 10 : 0 } : null,
+    };
+  });
+
+  /** Public, aggregate-only numbers for the landing page (no personal data). */
+  app.get("/stats/public", async () => {
+    const all = await standings();
+    const offices = new Set(all.map((r) => r.officeId)).size;
+    const credits = Math.round(all.reduce((t, r) => t + r.credits, 0) * 10) / 10;
+    const titles = all.reduce((t, r) => t + r.titles, 0);
+    const pages = await db.one<{ n: string }>("SELECT count(*)::text AS n FROM pages WHERE active AND (status='published' OR sample)");
+    return { players: all.length, offices, credits, titles, bundles: Number(pages?.n ?? 0) };
+  });
+
+  /** My profile: player card, standing, history and achievements. */
+  app.get("/me/profile", async (req, reply) => {
+    const pid = requirePlayer(req, reply);
+    if (!pid) return;
+    const { player, attempts, summary } = await summaryFor(db, pid);
+    const office = await db.one<any>("SELECT name_en, name_hi, city, state FROM offices WHERE id=$1", [player!.office_id]);
+    const all = rankOf(await standings());
+    const me = all.find((r) => r.id === pid);
+    const done = attempts.filter((a) => a.status === "submitted");
+    const has = (f: (a: any) => boolean) => done.some(f);
+    const achievements = [
+      { key: "enlisted", earned: true },
+      { key: "firstClear", earned: has((a) => (a.score ?? 0) >= config().titlePassMark) },
+      { key: "trialCleared", earned: summary.trialPassed },
+      { key: "glossaryAce", earned: has((a) => a.measures?.glossary === 1 && (a.score ?? 0) > 0) },
+      { key: "swift", earned: has((a) => a.measures?.time === 1 && (a.score ?? 0) >= config().titlePassMark) },
+      { key: "cleanSheet", earned: has((a) => a.left_page_count === 0 && a.paste_blocked_count === 0 && (a.score ?? 0) > 0) },
+      { key: "comeback", earned: summary.rounds.some((r) => r.bestChance !== null && r.bestChance > 1 && (r.chances[0] ?? 0) < (r.best ?? 0)) },
+      { key: "allRounder", earned: summary.allPlayed },
+      { key: "grandSlam", earned: summary.rounds.filter((r) => r.playable).every((r) => r.titleEarned) },
+      { key: "topTen", earned: !!me && me.rank <= 10 && me.credits > summary.registrationCredits },
+    ];
+    return {
+      player: {
+        name: player!.name, email: player!.email, mobile: `+91 ••••• ${String(player!.mobile).slice(-5)}`,
+        office: office ? { name: office.name_en, nameHi: office.name_hi, city: office.city, state: office.state } : null,
+        address: player!.office_address, registeredAt: player!.registered_at,
+      },
+      summary,
+      standing: me ? { rank: me.rank, of: all.length, tier: me.tier } : null,
+      history: attempts.map((a) => ({
+        id: a.id, roundKey: a.round_key, chance: a.chance_no, status: a.status, score: a.score,
+        startedAt: a.started_at, submittedAt: a.submitted_at, minutes: a.submitted_at ? Math.max(1, Math.round((+new Date(a.submitted_at) - +new Date(a.started_at)) / 60000)) : null,
+        measures: a.measures, autoSubmitted: a.auto_submitted,
+      })).sort((x, y) => +new Date(y.startedAt) - +new Date(x.startedAt)),
+      achievements,
+    };
   });
 
   /** Pop-up lines (§7.5): first_chance or retry (+ best), typing-only notice before प्राथमिक, rotating tip. */

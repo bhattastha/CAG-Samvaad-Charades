@@ -5,17 +5,15 @@ const shot = async (page: any, name: string) => { if (shots) { await page.waitFo
 
 test.describe.configure({ mode: "serial" });
 
-/** For the browser journey the Trial qualifying score is lowered from the console API (configurable, not hard-coded), then restored. */
-async function setQualify(request: any, baseURL: string, n: number) {
-  await request.post(`${baseURL}/api/auth/otp/request`, { data: { email: "manager@cag.gov.in" } });
-  await request.post(`${baseURL}/api/auth/otp/verify`, { data: { email: "manager@cag.gov.in", code: "123456" } });
-  const r = await request.put(`${baseURL}/api/admin/config/settings`, { data: { trialQualifyingScore: n } });
-  if (!r.ok()) throw new Error(`settings ${r.status()}`);
-}
-test.beforeAll(async ({ playwright }, info) => { const base = info.project.use.baseURL!; const rq = await playwright.request.newContext(); await setQualify(rq, base, 10); await rq.dispose(); });
-test.afterAll(async ({ playwright }, info) => { const base = info.project.use.baseURL!; const rq = await playwright.request.newContext(); await setQualify(rq, base, 33); await rq.dispose(); });
+/** The review build ships with every level open ("all-open"); the console setting is checked and left unchanged. */
+test.beforeAll(async ({ playwright }, info) => {
+  const rq = await playwright.request.newContext();
+  const cfg = await (await rq.get(`${info.project.use.baseURL}/api/config`)).json();
+  if (cfg.levels.unlockRule !== "all-open") throw new Error("expected the all-open review build");
+  await rq.dispose();
+});
 
-test("new player: profile → training → rules → map → briefing → Level 1 → report → Level 2", async ({ page }) => {
+test("new player: landing → player card → training → rules → map → Trial → report → profile menu → Primary workbench", async ({ page }) => {
   // Sahayika must never start talking on her own (default voice mode: tap to listen)
   await page.addInitScript(() => {
     (window as any).__spoke = 0;
@@ -24,11 +22,11 @@ test("new player: profile → training → rules → map → briefing → Level 
   });
   const email = `e2e.${Date.now()}@cag.gov.in`;
   await page.goto("/");
-  await expect(page.getByRole("button", { name: /Press Start/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Join the challenge/ }).first()).toBeVisible();
   await expect(page.getByText("Samvaad").first()).toBeVisible();
   await expect(page.getByRole("switch", { name: "Sahayak voice guide" })).toHaveAttribute("aria-checked", "false");
   await shot(page, "01_title");
-  await page.getByRole("button", { name: /Press Start/ }).click();
+  await page.getByRole("button", { name: /Join the challenge/ }).first().click();
 
   await expect(page).toHaveURL(/register/);
   await page.locator("#name").fill("Ramesh Kumar");
@@ -36,13 +34,15 @@ test("new player: profile → training → rules → map → briefing → Level 
   await page.locator("#email").fill(email);
   await page.locator("#office").fill("central");
   await page.locator("#office-list li").first().click();
+  // the player card fills in live as the officer types
+  await expect(page.getByTestId("player-card")).toContainText("Ramesh Kumar");
   await shot(page, "02_profile");
-  await page.getByRole("button", { name: /Create profile/ }).click();
+  await page.getByRole("button", { name: /Create my player card/ }).click();
   await page.locator("#otp").fill("123456");
   await page.getByRole("button", { name: /Verify & enter/ }).click();
-  await expect(page.getByText("Profile created!")).toBeVisible();
+  await expect(page.getByText("You're in.")).toBeVisible();
   await shot(page, "02b_profile_created");
-  await page.getByRole("button", { name: /Continue/ }).click();
+  await page.getByRole("button", { name: /Start training/ }).click();
 
   await expect(page).toHaveURL(/how-to-play/);
   await page.getByRole("button", { name: /^Next/ }).click();
@@ -66,7 +66,7 @@ test("new player: profile → training → rules → map → briefing → Level 
   await page.getByRole("button", { name: /Open the map/ }).click();
   await expect(page).toHaveURL(/journey/);
   await expect(page.getByText("You are here")).toBeVisible();
-  await expect(page.getByText(/Start here: the Trial is your entry ticket/)).toBeVisible();
+  await expect(page.getByText(/Start with the Trial/).first()).toBeVisible();
   await shot(page, "05_journey");
   // Level 5 is visible but preview-only
   await page.getByRole("button", { name: /Level 5 Varchaspati Round/ }).click();
@@ -108,26 +108,31 @@ test("new player: profile → training → rules → map → briefing → Level 
   await page.getByRole("link", { name: /Review my translation/ }).click();
   await expect(page.locator("p.whitespace-pre-wrap").first()).toContainText("लौह अयस्क");
   await page.goBack();
-  await expect(page.getByText("Trial cleared! Every level is now open.")).toBeVisible();
-  // Secondary can be opened directly, without Primary
+  // every level stays open; Secondary can be opened directly, without Primary
   await page.getByRole("link", { name: /Back to map/ }).click();
-  await expect(page.getByText(/Trial cleared! Primary, Secondary and Pro are open/)).toBeVisible();
+  await expect(page.getByText(/Warm-up done/)).toBeVisible();
   await shot(page, "05c_journey_unlocked");
   await page.getByRole("button", { name: /Level 3 Secondary Round/ }).click();
   await expect(page).toHaveURL(/play\/secondary/);
   await page.getByRole("button", { name: /Back/ }).click();
+  // signed-in portal: profile menu → leaderboard and profile
+  await page.getByTestId("profile-menu").click();
+  await page.getByRole("menuitem", { name: /Leaderboard/ }).click();
+  await expect(page).toHaveURL(/leaderboard/);
+  await expect(page.getByText(/Rank \d+ of \d+/)).toBeVisible();
+  await page.getByTestId("profile-menu").click();
+  await page.getByRole("menuitem", { name: /My profile/ }).click();
+  await expect(page.getByText("Attempt history")).toBeVisible();
+  await shot(page, "05d_profile");
+  await page.goto("/journey");
   await page.getByRole("button", { name: /Level 2 Primary Round/ }).click();
   await expect(page).toHaveURL(/play\/primary/);
   await page.getByRole("button", { name: /Start mission/ }).click();
-  await expect(page.getByText("BHASHINI draft").first()).toBeVisible({ timeout: 10_000 });
+  await expect(page.getByText("BHASHINI draft").locator("visible=true").first()).toBeVisible({ timeout: 15_000 });
+  // the 10-page report bundle has a page navigator
+  await expect(page.getByText(/Page 1 of 10/).first()).toBeVisible();
   await page.waitForTimeout(800);
   await shot(page, "10_primary_round");
-  await expect(page.locator(".hc-watch").first()).toBeVisible();
-  await page.locator(".hc-watch").first().click();
-  await shot(page, "10b_watch_popover");
-  await page.keyboard.press("Escape");
-  const srcTab = page.getByRole("button", { name: "Source page" });
-  if (await srcTab.isVisible()) await srcTab.click();
   await page.locator(".hc-source-term").first().click();
   await expect(page.getByText("Glossary suggestion").first()).toBeVisible();
 
@@ -149,9 +154,9 @@ test("settings: voice control and accessibility toggles", async ({ page }) => {
 test("manager console opens for a manager", async ({ page }) => {
   test.skip(test.info().project.name !== "chrome", "console is desktop-first");
   await page.goto("/manager");
-  await page.getByPlaceholder("you@cag.gov.in").fill("manager@cag.gov.in");
+  await page.getByLabel("Official email").fill("manager@cag.gov.in");
   await page.getByRole("button", { name: "Send code" }).click();
-  await page.getByPlaceholder("OTP").fill("123456");
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page.getByText("Pages per round")).toBeVisible();
+  await page.getByLabel("One-time password").fill("123456");
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(page.getByText("Registered players").first()).toBeVisible();
 });

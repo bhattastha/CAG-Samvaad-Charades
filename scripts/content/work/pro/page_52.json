@@ -1,0 +1,362 @@
+{
+ "pdf_page": 52,
+ "printed_page": "28",
+ "hindi_pdf_pages": [
+  68,
+  69,
+  70
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "Business Perspective for the integrated steel plants. Additional time consumed in capital repair and preventive repair and maintenance than planned, impacts available hours and overall Blast Furnace performance. Further, capital and preventive repairs are planned and undertaken to minimize the unplanned shutdown hours to ensure a high percentage of furnace availability.",
+   "hi_reference": "पूंजीगत मरम्मत एवं निवारक मरम्मत एवं संरक्षण में नियोजित समय से अधिक समय लगने से उपलब्ध घंटों एवं समग्र ब्लास्ट फर्नेस के निष्पादन पर प्रभाव पड़ता है। इसके अतिरिक्त, भट्ठी की उपलब्धता का उच्च प्रतिशत सुनिश्चित करने हेतु अनियोजित कार्यबंदी घंटों को कम करने हेतु पूंजीगत एवं निवारक मरम्मत की योजना बनाई एवं उन्हें कार्यान्वित किया जाता है।",
+   "continues_from_previous_page": true,
+   "note": "Hindi for the opening fragment 'Business Perspective for the integrated steel plants.' is included in the previous page's part (Hindi word order)."
+  },
+  {
+   "type": "body",
+   "en": "On review of capital repair of blast furnaces initiated/completed during 2017-24 and in-progress as on 31 March 2024, Audit observed that extra hours were taken for capital repair of Blast Furnaces than the planned hours. The capital repair planned hours vis a vis actual hours consumed during the period 2017-24 are as below:",
+   "hi_reference": "वर्ष 2017-24 के दौरान आरम्भ/ पूर्ण हुई एवं 31 मार्च 2024 तक प्रगति पर चल रही ब्लास्ट फर्नेस की पूंजीगत मरम्मत की समीक्षा पर, लेखापरीक्षा ने यह पाया कि ब्लास्ट फर्नेस की पूंजीगत मरम्मत हेतु नियोजित घंटों से अधिक समय लगा। वर्ष 2017-24 की अवधि के दौरान पूंजीगत मरम्मत के नियोजित घंटे बनाम वास्तविक रूप में व्यय किए गए घंटे निम्नानुसार हैं।"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table-9: Hours planned for Capital repair vis-à-vis actual hour consumed during 2017-24",
+     "hi_reference": "तालिका-9: पूंजीगत मरम्मत के लिए नियोजित घंटे बनाम वास्तविक खपत घंटे"
+    },
+    "unit": {
+     "en": "(in Hours)",
+     "hi_reference": "(घंटों में)"
+    },
+    "columns": [
+     {
+      "en": "Year",
+      "hi_reference": "वर्ष"
+     },
+     {
+      "en": "Capital Repair Plan",
+      "hi_reference": "पूंजीगत मरम्मत योजना"
+     },
+     {
+      "en": "Capital Repair Planned but not taken up",
+      "hi_reference": "नियोजित किंतु प्रारम्भ नहीं की गयी पुंजीगत मरम्मत"
+     },
+     {
+      "en": "Plan hour available for capital repair",
+      "hi_reference": "पूंजीगत मरम्मत के लिए उपलब्ध योजना घंटे"
+     },
+     {
+      "en": "Hours saved in capital repair against plan",
+      "hi_reference": "योजना के प्रति पूंजीगत मरम्मत में घंटों की बचत"
+     },
+     {
+      "en": "Hours Utilized for Capital Repair",
+      "hi_reference": "पूंजीगत मरम्मत के लिए उपयोग किए गए घंटे"
+     },
+     {
+      "en": "Extra Hours Taken for Capital Repair",
+      "hi_reference": "पूंजीगत मरम्मत के लिए अतिरिक्त घंटे"
+     },
+     {
+      "en": ""
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": ""
+      },
+      {
+       "en": "Taken up in absence of Plan",
+       "hi_reference": "योजना के अभाव में लिया गया"
+      },
+      {
+       "en": "Taken up beyond plan",
+       "hi_reference": "योजना से परे लिया गया"
+      }
+     ],
+     [
+      {
+       "en": "1"
+      },
+      {
+       "en": "2"
+      },
+      {
+       "en": "3"
+      },
+      {
+       "en": "4= (2-3)"
+      },
+      {
+       "en": "5"
+      },
+      {
+       "en": "6"
+      },
+      {
+       "en": "7"
+      },
+      {
+       "en": "8"
+      }
+     ],
+     [
+      {
+       "en": "2017-18"
+      },
+      {
+       "en": "18,408"
+      },
+      {
+       "en": "1,896"
+      },
+      {
+       "en": "16,512"
+      },
+      {
+       "en": "0"
+      },
+      {
+       "en": "28,687"
+      },
+      {
+       "en": "8,760"
+      },
+      {
+       "en": "3,415"
+      }
+     ],
+     [
+      {
+       "en": "2018-19"
+      },
+      {
+       "en": "22,752"
+      },
+      {
+       "en": "10,032"
+      },
+      {
+       "en": "12,720"
+      },
+      {
+       "en": "0"
+      },
+      {
+       "en": "23,140"
+      },
+      {
+       "en": "888"
+      },
+      {
+       "en": "9,532"
+      }
+     ],
+     [
+      {
+       "en": "2019-20"
+      },
+      {
+       "en": "26,952"
+      },
+      {
+       "en": "576"
+      },
+      {
+       "en": "26,376"
+      },
+      {
+       "en": "2,040"
+      },
+      {
+       "en": "38,001"
+      },
+      {
+       "en": "40"
+      },
+      {
+       "en": "13,625"
+      }
+     ],
+     [
+      {
+       "en": "2020-21"
+      },
+      {
+       "en": "17,160"
+      },
+      {
+       "en": "1,632"
+      },
+      {
+       "en": "15,528"
+      },
+      {
+       "en": "0"
+      },
+      {
+       "en": "25,176"
+      },
+      {
+       "en": "8,760"
+      },
+      {
+       "en": "888"
+      }
+     ],
+     [
+      {
+       "en": "2021-22"
+      },
+      {
+       "en": "12,384"
+      },
+      {
+       "en": "6,696"
+      },
+      {
+       "en": "5,688"
+      },
+      {
+       "en": "144"
+      },
+      {
+       "en": "17,300"
+      },
+      {
+       "en": "8,760"
+      },
+      {
+       "en": "2,996"
+      }
+     ],
+     [
+      {
+       "en": "2022-23"
+      },
+      {
+       "en": "15,696"
+      },
+      {
+       "en": "3,888"
+      },
+      {
+       "en": "11,808"
+      },
+      {
+       "en": "156"
+      },
+      {
+       "en": "21,396"
+      },
+      {
+       "en": "3,912"
+      },
+      {
+       "en": "5,832"
+      }
+     ],
+     [
+      {
+       "en": "2023-24"
+      },
+      {
+       "en": "14,616"
+      },
+      {
+       "en": "4,587"
+      },
+      {
+       "en": "10,029"
+      },
+      {
+       "en": "312"
+      },
+      {
+       "en": "19,192"
+      },
+      {
+       "en": "8,784"
+      },
+      {
+       "en": "691"
+      }
+     ],
+     [
+      {
+       "en": "2017-24"
+      },
+      {
+       "en": "1,27,968"
+      },
+      {
+       "en": "29,307"
+      },
+      {
+       "en": "98,661"
+      },
+      {
+       "en": "2,652"
+      },
+      {
+       "en": "1,72,892"
+      },
+      {
+       "en": "39,904"
+      },
+      {
+       "en": "36,979"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "As seen from table above, though overall SAIL consumed extra hours on capital repair projects during 2017-24, some projects were completed in lesser time than what was planned for. Also, some capital repair projects were planned but not taken up while some others were taken up despite not been planned for. During 2017-2024, against the plan of 1,27,968 hours for capital repair, 1,72,892 hours were taken. The Company had not taken up capital repairs of 29,307 hours that were planned initially. In some of the projects SAIL completed the capital repairs in lesser time than planned and thereby saved 2,652 hours. Overall SAIL consumed 76,883 extra hours (Col. 7 + Col. 8 in table above) on capital projects.",
+   "hi_reference": "जैसा कि उपरोक्त तालिका में देखा जा सकता है कि यद्यपि, कुल मिलाकर सेल ने वर्ष 2017-24 के दौरान पूंजीगत मरम्मत परियोजनाओं पर अतिरिक्त घंटे व्यय किए, कुछ परियोजनाएं योजनाबद्ध समय से कम समय में पूर्ण हुईं। इसके अतिरिक्त, कुछ पूंजीगत मरम्मत परियोजनाओं की योजना बनाई गई परंतु उन्हें आरम्भ नहीं किया गया, जबकि कुछ अन्य को योजना ना होने के बाद भी आरम्भ किया गया। वर्ष 2017-2024 के दौरान, पूंजीगत मरम्मत हेतु 1,27,968 घंटों की योजना के प्रति 1,72,892 घंटे लगे। कंपनी ने प्रारम्भ में योजनाबद्ध 29,307 घंटों की पूंजीगत मरम्मत नहीं की। कुछ परियोजनाओं में सेल ने पूंजीगत मरम्मत को योजनाबद्ध समय से कम समय में पूर्ण किया एवं इस प्रकार 2,652 घंटे बचाए। कुल मिलाकर सेल ने बड़ी परियोजनाओं पर 76,883 अतिरिक्त घंटे (उपरोक्त तालिका में कॉलम 7 + कॉलम 8) व्यय किए।"
+  },
+  {
+   "type": "body",
+   "en": "Out of the 39,904 hours consumed for capital repairs in absence of plans, 30,256 hours were consumed at Bokaro Steel Plant for BF#3, 4 & 5 and 9,648 hours were consumed at BF#1 of Rourkela Steel Plant.",
+   "hi_reference": "योजनाओं के अभाव में पूंजीगत मरम्मत के लिए व्यय किए गए 39,904 घंटों में से, बोकारो इस्पात संयंत्र में बीएफ#3, 4 एवं 5 हेतु 30,256 घंटे एवं राउरकेला इस्पात संयंत्र के बीएफ#1 में 9,648 घंटे व्यय किए गए।"
+  },
+  {
+   "type": "body",
+   "en": "Further, out of 36,979 extra hours consumed on capital repairs beyond the planned hours, maximum of 20,926 hours was consumed at Bhilai Steel Plant followed by 13,965 hours at Bokaro and 1,152 hours at Rourkela Steel Plant. Only 936 hours were consumed at Durgapur, and IISCO Steel Plants. This has resulted in loss of production",
+   "hi_reference": "इसके अतिरिक्त, निर्धारित समय से अधिक पूंजीगत मरम्मत पर व्यय किए गए 36,979 अतिरिक्त घंटों में से, सबसे अधिक 20,926 घंटे भिलाई इस्पात संयंत्र पर, उसके पश्चात बोकारो में 13,965 घंटे एवं राउरकेला इस्पात संयंत्र में 1,152 घंटे व्यय किए गए। दुर्गापुर एवं इस्को इस्पात संयंत्रों में मात्र 936 घंटे ही व्यय किए गए। जिसके परिणामस्वरूप,",
+   "continues_on_next_page": true
+  },
+  {
+   "type": "page_number",
+   "en": "28"
+  }
+ ]
+}

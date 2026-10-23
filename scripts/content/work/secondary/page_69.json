@@ -1,0 +1,59 @@
+{
+ "pdf_page": 69,
+ "printed_page": "43",
+ "hindi_pdf_pages": [
+  89,
+  90
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "heading",
+   "en": "Blast Furnace Output",
+   "hi_reference": "ब्लास्ट फर्नेस आउटपुट"
+  },
+  {
+   "type": "body",
+   "en": "5.1 Blast furnace produces hot metal, which is sent to Steel Melting Shop for production of Crude Steel which is either sent to Rolling Mills for production of Saleable Steel or sold as semi-finished product. The output of blast furnace (hot metal and slag) are dealt at different downstream units like Steel Melting Shop, Pig Casting Machine and Slag Granulation Plant set up at different locations inside the steel plant. In case of any problem noted in the Steel Melting Shop, hot metal is poured into Pig Casting Machine where pig iron is generated. In case where neither hot metal can be sent to the Steel Melting Shop nor poured into Pig Casting Machine, hot metal is dumped into sand pit and after recovery, it is sold as scrap. In the steel making process, impurities like slag is generated which is dumped as a waste or granulated and sold for use in cement industry.",
+   "hi_reference": "5.1 ब्लास्ट फर्नेस हॉट मेटल का उत्पादन करता है, जिसे कच्चे इस्पात के उत्पादन के लिए इस्पात मेल्टिंग शॉप में भेजा जाता है, जिसे या तो बिक्री योग्य इस्पात के उत्पादन के लिए रोलिंग मिल्स में भेजा जाता है या अर्ध-तैयार उत्पाद के रूप में बेचा जाता है। ब्लास्ट फर्नेस (हॉट मेटल एवं स्लैग) का उत्पादन विभिन्न डाउनस्ट्रीम इकाइयों जैसे इस्पात मेल्टिंग शॉप, पिग कास्टिंग मशीन एवं स्लैग ग्रेनुलेशन संयंत्र में किया जाता है, जो इस्पात संयंत्र के अंदर विभिन्न स्थानों पर स्थापित होते हैं। इस्पात मेल्टिंग शॉप में कोई समस्या पाए जाने पर, हॉट मेटल को पिग कास्टिंग मशीन में डाला जाता है, जहां पिग आयरन उत्पन्न होता है। ऐसे मामले में जहां न तो हॉट मेटल को स्टील मेल्टिंग शॉप में भेजा जा सकता है एवं न ही पिग कास्टिंग मशीन में डाला जा सकता है, हॉट मेटल को सैंड पिट में डाल दिया जाता है एवं पुनर्प्राप्ति के बाद, इसे स्क्रैप के रूप में बेच दिया जाता है। इस्पात निर्माण प्रक्रिया में स्लैग जैसी अशुद्धियाँ उत्पन्न होती हैं, जिन्हें अपशिष्ट के रूप में फेंक दिया जाता है या ग्रेनुलेट करके सीमेंट उद्योग में उपयोग के लिए बेच दिया जाता है।"
+  },
+  {
+   "type": "body",
+   "en": "In an integrated steel plant, the capacities of different upstream and downstream facilities⁴⁷ is required to be commensurate to maximise the overall production of steel. Any imbalance in the upstream and downstream facilities leads to under utilisation of plant capacity.",
+   "hi_reference": "एक एकीकृत इस्पात संयंत्र में, समग्र इस्पात उत्पादन को अधिकतम करने के लिए विभिन्न अपस्ट्रीम एवं डाउनस्ट्रीम सुविधाओं⁴⁷ की क्षमताएँ समानुपातिक होनी आवश्यक हैं। अपस्ट्रीम एवं डाउनस्ट्रीम सुविधाओं में किसी भी प्रकार का असंतुलन संयंत्र की क्षमता को कम करने का कारण बनता है।"
+  },
+  {
+   "type": "body",
+   "en": "Audit examined the different outputs from blast furnaces of SAIL during the period 2017-2024 and assessed whether the projects relating to upstream and downstream facilities of blast furnace were planned judiciously and executed economically and efficiently. These issues have been further discussed in detail in the succeeding paragraphs.",
+   "hi_reference": "लेखापरीक्षा ने 2017-2024 की अवधि के दौरान सेल के ब्लास्ट फर्नेस से प्राप्त विभिन्न आउटपुट की जाँच की एवं यह निर्धारण किया कि क्या ब्लास्ट फर्नेस की अपस्ट्रीम एवं डाउनस्ट्रीम सुविधाओं से संबंधित परियोजनाओं की योजना विवेकपूर्ण ढंग से बनाई गई है एवं उन्हें मितव्ययिता एवं कुशलता से क्रियान्वित किया गया है। इन मुद्दों पर आगामी पैराग्राफों में विस्तार से चर्चा की गई है।"
+  },
+  {
+   "type": "heading",
+   "en": "5.2 Capacity imbalance in steel making process",
+   "hi_reference": "5.2 इस्पात निर्माण प्रक्रिया में क्षमता असंतुलन"
+  },
+  {
+   "type": "body",
+   "en": "Capacity imbalance in Blast Furnace operations occurs when the installed or upgraded capacity of the Blast furnace is not commensurate with the supporting upstream facilities such as Coke ovens, Sinter plants and Steel Melting Shops in the downstream. This results in operational bottlenecks, underutilisation of created assets, reduced efficiency of the integrated steel plant and higher specific consumption of inputs. The imbalance reflects deficiencies in capacity planning, synchronisation of projects, and monitoring of execution schedules.",
+   "hi_reference": "ब्लास्ट फर्नेस संचालन में क्षमता असंतुलन तब होता है जब ब्लास्ट फर्नेस की स्थापित या उन्नत क्षमता, डाउनस्ट्रीम में कोक ओवन, सिंटर संयंत्र एवं इस्पात मेल्टिंग शॉप जैसी सहायक अपस्ट्रीम सुविधाओं के अनुरूप नहीं होती है। इसके परिणामस्वरूप परिचालन संबंधी अड़चनें, निर्मित परिसंपत्तियों का कम उपयोग, एकीकृत इस्पात संयंत्र की दक्षता में कमी एवं इनपुट की अधिक विशिष्ट खपत होती है। यह असंतुलन क्षमता नियोजन, परियोजनाओं के समन्वय एवं निष्पादन अनुसूचियों की निगरानी में कमियों को दर्शाता है।"
+  },
+  {
+   "type": "body",
+   "en": "Table 14 shows the capacity of blast furnace with its upstream and downstream facilities at the steel plants of SAIL during 2017-2024.",
+   "hi_reference": "नीचे दी गई तालिका 2017-2024 के दौरान सेल के इस्पात संयंत्रों में अपस्ट्रीम एवं डाउनस्ट्रीम सुविधाओं के साथ ब्लास्ट फर्नेस की क्षमता दर्शाती है।"
+  },
+  {
+   "type": "footnote",
+   "en": "47 Upstream facilities include Raw Material Handling Plant, Sinter Plant, Coke Oven Battery and Downstream facilities include Steel Melting Shop, Pig Casting Machine, Slag Granulation Plant etc.",
+   "hi_reference": "47 अपस्ट्रीम सुविधाओं में कच्चा माल हैंडलिंग प्लांट, सिंटर प्लांट, कोक ओवन बैटरी और डाउनस्ट्रीम सुविधाओं में स्टील मेल्टिंग शॉप, पिग कास्टिंग मशीन, स्लैग ग्रैनुलेशन प्लांट आदि शामिल हैं।"
+  },
+  {
+   "type": "page_number",
+   "en": "43"
+  }
+ ]
+}

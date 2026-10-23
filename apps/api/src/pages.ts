@@ -1,44 +1,53 @@
 import {
-  applyOverrides, clientPage, containsHindi, matchSourceTerms, normalise,
+  applyOverrides, clientPage, containsHindi, entriesForSector, glossaryKey, matchSourceTerms, normalise,
   type GlossaryEntry, type PageData, type Part,
 } from "@hc/shared";
 import type { Db } from "./db.js";
 
 // ---------------- glossary index (in memory; ~11k entries) ----------------
 
-let glossary: { all: GlossaryEntry[]; byEn: Map<string, GlossaryEntry>; allByEn: Map<string, GlossaryEntry>; overrides: GlossaryEntry[] } | null = null;
+/**
+ * Built once and cached until the glossary changes (Anuvaad rebuilds this on every call — its p95 of 9.65 s;
+ * caching the indexes is the optimisation the algorithm note recommends). Two indexes, as in Phase 2:
+ * `byEn`/`allByEn` (detection, one entry per key) and `entries` (presentation, every entry per key).
+ */
+let glossary: { all: GlossaryEntry[]; byEn: Map<string, GlossaryEntry>; allByEn: Map<string, GlossaryEntry>; entries: Map<string, GlossaryEntry[]>; overrides: GlossaryEntry[] } | null = null;
 const STOP = new Set(["and", "the", "for", "from", "with", "also", "such", "this", "that", "these", "those", "into", "upon", "over", "under"]);
 
 export async function loadGlossary(db: Db) {
-  const rows = await db.query<{ en: string; hi: string; accepted_variants: string[]; avoid_forms: string[]; flags: string[]; override: any }>(
-    "SELECT en, hi, accepted_variants, avoid_forms, flags, override FROM glossary_terms",
+  const rows = await db.query<{ en: string; hi: string; accepted_variants: string[]; avoid_forms: string[]; flags: string[]; override: any; sector: string | null }>(
+    "SELECT en, hi, accepted_variants, avoid_forms, flags, override, sector FROM glossary_terms",
   );
   const all: GlossaryEntry[] = [];
   const overrides: GlossaryEntry[] = [];
   const byEn = new Map<string, GlossaryEntry>();
   const allByEn = new Map<string, GlossaryEntry>();
+  const entries = new Map<string, GlossaryEntry[]>();
   for (const r of rows) {
     if (r.flags.includes("empty_primary_after_cleaning")) continue;
     const ov = r.override && r.override.active !== false ? r.override : null;
     const e: GlossaryEntry = ov
-      ? { en: r.en, hi: ov.hi, variants: ov.variants ?? [], avoid: ov.avoid ?? [] }
-      : { en: r.en, hi: r.hi, variants: (r.accepted_variants ?? []).filter((v) => !/^\d+$/.test(v)), avoid: r.avoid_forms ?? [] };
+      ? { en: r.en, hi: ov.hi, variants: ov.variants ?? [], avoid: ov.avoid ?? [], sector: r.sector }
+      : { en: r.en, hi: r.hi, variants: (r.accepted_variants ?? []).filter((v) => !/^\d+$/.test(v)), avoid: r.avoid_forms ?? [], sector: r.sector };
     if (ov) overrides.push(e);
     all.push(e);
-    const k = r.en.toLowerCase().replace(/’/g, "'").replace(/\s+/g, " ").trim();
-    // inline source underlines: multi-word terms, and longer single words whose Hindi is a real
-    // term (not a transliteration) — so the page is not drowned in dashes
+    const k = glossaryKey(r.en);
+    if (!k) continue;
+    entries.set(k, [...(entries.get(k) ?? []), e]);
+    // workbench underlines: every approved term except function words and very short or
+    // transliterated single words, so the page is not drowned in dashes
     const multi = k.includes(" ");
-    const strong = multi ? k.length >= 6 : k.length >= 8 && !r.flags.includes("primary_looks_transliterated");
-    if (strong && !STOP.has(k)) byEn.set(k, e);
-    allByEn.set(k, e);
+    const strong = multi || (k.length >= 4 && !r.flags.includes("primary_looks_transliterated"));
+    if (strong && !STOP.has(k) && !byEn.has(k)) byEn.set(k, e);
+    if (!allByEn.has(k) || !e.sector) allByEn.set(k, e);
   }
-  glossary = { all, byEn, allByEn, overrides };
+  glossary = { all, byEn, allByEn, entries, overrides };
   pageCache.clear();
 }
 export const glossaryIndex = () => glossary!;
 
 export function searchGlossary(q: string, limit = 25): GlossaryEntry[] {
+  // the drawer search is free text, not detection: prefix/contains on English or Hindi
   const g = glossary!;
   const s = normalise(q).toLowerCase();
   if (!s) return [];
@@ -60,11 +69,11 @@ const pageCache = new Map<string, { version: number; page: PageData; sector: str
 
 /** Per-field glossary matches in the English, and words worth a second look in the Hindi draft. */
 export interface PageExtras {
-  sourceTerms: Record<string, Record<string, { start: number; end: number; en: string; hi: string; variants: string[]; avoid: string[] }[]>>;
+  sourceTerms: Record<string, Record<string, { start: number; end: number; en: string; hi: string; variants: string[]; avoid: string[]; area?: string | null; alternatives?: { hi: string; area: string | null }[] }[]>>;
   watchWords: { text: string; kind: "avoid" | "slip"; en?: string; hi?: string; options?: string[] }[];
 }
 
-function computeExtras(page: PageData): PageExtras {
+function computeExtras(page: PageData, sector = ""): PageExtras {
   const g = glossary!;
   const refAll = page.parts.flatMap((p) => p.fields.map((f) => f.hiReference)).join(" ");
   const sourceTerms: PageExtras["sourceTerms"] = {};
@@ -77,11 +86,20 @@ function computeExtras(page: PageData): PageExtras {
     }
   };
   const index = new Map(g.byEn);
-  for (const t of page.terms) index.set(t.en.toLowerCase(), t);
+  for (const t of page.terms) index.set(glossaryKey(t.en), t);
   for (const p of page.parts) {
     for (const f of p.fields) {
       if (f.numeric || !f.en) continue;
-      const m = matchSourceTerms(f.en, index).map(({ start, end, entry }) => ({ start, end, en: entry.en, hi: entry.hi, variants: entry.variants.slice(0, 4), avoid: entry.avoid.slice(0, 4) }));
+      const m = matchSourceTerms(f.en, index).map(({ start, end, entry }) => {
+        // page terms win; otherwise sector-specific entries come before general ones (Phase 7).
+        // Sent as "area": the page's own sector is never sent to the browser (§14).
+        const scoped = page.terms.some((t) => t.en === entry.en) ? [entry] : entriesForSector(g.entries.get(glossaryKey(entry.en)), sector);
+        const best = scoped[0] ?? entry;
+        return {
+          start, end, en: best.en, hi: best.hi, variants: best.variants.slice(0, 4), avoid: best.avoid.slice(0, 4), area: best.sector ?? null,
+          ...(scoped.length > 1 ? { alternatives: scoped.slice(1).map((x) => ({ hi: x.hi, area: x.sector ?? null })) } : {}),
+        };
+      });
       if (m.length) (sourceTerms[p.id] ??= {})[f.key] = m;
       m.forEach((x) => addAvoid({ en: x.en, hi: x.hi, variants: x.variants, avoid: x.avoid }));
     }
@@ -111,7 +129,7 @@ export async function loadPage(db: Db, id: string): Promise<{ page: PageData; se
     slips: slips.map((s) => ({ partId: s.part_id, kind: s.kind, wrongText: s.wrong_text, enTerm: s.en_term, fixHint: s.fix_hint })),
     terms: applyOverrides(terms.map((t) => ({ en: t.en, hi: t.hi, variants: t.variants, avoid: t.avoid })), glossary?.overrides ?? []),
   };
-  const v = { version: row.version, page, sector: row.sector, extras: computeExtras(page) };
+  const v = { version: row.version, page, sector: row.sector, extras: computeExtras(page, row.sector) };
   pageCache.set(id, v);
   return v;
 }

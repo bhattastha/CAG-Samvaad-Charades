@@ -5,7 +5,7 @@
     "gameNameHi": "संवाद शराड्स",
     "brandLine": "CAG × BHASHINI",
     "guide": "Sahayak",
-    "guideRole": "Your guide",
+    "guideRole": "Your coach",
     "listen": "Listen",
     "pause": "Pause",
     "resume": "Resume",
@@ -25,8 +25,8 @@
     "credits": "credits",
     "stars": "stars",
     "level": "Level",
-    "loading": "Loading the next scene…",
-    "error": "Something went wrong. Please try again.",
+    "loading": "Loading…",
+    "error": "Something went wrong. Try again.",
     "retry": "Try again",
     "settings": "Settings",
     "logout": "Sign out"
@@ -37,11 +37,11 @@
     "voiceOff": "Off",
     "voiceTap": "Only when I tap Listen",
     "voiceAuto": "Read lines aloud automatically",
-    "voiceHint": "Sahayak never talks over you: pause or stop the voice anytime from the player at the bottom.",
+    "voiceHint": "Sahayak never talks over you. Pause or stop the voice anytime from the player bar.",
     "sound": "Sound effects",
     "volume": "Volume",
     "haptics": "Vibration on phones",
-    "textSize": "Text & HUD size",
+    "textSize": "Text and HUD size",
     "sizeS": "S",
     "sizeM": "M",
     "sizeL": "L",
@@ -53,93 +53,163 @@
     "done": "Done"
   },
   "title": {
-    "kicker": "A Hindi Pakhwada game",
+    "kicker": "Hindi Pakhwada 2026 · Official challenge",
     "heading": "Samvaad Charades",
-    "subheading": "Translate real CAG audit reports. Clear the Trial, then take on Primary, Secondary and Pro. Earn titles and up to 50 credits.",
-    "start": "Press Start",
-    "resume": "Continue your journey",
+    "subheading": "Real CAG audit pages. BHASHINI's machine draft. The CAG glossary. Prove your Hindi across five levels, win four titles and bank up to 50 credits.",
+    "start": "Join the challenge",
+    "resume": "Continue your campaign",
     "artCaption": "English → हिंदी",
     "levelsLabel": "5 levels · 4 titles · 50 credits",
     "pressAnyKey": "Press Enter to start",
     "voiceToggle": "Sahayak voice guide",
     "voiceOn": "On",
     "voiceOff": "Off",
-    "voiceHelp": "Turn on to hear Sahayak read every tip aloud. You can change this anytime in ⚙️ Settings."
+    "voiceHelp": "Hear Sahayak read each briefing aloud. Change it anytime in Settings.",
+    "tagline": "The translation challenge for audit professionals.",
+    "signIn": "Sign in",
+    "startBonus": "+2 credits the moment you join",
+    "seasonCard": "Season ladder",
+    "trialLine": "300-word warm-up",
+    "joinBonus": "Joining bonus",
+    "statPlayers": "Officers playing",
+    "statOffices": "Offices",
+    "statCredits": "Credits earned",
+    "statTitles": "Titles won",
+    "perksKicker": "Why play",
+    "perksHeading": "Every level pays off: in credits, in rank, in skill.",
+    "perks": [
+      {
+        "icon": "coin",
+        "title": "Up to 50 credits",
+        "body": "Your best score in each level converts to credits, recorded against your name for the Hindi Pakhwada awards."
+      },
+      {
+        "icon": "award",
+        "title": "Four titles and a certificate",
+        "body": "Score 33 or more to win Anuvad Pathik, Nipun, Vidwan and Visheshagya, all on one certificate."
+      },
+      {
+        "icon": "trophy",
+        "title": "A place on the leaderboard",
+        "body": "See where you stand in your office, your state and across the department."
+      },
+      {
+        "icon": "zap",
+        "title": "A skill you use every day",
+        "body": "Train on the same BHASHINI workbench and CAG glossary that power Anuvaad."
+      }
+    ],
+    "stepsKicker": "How it works",
+    "stepsHeading": "Join in a minute. Play at your pace.",
+    "steps": [
+      {
+        "title": "Enlist",
+        "body": "Register with your official email and office. A one-time code confirms it's you."
+      },
+      {
+        "title": "Warm up",
+        "body": "Open with the 300-word Trial, then take on the levels. Each gives you three chances."
+      },
+      {
+        "title": "Climb",
+        "body": "Your best score in every level counts. Win titles, bank credits, climb the board."
+      }
+    ],
+    "footer": "For officers of the Indian Audit & Accounts Department · Content: CAG Report No. 38 of 2025"
   },
   "registration": {
-    "heading": "Create your player profile",
-    "headingEn": "Step 1 of 3",
-    "formHeading": "Tell us about yourself",
+    "heading": "Enlist for the challenge",
+    "headingEn": "Player registration",
+    "formHeading": "Your details",
     "required": "* required",
     "name": "Full name",
     "mobile": "Mobile number",
     "email": "Official email ID",
     "office": "Office",
     "officeAddress": "Office address",
-    "creditBadge": "+2 credits",
+    "creditBadge": "+2 joining credits",
     "bigCredit": "+2 joining credits",
-    "submit": "Create profile",
-    "submitNote": "All your credits are saved with this email.",
-    "privacyNote": "Your details are used only for this game and Hindi Pakhwada credits, and stay on servers in India.",
-    "otpSent": "We sent a 6-digit code to your email.",
-    "otpLabel": "Enter code",
+    "submit": "Create my player card",
+    "submitNote": "Every credit you earn is saved to this email.",
+    "privacyNote": "Your details are used only for this game and Hindi Pakhwada credits, and are stored on servers in India.",
+    "otpSent": "A 6-digit code is on its way to your email.",
+    "otpLabel": "Enter the code",
     "otpVerify": "Verify & enter",
     "sampleContent": "Sample content",
-    "officeSearch": "Search your office (English or Hindi)",
+    "officeSearch": "Search your office in English or Hindi",
     "officeNone": "No office found",
     "newBadge": "edited",
-    "errName": "Please enter your full name.",
+    "errName": "Enter your full name.",
     "errMobile": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
     "errEmail": "Enter a valid email ID.",
     "errOffice": "Pick your office from the list.",
     "errAddress": "Enter your office address.",
-    "errOtp": "That code doesn't match. Check it once more.",
-    "errOtpRate": "Too many codes requested. Please try again in a little while.",
-    "errDomain": "This game is for CAG officers only. Please use your official email ID.",
+    "errOtp": "That code doesn't match. Check it and try again.",
+    "errOtpRate": "Too many codes requested. Try again in a few minutes.",
+    "errDomain": "This challenge is open to CAG officers only. Use your official email ID.",
     "resend": "Resend code",
     "devCode": "Development code: {code}",
-    "welcomeBack": "Returning player? Enter the code and you'll land right where you left off.",
+    "welcomeBack": "Returning player? Enter the code to pick up where you left off.",
     "changeEmail": "Change email",
-    "returningLink": "Played before? Sign in with just your email",
-    "newLink": "New player? Fill the full profile",
+    "returningLink": "Already playing? Sign in",
+    "newLink": "New player? Create your profile",
     "steps": [
-      "Profile",
+      "Details",
       "Verify",
       "Ready"
     ],
-    "unlocked": "Profile created!",
-    "unlockedSub": "You earned your first credits. Your journey begins now."
+    "unlocked": "You're in.",
+    "unlockedSub": "Joining credits banked. Next: a two-minute training run, then the Trial.",
+    "sub": "One profile. Every credit you earn stays linked to it.",
+    "headingReturning": "Welcome back",
+    "subReturning": "Sign in with your official email to pick up where you left off.",
+    "formHeadingReturning": "Sign in",
+    "signInSubmit": "Send sign-in code",
+    "cardKicker": "Player card",
+    "cardDraft": "Draft",
+    "cardVerifying": "Verifying",
+    "cardName": "Your name",
+    "cardOffice": "Your office",
+    "cardRank": "Recruit",
+    "cardCredits": "Credits",
+    "cardTitles": "Titles",
+    "cardLevels": "Levels",
+    "trackHeading": "What's on the table",
+    "trackJoin": "Joining bonus — credited on sign-up",
+    "trackTotal": "Maximum you can bank",
+    "unlockedKicker": "Profile active",
+    "toTraining": "Start training"
   },
   "howToPlay": {
     "heading": "Training ground",
-    "headingEn": "Learn the moves before your first mission",
+    "headingEn": "Learn the controls before your first mission",
     "steps": [
       {
         "title": "Your mission",
-        "body": "Each level gives you a page from a real CAG audit report in English. Your job: make the Hindi perfect, just as CAG publishes it."
+        "body": "Every level hands you a page from a real CAG audit report in English. Your job: deliver Hindi to CAG's published standard."
       },
       {
         "title": "How you score",
-        "body": "Five things make your score out of 100: translation quality, time, completion, glossary words and sentence construction. Score 33 or more to win the level's title."
+        "body": "Your score out of 100 draws on five measures: translation quality, time, completion, glossary terms and sentence construction. Score 33 or more to win the level's title."
       },
       {
         "title": "Your toolkit",
-        "body": "Type Roman letters and pick a Hindi suggestion, use the InScript keyboard, or your device's Hindi keyboard. In Level 1 you can also speak. Try it below!"
+        "body": "Type in Roman letters and pick a Hindi suggestion, use InScript keys, or use your device's Hindi keyboard. In the Trial you can also speak. Try it below."
       },
       {
-        "title": "Your guide",
-        "body": "Sahayak is with you in every level. Ask for a hint, a glossary word or the time left. Sahayak never gives away the answer."
+        "title": "Your coach",
+        "body": "Sahayak is on hand in every level for hints, glossary terms and time checks, but never gives away the answer."
       }
     ],
     "points": [
-      "Made for CAG officers.",
-      "Play to gain: appraisal benefit, translation practice and Hindi Pakhwada credits.",
+      "Built for officers of the Indian Audit & Accounts Department.",
+      "What you gain: appraisal benefit, real translation practice and Hindi Pakhwada credits.",
       "Credits: Joining 2 · Trial 3 · Primary 5 · Secondary 15 · Pro 25 = 50",
-      "From Level 2, BHASHINI gives you a machine draft. Find its mistakes and fix them.",
-      "In Level 1 (Trial) you translate everything yourself.",
-      "Stuck on a word? Open the Glossary.",
-      "Five things count: translation, time, completion, glossary, sentence construction.",
-      "See the ways to write Hindi on the right."
+      "From Level 2, BHASHINI supplies a machine draft. Find its errors and fix them.",
+      "In the Trial (Level 1), you translate everything yourself.",
+      "Unsure of a term? Open the Glossary.",
+      "Five measures count: translation, time, completion, glossary, sentence construction.",
+      "Try the ways to write Hindi on the right."
     ],
     "creditsLabel": "Credits",
     "scoreLabel": "Score",
@@ -149,32 +219,33 @@
     "voice": "Speak to type",
     "voiceOnlyTrial": "Level 1 only",
     "tryHere": "Practice pad",
-    "practiceNote": "Practice only: nothing here is saved.",
+    "practiceNote": "Practice only. Nothing here is saved.",
     "phoneticExample": "Type sarkar and press Space",
     "finish": "I'm ready"
   },
   "rules": {
     "heading": "Rules of the game",
-    "headingEn": "Three rules keep it fair for everyone",
+    "headingEn": "Three rules keep the field fair",
     "rule1": "No copy-paste",
     "rule2": "Three chances per level",
-    "rule3": "Voice only in Level 1",
-    "rule1Body": "During a mission you can't leave the page, copy or paste. Leaving is counted and shown on your report card.",
-    "rule2Body": "Play each level up to three times. Only your best score counts, so a bad try never costs you credits.",
-    "rule3Body": "Speak-to-type works only in the Trial. From Level 2 you type every word.",
+    "rule3": "Voice only in the Trial",
+    "rule1Body": "During a mission, copy and paste are disabled. Leaving the page is counted and shown on your report card.",
+    "rule2Body": "Play each level up to three times. Only your best score counts, so a weaker run never costs you credits.",
+    "rule3Body": "Speak-to-type works only in the Trial. From Level 2 on, you type every word.",
     "start": "Open the map",
     "cardVoiceOrType": "Speak or type",
     "cardTypeOnly": "Type only",
     "cardEachSentence": "Every finished sentence counts",
     "cardEachParagraph": "Every part you tick counts",
-    "cardCredits": "Win up to {n} credits"
+    "cardCredits": "Up to {n} credits",
+    "ruleLabel": "Rule {n}"
   },
   "journey": {
-    "heading": "Your journey",
-    "headingEn": "Clear the Trial, then pick any level you like",
+    "heading": "Choose your level",
+    "headingEn": "Warm up with the Trial, then take on Primary, Secondary and Pro.",
     "youAreHere": "You are here",
     "locked": "Locked",
-    "lockedHint": "Pass the Trial ({n}+) to unlock",
+    "lockedHint": "Score {n}+ in the Trial to unlock",
     "play": "Play",
     "replay": "Play again",
     "resume": "Resume",
@@ -184,14 +255,14 @@
     "creditsMeter": "Credits",
     "titles": "Title collection",
     "titleLocked": "Not yet won",
-    "allDone": "Every level played! Visit the Hall of Fame.",
+    "allDone": "Every level played. Your Hall of Fame is ready.",
     "hallOfFame": "Hall of Fame",
     "rewards": "Rewards",
     "statsStars": "Stars",
-    "trialFirst": "Start here: the Trial is your entry ticket. Score {n}+ to unlock every level.",
-    "trialRetry": "So close! Score {n}+ in the Trial to unlock the other levels. {left} chances left.",
-    "trialLockedOut": "All Trial chances are used. Please contact the game manager.",
-    "unlockedAll": "Trial cleared! Primary, Secondary and Pro are open. Play them in any order.",
+    "trialFirst": "Start here: the Trial is your entry ticket. Score {n}+ to unlock every other level.",
+    "trialRetry": "Close. Score {n}+ in the Trial to open the other levels. {left} chances left.",
+    "trialLockedOut": "All Trial chances are used. Contact the game manager to continue.",
+    "unlockedAll": "Trial cleared. Primary, Secondary and Pro are open; play them in any order.",
     "comingSoon": "Coming soon",
     "phase2": "Phase 2",
     "preview": "Preview",
@@ -199,38 +270,44 @@
     "wordsLabel": "~{n} words",
     "leaderboard": "Leaderboard",
     "yourRank": "You're #{rank} of {of}",
-    "leaderEmpty": "Be the first on the board!",
-    "entry": "Entry level"
+    "leaderEmpty": "The board is open. Be the first name on it.",
+    "entry": "Entry level",
+    "kicker": "Campaign map",
+    "fullBoard": "Full leaderboard",
+    "voiceOk": "Voice typing allowed",
+    "typingOnly": "Typing only",
+    "openFirst": "Start with the Trial, a 300-word warm-up that sets your pace. Every level is open; play in any order.",
+    "openPlayed": "Warm-up done. Primary, Secondary and Pro are all open; each keeps its own three chances and best score."
   },
   "preRound": {
     "heading": "Mission briefing",
-    "headingEn": "Read your orders, then start the clock",
+    "headingEn": "Review your orders, then start the clock",
     "objectives": "Objectives",
     "rewards": "Rewards",
     "willBecome": "Win the title {title}",
     "creditsReward": "Up to {n} credits",
     "timeYouHave": "Time limit",
-    "typingOnly": "From now on you type every word. Speaking was only for the Trial.",
-    "cannotLeave": "Stay on this page: no tab switching, no copy-paste.",
-    "fullMeaning": "Bring across the full meaning of every part. Leave nothing out.",
-    "threeChances": "You have three chances. Your best score counts.",
+    "typingOnly": "Typing only from here. Voice input was for the Trial.",
+    "cannotLeave": "Stay on this page until you submit. Copy-paste is disabled.",
+    "fullMeaning": "Carry the full meaning of every part. Leave nothing out.",
+    "threeChances": "Three chances. Your best score counts.",
     "objTrial": "Translate the passage into Hindi from scratch.",
-    "objMain": "Check BHASHINI's Hindi draft part by part, fix every mistake, and tick ✓ each part.",
+    "objMain": "Review BHASHINI's Hindi draft part by part, fix every error, and tick ✓ each part.",
     "objNumbers": "Keep numbers, years and ₹ amounts exactly as they are.",
     "start": "Start mission",
     "micStart": "Test microphone",
-    "micMeter": "We can hear you",
-    "micOk": "Microphone ready!",
+    "micMeter": "Signal detected",
+    "micOk": "Microphone ready",
     "notNow": "Not now",
-    "fullscreenNote": "The mission runs full screen.",
-    "countdownGo": "GO!",
+    "fullscreenNote": "The mission runs in full screen.",
+    "countdownGo": "Go",
     "getReady": "Get ready…"
   },
   "round": {
     "sourceLabel": "Source page",
     "sourceLabelEn": "English",
     "yourTranslation": "Your Hindi translation",
-    "draftLabel": "BHASHINI draft · check and fix",
+    "draftLabel": "BHASHINI draft · Check and improve",
     "partDone": "✓ Cleared",
     "partIncomplete": "To do",
     "keyboardPhonetic": "Roman → Hindi",
@@ -239,27 +316,27 @@
     "typeMode": "Type",
     "speak": "Speak",
     "listening": "Listening…",
-    "voiceUnavailable": "Voice isn't available right now. No problem, keep typing.",
+    "voiceUnavailable": "Voice input is unavailable right now. Keep typing; nothing is lost.",
     "sentencesDone": "{done}/{total} sentences",
     "paragraphsDone": "{done}/{total} parts",
     "submit": "Submit",
     "confirmSubmit": "Submit anyway?",
     "partsLeft": "{n} still to do",
     "copyPasteToast": "Copy-paste is locked. Write it yourself, you've got this!",
-    "fiveMinToast": "5 minutes left!",
-    "timeUp": "Time's up! Your work has been submitted.",
-    "leftPageCard": "The mission and the clock kept running while you were away. Come back and keep going.",
+    "fiveMinToast": "5 minutes left",
+    "timeUp": "Time's up. Your work has been submitted.",
+    "leftPageCard": "You left the mission page and the clock kept running. Pick up where you stopped.",
     "leftPageCount": "Times away: {n}",
-    "serviceSlow": "BHASHINI is a little slow. Keep typing, your work is safe.",
-    "offline": "Offline: keep writing, we'll save as soon as you reconnect.",
+    "serviceSlow": "BHASHINI is responding slowly. Keep typing; your work is safe.",
+    "offline": "Offline. Keep writing; your work saves as soon as you reconnect.",
     "numbersLocked": "Numbers stay exactly as they are.",
     "xlitHint": "Type in Roman · Space = first suggestion · Esc = keep as typed",
-    "xlitUnavailable": "Suggestions are unavailable. Use InScript or your Hindi keyboard.",
+    "xlitUnavailable": "Suggestions are unavailable. Switch to InScript or your Hindi keyboard.",
     "otherWindow": "This mission is open in another window.",
     "saved": "Saved",
     "saving": "Saving…",
-    "micCheck": "Say something to test the mic",
-    "micDenied": "Mic permission was not given. That's fine, you can type.",
+    "micCheck": "Say a few words to test the mic",
+    "micDenied": "Microphone access wasn't granted. Typing works just as well.",
     "tick": "Mark ✓",
     "untick": "Reopen",
     "glossaryHint": "Tap an underlined word for glossary help",
@@ -276,9 +353,9 @@
     "fiveMinSr": "Five minutes left",
     "oneMinSr": "One minute left",
     "lockedNumber": "This number can't be changed",
-    "partCleared": "Part cleared!",
+    "partCleared": "Part cleared",
     "sentenceDone": "+1 sentence",
-    "allCleared": "Everything cleared, review and submit!",
+    "allCleared": "All parts cleared. Review, then submit.",
     "reward": "Reward",
     "progress": "Progress",
     "time": "Time",
@@ -292,11 +369,39 @@
       "table": "Table",
       "chart": "Chart",
       "annexure_ref": "Annexure reference",
-      "passage": "Passage"
+      "passage": "Passage",
+      "figure": "Figure"
     },
     "pageNav": "Page {n} of {total}",
     "prevPage": "Previous page",
-    "nextPage": "Next page"
+    "nextPage": "Next page",
+    "workbench": "Translation workbench",
+    "pageNumberLabel": "Page",
+    "qaIssues": "{n} to check",
+    "qa": {
+      "empty": "Every field translated",
+      "emptyN": "{n} field(s) still empty",
+      "numbers": "All numbers kept",
+      "latin": "No English words left",
+      "watch": "No flagged words",
+      "stop": "Ends with a full stop (।)"
+    },
+    "context": {
+      "title": "Segment context",
+      "segment": "Segment {n} of {total}",
+      "pick": "Select a segment to see its glossary terms and checks.",
+      "glossary": "Glossary for this segment",
+      "noTerms": "No glossary terms in this segment.",
+      "used": "Approved form used",
+      "avoidUsed": "A form to avoid is in your text",
+      "insert": "Insert at the cursor",
+      "general": "General",
+      "search": "Search the full CAG glossary",
+      "qa": "Quality checks",
+      "thisPage": "Segments done on this page"
+    },
+    "reviewBuild": "Review build",
+    "chance": "Chance"
   },
   "glossary": {
     "searchPlaceholder": "Search in English or Hindi",
@@ -305,7 +410,7 @@
   },
   "chat": {
     "title": "Ask Sahayak",
-    "placeholder": "Ask about a word or a rule…",
+    "placeholder": "Ask about a term or a rule…",
     "send": "Send",
     "quick": {
       "hint": "Give me a hint",
@@ -317,17 +422,17 @@
   },
   "complete": {
     "missionComplete": "Mission complete!",
-    "timeUp": "Time's up!",
-    "scoring": "Checking your Hindi against CAG's published page…",
+    "timeUp": "Time's up",
+    "scoring": "Scoring your Hindi against CAG's published page…",
     "measuring": "Scoring",
-    "tapToContinue": "Tap to see your report card",
-    "titleUnlocked": "Title unlocked!",
-    "newBest": "New best!"
+    "tapToContinue": "Tap for your report card",
+    "titleUnlocked": "Title unlocked",
+    "newBest": "New personal best"
   },
   "reportCard": {
     "heading": "Report card · {roundName}",
-    "headingEn": "How did you do?",
-    "sahayikaAnnounces": "Sahayak announces",
+    "headingEn": "Your mission debrief",
+    "sahayikaAnnounces": "Sahayak reports",
     "thisTime": "this attempt",
     "howYouDid": "Your five stats",
     "measureTranslation": "Translation",
@@ -337,7 +442,7 @@
     "measureSentence": "Sentences",
     "measureTranslationSub": "Closeness to CAG's Hindi",
     "measureTimeSub": "Time taken",
-    "measureCompletionSub": "Done",
+    "measureCompletionSub": "Completed",
     "measureGlossarySub": "CAG terms used",
     "measureSentenceSub": "Sentence construction",
     "marksOf10": "{n}/10",
@@ -351,32 +456,32 @@
     "runningTotal": "Total {n} / 50",
     "starsLabel": "Stars collected",
     "replay": "Play again · {n} left",
-    "nextRound": "Next: {roundName} →",
-    "totalScore": "Hall of Fame →",
+    "nextRound": "Next: {roundName}",
+    "totalScore": "Hall of Fame",
     "map": "Back to map",
     "reviewOwn": "Review my translation",
     "titlePill": "Title",
     "bestStar": "Best",
     "reviewHeading": "Your translation",
-    "reviewNote": "Underlined words are worth another look. CAG's own translation isn't shown, so the challenge stays fair.",
+    "reviewNote": "Underlined words deserve a second look. CAG's reference translation stays hidden to keep the contest fair.",
     "legendAvoid": "word to replace with the glossary term",
     "legendLatin": "English word left in",
     "legendSlip": "machine slip still there",
     "missingTerms": "Glossary terms not found:",
     "autoSubmitted": "Submitted automatically when time ran out",
-    "tipTerm": "Next time, write '{hi}' for '{en}'.",
-    "tipGrammar": "Next time, watch out: {issue}",
-    "tipPraise": "Brilliant! Keep writing like this.",
+    "tipTerm": "Next time, use '{hi}' for '{en}'.",
+    "tipGrammar": "One to watch next time: {issue}",
+    "tipPraise": "Clean work. Hold this standard.",
     "pageLeft": "Times away from the page: {n}",
     "nextGoal": "Next goal",
     "goalTitle": "Score {n} more to win {title}",
     "goalNext": "Unlock {title} in {round}",
-    "goalDone": "All four titles: visit the Hall of Fame",
+    "goalDone": "All four titles won. Visit the Hall of Fame.",
     "retryTrial": "Try the Trial again · {n} left",
     "trialUnlocked": "Trial cleared! Every level is now open.",
     "sessionId": "Session",
     "goalTrial": "Score {n} more in the Trial to unlock every level",
-    "goalPick": "Pick your next level on the map"
+    "goalPick": "Choose your next level on the map"
   },
   "total": {
     "heading": "Hall of Fame",
@@ -388,17 +493,17 @@
     "chancesUsed": "{n}/3 chances",
     "totalCredits": "Total credits",
     "bestAdded": "Your best score in each level is what counts.",
-    "congrats": "Well played, {name}!",
-    "useCredits": "Take your credits to the Hindi Pakhwada contest. More credits, bigger win!",
+    "congrats": "Well played, {name}.",
+    "useCredits": "Your credits count toward the Hindi Pakhwada awards. Every credit adds to your standing.",
     "download": "Download certificate",
     "improve": "Raise my score",
-    "improveNote": "Levels with chances left can be replayed to raise your score.",
+    "improveNote": "Replay any level with chances left to raise your best.",
     "pickRound": "Which level do you want to replay?",
-    "nothingToReplay": "All chances in every level are used."
+    "nothingToReplay": "Every chance in every level is used."
   },
   "grammarIssues": {
     "latin_word": {
-      "en": "write proper Hindi words, not English ones.",
+      "en": "replace English words with Hindi ones.",
       "hi": "अंग्रेज़ी शब्दों की जगह हिंदी शब्द लिखिए।"
     },
     "missing_danda": {
@@ -410,7 +515,7 @@
       "hi": "कोई शब्द मात्रा से शुरू नहीं होना चाहिए।"
     },
     "repeated_word": {
-      "en": "a word was written twice in a row.",
+      "en": "a word appears twice in a row.",
       "hi": "एक शब्द लगातार दो बार लिखा गया है।"
     },
     "unbalanced_bracket": {
@@ -424,11 +529,12 @@
   },
   "sahayikaExtra": {
     "refuseTranslate": {
-      "en": "That part is your job, and I know you can do it! I can give you a hint or a glossary word instead.",
-      "hi": "यह हिस्सा तो आपको ही लिखना है, और आप कर लेंगे! मैं आपको एक इशारा या शब्दावली का शब्द दे सकती हूँ।"
+      "en": "Translating the page is your job in this mission. I can offer a hint or the right glossary term instead.",
+      "hi": "इस मिशन में पेज का अनुवाद आपका काम है। इसके बजाय एक संकेत या सही शब्दावली शब्द यहाँ उपलब्ध है।"
     },
-    "sahayikaSays": "Sahayak says",
-    "chatLimit": "You've used all your questions for this mission. You can do the rest on your own!"
+    "sahayikaSays": "Briefing",
+    "chatLimit": "You've used every question for this mission. The rest is in your hands.",
+    "online": "Online"
   },
   "certificate": {
     "docTitle": "Samvaad Charades · Certificate",
@@ -450,10 +556,10 @@
   "varchaspati": {
     "kicker": "Level 5 · Phase 2 preview",
     "heading": "Varchaspati",
-    "tagline": "The PhD of translation: one complex ~300-page CAG report, start to finish.",
-    "teaser": "Still hungry for more?",
-    "teaserBody": "Finished every level? Varchaspati is the ultimate challenge: a full 300-page report with tables, charts, annexures and everything in between.",
-    "notYet": "Varchaspati opens in Phase 2. Keep sharpening your skills in the other levels!",
+    "tagline": "The doctorate of translation: one complex ~300-page CAG report, start to finish.",
+    "teaser": "Ready for the summit?",
+    "teaserBody": "Cleared every level? Varchaspati is the ultimate test: a full ~300-page report with tables, charts, annexures and everything in between.",
+    "notYet": "Varchaspati opens in Phase 2. Keep sharpening your edge in the other levels.",
     "frameworkHeading": "How Varchaspati will be judged (proposed)",
     "framework": [
       {
@@ -506,6 +612,120 @@
       "~300 pages, played across several saved sessions",
       "Everything from Primary, Secondary and Pro, plus long-range consistency",
       "BHASHINI draft for the whole report; you check and fix it"
+    ],
+    "corpusHeading": "Proposed corpus (~300 pages)",
+    "corpus": [
+      {
+        "title": "Union Government (Railways) — Railway Finances, year ended March 2023",
+        "pages": "≈ 140 pp. + annexures",
+        "note": "English in hand; matching Hindi edition awaited"
+      },
+      {
+        "title": "Report No. 38 of 2025 — Performance of Blast Furnaces in SAIL (complete)",
+        "pages": "90 pp.",
+        "note": "English and Hindi in hand"
+      },
+      {
+        "title": "One State report mapped to the player's office",
+        "pages": "≈ 70 pp.",
+        "note": "To be ingested from the console"
+      }
     ]
+  },
+  "nav": {
+    "main": "Main",
+    "levels": "Levels",
+    "leaderboard": "Leaderboard",
+    "profile": "My profile",
+    "certificate": "Score & certificate",
+    "signOut": "Sign out"
+  },
+  "leaderboard": {
+    "kicker": "Standings",
+    "heading": "Leaderboard",
+    "sub": "Ranked by credits, then by the sum of best scores.",
+    "scope": {
+      "all": "All India",
+      "state": "My state",
+      "office": "My office"
+    },
+    "yourStanding": "Your standing",
+    "rankOf": "Rank {rank} of {of}",
+    "leading": "You lead this board. Hold the line.",
+    "gap": "{n} credits to climb one place.",
+    "titles": "Titles",
+    "colPlayer": "Player",
+    "colTier": "Highest title",
+    "colLevels": "Levels played",
+    "colStars": "Stars",
+    "colCredits": "Credits",
+    "you": "You",
+    "recruit": "Recruit",
+    "rule": "Names show as first name and initial. Only your best score in each level counts."
+  },
+  "profile": {
+    "card": "Player card",
+    "rank": "Rank",
+    "titles": "Titles",
+    "toMax": "{n} credits left to bank",
+    "details": "Profile details",
+    "joined": "Joined",
+    "privacy": "Your details are visible only to you and the game managers.",
+    "levels": "Level records",
+    "openMap": "Open campaign map",
+    "best": "Personal best",
+    "chancesUsed": "{n}/3 chances used",
+    "achievements": "Achievements",
+    "history": "Attempt history",
+    "noHistory": "No attempts yet. Your first mission is waiting on the campaign map.",
+    "colLevel": "Level",
+    "colChance": "Chance",
+    "colDate": "Date",
+    "colTime": "Time",
+    "colScore": "Score",
+    "auto": "auto-submitted",
+    "inProgress": "In progress",
+    "ach": {
+      "enlisted": {
+        "title": "Enlisted",
+        "body": "Created your player card."
+      },
+      "firstClear": {
+        "title": "First clear",
+        "body": "Scored 33+ in any level."
+      },
+      "trialCleared": {
+        "title": "Trial cleared",
+        "body": "Passed the Trial warm-up."
+      },
+      "glossaryAce": {
+        "title": "Glossary ace",
+        "body": "Every page term right in one attempt."
+      },
+      "swift": {
+        "title": "Swift hand",
+        "body": "Won a title using half the time or less."
+      },
+      "cleanSheet": {
+        "title": "Clean sheet",
+        "body": "Finished an attempt without leaving the page."
+      },
+      "comeback": {
+        "title": "Comeback",
+        "body": "Beat your first score on a later chance."
+      },
+      "allRounder": {
+        "title": "All-rounder",
+        "body": "Played every level at least once."
+      },
+      "grandSlam": {
+        "title": "Grand slam",
+        "body": "Won all four titles."
+      },
+      "topTen": {
+        "title": "Top ten",
+        "body": "Reached the All-India top ten."
+      }
+    }
   }
 }

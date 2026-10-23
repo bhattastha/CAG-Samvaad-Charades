@@ -1,0 +1,113 @@
+{
+ "pdf_page": 54,
+ "printed_page": "30",
+ "hindi_pdf_pages": [
+  71,
+  72,
+  73
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table-10: Capital Repair of Blast Furnaces (continued)",
+     "hi_reference": "तालिका-10: ब्लास्ट फर्नेस की पूंजीगत मरम्मत",
+     "note": "No title is repeated on the continuation page in either edition; title carried for context."
+    },
+    "columns": [
+     {
+      "en": "Name of the Plant",
+      "hi_reference": "संयंत्र का नाम"
+     },
+     {
+      "en": "Reasons for delay",
+      "hi_reference": "विलम्ब के कारण"
+     },
+     {
+      "en": "Impact of delay",
+      "hi_reference": "विलम्ब का प्रभाव"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": ""
+      },
+      {
+       "en": "2019 and March 2021) contributed towards delay in capital repair.",
+       "hi_reference": "2019 और मार्च 2021 के बीच) के कारण पूंजीगत मरम्मत में देरी हुई।",
+       "continues_from_previous_page": true
+      },
+      {
+       "en": ""
+      }
+     ],
+     [
+      {
+       "en": "BF#1 Bokaro Steel Plant³⁷\nPlanned for October 2016 to January 2018\nActual repair October 2016 to January 2020\nAdditional time taken 24 months",
+       "hi_reference": "बोकारो स्टील प्लांट बीएफ#1³⁷\nअक्टूबर 2016 से जनवरी 2018 तक की योजना\nवास्तविक मरम्मत अक्टूबर 2016 से जनवरी 2020 तक\nअतिरिक्त समय 24 महीने"
+      },
+      {
+       "en": "The Management attributed reasons for delay on (i) extra time taken in finalisation of change order for repairing of Bustle pipe by six months and (ii) delay in commissioning (January 2020) of project even after completion of work in July 2019 due to sluggish market condition.",
+       "hi_reference": "प्रबंधन ने विलंब के लिए (i) बस्टल पाइप की मरम्मत के लिए परिवर्तन आदेश को अंतिम रूप देने में छः महीने का अतिरिक्त समय लगने एवं (ii) सुस्त बाजार की स्थिति के कारण जुलाई 2019 में काम पूरा होने के बाद भी परियोजना के चालू होने में विलंब (जनवरी 2020) को उत्तरदायी ठहराया।"
+      },
+      {
+       "en": "Potential loss of contribution of ₹197 crore (0.31 million tonne³⁸ of hot metal equivalent to 0.26 million tonne of Saleable Steel) at BF#1.",
+       "hi_reference": "बीएफ#1 पर ₹197 करोड़ (0.31 मिलियन टन³⁸ तप्त धातु जो 0.26 मिलियन टन बिक्री योग्य स्टील के बराबर है) के योगदान की संभावित हानि।"
+      }
+     ],
+     [
+      {
+       "en": "BF#4 Bhilai Steel Plant\nPlanned for 812 days – (2017-18 to 2021-22)\nActual repair 1311 days (7 January 2018 to 11 August 2021)\nAdditional time taken 499 days³⁹",
+       "hi_reference": "बीएफ#4 भिलाई इस्पात संयंत्र\n812 दिनों की योजना - (2017-18 से 2021-22 तक)\nवास्तविक मरम्मत 1311 दिन (7 जनवरी 2018 से 11 अगस्त 2021 तक)\nअतिरिक्त समय 499 दिन³⁹"
+      },
+      {
+       "en": "Audit noted that Bhilai Steel Plant was unable to synchronize and integrate up-gradation of three Stoves and capital repair of BF#4, which resulted in prolonged shutdown of blast furnace.",
+       "hi_reference": "लेखापरीक्षा में पाया गया कि भिलाई स्टील प्लांट तीन स्टोवों के उन्नयन एवं बीएफ#4 की पूंजीगत मरम्मत को समन्वित एवं एकीकृत करने में असमर्थ रहा, जिसके परिणामस्वरूप ब्लास्ट फर्नेस को लंबे समय तक बंद रखना पड़ा।"
+      },
+      {
+       "en": "Potential loss of contribution of ₹1,579.01 crore (1.396 million tonne of hot metal equivalent to 1.147 million tonne of Saleable Steel)",
+       "hi_reference": "₹1,579.01 करोड़ के योगदान की संभावित हानि (1.396 मिलियन टन तप्त धातु, 1.147 मिलियन टन विक्रेय इस्पात के समतुल्य)"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data from records furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए अभिलेखों से आंकड़े।"
+    },
+    "continues_from_previous_page": true
+   }
+  },
+  {
+   "type": "body",
+   "en": "Management/Ministry replied (November 2023/July 2024/February 2025 & April 2025) that the project of BF#1 of Rourkela Steel Plant was a complex brown field project executed for the first time with new technology and advanced features in the vicinity of existing operating furnaces and in respect of BF#4 stated that due to the complicated nature of technical and commercial details, the project took longer time. It also stated that the notional contribution loss of ₹882.73 crore calculated by Audit was purely theoretical as during 2017-18 Indian Steel industry was going through a challenging phase. It further stated that, BF#1 of Bokaro was ready for commissioning by August 2019 but due to sluggish steel market condition, it was blown in on 8 January 2020. Delay in capital repair of BF#4 at Bhilai was mainly due to delay in supply of refractory for stove and delay in project execution by the agency. During the exit",
+   "hi_reference": "प्रबंधन/मंत्रालय ने उत्तर दिया (नवंबर 2023/जुलाई 2024/ फरवरी 2025 एवं अप्रेल 2025) कि राउरकेला स्टील प्लांट की बीएफ#1 की परियोजना एक जटिल ब्राउन फील्ड परियोजना थी, जिसे पहली बार मौजूदा संचालित भट्ठियों के आसपास नई तकनीक एवं उन्नत सुविधाओं के साथ क्रियान्वित किया गया था एवं बीएफ#4 के संबंध में कहा गया कि तकनीकी एवं वाणिज्यिक विवरणों की जटिल प्रकृति के कारण, परियोजना में अधिक समय लगा। इसमें यह भी कहा गया कि लेखापरीक्षा द्वारा गणना की गई ₹882.73 करोड़ की अनुमानित अंशदान हानि पूरी तरह से सैद्धांतिक थी, क्योंकि 2017-18 के दौरान भारतीय इस्पात उद्योग एक चुनौतीपूर्ण दौर से गुजर रहा था। इसमें आगे कहा गया है कि, बोकारो का बीएफ#1 अगस्त 2019 तक चालू होने के लिए तैयार था, लेकिन सुस्त स्टील बाजार की स्थिति के कारण, इसे 8 जनवरी 2020 को चालू कर दिया गया। भिलाई में बीएफ#4 की पूंजीगत मरम्मत में विलंब मुख्य रूप से स्टोव के लिए रिफ्रैक्टरी की आपूर्ति में देरी एवं एजेंसी द्वारा परियोजना निष्पादन में विलंब के कारण हुआ।",
+   "continues_on_next_page": true
+  },
+  {
+   "type": "footnote",
+   "en": "37 Blast furnace was blown down since May 2012.",
+   "hi_reference": "37 मई 2012 से ब्लास्ट फर्नेस बंद पड़ा है।"
+  },
+  {
+   "type": "footnote",
+   "en": "38 Production loss of BF#1: of 0.31 million tonne (1.64 million tonne from BF#1 after adjustment of 1.33 million tonne from BF#4 during deferment period).",
+   "hi_reference": "38 बीएफ#1 का उत्पादन नुकसान: 0.31 मिलियन टन (स्थगन अवधि के दौरान बीएफ#4 से 1.33 मिलियन टन के समायोजन के बाद बीएफ#1 से 1.64 मिलियन टन)।"
+  },
+  {
+   "type": "footnote",
+   "en": "39 Plan for capital repair 812 days - 2017-18 (150 days), 2018-19 (183 days), 2019-20 (91 days), 2020-21 (365 days) and 2021-22 (23 days) and the days consumed in capital repair from 7 January 2018 to 11 August 2021 for 1311 days. Excess days taken against plan were 499 days (1,311 days minus 812 days plan).",
+   "hi_reference": "39 पूंजीगत मरम्मत के लिए योजना 812 दिन - 2017-18 (150 दिन), 2018-19 (183 दिन), 2019-20 (91 दिन), 2020-21 (365 दिन) और 2021-22 (23 दिन) और 7 जनवरी 2018 से 11 अगस्त 2021 तक पूंजीगत मरम्मत में लगे दिन 1311 दिन। योजना के विरुद्ध लिए गए अतिरिक्त दिन 499 दिन थे (1,311 दिन घटाकर 812 दिन की योजना)।"
+  },
+  {
+   "type": "page_number",
+   "en": "30"
+  }
+ ]
+}

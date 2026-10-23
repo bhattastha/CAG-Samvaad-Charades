@@ -1,0 +1,202 @@
+{
+ "pdf_page": 22,
+ "printed_page": "4",
+ "hindi_pdf_pages": [
+  27,
+  28
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "Injection¹⁰ are blown from the tuyeres¹¹ as shown in Figure 1. Apart from these solid raw materials, Blast furnace also requires oxygen for enrichment to increase thermal efficiency by burning of coke, water for cooling the refractory lining. Blast Furnace receives Iron ore from Raw Material Handling Plant, Sinter from Sinter Plant and Coke from Coke Ovens.",
+   "hi_reference": "इंजेक्शन¹⁰ उड़ाया जाता है जैसा कि चित्र 1 में दिखाया गया है। इन ठोस कच्चे माल के अलावा, ब्लास्ट फर्नेस को कोक के जलने से तापीय दक्षता बढ़ाने के लिए ऑक्सीजन की भी आवश्यकता होती है, तथा रिफ्रैक्टरी लाइनिंग को ठंडा करने के लिए जल की भी आवश्यकता होती है। ब्लास्ट फर्नेस को कच्चा माल हैंडलिंग प्लांट से लौह अयस्क, सिंटर प्लांट से सिंटर एवं कोक ओवन से कोक प्राप्त होता है।",
+   "note": "Continues the sentence from pdf 21. In Hindi 'from the tuyeres' (ट्यूयर्स से) falls in the earlier half of the sentence, given on page_21. Hindi prints इंजेक्शन¹¹; marker renumbered to English 10."
+  },
+  {
+   "type": "body",
+   "en": "Hot metal is sent to the Steel Melting Shop for production of Steel and sent to the Continuous Casting Shop where Crude Steel¹² is produced in the form of billet/bloom/slab and only a limited quantity of steel is sent to Ingot Casting Shop at Durgapur Steel Plant for making ingots. The billets/slabs formed are cut to proper lengths and are either sold as semi-finished products or converted at different rolling mills into finished products for sale. The steel at this phase is called saleable steel¹³. Therefore, the production performance of Blast Furnace has a very significant role in the entire steel making process.",
+   "hi_reference": "तप्त धातु को इस्पात उत्पादन के लिए स्टील मेल्टिंग शॉप में भेजा जाता है एवं फिर उसे कंटिनुअस कस्टिंग शॉप में भेजा जाता है, जहां बिलेट/ब्लूम/स्लैब के रूप में कच्चा इस्पात¹² तैयार किया जाता है एवं केवल सीमित मात्रा में इस्पात को इंगोट बनाने के लिए दुर्गापुर इस्पात संयंत्र में इंगोट कास्टिंग शॉप में भेजा जाता है। निर्मित बिलेट्स/स्लैबों को उचित लंबाई में काटा जाता है एवं या तो उन्हें अर्द्ध-तैयार उत्पादों के रूप में बेचा जाता है या विभिन्न रोलिंग मिलों में बिक्री के लिए तैयार उत्पादों में परिवर्तित किया जाता है। इस अवस्था में इस्पात को विक्रय योग्य इस्पात¹³ कहा जाता है। इसलिए, संपूर्ण इस्पात निर्माण प्रक्रिया में ब्लास्ट फर्नेस के उत्पादन प्रदर्शन की बहुत महत्वपूर्ण भूमिका है।",
+   "note": "Hindi page ends with a stray word ब्लूम्स after this paragraph; omitted."
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_22_1.png",
+    "title": {
+     "en": "Figure 2: Steelmaking Process",
+     "hi_reference": "चित्र 2: इस्पात निर्माण प्रक्रिया"
+    },
+    "labels": [
+     {
+      "en": "MARSHALLING YARD",
+      "hi_reference": "मार्शलिंग यार्ड"
+     },
+     {
+      "en": "INPUT",
+      "hi_reference": "इनपुट"
+     },
+     {
+      "en": "ORE",
+      "hi_reference": "अयस्क"
+     },
+     {
+      "en": "COAL",
+      "hi_reference": "कोयला"
+     },
+     {
+      "en": "Sintering Plant - I",
+      "hi_reference": "सिंटरिंग प्लांट-I"
+     },
+     {
+      "en": "Sintering Plant - II",
+      "hi_reference": "सिंटरिंग प्लांट-II"
+     },
+     {
+      "en": "Sintering Plant - III",
+      "hi_reference": "सिंटरिंग प्लांट-III"
+     },
+     {
+      "en": "SINTER",
+      "hi_reference": "सिंटर"
+     },
+     {
+      "en": "Raw Material Handling Plant",
+      "hi_reference": "कच्चा माल प्रबंधन संयंत्र"
+     },
+     {
+      "en": "IRON ORE LUMP",
+      "hi_reference": "लौह अयस्क लंप"
+     },
+     {
+      "en": "Coke Oven Battery",
+      "hi_reference": "कोक ओवेन बेट्री"
+     },
+     {
+      "en": "BLAST FURNACE",
+      "hi_reference": "ब्लास्ट फर्नेस"
+     },
+     {
+      "en": "COAL HANDLING PLANT",
+      "hi_reference": "कोयला हैंडलिंग संयंत्र"
+     },
+     {
+      "en": "POWER & STEAM SUPPLY TO ALL UNITS",
+      "hi_reference": "सभी इकाइयों को बिजली और भाप की आपूर्ति"
+     },
+     {
+      "en": "COKE CRUSHER",
+      "hi_reference": "कोक क्रशर"
+     },
+     {
+      "en": "OXYGEN PLANT",
+      "hi_reference": "ऑक्सीजन संयंत्र"
+     },
+     {
+      "en": "OXYGEN",
+      "hi_reference": "ऑक्सीजन"
+     },
+     {
+      "en": "Captive Power Plant",
+      "hi_reference": "कैप्टिव पावर प्लांट"
+     },
+     {
+      "en": "HOT AIR BLAST",
+      "hi_reference": "गर्म हवा का ब्लास्ट"
+     },
+     {
+      "en": "STOVES",
+      "hi_reference": "स्टोव"
+     },
+     {
+      "en": "HOT METAL",
+      "hi_reference": "तप्त धातु",
+      "uncertain": true
+     },
+     {
+      "en": "Steel Melting Shop-II",
+      "hi_reference": "स्टील मेल्टिंग शॉप-II"
+     },
+     {
+      "en": "Continuous Casting Machine",
+      "hi_reference": "कांटीनुअस कास्टिंग मशीन"
+     },
+     {
+      "en": "Steel Melting Shop-I",
+      "hi_reference": "स्टील मेल्टिंग शॉप-I"
+     },
+     {
+      "en": "DIFFERENT MILLS",
+      "hi_reference": "विभिन्न मिलें"
+     },
+     {
+      "en": "BLOOMS, BILLETS, SLABS, INGOTS",
+      "hi_reference": "ब्लूम्स, बिलेट्स, स्लैबस, इनगट्स"
+     },
+     {
+      "en": "Pig Casting Machine",
+      "hi_reference": "पिग कास्टिंग मशीन"
+     },
+     {
+      "en": "PIG MOULDS",
+      "hi_reference": "पिग मोल्डस"
+     },
+     {
+      "en": "Slag Granulation Plant",
+      "hi_reference": "स्लैग ग्रेनुलेसन प्लांट"
+     },
+     {
+      "en": "Granulated Slag",
+      "hi_reference": "ग्रेनुलेटेड स्लैग"
+     },
+     {
+      "en": "OUTPUT",
+      "hi_reference": "आउटपुट"
+     }
+    ],
+    "source": null
+   }
+  },
+  {
+   "type": "heading",
+   "en": "1.7 Status of Blast Furnace",
+   "hi_reference": "1.7 ब्लास्ट फर्नेस की स्थिति"
+  },
+  {
+   "type": "body",
+   "en": "SAIL had 28 blast furnaces with installed capacity of 23.07 million tonne per annum as on 31 March 2024. Twenty-seven blast furnaces were in five integrated steel plants and",
+   "hi_reference": "31 मार्च 2024 तक सेल के पास 28 ब्लास्ट फर्नेस थीं जिनकी स्थापित क्षमता 23.07 मिलियन टन प्रति वर्ष थी। पाँच एकीकृत इस्पात संयंत्रों में 27 ब्लास्ट फर्नेस थीं एवं",
+   "note": "Sentence continues on pdf 23."
+  },
+  {
+   "type": "footnote",
+   "en": "10 Coal Dust Injection is a process that involves blowing large volumes of fine coal dust into the Blast Furnace. It provides a supplemental carbon source to speed up the production of metallic iron, reducing the need for coke production. This helps in substantial reduction of coke consumption in the Blast Furnace.",
+   "hi_reference": "10 कोल डस्ट इंजेक्शन एक ऐसी प्रक्रिया है जिसमें बड़ी मात्रा में महीन कोयले की धूल को ब्लास्ट फर्नेस में डाला जाता है। यह धात्विक लौह के उत्पादन को तेज़ करने के लिए एक पूरक कार्बन स्रोत प्रदान करता है, जिससे कोक उत्पादन की आवश्यकता कम हो जाती है। इससे ब्लास्ट फर्नेस में कोक की खपत में काफ़ी कमी आती है।",
+   "note": "Hindi edition numbers this footnote 11 (pdf 27)"
+  },
+  {
+   "type": "footnote",
+   "en": "11 Tuyeres are nozzles located just above the hearth through which hot air blast and CDI (with Nitrogen as carrier) are blown into the Furnace.",
+   "hi_reference": "11 ट्यूयर्स, भट्ठी के ठीक ऊपर स्थित नोजल होते हैं, जिनके माध्यम से गर्म हवा का झोंका और सीडीआई (नाइट्रोजन वाहक के रूप में) भट्ठी में उड़ाया जाता है।",
+   "note": "Hindi edition numbers this footnote 9 (pdf 27)"
+  },
+  {
+   "type": "footnote",
+   "en": "12 Steel product from Steel Melting Shop upon solidification of liquid steel. It includes ingots, slab, blooms and billets.",
+   "hi_reference": "12 तरल स्टील के ठोसीकरण पर स्टील मेल्टिंग शॉप से प्राप्त स्टील उत्पाद। इसमें इंगोट, स्लैब, ब्लूम और बिलेट शामिल हैं।"
+  },
+  {
+   "type": "footnote",
+   "en": "13 Various steel products which are sold to the customers for further processing or for direct use/consumption.",
+   "hi_reference": "13 विभिन्न इस्पात उत्पाद जो ग्राहकों को आगे की प्रक्रिया या प्रत्यक्ष उपयोग/उपभोग के लिए बेचे जाते हैं।"
+  },
+  {
+   "type": "page_number",
+   "en": "4"
+  }
+ ]
+}

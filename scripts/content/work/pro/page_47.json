@@ -1,0 +1,137 @@
+{
+ "pdf_page": 47,
+ "printed_page": "23",
+ "hindi_pdf_pages": [
+  61,
+  62
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": null,
+    "unit": null,
+    "columns": [
+     {
+      "en": "Name of the Steel plant",
+      "hi_reference": "इस्पात संयंत्र का नाम"
+     },
+     {
+      "en": "Hot Metal Capacity before MEP (2006-07)",
+      "hi_reference": "एमईपी से पहले तप्त धातु की क्षमता (2006-07)"
+     },
+     {
+      "en": "Hot Metal capacity targeted after MEP (2009-10)",
+      "hi_reference": "एमईपी के बाद तप्त धातु की लक्षित क्षमता (2009-10)"
+     },
+     {
+      "en": "Hot Metal capacity as on 31 March 2024",
+      "hi_reference": "31 मार्च 2024 तक तप्त धातु क्षमता"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Rourkela",
+       "hi_reference": "राउरकेला"
+      },
+      {
+       "en": "2.00"
+      },
+      {
+       "en": "4.50"
+      },
+      {
+       "en": "4.65"
+      }
+     ],
+     [
+      {
+       "en": "Bhadravati",
+       "hi_reference": "भद्रावती"
+      },
+      {
+       "en": "0.22"
+      },
+      {
+       "en": "0.33"
+      },
+      {
+       "en": "0.22"
+      }
+     ],
+     [
+      {
+       "en": "Total",
+       "hi_reference": "कुल"
+      },
+      {
+       "en": "13.83"
+      },
+      {
+       "en": "23.46"
+      },
+      {
+       "en": "23.07"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा प्रस्तुत आंकड़ा"
+    },
+    "continued": "Continuation of Table-4 from the previous English page (pdf 46); header row repeated in the PDF."
+   }
+  },
+  {
+   "type": "body",
+   "en": "* Blast Furnace at VISP, Bhadravati has been closed since January 2017; Hot metal is not produced in Salem Steel Plant.",
+   "hi_reference": "* वीआईएसपी, भद्रावती में ब्लास्ट फर्नेस जनवरी 2017 से बंद कर दी गई है; सेलम स्टील प्लांट में तप्त धातु का उत्पादन नहीं किया जाता है।",
+   "note": "Table note printed under Table-4."
+  },
+  {
+   "type": "body",
+   "en": "Audit observed that production capacity in Bokaro, Burnpur and Bhadravati steel plants was not created as envisaged. IISCO steel plant created blast furnace capacity of 2.70 mtpa against the envisaged capacity of 2.91 mtpa as SAIL Management decided (417 Board Meeting held in April 2015) to phase out Blast Furnace #2 of capacity 0.21 mtpa due to economic consideration. Bokaro steel plant also could create blast furnace capacity of 5.25 mtpa against the envisaged capacity of 5.77 mtpa as Bokaro steel plant operates four blast furnaces at a time considering its downstream facilities and one blast furnace remained under capital repair. Bhilai, Durgapur and Rourkela steel plants achieved the envisaged capacity as per the Modernisation & Expansion Plan.",
+   "hi_reference": "लेखापरीक्षा में पाया गया कि बोकारो, बर्नपुर एवं भद्रावती स्टील प्लांट में उत्पादन क्षमता परिकल्पना के अनुसार नहीं निर्मित की गई थी। इस्को इस्पात संयंत्र ने 2.91 मिलियन टन प्रति वर्ष की परिकल्पित क्षमता के मुकाबले 2.70 मिलियन टन प्रति वर्ष की ब्लास्ट फर्नेस क्षमता का निर्माण किया क्योंकि सेल प्रबंधन ने किफायत बरतने के विचार से 0.21 मिलियन टन प्रति वर्ष की क्षमता के ब्लास्ट फर्नेस # 2 को चरणबद्ध तरीके से समाप्त करने का निर्णय लिया था (अप्रैल 2015 में बोर्ड की 417 बैठक)। बोकारो स्टील प्लांट 5.77 मिलियन टन प्रति वर्ष की परिकल्पित क्षमता के मुकाबले 5.25 मिलियन टन प्रति वर्ष की ब्लास्ट फर्नेस क्षमता का भी निर्माण कर सकता है क्योंकि बोकारो स्टील प्लांट अपनी डाउनस्ट्रीम सुविधाओं को देखते हुए एक समय में चार ब्लास्ट फर्नेस संचालित करता है एवं एक ब्लास्ट फर्नेस बड़े स्तर पर मरम्मत के अंतर्गत था। भिलाई, दुर्गापुर एवं राउरकेला स्टील प्लांट ने आधुनिकीकरण एवं विस्तार योजना के अनुसार परिकल्पित क्षमता हासिल की थी।"
+  },
+  {
+   "type": "heading",
+   "en": "4.3 Production performance of Blast Furnace",
+   "hi_reference": "4.3 ब्लास्ट फर्नेस का उत्पादन निष्पादन"
+  },
+  {
+   "type": "body",
+   "en": "The target for production of iron and steel (saleable steel) is stated in the Memorandum of Understanding (MoU) signed by SAIL with Ministry of Steel. Besides this, the production target of hot metal is also laid down in the Annual Business Perspective. During the Exit conference (February 2025) Management stated that the Annual Business Perspective targets were internal and intentionally ambitious, while formal production targets were established through MoU with Ministry.",
+   "hi_reference": "इस्पात मंत्रालय के साथ सेल द्वारा हस्ताक्षरित समझौता ज्ञापन (एमओयू) में लौह एवं इस्पात (बिक्री योग्य इस्पात) के उत्पादन का लक्ष्य बताया गया है। इसके अलावा, वार्षिक व्यावसायिक परिप्रेक्ष्य में तप्त धातु का उत्पादन लक्ष्य भी निर्धारित किया गया है। एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान प्रबंधन ने कहा कि वार्षिक व्यावसायिक परिप्रेक्ष्य लक्ष्य आंतरिक एवं साशय महत्वाकांक्षी थे, जबकि औपचारिक उत्पादन लक्ष्य, मंत्रालय के साथ समझौता ज्ञापन के माध्यम से निर्धारित किए गए थे।"
+  },
+  {
+   "type": "body",
+   "en": "Audit noted that while the MoU stipulates only the quantitative targets, the Annual Business Perspective also includes other operational and techno-economic parameters. Production of hot metal and achievement of major operational and techno-economic parameters is reviewed periodically by the SAIL Board considering Annual Business Perspective targets. In view of above, Annual Business Perspective serves as a yardstick to assess the performance and therefore, Audit has considered the production target as set in the Annual Business Perspective of SAIL as the benchmark to assess/judge the performance of the blast furnaces of the Company.",
+   "hi_reference": "लेखापरीक्षा ने पाया कि जबकि समझौता ज्ञापन केवल मात्रात्मक लक्ष्यों को निर्धारित करता है, वार्षिक व्यावसायिक परिप्रेक्ष्य में अन्य प्रचालन एवं तकनीकी-आर्थिक प्रचालन भी सम्मिलित हैं। वार्षिक व्यावसायिक परिप्रेक्ष्य लक्ष्यों पर विचार करते हुए सेल बोर्ड द्वारा समय-समय पर तप्त धातु के उत्पादन एवं प्रमुख प्रचालन एवं तकनीकी-आर्थिक मापदंडों की उपलब्धि की समीक्षा की जाती है। उपरोक्त के मद्देनजर, वार्षिक व्यावसायिक परिप्रेक्ष्य निष्पादन का आकलन करने के लिए एक मानक के रूप में कार्य करता है एवं इसलिए, लेखापरीक्षा ने सेल के वार्षिक व्यावसायिक परिप्रेक्ष्य में निर्धारित उत्पादन लक्ष्य को कंपनी की ब्लास्ट फर्नेस के निष्पादन का आकलन/जाँच करने के लिए मानक के रूप में माना है।"
+  },
+  {
+   "type": "heading",
+   "en": "Production of Hot Metal",
+   "hi_reference": "तप्त धातु का उत्पादन"
+  },
+  {
+   "type": "body",
+   "en": "Annual production of hot metal in SAIL was between 15.98 million tonne and 20.50 million tonne during 2017-24 which was less than production plan as per Annual Business Perspective. There was a shortfall in production of hot metal by 14.73 million tonne than the plan during the above period. Further, there was a shortfall of 4.81 million tonne of hot metal than the MoU quantity.",
+   "hi_reference": "सेल में तप्त धातु का वार्षिक उत्पादन 2017-24 के दौरान 15.98 मिलियन टन एवं 20.50 मिलियन टन के मध्य था जो वार्षिक व्यावसायिक परिप्रेक्ष्य के अनुसार उत्पादन योजना से कम था। उपरोक्त अवधि के दौरान योजना की तुलना में तप्त धातु के उत्पादन में 14.73 मिलियन टन की कमी थी। इसके अलावा, समझौता ज्ञापन की मात्रा की तुलना में 4.81 मिलियन टन तप्त धातु की कमी थी।"
+  },
+  {
+   "type": "body",
+   "en": "The production target and achievement of production of hot metal during 2017-2024 is given in table 5.",
+   "hi_reference": "2017-2024 के दौरान तप्त धातु के उत्पादन का उत्पादन लक्ष्य एवं उपलब्धि तालिका - 5 में दी गई है:"
+  },
+  {
+   "type": "page_number",
+   "en": "23"
+  }
+ ]
+}

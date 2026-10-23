@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef } from "react";
-import type { Answers, ChartLayout, ClientField, ClientPart, TableLayout } from "@hc/shared";
+import type { Answers, ChartLayout, ClientField, ClientPart, FigureLayout, TableLayout } from "@hc/shared";
+import { Icon } from "../components/Icon";
 import { t } from "../lib/strings";
 import { TranslationEditor, type EditorHandle, type WatchClick } from "../editor/TranslationEditor";
 import type { SourceTerm, WatchWord } from "./useAttempt";
@@ -32,15 +33,15 @@ export function GlossPopover({ s, onPick, onClose }: { s: PopoverState; onPick(v
   const below = s.rect.bottom + 230 < window.innerHeight;
   return (
     <div ref={ref} role="dialog" aria-label={t("round.suggestFor")} onMouseDown={(e) => e.preventDefault()}
-      className="fixed z-[85] w-[280px] rounded-card bg-white border border-blue-200 shadow-pop p-3 animate-pop"
+      className="fixed z-[85] w-[290px] rounded-card bg-white border border-slate-200 shadow-pop p-3 animate-pop"
       style={below ? { left, top: s.rect.bottom + 6 } : { left, bottom: window.innerHeight - s.rect.top + 6 }}>
-      <div className="text-xs font-bold text-royal uppercase tracking-wide">{s.mode === "replace" ? t("round.watchWord") : t("round.suggestFor")}</div>
+      <div className="kicker">{s.mode === "replace" ? t("round.watchWord") : t("round.suggestFor")}</div>
       <div className="mt-0.5 font-semibold text-navy">{s.title}</div>
       <div className="mt-2 flex flex-col gap-1.5">
         {s.options.map((o, i) => (
           <button key={o} onClick={() => onPick(o)} disabled={!s.target}
-            className={`text-left rounded-lg px-3 py-1.5 text-[17px] border flex items-center justify-between gap-2 disabled:opacity-50 ${i === 0 ? "bg-primary-soft border-orange-200 font-semibold" : "bg-white border-gray-200 hover:bg-gray-50"}`}>
-            <span>{o}</span><span className="text-xs font-bold text-primary-strong whitespace-nowrap">{s.mode === "replace" ? t("round.replaceWith") : "＋ " + t("glossary.insert")}</span>
+            className={`text-left rounded-md px-3 py-1.5 text-[17px] border flex items-center justify-between gap-2 disabled:opacity-50 ${i === 0 ? "bg-gold-soft border-gold-light font-semibold" : "bg-white border-slate-200 hover:bg-slate-50"}`}>
+            <span>{o}</span><span className="text-xs font-bold text-navy-600 whitespace-nowrap">{s.mode === "replace" ? t("round.replaceWith") : "+ " + t("glossary.insert")}</span>
           </button>
         ))}
       </div>
@@ -51,7 +52,7 @@ export function GlossPopover({ s, onPick, onClose }: { s: PopoverState; onPick(v
 
 // ---------------- English source ----------------
 
-function TermText({ text, terms, onTerm }: { text: string; terms?: SourceTerm[]; onTerm?(term: SourceTerm, rect: DOMRect): void }) {
+export function TermText({ text, terms, onTerm }: { text: string; terms?: SourceTerm[]; onTerm?(term: SourceTerm, rect: DOMRect): void }) {
   if (!terms?.length) return <>{text}</>;
   const out: React.ReactNode[] = [];
   let last = 0;
@@ -87,7 +88,7 @@ function SourceChart({ part, render }: { part: ClientPart; render(f: ClientField
   );
 }
 
-export const SERIES = ["#E8590C", "#2563EB", "#16A34A", "#F59E0B"];
+export const SERIES = ["#E85A1A", "#1D4E89", "#C49B3D", "#15803D"];
 
 /** Read-only bars and values; only words are translated (§7.6). */
 export function ChartSvg({ layout, labels }: { layout: ChartLayout; labels: string[] }) {
@@ -124,6 +125,7 @@ function SourceTable({ part, render }: { part: ClientPart; render(f: ClientField
   return (
     <div>
       {L.title && <div className="font-semibold text-[14px] mb-1.5">{render(f(L.title))}</div>}
+      {L.unit && <div className="text-right text-[12.5px] text-muted mb-1">{render(f(L.unit))}</div>}
       <div className="overflow-x-auto rounded-lg border border-gray-200">
         <table className="w-full text-[13px] border-collapse">
           <tbody>
@@ -138,6 +140,44 @@ function SourceTable({ part, render }: { part: ClientPart; render(f: ClientField
       {L.note && <div className="text-xs text-muted mt-1">{render(f(L.note))}</div>}
     </div>
   );
+}
+
+/** Figure (chart / diagram / photo) shown as an image; caption, labels and source are text. */
+export function FigureImage({ L }: { L: FigureLayout }) {
+  return (
+    <div className="rounded-md border border-slate-200 bg-white p-1.5 overflow-hidden">
+      <img src={`/figures/${L.image}`} alt="" draggable={false} className="w-full h-auto select-none pointer-events-none" style={L.width && L.height ? { aspectRatio: `${L.width} / ${L.height}` } : undefined} />
+    </div>
+  );
+}
+function SourceFigure({ part, render }: { part: ClientPart; render(f: ClientField | undefined): React.ReactNode }) {
+  const L = part.layout as FigureLayout;
+  const f = (k?: string) => part.fields.find((x) => x.key === k);
+  return (
+    <figure>
+      {L.title && <figcaption className="font-semibold text-[14px] mb-1.5">{render(f(L.title))}</figcaption>}
+      <FigureImage L={L} />
+      {L.labels.length > 0 && <div className="mt-1.5 flex flex-wrap gap-1.5">{L.labels.map((k) => <span key={k} className="rounded bg-slate-100 px-2 py-0.5 text-[12.5px]">{render(f(k))}</span>)}</div>}
+      {L.source && <div className="text-xs text-muted mt-1 italic">{render(f(L.source))}</div>}
+    </figure>
+  );
+}
+
+/** One part of the English page, rendered with its structure. */
+export function PartSource({ p, terms, onTerm }: { p: ClientPart; terms: Record<string, Record<string, SourceTerm[]>>; onTerm(partId: string, fieldKey: string, term: SourceTerm, rect: DOMRect): void }) {
+  const render = (f?: ClientField) => f ? <TermText text={f.en} terms={terms[p.id]?.[f.key]} onTerm={(tm, r) => onTerm(p.id, f.key, tm, r)} /> : null;
+  const f0 = p.fields[0];
+  switch (p.type) {
+    case "header": return <div className="text-[12.5px] italic text-muted">{render(f0)}</div>;
+    case "footer": return <div className="text-[12.5px] italic text-muted">{render(f0)}</div>;
+    case "heading": return <div className="font-bold text-[16px]">{render(f0)}</div>;
+    case "headnote": return <div className="rounded-md bg-slate-100 border border-slate-200 px-3 py-2 text-[14.5px]">{render(f0)}</div>;
+    case "footnote": return <div className="text-[12.5px] text-navy/80">{render(f0)}</div>;
+    case "table": return <SourceTable part={p} render={render} />;
+    case "chart": return <SourceChart part={p} render={(f) => render(f)} />;
+    case "figure": return <SourceFigure part={p} render={render} />;
+    default: return <p>{render(f0)}</p>;
+  }
 }
 
 export function SourcePanel({ parts, terms, focusedPart, sentenceIndex, onTerm, onPartClick }: {
@@ -188,6 +228,7 @@ export function SourcePanel({ parts, terms, focusedPart, sentenceIndex, onTerm, 
           case "footnote": return wrap("text-[12.5px] text-navy/80 border-t border-gray-200 pt-1.5", render(f0));
           case "table": return wrap("", <SourceTable part={p} render={render} />);
           case "chart": return wrap("", <SourceChart part={p} render={(f) => render(f)} />);
+          case "figure": return wrap("", <SourceFigure part={p} render={render} />);
           default: return wrap("", <p>{render(f0)}</p>);
         }
       })}
@@ -197,7 +238,7 @@ export function SourcePanel({ parts, terms, focusedPart, sentenceIndex, onTerm, 
 
 // ---------------- Hindi draft (main rounds) ----------------
 
-interface DraftProps {
+export interface DraftProps {
   parts: ClientPart[];
   answers: Answers;
   readOnly: boolean;
@@ -213,7 +254,7 @@ interface DraftProps {
   onXlit(i: number): void;
 }
 
-function FieldEditor({ p, f, d, compact = false, singleLine = false }: { p: ClientPart; f: ClientField; d: DraftProps; compact?: boolean; singleLine?: boolean }) {
+export function FieldEditor({ p, f, d, compact = false, singleLine = false }: { p: ClientPart; f: ClientField; d: DraftProps; compact?: boolean; singleLine?: boolean }) {
   if (f.numeric) return <span className="en tabular-nums">{f.en}</span>;
   return (
     <TranslationEditor
@@ -236,13 +277,78 @@ function FieldEditor({ p, f, d, compact = false, singleLine = false }: { p: Clie
   );
 }
 
-function TickButton({ done, disabled, onClick }: { done: boolean; disabled: boolean; onClick(): void }) {
+export function TickButton({ done, disabled, onClick }: { done: boolean; disabled: boolean; onClick(): void }) {
   return (
     <button type="button" onClick={onClick} disabled={disabled} aria-pressed={done}
-      className={`shrink-0 rounded-full px-3 py-1 text-[13px] font-bold border-2 transition ${done ? "bg-success text-white border-success animate-pop" : "bg-white text-success border-green-300 hover:bg-success-soft"}`}>
-      {done ? t("round.partDone") : t("round.tick")}
+      className={`shrink-0 inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[12.5px] font-bold border transition ${done ? "bg-success text-white border-success animate-pop" : "bg-white text-success border-success/40 hover:bg-success-soft"}`}>
+      <Icon name="check" size={14} stroke={2.4} />{done ? t("round.partDone") : t("round.tick")}
     </button>
   );
+}
+
+/** The editable Hindi of one part (draft pre-filled), keeping table grids and figure captions. */
+export function PartEditorBody({ p, d }: { p: ClientPart; d: DraftProps }) {
+  const f = (k?: string) => p.fields.find((x) => x.key === k);
+  if (p.type === "table") {
+    const L = p.layout as TableLayout;
+    return (
+      <div>
+        {L.title && f(L.title) && <div className="font-semibold mb-1.5"><FieldEditor p={p} f={f(L.title)!} d={d} compact singleLine /></div>}
+        {L.unit && f(L.unit) && <div className="mb-1 ml-auto max-w-xs text-[13px]"><FieldEditor p={p} f={f(L.unit)!} d={d} compact singleLine /></div>}
+        <div className="overflow-x-auto rounded-md border border-slate-200">
+          <table className="w-full text-[14px] border-collapse">
+            <tbody>
+              {L.rows.map((row, ri) => (
+                <tr key={ri} className={ri === 0 ? "bg-slate-50 font-semibold" : "border-t border-slate-100"}>
+                  {row.map((k, ci) => { const c = f(k); return <td key={ci} className={`px-2 py-1 align-top border-r border-slate-100 last:border-r-0 ${c?.numeric ? "text-right bg-slate-50/60 text-muted" : "min-w-[7rem]"}`}>{c ? <FieldEditor p={p} f={c} d={d} compact singleLine /> : null}</td>; })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {L.note && f(L.note) && <div className="text-[13px] mt-1"><FieldEditor p={p} f={f(L.note)!} d={d} compact /></div>}
+      </div>
+    );
+  }
+  if (p.type === "figure") {
+    const L = p.layout as FigureLayout;
+    return (
+      <div className="space-y-2">
+        {L.title && f(L.title) && <div className="font-semibold"><FieldEditor p={p} f={f(L.title)!} d={d} compact /></div>}
+        {L.labels.length > 0 && (
+          <div className="grid sm:grid-cols-2 gap-2">
+            {L.labels.map((k) => f(k) && (
+              <label key={k} className="flex items-center gap-2 text-[14px]">
+                <span className="en text-[12px] text-muted min-w-[5rem] max-w-[9rem] truncate" title={f(k)!.en}>{f(k)!.en}</span>
+                <span className="flex-1 rounded-md border border-slate-200 px-2"><FieldEditor p={p} f={f(k)!} d={d} compact singleLine /></span>
+              </label>
+            ))}
+          </div>
+        )}
+        {L.source && f(L.source) && <div className="text-[13px] italic"><FieldEditor p={p} f={f(L.source)!} d={d} compact /></div>}
+      </div>
+    );
+  }
+  if (p.type === "chart") {
+    const L = p.layout as ChartLayout;
+    return (
+      <div>
+        {L.title && f(L.title) && <div className="text-center font-semibold mb-1"><FieldEditor p={p} f={f(L.title)!} d={d} compact /></div>}
+        <ChartSvg layout={L} labels={L.xLabels.map((k) => f(k)?.en ?? "")} />
+        <div className="grid sm:grid-cols-2 gap-2 mt-2">
+          {[...L.series.map((s) => s.name), ...L.xLabels, L.yAxis].filter((k): k is string => !!k && !f(k)?.numeric).map((k, i) => (
+            <div key={k} className="flex items-center gap-2 text-[14px]">
+              {i < L.series.length && <span className="w-3 h-3 rounded-sm shrink-0" style={{ background: SERIES[i % SERIES.length] }} />}
+              <div className="flex-1 rounded-md border border-slate-200 px-2"><FieldEditor p={p} f={f(k)!} d={d} compact singleLine /></div>
+            </div>
+          ))}
+        </div>
+        {L.source && f(L.source) && <div className="text-[13px] mt-1.5 italic"><FieldEditor p={p} f={f(L.source)!} d={d} compact /></div>}
+      </div>
+    );
+  }
+  const cls = p.type === "heading" ? "font-bold" : p.type === "headnote" ? "rounded-md bg-slate-50 border border-slate-200 px-3 py-1.5" : p.type === "header" || p.type === "footer" || p.type === "footnote" ? "text-[15px]" : "";
+  return <div className={cls}>{p.fields[0] && <FieldEditor p={p} f={p.fields[0]} d={d} compact={["header", "footer", "footnote"].includes(p.type)} />}</div>;
 }
 
 export function DraftPanel(d: DraftProps) {

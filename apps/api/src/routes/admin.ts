@@ -11,6 +11,10 @@ import { ROOT } from "../env.js";
 import { loadGlossary, loadPage, savePage } from "../pages.js";
 import { segmentPdfPage } from "../ingest.js";
 import { parse } from "./util.js";
+import { activity, overview } from "../admin/analytics.js";
+import { listPlayers, playerDetail, resetAllPlayData, resetPlayer } from "../admin/players.js";
+
+export const RESET_ALL_PHRASE = "RESET ALL TEST DATA";
 
 const audit = (db: Db, actor: string, action: string, target: string, meta?: unknown) =>
   db.query("INSERT INTO audit_logs (actor, action, target, meta) VALUES ($1,$2,$3,$4)", [actor, action, target, meta ? JSON.stringify(meta) : null]);
@@ -88,7 +92,8 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     if (body?.page_id) ({ page, sector } = seedToPage(body as SeedPage));
     else page = parse(PageSchema, body) as PageData;
     if (await db.one("SELECT 1 FROM pages WHERE id=$1", [page.id])) return reply.code(409).send({ error: "exists" });
-    await savePage(db, page, { sector, source: body?.source ?? {}, status: "draft" });
+    const scope = typeof body?.scope === "string" && body.scope.trim() ? String(body.scope).trim().slice(0, 60) : undefined;
+    await savePage(db, page, { sector, source: body?.source ?? {}, status: "draft", scope });
     await audit(db, who, "page.create", page.id);
     return { id: page.id };
   });
@@ -368,6 +373,10 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
       titlePassMark: z.number().min(0).max(100).optional(),
       maxChancesPerRound: z.number().int().min(1).max(10).optional(),
       scoringWeights: z.object({ translation: z.number().min(0), completion: z.number().min(0), sentenceConstruction: z.number().min(0), glossary: z.number().min(0), time: z.number().min(0) }).optional(),
+      unlockRule: z.enum(["all-open", "trial-pass-unlocks-all"]).optional(),
+      scoring: z.object({ chrfFloor: z.number().min(0).max(1).optional(), chrfCeil: z.number().min(0).max(1).optional(), minWordsPerSentence: z.number().int().min(1).max(20).optional() })
+        .refine((x) => x.chrfFloor === undefined || x.chrfCeil === undefined || x.chrfFloor < x.chrfCeil, { message: "chrF floor must be below the ceiling" }).optional(),
+      avoidThreshold: z.number().min(0).max(1).optional(),
     }), req.body);
     const caps = await db.query("SELECT key, value FROM config_overrides WHERE key='creditCaps'");
     try { applySettings(baseConfig, [...caps, { key: "settings", value: body }]); } catch (e: any) { return reply.code(400).send({ error: "invalid", message: e.message }); }
@@ -377,8 +386,113 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     return { ok: true, effective: config() };
   });
 
+  app.get("/admin/config/history", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    return db.query("SELECT * FROM audit_logs WHERE action LIKE 'config.%' OR action LIKE 'danger.%' ORDER BY at DESC LIMIT 100");
+  });
+
   app.get("/admin/audit", async (req, reply) => {
     if (!viewer(req, reply)) return;
-    return db.query("SELECT * FROM audit_logs ORDER BY at DESC LIMIT 300");
+    const { q, action } = parse(z.object({ q: z.string().max(120).optional(), action: z.string().max(60).optional() }), req.query);
+    return db.query(
+      `SELECT * FROM audit_logs WHERE ($1::text IS NULL OR actor ILIKE $1 OR target ILIKE $1 OR action ILIKE $1) AND ($2::text IS NULL OR action LIKE $2)
+       ORDER BY at DESC LIMIT 500`, [q ? `%${q}%` : null, action ? `${action}%` : null]);
+  });
+
+  // ---------- analytics (console overview) ----------
+  app.get("/admin/analytics/overview", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    const { range } = parse(z.object({ range: z.enum(["7d", "30d", "all"]).default("30d") }), req.query);
+    return overview(db, range ?? "30d");
+  });
+  app.get("/admin/activity", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    const { limit } = parse(z.object({ limit: z.coerce.number().int().min(1).max(200).default(30) }), req.query);
+    return activity(db, limit ?? 30);
+  });
+
+  // ---------- players ----------
+  app.get("/admin/players", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    return listPlayers(db);
+  });
+  app.get("/admin/players/:id", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    const { id } = parse(z.object({ id: z.string().min(1).max(100) }), req.params);
+    const d = await playerDetail(db, id);
+    return d ?? reply.code(404).send({ error: "not_found" });
+  });
+  /** Guarded reset: the body must repeat the player's email. Deletes attempts, events and chat; optionally the player. */
+  app.post("/admin/players/:id/reset", async (req, reply) => {
+    const who = manager(req, reply);
+    if (!who) return;
+    const { id } = parse(z.object({ id: z.string().min(1).max(100) }), req.params);
+    const b = parse(z.object({ confirmEmail: z.string().email(), deletePlayer: z.boolean().default(false), reason: z.string().max(300).optional() }), req.body);
+    const p = await db.one<{ email: string }>("SELECT email FROM players WHERE id=$1", [id]);
+    if (!p) return reply.code(404).send({ error: "not_found" });
+    if (p.email.toLowerCase() !== b.confirmEmail.trim().toLowerCase()) return reply.code(400).send({ error: "confirm_mismatch" });
+    const r = await resetPlayer(db, id, !!b.deletePlayer);
+    await audit(db, who, b.deletePlayer ? "player.delete" : "player.reset", p.email, { ...r, reason: b.reason ?? null });
+    return { ok: true, ...r };
+  });
+  /** Danger zone: delete every player and all play data; content stays. Typed confirmation required. */
+  app.post("/admin/danger/reset-play-data", async (req, reply) => {
+    const who = manager(req, reply);
+    if (!who) return;
+    const b = parse(z.object({ confirm: z.string() }), req.body);
+    if (b.confirm !== RESET_ALL_PHRASE) return reply.code(400).send({ error: "confirm_mismatch", expected: RESET_ALL_PHRASE });
+    const counts = await resetAllPlayData(db);
+    await audit(db, who, "danger.reset_play_data", "all-players", counts);
+    return { ok: true, deleted: counts };
+  });
+
+  // ---------- content library (reports and the level bundles built from them) ----------
+  app.get("/admin/library", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    const rows = await db.query<any>(`SELECT p.id, p.round_key, p.label, p.printed_page_no, p.status, p.sample, p.version, p.scope, p.created_at,
+      COALESCE(NULLIF(p.source->>'report',''), NULLIF(p.source->>'file',''), 'Unassigned') AS report, p.source->>'file' AS file, p.source->>'hindi_file' AS hindi_file,
+      (SELECT count(DISTINCT COALESCE(x.page_no,0))::int FROM page_parts x WHERE x.page_id=p.id) AS report_pages,
+      (SELECT count(*)::int FROM page_parts x WHERE x.page_id=p.id AND x.editable) AS parts,
+      (SELECT count(*)::int FROM page_parts x WHERE x.page_id=p.id AND x.editable AND x.reference_verified) AS verified,
+      (SELECT count(*)::int FROM page_terms t WHERE t.page_id=p.id) AS terms,
+      (SELECT count(*)::int FROM planted_slips s WHERE s.page_id=p.id) AS slips,
+      (SELECT count(*)::int FROM attempts a WHERE a.page_id=p.id) AS times_used,
+      (SELECT round(avg(a.score)::numeric,1)::float FROM attempts a WHERE a.page_id=p.id AND a.score IS NOT NULL) AS avg_score
+      FROM pages p ORDER BY p.created_at`);
+    const order = config().rounds.map((r) => r.key);
+    type Rep = { report: string; scopes: string[]; files: string[]; bundles: any[] };
+    const reports = new Map<string, Rep>();
+    for (const r of rows) {
+      const e: Rep = reports.get(r.report) ?? { report: r.report, scopes: [], files: [], bundles: [] };
+      if (!e.scopes.includes(r.scope)) e.scopes.push(r.scope);
+      for (const f of [r.file, r.hindi_file]) if (f && !e.files.includes(f)) e.files.push(f);
+      e.bundles.push(r);
+      reports.set(r.report, e);
+    }
+    for (const e of reports.values()) e.bundles.sort((a, b) => order.indexOf(a.round_key) - order.indexOf(b.round_key) || a.id.localeCompare(b.id));
+    return [...reports.values()];
+  });
+  /** Light edit of a bundle's catalogue data (label, report name, scope) without resending the page. */
+  app.put("/admin/pages/:id/meta", async (req, reply) => {
+    const who = manager(req, reply);
+    if (!who) return;
+    const { id } = parse(z.object({ id: z.string() }), req.params);
+    const b = parse(z.object({ label: z.string().min(1).max(200).optional(), report: z.string().max(300).optional(), scope: z.string().min(1).max(60).optional() }), req.body);
+    const row = await db.one<{ source: any }>("SELECT source FROM pages WHERE id=$1", [id]);
+    if (!row) return reply.code(404).send({ error: "not_found" });
+    const source = b.report === undefined ? row.source : { ...(row.source ?? {}), report: b.report };
+    await db.query("UPDATE pages SET label=COALESCE($2,label), scope=COALESCE($3,scope), source=$4 WHERE id=$1", [id, b.label ?? null, b.scope ?? null, JSON.stringify(source)]);
+    await audit(db, who, "page.meta", id, b);
+    return { ok: true };
+  });
+  /** Map every bundle of one report to Union or a State (office mapping, §22 of DECISIONS). */
+  app.put("/admin/reports/scope", async (req, reply) => {
+    const who = manager(req, reply);
+    if (!who) return;
+    const b = parse(z.object({ report: z.string().min(1).max(300), scope: z.string().min(1).max(60) }), req.body);
+    const ids = await db.query<{ id: string }>(
+      `UPDATE pages SET scope=$2 WHERE COALESCE(NULLIF(source->>'report',''), NULLIF(source->>'file',''), 'Unassigned')=$1 RETURNING id`, [b.report, b.scope]);
+    await audit(db, who, "report.scope", b.report, { scope: b.scope, pages: ids.length });
+    return { ok: true, pages: ids.length };
   });
 }

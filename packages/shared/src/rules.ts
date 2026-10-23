@@ -51,6 +51,8 @@ export function summarise(config: GameConfig, attempts: AttemptLite[], registrat
     return t.length ? Math.max(...t.map((a) => a.score!)) : null;
   })();
   const trialPassed = trialBest !== null && trialBest >= qualify;
+  // "all-open" (demo/review builds): every playable level is open from the start; the Trial is still suggested first.
+  const allOpen = config.levels.unlockRule === "all-open";
   for (const r of config.rounds) {
     const mine = attempts.filter((a) => a.roundKey === r.key);
     const submitted = mine.filter((a) => a.status === "submitted" && a.score !== null);
@@ -68,7 +70,7 @@ export function summarise(config: GameConfig, attempts: AttemptLite[], registrat
       name: r.name,
       title: r.title,
       creditCap: r.creditCap,
-      unlocked: playable && (r.key === "trial" || trialPassed),
+      unlocked: playable && (allOpen || r.key === "trial" || trialPassed),
       chancesUsed: mine.length,
       chancesLeft: playable ? Math.max(0, max - mine.length) : 0,
       played: submitted.length,
@@ -84,7 +86,7 @@ export function summarise(config: GameConfig, attempts: AttemptLite[], registrat
   const p = 10 ** config.creditDecimals;
   const totalCredits = Math.min(config.maxCredits, Math.round((registrationCredits + rounds.reduce((s, r) => s + r.credits, 0)) * p) / p);
   // until the Trial is passed, the Trial is always the next step
-  const next = !trialPassed ? (rounds[0].chancesLeft > 0 ? rounds[0] : undefined) : rounds.find((r) => r.unlocked && r.played === 0 && r.chancesLeft > 0);
+  const next = !trialPassed && !(allOpen && rounds[0].played > 0) ? (rounds[0].chancesLeft > 0 ? rounds[0] : undefined) : rounds.find((r) => r.unlocked && r.played === 0 && r.chancesLeft > 0);
   return {
     rounds,
     registrationCredits,

@@ -97,8 +97,18 @@ export function seedToPage(s: SeedPage): { page: PageData; sector: string } {
       const L = p.layout ?? {};
       const { fields, rows } = tableFields(L);
       const title = field("title", L.title);
+      const unit = field("unit", L.unit);
       const note = field("note", L.note);
-      parts.push({ ...base, layout: { kind: "table", rows, title: title ? "title" : undefined, note: note ? "note" : undefined }, fields: [title, ...fields, note].filter(Boolean) as Field[] });
+      const continued = !!(L.continued || L.continued_on_next_page || L.continues);
+      parts.push({ ...base, layout: { kind: "table", rows, title: title ? "title" : undefined, unit: unit ? "unit" : undefined, note: note ? "note" : undefined, ...(continued ? { continued } : {}) }, fields: [title, unit, ...fields, note].filter(Boolean) as Field[] });
+    } else if (p.type === "figure") {
+      const L = p.layout ?? {};
+      const fields: Field[] = [];
+      const add = (k: string, t: SeedText | undefined) => { const f = field(k, t); if (f) fields.push(f); return f ? k : undefined; };
+      const title = add("title", L.title);
+      const labels = (L.labels ?? []).map((x: SeedText, i: number) => add(`l${i}`, x)).filter(Boolean) as string[];
+      const source = add("source", L.source ?? undefined);
+      parts.push({ ...base, layout: { kind: "figure", image: L.image, width: L.width, height: L.height, title, labels, source }, fields });
     } else if (p.type === "chart") {
       const L = p.layout ?? {};
       const fields: Field[] = [];

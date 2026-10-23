@@ -387,20 +387,20 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
       aria-label={t("round.xlitHint")}
       onMouseDown={(e) => e.preventDefault()}
       className={touch
-        ? "fixed inset-x-0 z-[90] bg-white border-t border-blue-200 shadow-pop px-2 py-1.5 flex gap-1.5 overflow-x-auto"
-        : "fixed z-[90] min-w-[190px] rounded-xl bg-white border border-blue-200 shadow-pop py-1 animate-pop"}
+        ? "fixed inset-x-0 z-[90] bg-white border-t-2 border-navy-600 shadow-pop px-2 py-1.5 flex gap-1.5 overflow-x-auto"
+        : "fixed z-[90] min-w-[190px] rounded-ui bg-white border border-slate-200 border-t-2 border-t-navy-600 shadow-pop py-1 overflow-hidden"}
       style={touch ? { bottom: `calc(${(window.innerHeight - (window.visualViewport?.height ?? window.innerHeight) - (window.visualViewport?.offsetTop ?? 0))}px)` } : { left: Math.min(coords?.left ?? 0, window.innerWidth - 220), top: coords?.top ?? 0 }}
     >
       {(list ?? []).map((s, i) => (
         <button key={s + i} role="option" aria-selected={hi === i} onClick={() => pick(i)}
-          className={touch ? `shrink-0 rounded-lg px-3 py-2 text-[18px] ${hi === i ? "bg-royal-bright text-white" : "bg-royal-soft text-navy"}` : `w-full text-left px-3 py-1.5 text-[18px] flex gap-3 items-center ${hi === i ? "bg-royal-soft" : "hover:bg-gray-50"}`}>
-          {!touch && <span className="en text-xs text-muted w-3">{i + 1}</span>}{s}
+          className={touch ? `shrink-0 rounded-md px-3 py-2 text-[18px] border ${hi === i ? "bg-navy text-white border-navy" : "bg-navy-50 text-navy border-slate-200"}` : `w-full text-left px-3 py-1.5 text-[18px] flex gap-3 items-center text-ink ${hi === i ? "bg-navy-50 shadow-[inset_3px_0_0_#E85A1A]" : "hover:bg-slate-50"}`}>
+          {!touch && <span className="en text-[11px] font-bold text-muted w-4 h-4 rounded border border-slate-200 grid place-items-center tnum">{i + 1}</span>}{s}
         </button>
       ))}
       {list === null && <div className={touch ? "px-3 py-2 text-muted" : "px-3 py-1.5 text-muted text-sm"}>…</div>}
       <button role="option" aria-selected={hi === (list?.length ?? 0)} onClick={() => pick(list?.length ?? 0)}
-        className={touch ? "shrink-0 rounded-lg px-3 py-2 en text-[16px] bg-gray-100" : `w-full text-left px-3 py-1.5 en text-[15px] flex gap-3 items-center border-t border-gray-100 ${hi === (list?.length ?? 0) ? "bg-royal-soft" : "hover:bg-gray-50"}`}>
-        {!touch && <span className="text-xs text-muted w-3">5</span>}{word!.text} <span className="text-xs text-muted">· {t("round.keepAsTyped")}</span>
+        className={touch ? "shrink-0 rounded-md px-3 py-2 en text-[16px] bg-slate-100 border border-slate-200 text-navy" : `w-full text-left px-3 py-1.5 en text-[15px] flex gap-3 items-center text-ink border-t border-slate-100 ${hi === (list?.length ?? 0) ? "bg-navy-50 shadow-[inset_3px_0_0_#E85A1A]" : "hover:bg-slate-50"}`}>
+        {!touch && <span className="text-[11px] font-bold text-muted w-4 h-4 rounded border border-slate-200 grid place-items-center tnum">5</span>}{word!.text} <span className="text-xs text-muted">· {t("round.keepAsTyped")}</span>
       </button>
     </div>
   );
@@ -408,7 +408,7 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
   return (
     <div className={`hc-editor ${p.compact ? "compact" : ""} relative`}>
       <EditorContent editor={editor} />
-      {!p.value && p.placeholder && <div className="pointer-events-none absolute top-0 left-0 text-gray-400 text-[17px]">{p.placeholder}</div>}
+      {!p.value && p.placeholder && <div className="pointer-events-none absolute top-0 left-0 text-slate-400 text-[17px]">{p.placeholder}</div>}
       {interim && <div className="hc-interim mt-1 text-[17px]">{interim}…</div>}
       {popup && createPortal(popup, document.body)}
     </div>

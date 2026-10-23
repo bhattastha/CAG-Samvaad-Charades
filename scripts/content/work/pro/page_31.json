@@ -1,0 +1,103 @@
+{
+ "pdf_page": 31,
+ "printed_page": "9",
+ "hindi_pdf_pages": [
+  39,
+  40
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "heading",
+   "en": "CHAPTER III Assessment, Availability and Consumption of Raw Materials, Fuel & Services",
+   "hi_reference": "अध्याय III कच्चे माल एवं ईंधन तथा सेवाएं का आकलन, उपलब्धता एवं खपत"
+  },
+  {
+   "type": "body",
+   "en": "3.1 Raw Materials (Iron ore, Sinter, Limestone, Dolomite & Pellets), Fuel (Coke & Coal Dust Injection coal) and Services (power and refractories) are required for steel making. A significant quantity of raw materials which constitute around 48 per cent of expenditure of the company are consumed in the blast furnace. Audit was conducted with an objective to assess whether requirement of raw materials was assessed adequately, raw materials were available in desired quantity and used as per desired proportion and whether Coke rate, Coal Dust Injection rate, other operating indices and consumption of services were within the norms.",
+   "hi_reference": "3.1 इस्पात निर्माण के लिए कच्चे माल (लौह अयस्क, सिंटर, चूना पत्थर, डोलोमाइट एवं पेलेट्स), ईंधन (कोक एवं कोल डस्ट इंजेक्शन कोयला) एवं सेवाओं (बिजली एवं रिफ्रैक्टरी) की आवश्यकता होती है। कच्चे माल की एक बड़ी मात्रा, जो कंपनी के व्यय का लगभग 48 प्रतिशत है, ब्लास्ट फर्नेस में खपत होती है। लेखापरीक्षा का उद्देश्य यह निर्धारित करना था कि क्या कच्चे माल की आवश्यकता का पर्याप्त आकलन किया गया था, क्या कच्चा माल वांछित मात्रा में उपलब्ध था एवं उसका उपयोग वांछित अनुपात के अनुसार किया गया था तथा क्या कोक दर, कोल डस्ट इंजेक्शन दर, अन्य परिचालन सूचकांक एवं सेवाओं की खपत मानदंडों के अनुरूप थी।"
+  },
+  {
+   "type": "heading",
+   "en": "3.2 Planning and Availability of Raw Material",
+   "hi_reference": "3.2 कच्चे माल की योजना एवं उपलब्धता"
+  },
+  {
+   "type": "body",
+   "en": "Annual requirement of raw materials and norms for consumption of coke are decided in the Annual Business Perspective for respective years. The required quantity of raw materials are arranged/made available either from captive mines, in house production or purchase. Shortage/non-availability of adequate quantity of raw material affects continuous operation of blast furnace which ultimately affects the production of targeted quantity of hot metal adversely.",
+   "hi_reference": "कच्चे माल की वार्षिक आवश्यकता एवं कोक की खपत के मानदंड संबंधित वर्षों के वार्षिक व्यावसायिक परिप्रेक्ष्य में तय किए जाते हैं। कच्चे माल की आवश्यक मात्रा निजी खदानों, आंतरिक उत्पादन या खरीद से व्यवस्थित/उपलब्ध कराई जाती है। कच्चे माल की पर्याप्त मात्रा की कमी या अनुपलब्धता ब्लास्ट फर्नेस के निरंतर परिचालन को प्रभावित करती है, जिससे अंततः लक्षित मात्रा में तप्त धातु के उत्पादन पर प्रतिकूल प्रभाव पड़ता है।"
+  },
+  {
+   "type": "body",
+   "en": "The percentage of availability of iron ore lump, sinter, coke, and Coal Dust Injection (CDI) coal at plants with respect to the plan during the period 2017-24 is depicted in the chart below.",
+   "hi_reference": "वर्ष 2017-24 की अवधि के दौरान योजना के अनुसार संयंत्रों में लौह अयस्क लम्प, सिंटर, कोक एवं कोल डस्ट इंजेक्शन (सीडीआई) कोयले की उपलब्धता का प्रतिशत चार्ट - 2 में दर्शाया गया है।"
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_31_1.png",
+    "title": {
+     "en": "Chart-2: Percentage of Availability of Raw Material at Steel Plants during 2017-24",
+     "hi_reference": "चार्ट-2: 2017-24 के दौरान इस्पात संयंत्रों में कच्चे माल की उपलब्धता का प्रतिशत"
+    },
+    "labels": [
+     {
+      "en": "Bokaro Steel Plant",
+      "hi_reference": "बोकारो"
+     },
+     {
+      "en": "Bhilai Steel Plant",
+      "hi_reference": "भिलाई"
+     },
+     {
+      "en": "Durgapur Steel Plant",
+      "hi_reference": "दुर्गापुर"
+     },
+     {
+      "en": "IISCO Steel Plant",
+      "hi_reference": "बर्नपुर",
+      "note": "Hindi chart labels this group बर्नपुर (IISCO Steel Plant is at Burnpur)"
+     },
+     {
+      "en": "Rourkela Steel Plant",
+      "hi_reference": "राउरकेला"
+     },
+     {
+      "en": "Iron Ore Lump",
+      "hi_reference": "लौह अयस्क लम्प"
+     },
+     {
+      "en": "Sinter",
+      "hi_reference": "सिंटर"
+     },
+     {
+      "en": "Coke",
+      "hi_reference": "कोक"
+     },
+     {
+      "en": "CDI Coal",
+      "hi_reference": "सीडीआई कोयला"
+     }
+    ],
+    "source": {
+     "en": "Source: Data furnished by the Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "It was seen that all the five integrated Steel Plants had planned their annual requirement of major raw material adequately except for Coal Dust Injection. The availability of iron ore lump ranged between 83 per cent to 115 per cent while that of sinter ranged between 84 per cent to 102 per cent of the planned quantity. The coke availability",
+   "hi_reference": "यह देखा गया कि सभी पांच एकीकृत इस्पात संयंत्रों ने कोल डस्ट इंजेक्शन को छोड़कर प्रमुख कच्चे माल की अपनी वार्षिक आवश्यकता की पर्याप्त रूप से योजना बना ली थी। लौह अयस्क की उपलब्धता नियोजित मात्रा के 83 प्रतिशत से 115 प्रतिशत के मध्य थी, जबकि सिंटर की उपलब्धता नियोजित मात्रा के 84 प्रतिशत से 102 प्रतिशत के मध्य थी। कोक की उपलब्धता",
+   "note": "Sentence continues on pdf 32."
+  },
+  {
+   "type": "page_number",
+   "en": "9"
+  }
+ ]
+}

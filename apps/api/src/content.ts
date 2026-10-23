@@ -40,6 +40,9 @@ export interface SettingsOverride {
   titlePassMark?: number;
   scoringWeights?: GameConfig["scoringWeights"];
   maxChancesPerRound?: number;
+  unlockRule?: GameConfig["levels"]["unlockRule"];
+  scoring?: Partial<Pick<GameConfig["scoring"], "chrfFloor" | "chrfCeil" | "minWordsPerSentence">>;
+  avoidThreshold?: number;
 }
 export function applySettings(base: GameConfig, rows: { key: string; value: any }[]): GameConfig {
   const caps = rows.find((r) => r.key === "creditCaps")?.value as Record<string, number> | undefined;
@@ -51,6 +54,9 @@ export function applySettings(base: GameConfig, rows: { key: string; value: any 
   if (typeof st?.titlePassMark === "number") next.titlePassMark = st.titlePassMark;
   if (typeof st?.maxChancesPerRound === "number") next.maxChancesPerRound = st.maxChancesPerRound;
   if (st?.scoringWeights) next.scoringWeights = st.scoringWeights;
+  if (st?.unlockRule) next.levels.unlockRule = st.unlockRule;
+  if (st?.scoring) next.scoring = { ...next.scoring, ...st.scoring };
+  if (typeof st?.avoidThreshold === "number") next.glossary.transliterationAvoidThreshold = st.avoidThreshold;
   return parseGameConfig(next); // invariants (50 credits, weights = 100) still hold
 }
 

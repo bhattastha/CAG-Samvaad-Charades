@@ -1,0 +1,429 @@
+{
+ "pdf_page": 32,
+ "printed_page": "10",
+ "hindi_pdf_pages": [
+  40,
+  41,
+  42
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "ranged between 90 per cent to 132 per cent whereas CDI coal ranged from 54 per cent to 83 per cent.",
+   "hi_reference": "90 प्रतिशत से 132 प्रतिशत के मध्य थी, जबकि सीडीआई कोयले की उपलब्धता 54 प्रतिशत से 83 प्रतिशत के मध्य थी।",
+   "note": "Continues the sentence from pdf 31."
+  },
+  {
+   "type": "body",
+   "en": "Audit noted cases of excess consumption of iron ore, sinter, coke, power and refractories as well as cases of inconsistent use of pellets which impacted the cost of production of hot metal adversely. These issues have been discussed in the succeeding paragraphs.",
+   "hi_reference": "लेखापरीक्षा में लौह अयस्क, सिंटर, कोक, विद्युत एवं रिफ्रैक्टरी की अत्यधिक खपत के साथ-साथ पेलेट्स के असंगत उपयोग के मामले पाए गए, जिससे तप्त धातु के उत्पादन लागत पर प्रतिकूल प्रभाव पड़ा। इन मुद्दों पर आगामी पैराग्राफों में चर्चा की गई है।"
+  },
+  {
+   "type": "heading",
+   "en": "3.3 Consumption of Iron Ore",
+   "hi_reference": "3.3 लौह अयस्क की खपत"
+  },
+  {
+   "type": "body",
+   "en": "Iron ore is the basic raw material in production of hot metal. SAIL sources iron ore from its captive mines. Audit noted that consumption of Iron ore lump in blast furnaces of SAIL was intermittently more or less than the Annual Business Perspective norm in all the steel plants during 2017-24 as shown in the table below.",
+   "hi_reference": "लौह अयस्क, तप्त धातु के उत्पादन में आधारभूत कच्चा माल है। सेल अपनी निजी खदानों से लौह अयस्क प्राप्त करता है। लेखापरीक्षा में पाया गया कि सेल के ब्लास्ट फर्नेस में लौह अयस्क लम्प की खपत 2017-24 के दौरान सभी इस्पात संयंत्रों में वार्षिक व्यावसायिक परिप्रेक्ष्य मानदंड से अधिक या कम थी, जैसा कि तालिका - 3 में दर्शाया गया है।"
+  },
+  {
+   "type": "table",
+   "layout": {
+    "title": {
+     "en": "Table 3: Norm and consumption of iron ore lump in blast furnaces of SAIL during 2017-24",
+     "hi_reference": "तालिका 3: 2017-24 के दौरान सेल की ब्लास्ट फर्नेस में लौह अयस्क लम्प की खपत का मानदंड एवं खपत"
+    },
+    "unit": {
+     "en": "(unit: kg/tonne of hot metal)",
+     "hi_reference": "(इकाई: किलोग्राम/टन तप्त धातु)"
+    },
+    "column_groups": [
+     {
+      "en": "2017-18",
+      "columns": [
+       1,
+       2
+      ]
+     },
+     {
+      "en": "2018-19",
+      "columns": [
+       3,
+       4
+      ]
+     },
+     {
+      "en": "2019-20",
+      "columns": [
+       5,
+       6
+      ]
+     },
+     {
+      "en": "2020-21",
+      "columns": [
+       7,
+       8
+      ]
+     },
+     {
+      "en": "2021-22",
+      "columns": [
+       9,
+       10
+      ]
+     },
+     {
+      "en": "2022-23",
+      "columns": [
+       11,
+       12
+      ]
+     },
+     {
+      "en": "2023-24",
+      "columns": [
+       13,
+       14
+      ]
+     }
+    ],
+    "columns": [
+     {
+      "en": "Year / Steel Plants",
+      "hi_reference": "वर्ष / इस्पात संयंत्र"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     },
+     {
+      "en": "Norm",
+      "hi_reference": "मानदंड"
+     },
+     {
+      "en": "Actual",
+      "hi_reference": "वास्तविक"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Bokaro Steel Plant",
+       "hi_reference": "बोकारो इस्पात संयंत्र"
+      },
+      {
+       "en": "580"
+      },
+      {
+       "en": "516"
+      },
+      {
+       "en": "577"
+      },
+      {
+       "en": "537"
+      },
+      {
+       "en": "603"
+      },
+      {
+       "en": "553"
+      },
+      {
+       "en": "612"
+      },
+      {
+       "en": "574"
+      },
+      {
+       "en": "551"
+      },
+      {
+       "en": "592"
+      },
+      {
+       "en": "580"
+      },
+      {
+       "en": "560"
+      },
+      {
+       "en": "579"
+      },
+      {
+       "en": "619"
+      }
+     ],
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई इस्पात संयंत्र"
+      },
+      {
+       "en": "553"
+      },
+      {
+       "en": "530"
+      },
+      {
+       "en": "503"
+      },
+      {
+       "en": "539"
+      },
+      {
+       "en": "509"
+      },
+      {
+       "en": "556"
+      },
+      {
+       "en": "559"
+      },
+      {
+       "en": "588"
+      },
+      {
+       "en": "630"
+      },
+      {
+       "en": "608"
+      },
+      {
+       "en": "655"
+      },
+      {
+       "en": "571"
+      },
+      {
+       "en": "531"
+      },
+      {
+       "en": "497"
+      }
+     ],
+     [
+      {
+       "en": "Durgapur Steel Plant",
+       "hi_reference": "दुर्गापुर इस्पात संयंत्र"
+      },
+      {
+       "en": "460"
+      },
+      {
+       "en": "509"
+      },
+      {
+       "en": "557"
+      },
+      {
+       "en": "518"
+      },
+      {
+       "en": "550"
+      },
+      {
+       "en": "504"
+      },
+      {
+       "en": "480"
+      },
+      {
+       "en": "512"
+      },
+      {
+       "en": "508"
+      },
+      {
+       "en": "551"
+      },
+      {
+       "en": "530"
+      },
+      {
+       "en": "516"
+      },
+      {
+       "en": "515"
+      },
+      {
+       "en": "493"
+      }
+     ],
+     [
+      {
+       "en": "ISP, Burnpur",
+       "hi_reference": "आईएसपी, बर्नपुर"
+      },
+      {
+       "en": "325"
+      },
+      {
+       "en": "328"
+      },
+      {
+       "en": "325"
+      },
+      {
+       "en": "384"
+      },
+      {
+       "en": "406"
+      },
+      {
+       "en": "363"
+      },
+      {
+       "en": "373"
+      },
+      {
+       "en": "376"
+      },
+      {
+       "en": "366"
+      },
+      {
+       "en": "412"
+      },
+      {
+       "en": "369"
+      },
+      {
+       "en": "328"
+      },
+      {
+       "en": "170"
+      },
+      {
+       "en": "270"
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला इस्पात संयंत्र"
+      },
+      {
+       "en": "327"
+      },
+      {
+       "en": "442"
+      },
+      {
+       "en": "415"
+      },
+      {
+       "en": "434"
+      },
+      {
+       "en": "376"
+      },
+      {
+       "en": "464"
+      },
+      {
+       "en": "414"
+      },
+      {
+       "en": "415"
+      },
+      {
+       "en": "454"
+      },
+      {
+       "en": "478"
+      },
+      {
+       "en": "487"
+      },
+      {
+       "en": "437"
+      },
+      {
+       "en": "386"
+      },
+      {
+       "en": "415"
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by the Management",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "Consumption of iron ore lump was more than the Annual Business Perspective in Bokaro Steel plant in 2021-22 & 2023-24, Bhilai Steel Plant during 2018-21, Durgapur Steel Plant in 2017-18, 2020-21 and 2021-22, Rourkela Steel Plant in 2017-22 & 2023-24 and IISCO Steel Plant in 2017-19, 2020-22 and 2023-24. It was noticed that during 2022-23 consumption of iron ore lump was less than the norm in all the steel plants due to use of pellet in burden though not planned in Annual Business Perspective. In contrast, it was noticed that in 2023-24 although SAIL planned to use pellet in the burden, due to less use of pellet than the plan, excess consumption of iron ore lump was noted in Bokaro, Rourkela and IISCO Steel Plant. Overall there was excess consumption of 0.823 million tonne¹⁸ of Iron ore lump during 2017-22 which valued ₹186.26 crore.",
+   "hi_reference": "बोकारो इस्पात संयंत्र में 2021-22 एवं 2023-24 में, भिलाई इस्पात संयंत्र में 2018-21 के दौरान, दुर्गापुर इस्पात संयंत्र में 2017-18, 2020-21 एवं 2021-22 में, राउरकेला इस्पात संयंत्र में 2017-22 एवं 2023-24 में एवं इस्को इस्पात संयंत्र में 2017-19, 2020-22 एवं 2023-24 में लौह अयस्क लम्प की खपत वार्षिक व्यावसायिक परिप्रेक्ष्य से अधिक थी। यह पाया गया कि 2022-23 के दौरान सभी इस्पात संयंत्रों में लौह अयस्क लम्प की खपत मानक से कम थी, क्योंकि भार में पेलेट का उपयोग किया गया, जबकि वार्षिक व्यावसायिक परिप्रेक्ष्य में इसकी योजना नहीं बनाई गई थी। इसके विपरीत, यह देखा गया कि 2023-24 में, हालाँकि सेल ने भार में पेलेट का उपयोग करने की योजना बनाई थी, लेकिन योजना से कम पेलेट के उपयोग के कारण, बोकारो, राउरकेला एवं इस्को इस्पात संयंत्र में लौह अयस्क लम्प की अधिक खपत देखी गई। 2017-22 के दौरान कुल मिलाकर 0.823 मिलियन टन¹⁸ लौह अयस्क लम्प की अधिक खपत हुई, जिसका मूल्य ₹186.26 करोड़ था।"
+  },
+  {
+   "type": "body",
+   "en": "Audit observed that the consumption of iron ore lump more than the norm was mainly due to variation in the Fe content in iron ore. The norm for Fe content in iron ore lump ranged between 62.50 per cent to 64.00 per cent while the actual Fe content ranged between 60.80 per cent to 64.17 per cent during 2017-2024. SAIL had never achieved",
+   "hi_reference": "लेखापरीक्षा में पाया गया कि मानक से अधिक लौह अयस्क लम्प की खपत मुख्य रूप से लौह अयस्क लम्प की मात्रा में भिन्नता के कारण थी। 2017-2024 के दौरान लौह अयस्क लम्प में लौह की मात्रा का मानक 62.50 प्रतिशत से 64.00 प्रतिशत के मध्य था, जबकि वास्तविक लौह की मात्रा 60.80 प्रतिशत से 64.17 प्रतिशत के मध्य रही।",
+   "note": "Ends mid-sentence ('SAIL had never achieved'); the Hindi of that sentence is ordered differently and is given whole on page_33."
+  },
+  {
+   "type": "footnote",
+   "en": "18 Total excess consumption of 2.130 million tonne minus consumption of iron ore less than norm of 1.307 million tonne.",
+   "hi_reference": "18 कुल 2.130 मिलियन टन अतिरिक्त खपत में से 1.307 मिलियन टन के मानक से कम लौह अयस्क की खपत घटाई गई।"
+  },
+  {
+   "type": "page_number",
+   "en": "10"
+  }
+ ]
+}

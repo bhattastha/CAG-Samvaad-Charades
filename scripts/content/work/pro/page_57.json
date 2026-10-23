@@ -1,0 +1,94 @@
+{
+ "pdf_page": 57,
+ "printed_page": "33",
+ "hindi_pdf_pages": [
+  75,
+  76,
+  77
+ ],
+ "parts": [
+  {
+   "type": "header",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38"
+  },
+  {
+   "type": "body",
+   "en": "It was seen that poor off take of hot metal by steel melting shops and shortage of raw material caused maximum delays followed by technical issues. Audit noted that out of the 11,253 hours (16 per cent) of unplanned shutdown due to technical reasons, 491 hours (4 per cent) was on account of electrical, 3,264 hours (29 per cent) on account of mechanical, 7,251 hours (65 per cent) on account of operational failure and 247 hours (2 per cent) on account of instrumentation failures during 2017-24. Apart from above, delay under miscellaneous category was 47 per cent of total delay hours mainly due to low/off blast and reduced wind which resulted in operation of blast furnace at reduced capacity.",
+   "hi_reference": "यह देखा गया कि स्टील मेल्टिंग शॉप्स द्वारा तप्त धातु की धीमी उठान तथा कच्चे माल की कमी के कारण सबसे अधिक विलंब हुआ, जिसके बाद तकनीकी समस्याएं आईं। लेखापरीक्षा ने पाया कि तकनीकी कारणों से अनियोजित शटडाउन के 11,253 घंटों (16 प्रतिशत) में से 491 घंटे (4 प्रतिशत) विद्युत के कारण, 3,264 घंटे (29 प्रतिशत) यांत्रिक के कारण, 7,251 घंटे (65 प्रतिशत) परिचालन विफलता के कारण एवं 247 घंटे (2 प्रतिशत) उपकरण विफलता के कारण थे। उपरोक्त के अलावा, विविध श्रेणी के अंतर्गत देरी कुल विलंब घंटों का 47 प्रतिशत थी, जिसका मुख्य कारण कम/बंद विस्फोट एवं कम हवा थी, जिसके परिणामस्वरूप ब्लास्ट फर्नेस का संचालन कम क्षमता पर हुआ।"
+  },
+  {
+   "type": "body",
+   "en": "Plant-wise break-up of unplanned shutdown hours on account of various reasons in SAIL steel plants is given in the chart.",
+   "hi_reference": "सेल इस्पात संयंत्रों में विभिन्न कारणों से अनियोजित शटडाउन घंटों का संयंत्रवार ब्यौरा चार्ट में दिया गया है।"
+  },
+  {
+   "type": "figure",
+   "layout": {
+    "image": "fig_57_1.png",
+    "title": {
+     "en": "Chart 6: Percentage of Unplanned shutdown hours in Plants during 2017-2024",
+     "hi_reference": "चार्ट 6: 2017-2024 के दौरान संयंत्रों में अनियोजित शटडाउन घंटों का प्रतिशत"
+    },
+    "labels": [
+     {
+      "en": "Technical",
+      "hi_reference": "तकनीकि"
+     },
+     {
+      "en": "Raw Material Shortage",
+      "hi_reference": "कच्चे माल की कमी"
+     },
+     {
+      "en": "Poor Offtake",
+      "hi_reference": "खराब उठाव"
+     },
+     {
+      "en": "Miscellaneous",
+      "hi_reference": "विविध"
+     },
+     {
+      "en": "Bokaro Steel Plant",
+      "hi_reference": "बोकारो"
+     },
+     {
+      "en": "Bhilai Steel Plant",
+      "hi_reference": "भिलाई"
+     },
+     {
+      "en": "Durgapur Steel Plant",
+      "hi_reference": "दुर्गापुर"
+     },
+     {
+      "en": "Rourkela Steel Plant",
+      "hi_reference": "राउरकेला"
+     }
+    ],
+    "source": {
+     "en": "Source: Data furnished by Management",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े"
+    }
+   }
+  },
+  {
+   "type": "body",
+   "en": "Audit noted that more than 20 per cent of total delay hours was attributable to technical reasons in Durgapur Steel Plant, shortage of raw material in Bokaro (during 2017-22), Durgapur, Rourkela and IISCO Steel Plant and poor off take by Steel Melting Shop in Bokaro, Rourkela and Durgapur Steel Plant during 2017-24 (2020-24 for IISCO Steel Plant). Reasons either not identified or multiple categories of reasons attributed to shutdowns were kept under the miscellaneous category which was between 22 per cent and 58 per cent.",
+   "hi_reference": "लेखापरीक्षा में पाया गया कि कुल विलंब घंटों का 20 प्रतिशत से अधिक दुर्गापुर स्टील प्लांट में तकनीकी कारणों, बोकारो (2017-22 के दौरान), दुर्गापुर, राउरकेला एवं इस्को स्टील प्लांट में कच्चे माल की कमी एवं 2017-24 (इस्को स्टील प्लांट के लिए 2020-24) के दौरान बोकारो, राउरकेला एवं दुर्गापुर स्टील प्लांट में स्टील मेल्टिंग शॉप द्वारा खराब उठाव के कारण था। शटडाउन के लिए जिन कारणों की पहचान नहीं की गई थी या जिनको कई श्रेणियों में रखा गया था, उन्हें विविध श्रेणी में रखा गया, जो 22 प्रतिशत से 58 प्रतिशत के मध्य था।"
+  },
+  {
+   "type": "body",
+   "en": "Such unplanned shutdown of the Blast furnace which is over and above the scheduled planned shutdown leads to lesser availability of the blast furnace for hot metal production. Better availability of blast furnace could be achieved by preventing such occurrences through periodical repair & maintenance, ensuring availability of raw materials as per plan, addressing the logistical issues downstream etc.",
+   "hi_reference": "ब्लास्ट फर्नेस का ऐसा अनियोजित शटडाउन, जो निर्धारित नियोजित शटडाउन से अधिक होता है, तप्त धातु उत्पादन के लिए ब्लास्ट फर्नेस की उपलब्धता को कम कर देता है। समय-समय पर मरम्मत एवं रखरखाव के माध्यम से ऐसी घटनाओं को रोककर, योजना के अनुसार कच्चे माल की उपलब्धता सुनिश्चित करके, डाउनस्ट्रीम में रसद संबंधी मुद्दों का समाधान करके ब्लास्ट फर्नेस की बेहतर उपलब्धता प्राप्त की जा सकती है।"
+  },
+  {
+   "type": "body",
+   "en": "Management/ Ministry replied (November 2023/July 2024 & February 2025) that the reasons for unplanned shutdowns were being addressed through commissioning of downstream facilities, shortage of raw material was being addressed by maintaining coal stock at plants by augmenting rake availability, Inter Plant transfer of coke and",
+   "hi_reference": "प्रबंधन/मंत्रालय ने उत्तर दिया (नवंबर 2023/जुलाई 2024 एवं फरवरी 2025) कि अनियोजित शटडाउन के कारणों को डाउनस्ट्रीम सुविधाओं को चालू करके संबोधित किया जा रहा है, कच्चे माल की कमी को रेक उपलब्धता बढ़ाकर संयंत्रों में कोयला स्टॉक बनाए रखने, संयंत्रों से कोक एवं",
+   "continues_on_next_page": true
+  },
+  {
+   "type": "page_number",
+   "en": "33"
+  }
+ ]
+}

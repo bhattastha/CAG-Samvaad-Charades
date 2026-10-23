@@ -111,19 +111,22 @@ export async function seedAll(db: Db, log = console.log) {
   log(`offices: ${offices.length}`);
 
   const gl = readJson("seed/glossary.json") as any[];
+  // a sector-specific entry shares its English with the general one (Anuvaad: "sector widens, never narrows"),
+  // so its unique key carries the sector
+  const keyOf = (g: any) => enNorm(g.english_term) + (g.sector ? `#${String(g.sector).toLowerCase()}` : "");
   const have = await db.one<{ n: number }>("SELECT count(*)::int AS n FROM glossary_terms");
   if ((have?.n ?? 0) < gl.length) {
     // bulk insert in chunks via unnest (fast on both PGlite and Postgres)
     for (let i = 0; i < gl.length; i += 500) {
       const chunk = gl.slice(i, i + 500);
       await db.query(
-        `INSERT INTO glossary_terms (id, en, en_norm, hi, accepted_variants, avoid_forms, flags)
-         SELECT 'g-' || n, e, n, h, string_to_array(av, '\u001f'), string_to_array(ao, '\u001f'), string_to_array(f, '\u001f')
-         FROM unnest($1::text[], $2::text[], $3::text[], $4::text[], $5::text[], $6::text[]) AS t(e, n, h, av, ao, f)
+        `INSERT INTO glossary_terms (id, en, en_norm, hi, accepted_variants, avoid_forms, flags, sector)
+         SELECT 'g-' || n, e, n, h, string_to_array(av, '\u001f'), string_to_array(ao, '\u001f'), string_to_array(f, '\u001f'), NULLIF(sc, '')
+         FROM unnest($1::text[], $2::text[], $3::text[], $4::text[], $5::text[], $6::text[], $7::text[]) AS t(e, n, h, av, ao, f, sc)
          ON CONFLICT (en_norm) DO NOTHING`,
         [
-          chunk.map((g) => g.english_term), chunk.map((g) => enNorm(g.english_term)), chunk.map((g) => g.hindi_term),
-          chunk.map((g) => g.accepted_variants.join("\u001f")), chunk.map((g) => g.avoid_forms.join("\u001f")), chunk.map((g) => g.flags.join("\u001f")),
+          chunk.map((g) => g.english_term), chunk.map(keyOf), chunk.map((g) => g.hindi_term),
+          chunk.map((g) => g.accepted_variants.join("\u001f")), chunk.map((g) => g.avoid_forms.join("\u001f")), chunk.map((g) => g.flags.join("\u001f")), chunk.map((g) => g.sector ?? ""),
         ],
       );
     }
@@ -149,10 +152,11 @@ export async function seedAll(db: Db, log = console.log) {
   for (const f of readdirSync(dir).filter((x) => x.endsWith(".json"))) {
     const raw = JSON.parse(readFileSync(resolve(dir, f), "utf8")) as SeedPage & { reference_status?: string; source?: any };
     const { page, sector } = seedToPage(raw);
-    const exists = await db.one("SELECT 1 FROM pages WHERE id=$1", [page.id]);
-    if (exists) continue;
+    const exists = await db.one<{ sample: boolean }>("SELECT sample FROM pages WHERE id=$1", [page.id]);
+    // SEED_REFRESH_PAGES=1 reloads seed content (e.g. rebuilt bundles) over sample pages; manager-verified pages are never touched
+    if (exists && !(process.env.SEED_REFRESH_PAGES === "1" && exists.sample)) continue;
     // unverified seed pages are playable only as labelled sample content in development (§19)
-    await savePage(db, page, { sector, source: raw.source, status: "draft", sample: true });
+    await savePage(db, page, { sector, source: raw.source, status: "draft", sample: true, scope: raw.source?.scope });
     log(`page: ${page.id} (${page.roundKey}, ${page.parts.length} parts, ${page.terms.length} terms, ${page.slips.length} slips)`);
   }
 
