@@ -29,10 +29,11 @@ export function verificationId(email: string, total: number, issued: string) {
 export function certificateHtml(p: { name: string; office: string; email: string; summary: Summary; issuedOn: Date }) {
   const c = strings.certificate;
   const titles = p.summary.rounds.filter((r) => r.titleEarned); // only titles earned, in round order
-  const issued = p.issuedOn.toLocaleDateString("hi-IN", { day: "numeric", month: "long", year: "numeric" });
+  const en = config().ui.locale === "en";
+  const issued = p.issuedOn.toLocaleDateString(en ? "en-IN" : "hi-IN", { day: "numeric", month: "long", year: "numeric" });
   const vid = verificationId(p.email, p.summary.totalCredits, p.issuedOn.toISOString().slice(0, 10));
   const brand = (f: string) => dataUrl(resolve(ROOT, "assets/brand", f), "image/png");
-  return `<!doctype html><html lang="hi"><head><meta charset="utf-8"><title>${esc(c.docTitle)}</title><style>
+  return `<!doctype html><html lang="${en ? "en" : "hi"}"><head><meta charset="utf-8"><title>${esc(c.docTitle)}</title><style>
 ${fontFaces()}
 @page{size:A4 landscape;margin:0}
 *{box-sizing:border-box}
@@ -56,13 +57,13 @@ h1 .a{color:#22293B}h1 .b{color:#E8590C}
 .sign{border-top:1px solid #9CA3AF;padding-top:1mm;min-width:60mm}
 </style></head><body><div class="frame">
 <div class="top"><img src="${brand("cag-logo.png")}" alt=""><img src="${brand("bhashini-logo.png")}" alt=""></div>
-<h1><span class="a">हिंदी</span> <span class="b">शराड्स</span></h1>
+${en ? `<h1><span class="a">Hindi</span> <span class="b">Charades</span></h1><div style="font-size:16pt;color:#C2410C;font-weight:700">हिंदी शराड्स</div>` : `<h1><span class="a">हिंदी</span> <span class="b">शराड्स</span></h1>`}
 <div class="brand">CAG × BHASHINI · HINDI PAKHWADA</div>
 <div class="lead">${esc(c.certify)}</div>
 <div class="name">${esc(p.name)}</div>
 <div class="office">${esc(p.office)}</div>
 <div class="body">${esc(titles.length ? c.bodyTitles : c.bodyNoTitles)}</div>
-${titles.length ? `<div class="titles">${titles.map((t) => `<span class="pill">${esc(t.title)}</span>`).join("")}</div>` : ""}
+${titles.length ? `<div class="titles">${titles.map((t) => { const rc = config().rounds.find((r) => r.key === t.key); return `<span class="pill">${esc(en ? rc?.titleEn || t.title : t.title)}</span>`; }).join("")}</div>` : ""}
 <div class="credits">${esc(c.creditsLabel)} <b>${p.summary.totalCredits}</b> / ${config().maxCredits}</div>
 <div class="foot">
   <div style="text-align:left">${esc(c.date)}: ${esc(issued)}<br>${esc(c.verification)}: ${vid}</div>

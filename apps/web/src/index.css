@@ -56,3 +56,16 @@ body {
 .no-select { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .linked { box-shadow: 0 0 0 3px #93C5FD; border-radius: 8px; background: #F5F9FF; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* accessibility: high contrast and reduced motion (settings) */
+.hc-contrast body { background-image: none; background: #fff; }
+.hc-contrast .text-muted { color: #374151 !important; }
+.hc-contrast .card, .hc-contrast .chip-plain { border-color: #22293B !important; }
+.hc-contrast .hc-ambient { display: none; }
+.hc-contrast .sahayika-panel { background: #1E3A8A !important; }
+.hc-reduce-motion *, .hc-reduce-motion *::before, .hc-reduce-motion *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+.hc-reduce-motion .hc-ambient { display: none; }
+.btn { will-change: transform; }
+.btn:active { transform: scale(.94); }
+/* nothing may widen the page on phones (particles, floating text, drifting letters) */
+html, body { overflow-x: clip; }

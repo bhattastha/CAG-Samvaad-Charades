@@ -4,7 +4,7 @@ import { env } from "../env.js";
 /** All BHASHINI calls go through here. Keys never leave the server (§9). */
 export const PIPELINE = "https://dhruva-api.bhashini.gov.in/services/inference/pipeline";
 export const LLM = "https://dhruva-api.bhashini.gov.in/services/inference/llm";
-export const NMT_SERVICE = "ai4bharat/indictrans-v2-all-gpu--t4";
+const svc = () => config().bhashiniServices;
 
 type Task = "translation" | "transliteration" | "asr" | "tts" | "llm";
 
@@ -105,7 +105,7 @@ export async function translateBatch(items: { text: string; locked: string[] }[]
     await Promise.all(chunks.slice(c, c + 5).map(async (idx) => {
       const masked = idx.map((i) => mask(items[i].text, items[i].locked));
       const res = await callService<any>("translation", PIPELINE, {
-        pipelineTasks: [{ taskType: "translation", config: { language: { sourceLanguage: "en", targetLanguage: "hi" }, serviceId: NMT_SERVICE } }],
+        pipelineTasks: [{ taskType: "translation", config: { language: { sourceLanguage: "en", targetLanguage: "hi" }, serviceId: svc().translation } }],
         inputData: { input: masked.map((m) => ({ source: m.masked })) },
       });
       const outputs: { target: string }[] = res?.pipelineResponse?.[0]?.output ?? [];
@@ -118,9 +118,8 @@ export async function translateBatch(items: { text: string; locked: string[] }[]
 // ---------- TTS (Sahayika, English, female) ----------
 
 export async function tts(text: string): Promise<Buffer> {
-  if (!env.DHRUVA_TTS_SERVICE_ID) throw new ServiceUnavailable("tts", "TTS service ID not configured");
   const res = await callService<any>("tts", PIPELINE, {
-    pipelineTasks: [{ taskType: "tts", config: { language: { sourceLanguage: "en" }, serviceId: env.DHRUVA_TTS_SERVICE_ID, gender: "female", samplingRate: 22050 } }],
+    pipelineTasks: [{ taskType: "tts", config: { language: { sourceLanguage: "en" }, serviceId: env.DHRUVA_TTS_SERVICE_ID || svc().ttsEnglish, gender: svc().ttsGender, samplingRate: 22050 } }],
     inputData: { input: [{ source: text }] },
   });
   const b64: string | undefined = res?.pipelineResponse?.[0]?.audio?.[0]?.audioContent;
@@ -142,7 +141,7 @@ export async function llm(system: string, user: string): Promise<string> {
 
 export async function asrFile(wavBase64: string): Promise<string> {
   const res = await callService<any>("asr", PIPELINE, {
-    pipelineTasks: [{ taskType: "asr", config: { language: { sourceLanguage: "hi" }, samplingRate: 16000, postProcessors: ["punctuation"] } }],
+    pipelineTasks: [{ taskType: "asr", config: { language: { sourceLanguage: "hi" }, serviceId: svc().asrHindi, samplingRate: 16000, postProcessors: ["punctuation"] } }],
     inputData: { audio: [{ audioContent: wavBase64 }] },
   });
   return String(res?.pipelineResponse?.[0]?.output?.[0]?.source ?? "");

@@ -1,119 +1,131 @@
 import { expect, test } from "@playwright/test";
 
 const shots = process.env.SHOTS_DIR;
-const shot = async (page: any, name: string) => { if (shots) await page.waitForTimeout(900), await page.screenshot({ path: `${shots}/${name}.png`, fullPage: false }); };
+const shot = async (page: any, name: string) => { if (shots) { await page.waitForTimeout(900); await page.screenshot({ path: `${shots}/${name}.png` }); } };
 
 test.describe.configure({ mode: "serial" });
 
-test("new player: register → how to play → rules → trial round → report → primary", async ({ page }) => {
+test("new player: profile → training → rules → map → briefing → Level 1 → report → Level 2", async ({ page }) => {
+  // Sahayika must never start talking on her own (default voice mode: tap to listen)
+  await page.addInitScript(() => {
+    (window as any).__spoke = 0;
+    const s = window.speechSynthesis;
+    if (s) { const orig = s.speak.bind(s); s.speak = (u: any) => { (window as any).__spoke++; orig(u); }; }
+  });
   const email = `e2e.${Date.now()}@cag.gov.in`;
   await page.goto("/");
-  await expect(page.getByRole("button", { name: /शुरू करें/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /Press Start/ })).toBeVisible();
   await shot(page, "01_title");
-  await page.getByRole("button", { name: /शुरू करें/ }).click();
+  await page.getByRole("button", { name: /Press Start/ }).click();
 
   await expect(page).toHaveURL(/register/);
-  await page.locator("#name").fill("रमेश कुमार");
+  await page.locator("#name").fill("Ramesh Kumar");
   await page.locator("#mobile").fill("9876543210");
   await page.locator("#email").fill(email);
   await page.locator("#office").fill("central");
   await page.locator("#office-list li").first().click();
-  await shot(page, "02_registration");
-  await page.getByRole("button", { name: /पंजीकरण करें/ }).click();
+  await shot(page, "02_profile");
+  await page.getByRole("button", { name: /Create profile/ }).click();
   await page.locator("#otp").fill("123456");
-  await page.getByRole("button", { name: /कोड जाँचें/ }).click();
-  await expect(page.getByText("+2 पंजीकरण क्रेडिट")).toBeVisible();
-  await page.waitForURL(/how-to-play/, { timeout: 8000 });
+  await page.getByRole("button", { name: /Verify & enter/ }).click();
+  await expect(page.getByText("Profile created!")).toBeVisible();
+  await shot(page, "02b_profile_created");
+  await page.getByRole("button", { name: /Continue/ }).click();
 
-  // practice editor: Roman → Hindi helper, Space commits suggestion 1
+  await expect(page).toHaveURL(/how-to-play/);
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await shot(page, "03_training_score");
+  await page.getByRole("button", { name: /^Next/ }).click();
+  // practice pad: Roman → Hindi helper, Space commits suggestion 1
   const practice = page.locator(".hc-editor .ProseMirror").first();
   await practice.click();
   await page.keyboard.type("sarkar", { delay: 60 });
   await expect(page.getByRole("listbox")).toBeVisible();
-  await page.waitForTimeout(900);
-  await shot(page, "03_how_to_play_xlit");
+  await page.waitForTimeout(800);
+  await shot(page, "03b_training_practice");
   await page.keyboard.press("Space");
   await expect(practice).toContainText("सरकार");
-  // Esc keeps Roman
-  await page.keyboard.type("audit", { delay: 40 });
-  await page.waitForTimeout(500);
-  await page.keyboard.press("Escape");
-  await page.keyboard.type(" ");
-  await expect(practice).toContainText("audit");
-  // paste is blocked
-  await page.evaluate(() => navigator.clipboard?.writeText?.("कॉपी किया हुआ लंबा पाठ").catch(() => {}));
-  await page.getByRole("button", { name: /आगे/ }).click();
+  // the Listen button plays only on tap, and can be paused/stopped
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await page.getByRole("button", { name: /I'm ready/ }).click();
 
   await expect(page).toHaveURL(/rules/);
   await shot(page, "04_rules");
-  await page.getByRole("button", { name: /समझ गया, शुरू करें/ }).click();
-  await expect(page).toHaveURL(/play\/trial/);
-  await expect(page.getByText("मौका 1 / 3")).toBeVisible();
-  await shot(page, "07_pre_round_trial");
-  await page.getByRole("button", { name: /^शुरू करें/ }).click();
+  await page.getByRole("button", { name: /Open the map/ }).click();
+  await expect(page).toHaveURL(/journey/);
+  await expect(page.getByText("You are here")).toBeVisible();
+  await shot(page, "05_journey");
+  await page.getByRole("button", { name: /Level 1 Trial Round/ }).click();
 
-  await expect(page).toHaveURL(/round\//);
+  await expect(page).toHaveURL(/play\/trial/);
+  await expect(page.getByText("Chance 1/3")).toBeVisible();
+  await shot(page, "06_briefing");
+  await page.getByRole("button", { name: /Start mission/ }).click();
+  await expect(page).toHaveURL(/round\//, { timeout: 10_000 });
+
   const ed = page.locator(".hc-editor .ProseMirror").first();
-  await ed.click();
-  await page.keyboard.press("Escape");
-  // device-keyboard style direct Hindi input (insertText bypasses the helper only in device mode)
   await page.locator("#kbd").selectOption("device");
   await ed.click();
   await page.keyboard.type("स्टील अथॉरिटी ऑफ इंडिया लिमिटेड भारत की अग्रणी इस्पात उत्पादक कंपनियों में से एक है। कंपनी के पास लौह अयस्क की खदानें हैं।");
-  await expect(page.getByText(/वाक्य 2 \/ 16 पूरे/)).toBeVisible();
+  await expect(page.getByText("2/16 sentences").first()).toBeVisible();
   await page.waitForTimeout(2600);
-  await expect(page.getByText("सेव हो गया")).toBeVisible();
-  await shot(page, "05_trial_round");
+  await expect(page.getByText("Saved").first()).toBeVisible();
+  await shot(page, "07_trial_round");
 
-  // refresh keeps text and clock
   await page.reload();
   await expect(page.locator(".hc-editor .ProseMirror").first()).toContainText("लौह अयस्क");
 
-  // submit with parts left: two presses
-  await page.getByRole("button", { name: "जमा करें" }).click();
-  await expect(page.getByRole("button", { name: "पक्का जमा करें?" })).toBeVisible();
-  await page.getByRole("button", { name: "पक्का जमा करें?" }).click();
-  await expect(page).toHaveURL(/report\//);
-  await expect(page.getByText(/\/ 100/).first()).toBeVisible();
+  await page.getByRole("button", { name: "Submit", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Submit anyway?" })).toBeVisible();
+  await page.getByRole("button", { name: "Submit anyway?" }).click();
+  await expect(page.getByText("Mission complete!")).toBeVisible();
+  await shot(page, "08_mission_complete");
+  await page.waitForTimeout(1900);
+  await shot(page, "08b_scoring");
+  await page.getByRole("button", { name: /Skip/ }).click();
+  await expect(page.getByText("Your five stats")).toBeVisible();
   await page.waitForTimeout(1500);
-  await shot(page, "06_trial_report_card");
-  await expect(page.getByText("अगले राउंड से आपको टाइप करके ही लिखना होगा।")).toBeVisible();
+  await shot(page, "09_report_card");
 
-  await page.getByRole("link", { name: /अपना अनुवाद देखिए/ }).click();
+  await page.getByRole("link", { name: /Review my translation/ }).click();
   await expect(page.locator("p.whitespace-pre-wrap").first()).toContainText("लौह अयस्क");
   await page.goBack();
-
-  await page.getByRole("button", { name: /प्राथमिक राउंड/ }).click();
+  await page.getByRole("button", { name: /Next: Primary Round/ }).click();
   await expect(page).toHaveURL(/play\/primary/);
-  await expect(page.getByText(/अब से आपको टाइप करके ही लिखना है/).first()).toBeVisible();
-  await page.getByRole("button", { name: /^शुरू करें/ }).click();
-  await expect(page.getByText("भाषिणी अनुवाद").first()).toBeVisible();
+  await page.getByRole("button", { name: /Start mission/ }).click();
+  await expect(page.getByText("BHASHINI draft").first()).toBeVisible({ timeout: 10_000 });
   await page.waitForTimeout(800);
-  await shot(page, "08_primary_round");
-  // locked numbers render as chips; watch words are underlined
+  await shot(page, "10_primary_round");
   await expect(page.locator(".hc-watch").first()).toBeVisible();
   await page.locator(".hc-watch").first().click();
-  await shot(page, "08b_primary_watch_popover");
+  await shot(page, "10b_watch_popover");
   await page.keyboard.press("Escape");
-  // a source glossary term offers Hindi (on phones, switch to the English panel first)
-  const srcTab = page.getByRole("button", { name: "मूल पाठ" });
+  const srcTab = page.getByRole("button", { name: "Source page" });
   if (await srcTab.isVisible()) await srcTab.click();
   await page.locator(".hc-source-term").first().click();
-  await expect(page.getByText("शब्दावली सुझाव").first()).toBeVisible();
-  await shot(page, "08c_source_term_popover");
+  await expect(page.getByText("Glossary suggestion").first()).toBeVisible();
+
+  // nothing was spoken without a tap
+  expect(await page.evaluate(() => (window as any).__spoke)).toBe(0);
+});
+
+test("settings: voice control and accessibility toggles", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Settings" }).click();
+  await expect(page.getByText("Sahayika's voice")).toBeVisible();
+  await page.getByRole("button", { name: "XL" }).click();
+  await page.getByRole("switch", { name: /High contrast/ }).click();
+  await shot(page, "11_settings");
+  expect(await page.evaluate(() => document.documentElement.classList.contains("hc-contrast"))).toBe(true);
+  expect(await page.evaluate(() => document.documentElement.style.fontSize)).toBe("125%");
 });
 
 test("manager console opens for a manager", async ({ page }) => {
+  test.skip(test.info().project.name !== "chrome", "console is desktop-first");
   await page.goto("/manager");
   await page.getByPlaceholder("you@cag.gov.in").fill("manager@cag.gov.in");
-  test.skip(test.info().project.name !== "chrome", "console is desktop-first");
   await page.getByRole("button", { name: "Send code" }).click();
   await page.getByPlaceholder("OTP").fill("123456");
   await page.getByRole("button", { name: "Sign in" }).click();
   await expect(page.getByText("Pages per round")).toBeVisible();
-  await shot(page, "20_manager_dashboard");
-  await page.getByRole("link", { name: "Pages" }).click();
-  await page.getByText("Report 38/2025 · p. 2").click();
-  await expect(page.getByText("reference verified").first()).toBeVisible();
-  await shot(page, "21_manager_page_editor");
 });

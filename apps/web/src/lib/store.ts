@@ -1,24 +1,54 @@
 import { create } from "zustand";
 
 export type KeyboardMode = "roman" | "inscript" | "device";
+export type VoiceMode = "off" | "tap" | "auto";
+export type TextSize = "s" | "m" | "l" | "xl";
+
 const read = (k: string, d: string) => { try { return localStorage.getItem(k) ?? d; } catch { return d; } };
 const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* private mode */ } };
+const SCALE: Record<TextSize, string> = { s: "93.75%", m: "100%", l: "112.5%", xl: "125%" };
+
+export function applyPrefs(p: { textSize: TextSize; contrast: boolean; reduceMotion: boolean }) {
+  const h = document.documentElement;
+  h.style.fontSize = SCALE[p.textSize];
+  h.classList.toggle("hc-contrast", p.contrast);
+  h.classList.toggle("hc-reduce-motion", p.reduceMotion);
+}
 
 interface Prefs {
-  muted: boolean;
-  unlocked: boolean; // audio may auto-play only after the first tap (§15.9)
+  voice: VoiceMode;
+  sound: boolean;
+  volume: number;
+  haptics: boolean;
+  textSize: TextSize;
+  contrast: boolean;
+  reduceMotion: boolean;
+  unlocked: boolean; // audio may only start after the first tap (§15.9)
   keyboard: KeyboardMode;
-  setMuted(m: boolean): void;
+  set<K extends keyof Omit<Prefs, "set" | "unlockAudio" | "setKeyboard">>(k: K, v: Prefs[K]): void;
   unlockAudio(): void;
   setKeyboard(k: KeyboardMode): void;
 }
-export const usePrefs = create<Prefs>((set) => ({
-  muted: read("hc.muted", "0") === "1",
+
+const sysReduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+export const usePrefs = create<Prefs>((setState, getState) => ({
+  voice: read("hc.voice", "tap") as VoiceMode,
+  sound: read("hc.sound", "1") === "1",
+  volume: Number(read("hc.volume", "0.6")),
+  haptics: read("hc.haptics", "1") === "1",
+  textSize: read("hc.textSize", "m") as TextSize,
+  contrast: read("hc.contrast", "0") === "1",
+  reduceMotion: read("hc.reduceMotion", sysReduce ? "1" : "0") === "1",
   unlocked: false,
-  keyboard: (read("hc.keyboard", "roman") as KeyboardMode),
-  setMuted: (m) => { write("hc.muted", m ? "1" : "0"); if (m) window.speechSynthesis?.cancel(); set({ muted: m }); },
-  unlockAudio: () => set({ unlocked: true }),
-  setKeyboard: (k) => { write("hc.keyboard", k); set({ keyboard: k }); },
+  keyboard: read("hc.keyboard", "roman") as KeyboardMode,
+  set: (k, v) => {
+    write(`hc.${k}`, typeof v === "boolean" ? (v ? "1" : "0") : String(v));
+    setState({ [k]: v } as any);
+    applyPrefs(getState());
+  },
+  unlockAudio: () => setState({ unlocked: true }),
+  setKeyboard: (k) => { write("hc.keyboard", k); setState({ keyboard: k }); },
 }));
 
 /** Toasts */

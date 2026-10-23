@@ -125,7 +125,7 @@ describe("player journey", () => {
     const s = await call("GET", "/api/me/summary", cookie);
     expect(s.json.summary.totalCredits).toBeLessThanOrEqual(50);
     const c = await call("GET", "/api/me/certificate?format=html", cookie);
-    expect(c.raw.body).toContain("प्रमाणित किया जाता है कि");
+    expect(c.raw.body).toContain("This is to certify that");
     expect(findForbidden(c.raw.body)).toEqual([]);
   });
   it("returning player gets resumed with credits intact", async () => {

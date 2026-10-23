@@ -12,6 +12,9 @@
 | M7 console: dashboard, pages, ingest (PDF text-layer segmentation), reference/draft/slips/terms editors, publish gate, glossary + overrides, offices, Sahayika lines/audio/chat log, results + xlsx, audited credit caps | ✅ / ⚠ OCR | OCR runs only in the Docker image (tesseract hin) — returns 501 locally |
 | M8 cross-device + accessibility | 🟡 | Chrome desktop + phone-size (touch) e2e pass. Playwright WebKit crashes on this Mac (bus error) — run `--project=webkit --project=iphone` in CI on Linux; manual check on real iPhone/iPad/Safari still needed |
 
+## Iteration 2 — English, voice control, game feel (23 Oct)
+✅ English UI (strings.en.json), BHASHINI plugin hook with the workbench protected · ✅ Sahayika voice under player control (default: tap to listen) · ✅ journey map, briefing + countdown, HUD, mission-complete/scoring interstitials, rewards, Hall of Fame, SFX/haptics, settings · ⚠ waiting for `DHRUVA_API_KEY` in `.env` to switch drafts/TTS/ASR/LLM to live BHASHINI.
+
 ## Test commands
 - `corepack pnpm --filter @hc/shared test` · `corepack pnpm --filter @hc/api test`
 - e2e (needs `pnpm dev` running): `corepack pnpm exec playwright test --project=chrome --project=phone-chrome`

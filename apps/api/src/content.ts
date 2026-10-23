@@ -15,9 +15,13 @@ export interface Script {
   chatbotRules: string[];
 }
 
-/** Boot-time load. Throws (and the server refuses to start) if the config is invalid (§5). */
 export const baseConfig: GameConfig = parseGameConfig(readJson("config/game.config.json"));
-export const strings: Record<string, any> = readJson("content/strings.hi.json");
+/** Boot-time load. Throws (and the server refuses to start) if the config is invalid (§5). */
+/** Player strings follow config.ui.locale (en by default), falling back to Hindi key-by-key. */
+const hiStrings: Record<string, any> = readJson("content/strings.hi.json");
+const enStrings: Record<string, any> = readJson("content/strings.en.json");
+const merge = (a: any, b: any): any => (a && typeof a === "object" && !Array.isArray(a) ? Object.fromEntries([...new Set([...Object.keys(b ?? {}), ...Object.keys(a)])].map((k) => [k, merge(a[k], b?.[k])])) : a ?? b);
+export const strings: Record<string, any> = baseConfig.ui.locale === "en" ? merge(enStrings, hiStrings) : hiStrings;
 export const script: Script = readJson("content/sahayika.script.json");
 
 /** Effective config = file + audited credit-cap overrides from the console. */

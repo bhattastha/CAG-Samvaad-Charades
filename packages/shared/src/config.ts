@@ -13,6 +13,9 @@ const RoundSchema = z.object({
   bhashiniDraft: z.boolean(),
   voiceTyping: z.boolean(),
   completionCountedBy: z.enum(["sentence", "paragraph"]),
+  titleEn: z.string().default(""),
+  titleMeaning: z.string().default(""),
+  levelLabel: z.string().default(""),
 });
 export type RoundConfig = z.infer<typeof RoundSchema>;
 
@@ -66,6 +69,13 @@ export const GameConfigSchema = z
       minWordsPerSentence: z.number().int(),
     }),
     auth: z.object({ mode: z.string(), otpLength: z.number().int(), otpTtlMinutes: z.number() }),
+    ui: z.object({
+      locale: z.enum(["en", "hi"]).default("en"),
+      translationPlugin: z.object({ enabled: z.boolean(), scriptUrl: z.string(), languages: z.array(z.string()) }).default({ enabled: false, scriptUrl: "", languages: ["hi", "en"] }),
+    }).default({}),
+    bhashiniServices: z.object({
+      translation: z.string(), asrHindi: z.string(), ttsEnglish: z.string(), ttsGender: z.enum(["female", "male"]), transliteration: z.string(),
+    }).default({ translation: "ai4bharat/indictrans-v2-all-gpu--t4", asrHindi: "ai4bharat/conformer-hi-gpu--t4", ttsEnglish: "Bhashini/IITM/TTS", ttsGender: "female", transliteration: "ai4bharat/indicxlit--cpu-fsv2" }),
     transliteration: z.object({
       endpoint: z.string().url(),
       serviceId: z.string(),
@@ -124,6 +134,7 @@ export function publicConfig(c: GameConfig) {
     transliteration: { debounceMs: c.transliteration.debounceMs, numSuggestions: c.transliteration.numSuggestions },
     auth: { otpLength: c.auth.otpLength },
     scoring: { minWordsPerSentence: c.scoring.minWordsPerSentence },
+    ui: c.ui,
   };
 }
 export type PublicConfig = ReturnType<typeof publicConfig>;

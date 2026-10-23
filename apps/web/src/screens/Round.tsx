@@ -6,7 +6,10 @@ import { api } from "../lib/api";
 import { useConfig, useLines } from "../lib/queries";
 import { usePrefs, useToasts, type KeyboardMode } from "../lib/store";
 import { t } from "../lib/strings";
-import { speak, type Line } from "../lib/voice";
+import { announce, type Line } from "../lib/voice";
+import { sfx } from "../lib/sfx";
+import { Burst, floatText } from "../components/Juice";
+import { Hud } from "../round/Hud";
 import { Header, ProgressBar, Spinner } from "../components/Layout";
 import { SahayikaLine } from "../components/Sahayika";
 import { TranslationEditor, type EditorHandle } from "../editor/TranslationEditor";
@@ -49,7 +52,7 @@ export function Round() {
     try { sessionStorage.setItem(saidKey, JSON.stringify([...said.current])); } catch { /* ignore */ }
     const filled = { ...l, en: fill(l.en, vars), hi: fill(l.hi, vars) };
     setSlim(filled);
-    speak(filled, { auto: true });
+    announce(filled);
     window.clearTimeout(slimTimer.current);
     slimTimer.current = window.setTimeout(() => setSlim(null), 8000); // auto-hide after 8 s
   }, [view, lines, saidKey]);
@@ -60,8 +63,9 @@ export function Round() {
     const now = Date.now();
     if (now - lastBlock.current < 700) return;
     lastBlock.current = now;
-    if (kind === "locked") { push(t("round.numbersLocked"), "info"); return; }
+    if (kind === "locked") { push(t("round.numbersLocked"), "info"); sfx("error"); return; }
     push(t("round.copyPasteToast"), "warn");
+    sfx("error");
     sayLine("in_round.copy_paste_blocked", {}, false);
     if (view) api(`/attempts/${view.id}/events`, { body: { type: "paste_blocked" } }).catch(() => {});
   }, [push, sayLine, view]);
@@ -99,15 +103,27 @@ export function Round() {
     if (used >= limitS / 2) sayLine("in_round.half_time");
     const w = cfg?.fairPlay;
     if (w && remaining <= w.warnAtMinutesLeft * 60 && remaining > w.warnAtMinutesLeftSecond * 60) {
-      if (!said.current.has("in_round.five_min_left")) { push(t("round.fiveMinToast"), "info"); setSrNote(t("round.fiveMinSr")); }
+      if (!said.current.has("in_round.five_min_left")) { push(t("round.fiveMinToast"), "info"); setSrNote(t("round.fiveMinSr")); sfx("warn"); }
       sayLine("in_round.five_min_left");
     }
     if (w && remaining <= w.warnAtMinutesLeftSecond * 60 && remaining > 0) {
-      if (!said.current.has("in_round.one_min_left")) setSrNote(t("round.oneMinSr"));
+      if (!said.current.has("in_round.one_min_left")) { setSrNote(t("round.oneMinSr")); sfx("warn"); }
       sayLine("in_round.one_min_left");
     }
     if (view.roundKey === "trial" && Date.now() - lastTyping.current > 90_000) { sayLine("in_round.under_source"); lastTyping.current = Date.now(); }
   }, [Math.floor(nowMs / 5000)]);
+  // spatial + sound feedback when a sentence/part is cleared; a burst when everything is done
+  const prevDone = useRef<number | null>(null);
+  const [burst, setBurst] = useState(0);
+  useEffect(() => {
+    if (prevDone.current !== null && prog.done > prevDone.current && active) {
+      const anchor = document.querySelector("[data-hud-progress]")?.getBoundingClientRect() ?? null;
+      floatText(view?.roundKey === "trial" ? t("round.sentenceDone") : t("round.partCleared"), anchor, "good");
+      sfx(prog.done >= prog.total ? "fanfare" : "success");
+      if (prog.done >= prog.total) { setBurst((b) => b + 1); floatText(t("round.allCleared"), null, "gold"); }
+    }
+    prevDone.current = prog.done;
+  }, [prog.done]);
   useEffect(() => {
     if (!active || prog.total < 2) return;
     if (prog.done >= prog.total) sayLine("in_round.all_done_before_submit");
@@ -126,13 +142,14 @@ export function Round() {
     } catch { /* the server job submits from the last autosave anyway */ }
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     await qc.invalidateQueries({ queryKey: ["progress"] });
-    nav(`/report/${id}${auto ? "?auto=1" : ""}`, { replace: true });
+    nav(`/report/${id}?fx=${auto ? "timeup" : "done"}`, { replace: true });
   }, [at, id, nav, qc, submitting]);
   const pressSubmit = () => {
     const win = (cfg?.fairPlay.confirmSubmitWindowSeconds ?? 4) * 1000;
     if (partsLeft > 0 && Date.now() > confirmUntil) {
       setConfirmUntil(Date.now() + win);
       sayLine("in_round.submit_with_parts_left", { parts_left: partsLeft }, false);
+      sfx("warn");
       window.setTimeout(() => setConfirmUntil(0), win);
       return;
     }
@@ -184,7 +201,7 @@ export function Round() {
   };
   useEffect(() => () => voice.current?.stop(), []);
 
-  if (at.error) return <><Header /><div className="p-10 text-center text-lg">{t("ui.error")}</div></>;
+  if (at.error) return <><Header /><div className="p-10 text-center text-lg">{t("common.error")}</div></>;
   if (!view || !round || !cfg) return <><Header /><Spinner /></>;
   if (view.status === "submitted" && !submitting) { nav(`/report/${id}`, { replace: true }); return null; }
 
@@ -204,20 +221,16 @@ export function Round() {
       <Header compact />
       <div className="sr-only" aria-live="assertive">{srNote}</div>
 
-      {/* round header */}
-      <div className="mx-auto w-full max-w-[1400px] px-3 sm:px-6 pt-4 flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-2xl sm:text-[34px] font-bold text-primary leading-tight">{round.name} <span className="en text-base italic font-semibold text-muted">{round.nameEn} round</span></h1>
-        <div className="flex flex-wrap items-center gap-2">
-          {view.page.sample && <span className="chip bg-amber-50 border-amber-200 text-amber-800">{t("registration.sampleContent")}</span>}
-          <span className="chip-plain">{t("common.chanceOf", { n: view.chanceNo, max: cfg.maxChancesPerRound })}</span>
-          <span className={`chip-timer text-base ${remaining <= 300 ? "animate-pulse" : ""}`} role="timer" aria-label={t("common.timeLeft", { time: formatClock(remaining) })}>⏱ {t("common.timeLeft", { time: formatClock(remaining) })}</span>
-          <span className="chip-credit">{t("common.creditsUpTo", { n: view.creditCap })}</span>
-          <span className={`chip text-xs ${at.save === "offline" ? "bg-amber-50 border-amber-200 text-amber-800" : "bg-success-soft border-green-200 text-green-800"}`}>
-            {at.save === "saving" ? "⟳ " + t("round.saving") : at.save === "offline" ? "⚠ " + t("round.offline") : "✓ " + t("round.saved")}
-          </span>
-        </div>
+      {/* HUD (non-diegetic) + last-minute edge glow (meta) */}
+      <div data-hud-progress className="sticky top-14 z-20">
+        <Hud round={round} chanceNo={view.chanceNo} maxChances={cfg.maxChancesPerRound} remaining={remaining} limit={limitS}
+          warn5={cfg.fairPlay.warnAtMinutesLeft * 60} warn1={cfg.fairPlay.warnAtMinutesLeftSecond * 60}
+          progress={prog.done} total={prog.total} isTrial={isTrial} creditCap={view.creditCap} save={at.save} sample={view.page.sample} />
       </div>
-
+      {active && remaining > 0 && remaining <= cfg.fairPlay.warnAtMinutesLeftSecond * 60 && (
+        <div className="pointer-events-none fixed inset-0 z-[35] animate-pulse" style={{ boxShadow: "inset 0 0 120px 20px rgba(180,35,24,.35)" }} aria-hidden />
+      )}
+      <Burst fire={burst} count={36} spread={300} />
       {/* phone: switch panels */}
       <div className="lg:hidden mx-auto w-full px-3 mt-3">
         <div className="grid grid-cols-2 rounded-full bg-gray-100 p-1 text-[15px] font-semibold">
@@ -230,9 +243,9 @@ export function Round() {
       </div>
 
       <main className="mx-auto w-full max-w-[1400px] flex-1 px-3 sm:px-6 py-3 grid lg:grid-cols-2 gap-4 pb-40">
-        <section className={`card flex flex-col min-h-[50vh] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabelEn")}>
+        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabel")}>
           <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50 rounded-t-card flex items-center gap-2">
-            <span className="font-bold">{t("round.sourceLabel")}</span><span className="en text-sm text-muted">{t("round.sourceLabelEn")}</span>
+            <span className="font-bold">📄 {t("round.sourceLabel")}</span><span className="text-sm text-muted">{t("round.sourceLabelEn")}</span>
             <span className="ml-auto text-xs text-royal hidden sm:inline">{t("round.glossaryHint")}</span>
           </div>
           <div className="p-4 sm:p-5 overflow-y-auto max-h-[calc(100vh-260px)]">
@@ -246,9 +259,9 @@ export function Round() {
           </div>
         </section>
 
-        <section className={`card flex flex-col min-h-[50vh] border-primary/60 ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
+        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] border-primary/60 ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
           <div className="px-4 py-2.5 border-b border-orange-100 bg-cream rounded-t-card flex items-center gap-2">
-            <span className="font-bold">{isTrial ? t("round.yourTranslation") : t("round.draftLabel").split("·")[0]}</span>
+            <span className="font-bold">✍️ {isTrial ? t("round.yourTranslation") : t("round.draftLabel").split("·")[0]}</span>
             {!isTrial && <span className="text-sm text-primary-strong">{t("round.draftLabel").split("·")[1]}</span>}
             {readOnly && <span className="ml-auto chip-plain text-xs">{t("round.readOnly")}</span>}
           </div>
@@ -272,7 +285,7 @@ export function Round() {
             ) : (
               <DraftPanel parts={view.page.parts} answers={answers} readOnly={readOnly} watch={watchTexts} focusedPart={focusedPart} register={register}
                 onField={(pid, key, v) => at.update(pid, { field: [key, v] })}
-                onTick={(pid, done) => at.update(pid, { done })}
+                onTick={(pid, done) => { at.update(pid, { done }); if (!done) sfx("tap"); }}
                 onFocus={onFocus} onBlocked={onBlocked} onTyping={onTyping} onXlit={xlitAccept}
                 onWatchClick={(pid, key, w) => {
                   const ww = watchWords.find((x) => x.text === w.word);
@@ -318,7 +331,7 @@ export function Round() {
             </div>
             <div className="flex items-center gap-2">
               {confirming && <span className="text-sm font-semibold text-timer-text animate-pop">{t("round.partsLeft", { n: partsLeft })}</span>}
-              <button onClick={pressSubmit} disabled={readOnly || submitting} className={`btn-primary py-2.5 ${confirming ? "bg-timer-text hover:bg-timer-text animate-wiggle" : ""}`}>
+              <button onClick={() => { sfx("tap"); pressSubmit(); }} disabled={readOnly || submitting} className={`btn-primary py-2.5 active:scale-90 transition-transform ${confirming ? "bg-timer-text hover:bg-timer-text animate-wiggle" : ""}`}>
                 {submitting ? t("round.submitting") : confirming ? t("round.confirmSubmit") : t("round.submit")}
               </button>
             </div>

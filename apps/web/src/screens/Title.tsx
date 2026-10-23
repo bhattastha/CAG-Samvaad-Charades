@@ -1,46 +1,88 @@
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import cagLogo from "@assets/brand/cag-logo.png";
 import bhashiniLogo from "@assets/brand/bhashini-logo.png";
-import { useProgress } from "../lib/queries";
+import { useConfig, useProgress } from "../lib/queries";
+import { sfx } from "../lib/sfx";
 import { usePrefs } from "../lib/store";
 import { t } from "../lib/strings";
+import { Ambient, GameButton, Medal } from "../components/Juice";
+import { useSettingsOpen } from "../components/Settings";
 import { routeFor } from "./flow";
 
-/** §7.1 Title — design 01. */
+/** §7.1 Title — design 01, as a game start screen. */
 export function Title() {
   const nav = useNavigate();
   const { data } = useProgress();
+  const { data: cfg } = useConfig();
   const unlock = usePrefs((s) => s.unlockAudio);
+  const openSettings = useSettingsOpen((s) => s.set);
   const start = () => {
-    unlock(); // first tap: Sahayika may speak from now on (§15.9)
+    unlock(); // first tap: sound may play from now on (§15.9)
+    setTimeout(() => sfx("go"), 30);
     nav(data?.registered ? routeFor(data) : "/register");
   };
-  const tagline = t("title.tagline").split("·").map((s) => s.trim());
+  useEffect(() => {
+    const k = (e: KeyboardEvent) => { if (e.key === "Enter") start(); };
+    window.addEventListener("keydown", k);
+    return () => window.removeEventListener("keydown", k);
+  });
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      <section className="relative flex flex-col px-6 sm:px-12 lg:px-16 py-8 bg-white/80">
-        <img src={cagLogo} alt="CAG" className="h-16 w-auto self-start rounded-lg border border-gray-100 bg-white p-1 shadow-sm" />
-        <div className="my-auto py-10 animate-rise">
-          <span className="chip bg-primary-soft border-orange-200 text-primary-strong en tracking-[0.25em] text-xs">{t("common.brandLine")}</span>
-          <h1 className="mt-5 font-bold leading-[1.05]">
-            <span className="block text-6xl sm:text-7xl text-navy">{t("title.heading").split(" ")[0]}</span>
-            <span className="block text-6xl sm:text-7xl text-primary mt-1">{t("title.heading").split(" ").slice(1).join(" ")}</span>
+    <div className="min-h-screen grid lg:grid-cols-2 relative overflow-hidden">
+      <Ambient density={18} />
+      <section className="relative flex flex-col px-6 sm:px-12 lg:px-16 py-8">
+        <div className="flex items-center justify-between">
+          <img src={cagLogo} alt="CAG" className="h-14 w-auto rounded-lg border border-gray-100 bg-white p-1 shadow-sm" />
+          <motion.button whileTap={{ scale: 0.88, rotate: 45 }} onClick={() => { unlock(); openSettings(true); }} aria-label={t("common.settings")}
+            className="rounded-full border border-gray-200 bg-white w-11 h-11 grid place-items-center text-lg shadow-sm">⚙️</motion.button>
+        </div>
+        <div className="my-auto py-10">
+          <motion.span initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="chip bg-primary-soft border-orange-200 text-primary-strong tracking-[0.2em] text-xs uppercase">
+            {t("common.brandLine")} · {t("title.kicker")}
+          </motion.span>
+          <h1 className="mt-5 font-extrabold leading-[1.02]">
+            {t("title.heading").split(" ").map((w, i) => (
+              <motion.span key={w} className={`block text-6xl sm:text-8xl ${i ? "text-primary" : "text-navy"}`}
+                initial={{ opacity: 0, y: 40, rotate: i ? 3 : -3 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.1 + i * 0.15 }}>
+                {w}
+              </motion.span>
+            ))}
           </h1>
-          <div className="en mt-3 tracking-[0.45em] text-sm font-semibold text-muted">{t("title.subheadingEn")}</div>
-          <p className="mt-6 text-xl sm:text-2xl text-navy/90 leading-relaxed">{tagline.map((l) => <span key={l} className="block">{l}</span>)}</p>
-          <button onClick={start} className="btn-primary mt-8 px-10 py-4 text-xl animate-breathe hover:animate-none">
-            {t("title.start")} <span aria-hidden>→</span>
-          </button>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-2 text-3xl font-bold text-primary/80">{t("common.gameNameHi")}</motion.div>
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-5 text-xl text-navy/85 leading-relaxed max-w-lg">
+            {t("title.subheading")}
+          </motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }} className="mt-6 flex items-center gap-3">
+            {cfg?.rounds.map((r, i) => (
+              <motion.div key={r.key} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", delay: 0.8 + i * 0.1 }} title={r.titleEn}>
+                <Medal k={r.key} size={48} locked={!data?.summary?.rounds[i]?.titleEarned && !!data?.registered} />
+              </motion.div>
+            ))}
+            <span className="text-sm font-semibold text-muted ml-1">{t("title.levelsLabel")}</span>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1, type: "spring" }} className="mt-8 flex items-center gap-4">
+            <GameButton sound={null} onClick={start} className="px-10 py-4 text-xl animate-breathe hover:animate-none">
+              {data?.registered ? t("title.resume") : t("title.start")} <span aria-hidden>▶</span>
+            </GameButton>
+            <span className="hidden sm:inline text-sm text-muted">{t("title.pressAnyKey")}</span>
+          </motion.div>
         </div>
       </section>
       <section className="relative overflow-hidden bg-gradient-to-br from-cream via-[#FFF7F0] to-royal-soft flex flex-col items-center justify-center py-16">
-        <img src={bhashiniLogo} alt="BHASHINI" className="absolute top-8 right-8 h-16 w-auto rounded-lg border border-gray-100 bg-white p-1 shadow-sm" />
-        {[520, 420, 320, 220].map((d, i) => (
-          <div key={d} className="absolute rounded-full border border-orange-200/70" style={{ width: d, height: d, opacity: 0.4 + i * 0.12 }} />
+        <img src={bhashiniLogo} alt="BHASHINI" className="absolute top-8 right-8 h-14 w-auto rounded-lg border border-gray-100 bg-white p-1 shadow-sm" />
+        {[540, 430, 320, 210].map((d, i) => (
+          <motion.div key={d} className="absolute rounded-full border-2 border-orange-200/70" style={{ width: d, height: d }}
+            animate={{ scale: [1, 1.05, 1], opacity: [0.35 + i * 0.12, 0.6, 0.35 + i * 0.12] }} transition={{ duration: 4, delay: i * 0.4, repeat: Infinity }} />
         ))}
-        <div className="relative flex items-center animate-float">
-          <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-navy text-white grid place-items-center en text-7xl sm:text-8xl font-bold shadow-pop ring-8 ring-white">A</div>
-          <div className="-ml-10 mt-16 w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-primary text-white grid place-items-center text-7xl sm:text-8xl font-bold shadow-glow ring-8 ring-white">अ</div>
+        <div className="relative flex items-center">
+          <motion.div initial={{ x: -120, opacity: 0, rotate: -20 }} animate={{ x: 0, opacity: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 90, damping: 12, delay: 0.2 }}
+            whileHover={{ rotate: -8, scale: 1.05 }}
+            className="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-navy text-white grid place-items-center en text-7xl sm:text-8xl font-bold shadow-pop ring-8 ring-white">A</motion.div>
+          <motion.div initial={{ x: 120, opacity: 0, rotate: 20 }} animate={{ x: 0, opacity: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 90, damping: 12, delay: 0.35 }}
+            whileHover={{ rotate: 8, scale: 1.05 }}
+            className="-ml-10 mt-16 w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-primary text-white grid place-items-center text-7xl sm:text-8xl font-bold shadow-glow ring-8 ring-white">अ</motion.div>
+          <motion.div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl" animate={{ scale: [1, 1.25, 1], rotate: [0, 10, 0] }} transition={{ duration: 2.2, repeat: Infinity }} aria-hidden>✨</motion.div>
         </div>
         <div className="relative mt-8 text-xl font-bold text-navy">{t("title.artCaption")}</div>
       </section>

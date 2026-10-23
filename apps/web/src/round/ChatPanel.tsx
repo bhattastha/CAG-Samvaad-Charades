@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api";
-import { t } from "../lib/strings";
-import { speak, type Line } from "../lib/voice";
+import { lineText, t } from "../lib/strings";
+import { announce, type Line } from "../lib/voice";
+import { sfx } from "../lib/sfx";
 import { SahayikaAvatar } from "../components/SahayikaAvatar";
-import { ListenButton } from "../components/Sahayika";
+import { VoiceControl } from "../components/Sahayika";
 
 interface Msg { who: "me" | "her"; hi: string; en?: string; id?: string }
 
@@ -16,7 +17,7 @@ export function ChatPanel({ open, onClose, attemptId, quick, thinking, opener }:
   const [busy, setBusy] = useState(false);
   const [left, setLeft] = useState<number | null>(null);
   const end = useRef<HTMLDivElement>(null);
-  useEffect(() => { if (open && !msgs.length && opener) setMsgs([{ who: "her", hi: opener.hi, en: opener.en, id: opener.id }]); }, [open, opener]);
+  useEffect(() => { if (open && !msgs.length && opener) setMsgs([{ who: "her", hi: lineText(opener), en: opener.en, id: opener.id }]); }, [open, opener]);
   useEffect(() => { end.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs, busy]);
 
   const ask = async (body: { quick?: string; question?: string }, label: string) => {
@@ -25,11 +26,12 @@ export function ChatPanel({ open, onClose, attemptId, quick, thinking, opener }:
     setBusy(true);
     try {
       const r = await api<{ en: string; hi: string; spoken: boolean; remaining: number | null; limit?: boolean }>("/sahayika/chat", { body: { attemptId: attemptId ?? undefined, ...body } });
-      setMsgs((m) => [...m, { who: "her", hi: r.hi, en: r.en, id: "chat" }]);
+      setMsgs((m) => [...m, { who: "her", hi: lineText(r) || r.hi, en: r.en, id: `chat-${m.length}` }]);
       setLeft(r.remaining);
-      if (r.en) speak({ id: "chat", en: r.en, hi: r.hi, spoken: r.spoken }, { auto: true });
+      sfx("pop");
+      if (r.en) announce({ id: "chat", en: r.en, hi: r.hi, spoken: r.spoken });
     } catch {
-      setMsgs((m) => [...m, { who: "her", hi: t("ui.error") }]);
+      setMsgs((m) => [...m, { who: "her", hi: t("common.error") }]);
     } finally { setBusy(false); }
   };
 
@@ -41,18 +43,18 @@ export function ChatPanel({ open, onClose, attemptId, quick, thinking, opener }:
         <div className="sahayika-panel !rounded-none p-4 flex items-center gap-3">
           <SahayikaAvatar size={44} />
           <div className="flex-1"><div className="text-lg font-bold">{t("common.sahayikaButton")}</div><div className="text-sm text-blue-100">{t("chat.title")}</div></div>
-          <button onClick={onClose} className="text-2xl text-white/80 hover:text-white" aria-label={t("ui.close")}>✕</button>
+          <button onClick={onClose} className="text-2xl text-white/80 hover:text-white" aria-label={t("common.close")}>✕</button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-royal-soft/30" aria-live="polite">
           {msgs.map((m, i) => (
             <div key={i} className={`flex ${m.who === "me" ? "justify-end" : "justify-start"}`}>
               <div className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-[16px] leading-relaxed ${m.who === "me" ? "bg-primary text-white rounded-br-sm" : "bg-white border border-blue-100 rounded-bl-sm shadow-sm"}`}>
                 {m.hi}
-                {m.who === "her" && m.en && <div className="mt-1"><ListenButton line={{ id: m.id ?? "chat", en: m.en, hi: m.hi }} /></div>}
+                {m.who === "her" && m.en && <div className="mt-1"><VoiceControl line={{ id: m.id ?? "chat", en: m.en, hi: m.hi }} /></div>}
               </div>
             </div>
           ))}
-          {busy && <div className="text-muted italic">{thinking?.hi ?? "…"}</div>}
+          {busy && <div className="text-muted italic flex items-center gap-2"><span className="inline-flex gap-1">{[0,1,2].map((i) => <span key={i} className="w-1.5 h-1.5 rounded-full bg-royal animate-bounce" style={{ animationDelay: `${i * 120}ms` }} />)}</span>{lineText(thinking) || "…"}</div>}
           <div ref={end} />
         </div>
         <div className="p-3 border-t border-gray-100 space-y-2">

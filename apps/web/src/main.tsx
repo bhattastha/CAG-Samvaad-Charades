@@ -1,14 +1,22 @@
-import { lazy, StrictMode, Suspense } from "react";
+import { lazy, StrictMode, Suspense, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import "./index.css";
-import { useProgress } from "./lib/queries";
+import { useConfig, useProgress } from "./lib/queries";
+import { applyPrefs, usePrefs } from "./lib/store";
+import { setLocale } from "./lib/strings";
+import { stop as stopVoice } from "./lib/voice";
 import { Spinner, Toasts } from "./components/Layout";
+import { FloatLayer } from "./components/Juice";
+import { AudioDock } from "./components/AudioDock";
+import { SettingsPanel } from "./components/Settings";
 import { Title } from "./screens/Title";
 import { Register } from "./screens/Register";
 import { HowToPlay } from "./screens/HowToPlay";
 import { Rules } from "./screens/Rules";
+import { Journey } from "./screens/Journey";
 import { PreRound } from "./screens/PreRound";
 import { Round } from "./screens/Round";
 import { Report } from "./screens/Report";
@@ -19,6 +27,8 @@ import { Total } from "./screens/Total";
 const Manager = lazy(() => import("./manager/Manager"));
 
 const qc = new QueryClient({ defaultOptions: { queries: { refetchOnWindowFocus: false, retry: 1 } } });
+setLocale("en");
+applyPrefs(usePrefs.getState());
 
 function Player({ children }: { children: React.ReactNode }) {
   const { data, isLoading } = useProgress();
@@ -27,15 +37,37 @@ function Player({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <QueryClientProvider client={qc}>
-      <BrowserRouter>
-        <Routes>
+/** Optional BHASHINI website-translation plugin (config.ui.translationPlugin). The workbench is marked translate="no". */
+function TranslationPlugin() {
+  const { data: cfg } = useConfig();
+  useEffect(() => {
+    if (cfg?.ui?.locale) setLocale(cfg.ui.locale);
+    const p = cfg?.ui?.translationPlugin;
+    if (!p?.enabled || !p.scriptUrl || document.querySelector("script[data-bhashini-plugin]")) return;
+    const s = document.createElement("script");
+    s.src = p.scriptUrl;
+    s.async = true;
+    s.dataset.bhashiniPlugin = "1";
+    document.body.appendChild(s);
+  }, [cfg]);
+  return null;
+}
+
+/** Scenes slide and dissolve instead of cutting (game feel); Sahayika stops when the scene changes. */
+function Scenes() {
+  const location = useLocation();
+  useEffect(() => { stopVoice(); }, [location.pathname]);
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div key={location.pathname.startsWith("/manager") ? "/manager" : location.pathname}
+        initial={{ opacity: 0, y: 18, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
+        transition={{ duration: 0.32, ease: [0.2, 0.8, 0.2, 1] }} className="relative z-[1] min-h-screen">
+        <Routes location={location}>
           <Route path="/" element={<Title />} />
           <Route path="/register" element={<Register />} />
           <Route path="/how-to-play" element={<Player><HowToPlay /></Player>} />
           <Route path="/rules" element={<Player><Rules /></Player>} />
+          <Route path="/journey" element={<Player><Journey /></Player>} />
           <Route path="/play/:key" element={<Player><PreRound /></Player>} />
           <Route path="/round/:id" element={<Player><Round /></Player>} />
           <Route path="/report/:id" element={<Player><Report /></Player>} />
@@ -44,8 +76,31 @@ createRoot(document.getElementById("root")!).render(
           <Route path="/manager/*" element={<Suspense fallback={<Spinner />}><Manager /></Suspense>} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function App() {
+  const reduce = usePrefs((s) => s.reduceMotion);
+  return (
+    <MotionConfig reducedMotion={reduce ? "always" : "user"}>
+      <BrowserRouter>
+        <TranslationPlugin />
+        <Scenes />
         <Toasts />
+        <FloatLayer />
+        <AudioDock />
+        <SettingsPanel />
       </BrowserRouter>
+    </MotionConfig>
+  );
+}
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <QueryClientProvider client={qc}>
+      <App />
     </QueryClientProvider>
   </StrictMode>,
 );

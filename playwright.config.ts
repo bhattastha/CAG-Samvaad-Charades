@@ -4,6 +4,7 @@ import { defineConfig, devices } from "@playwright/test";
 export default defineConfig({
   testDir: "e2e",
   timeout: 90_000,
+  workers: 1, // all projects share one dev database
   use: { baseURL: process.env.BASE_URL ?? "http://localhost:5173", locale: "hi-IN", viewport: { width: 1366, height: 860 } },
   projects: [
     { name: "chrome", use: { ...devices["Desktop Chrome"], channel: "chrome", viewport: { width: 1366, height: 860 } } },

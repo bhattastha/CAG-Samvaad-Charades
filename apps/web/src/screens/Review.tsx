@@ -29,7 +29,7 @@ export function Review() {
     <>
       <Header />
       <Page>
-        <PageTitle hi={t("reportCard.reviewHeading")} en="Your translation" right={<Link to={`/report/${id}`} className="btn-ghost">← {t("ui.back")}</Link>} />
+        <PageTitle hi={t("reportCard.reviewHeading")} en="Your translation" right={<Link to={`/report/${id}`} className="btn-ghost">← {t("common.back")}</Link>} />
         <p className="text-muted mb-4">{t("reportCard.reviewNote")}</p>
         <div className="flex flex-wrap gap-4 mb-4 text-sm">
           <span><span className="hc-watch">शब्द</span> {t("reportCard.legendAvoid")} / {t("reportCard.legendSlip")}</span>

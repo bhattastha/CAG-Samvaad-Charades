@@ -18,7 +18,10 @@
       "creditCap": 3,
       "bhashiniDraft": false,
       "voiceTyping": true,
-      "completionCountedBy": "sentence"
+      "completionCountedBy": "sentence",
+      "titleEn": "Anuvad Pathik",
+      "titleMeaning": "The Translation Traveller",
+      "levelLabel": "Level 1"
     },
     {
       "key": "primary",
@@ -29,7 +32,10 @@
       "creditCap": 5,
       "bhashiniDraft": true,
       "voiceTyping": false,
-      "completionCountedBy": "paragraph"
+      "completionCountedBy": "paragraph",
+      "titleEn": "Anuvad Nipun",
+      "titleMeaning": "The Skilled Translator",
+      "levelLabel": "Level 2"
     },
     {
       "key": "secondary",
@@ -40,7 +46,10 @@
       "creditCap": 15,
       "bhashiniDraft": true,
       "voiceTyping": false,
-      "completionCountedBy": "paragraph"
+      "completionCountedBy": "paragraph",
+      "titleEn": "Anuvad Vidvaan",
+      "titleMeaning": "The Translation Scholar",
+      "levelLabel": "Level 3"
     },
     {
       "key": "pro",
@@ -51,7 +60,10 @@
       "creditCap": 25,
       "bhashiniDraft": true,
       "voiceTyping": false,
-      "completionCountedBy": "paragraph"
+      "completionCountedBy": "paragraph",
+      "titleEn": "Anuvad Visheshagya",
+      "titleMeaning": "The Translation Expert",
+      "levelLabel": "Level 4"
     }
   ],
   "maxCredits": 50,
@@ -128,5 +140,25 @@
     "minInputChars": 1,
     "debounceMs": 150,
     "timeoutMs": 2500
+  },
+  "ui": {
+    "locale": "en",
+    "_comment": "Player UI language. 'en' now; the BHASHINI website-translation plugin renders it in Hindi. The workbench (English source + Hindi answers) is always excluded from page translation.",
+    "translationPlugin": {
+      "enabled": false,
+      "scriptUrl": "",
+      "languages": [
+        "hi",
+        "en"
+      ]
+    }
+  },
+  "bhashiniServices": {
+    "_comment": "Service IDs from BHASHINI's model list (23 Oct 2026).",
+    "translation": "ai4bharat/indictrans-v2-all-gpu--t4",
+    "asrHindi": "ai4bharat/conformer-hi-gpu--t4",
+    "ttsEnglish": "Bhashini/IITM/TTS",
+    "ttsGender": "female",
+    "transliteration": "ai4bharat/indicxlit--cpu-fsv2"
   }
 }

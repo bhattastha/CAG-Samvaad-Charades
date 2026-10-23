@@ -23,7 +23,7 @@ export function GlossaryDrawer({ open, onClose, onInsert, initial = "" }: { open
         <div className="p-4 border-b border-orange-100 flex items-center gap-3 bg-cream">
           <span className="text-2xl">📖</span>
           <h2 className="text-xl font-bold text-primary-strong flex-1">{t("common.glossaryButton")}</h2>
-          <button onClick={onClose} className="text-2xl text-muted hover:text-navy" aria-label={t("ui.close")}>✕</button>
+          <button onClick={onClose} className="text-2xl text-muted hover:text-navy" aria-label={t("common.close")}>✕</button>
         </div>
         <div className="p-4">
           {/* plain input: the transliteration helper is never active here (§9.2) */}

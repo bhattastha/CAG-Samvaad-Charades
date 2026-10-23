@@ -76,7 +76,7 @@ export async function serviceRoutes(app: FastifyInstance, db: Db) {
   app.post("/sahayika/tts", async (req, reply) => {
     if (!req.session?.email) return reply.code(401).send({ error: "not_signed_in" });
     const { text } = parse(z.object({ text: z.string().min(1).max(400) }), req.body);
-    if (!isConfigured("tts") || !env.DHRUVA_TTS_SERVICE_ID) return reply.code(503).send({ error: "tts_unavailable" });
+    if (!isConfigured("tts")) return reply.code(503).send({ error: "tts_unavailable" });
     const k = createHash("sha1").update(text).digest("hex");
     try {
       let buf = ttsCache.get(k);
@@ -121,7 +121,7 @@ export async function serviceRoutes(app: FastifyInstance, db: Db) {
     const up = io("wss://dhruva-api.bhashini.gov.in", { path: "/socket.io", transports: ["websocket"], auth: { authorization: env.DHRUVA_ASR_KEY }, reconnection: false, timeout: 8000 });
     let ready = false;
     const dataEvent = process.env.DHRUVA_ASR_DATA_EVENT ?? "data";
-    up.on("connect", () => up.emit("start", [{ taskType: "asr", config: { language: { sourceLanguage: "hi" }, samplingRate: 16000, postProcessors: ["punctuation"] } }]));
+    up.on("connect", () => up.emit("start", [{ taskType: "asr", config: { language: { sourceLanguage: "hi" }, serviceId: config().bhashiniServices.asrHindi, samplingRate: 16000, postProcessors: ["punctuation"] } }]));
     up.on("ready", () => { ready = true; socket.send(JSON.stringify({ type: "ready" })); });
     up.on("response", (r: any) => {
       const text = r?.pipelineResponse?.[0]?.output?.[0]?.source ?? "";
