@@ -1,0 +1,277 @@
+import type { GameConfig, RoundConfig } from "./config.js";
+import { checkTerm, containsHindi, type TermCheck } from "./glossary.js";
+import { DEPENDENT_SIGN, LATIN_WORD, normalise, numberTokens, numericCore, sentences, words } from "./text.js";
+import type { Answers, Flag, PageData, Part } from "./types.js";
+
+const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
+
+/** Character n-grams with whitespace removed, as in chrF. */
+function charNgrams(s: string, n: number): Map<string, number> {
+  const chars = [...s.replace(/\s+/g, "")];
+  const m = new Map<string, number>();
+  for (let i = 0; i + n <= chars.length; i++) {
+    const g = chars.slice(i, i + n).join("");
+    m.set(g, (m.get(g) ?? 0) + 1);
+  }
+  return m;
+}
+
+/** chrF (Popović 2015): average char n-gram precision and recall over orders 1..N, then F-beta. */
+export function chrF(hyp: string, ref: string, order = 6, beta = 2): number {
+  const h = normalise(hyp);
+  const r = normalise(ref);
+  if (!h || !r) return h === r ? 1 : 0;
+  let pSum = 0, rSum = 0, k = 0;
+  for (let n = 1; n <= order; n++) {
+    const hg = charNgrams(h, n);
+    const rg = charNgrams(r, n);
+    let hTot = 0, rTot = 0, match = 0;
+    hg.forEach((c) => (hTot += c));
+    rg.forEach((c) => (rTot += c));
+    if (hTot === 0 || rTot === 0) continue;
+    hg.forEach((c, g) => (match += Math.min(c, rg.get(g) ?? 0)));
+    pSum += match / hTot;
+    rSum += match / rTot;
+    k++;
+  }
+  if (k === 0) return 0;
+  const P = pSum / k, R = rSum / k;
+  if (P + R === 0) return 0;
+  const b2 = beta * beta;
+  return ((1 + b2) * P * R) / (b2 * P + R);
+}
+
+export function calibrateChrF(c: number, floor: number, ceil: number): number {
+  return clamp01((c - floor) / (ceil - floor));
+}
+
+/** §11 समय: 1 if f ≤ share, then linear down to `atLimit` at f = 1. */
+export function timeMeasure(usedSeconds: number, limitSeconds: number, share = 0.5, atLimit = 0.6): number {
+  const f = clamp01(limitSeconds > 0 ? usedSeconds / limitSeconds : 1);
+  if (f <= share) return 1;
+  return 1 - ((f - share) / (1 - share)) * (1 - atLimit);
+}
+
+/** Credits per round: best × cap / 100, to `decimals` places (1 → Math.round(best × cap / 10) / 10). */
+export function roundCredits(best: number, cap: number, decimals = 1): number {
+  const p = 10 ** decimals;
+  return Math.round((best * cap * p) / 100) / p;
+}
+
+export type GrammarCode = "latin_word" | "missing_danda" | "vowel_sign_start" | "repeated_word" | "unbalanced_bracket" | "number_missing";
+export interface GrammarIssue {
+  code: GrammarCode;
+  partId: string;
+  fieldKey: string;
+  text: string;
+  penalty: number;
+}
+
+export interface Measures {
+  translation: number;
+  completion: number;
+  sentence: number;
+  glossary: number;
+  time: number;
+}
+export interface Counts {
+  translation10: number;
+  sentence10: number;
+  completionDone: number;
+  completionTotal: number;
+  completionUnit: "sentence" | "paragraph";
+  glossaryCorrect: number;
+  glossaryTotal: number;
+  usedMinutes: number;
+  limitMinutes: number;
+}
+export type Tip =
+  | { kind: "term"; en: string; hi: string; wrong: string | null }
+  | { kind: "grammar"; code: GrammarCode; text: string }
+  | { kind: "praise" };
+
+export interface ScoreResult {
+  score: number;
+  measures: Measures;
+  counts: Counts;
+  tip: Tip;
+  termChecks: TermCheck[];
+  grammar: GrammarIssue[];
+  flags: Flag[];
+  empty: boolean;
+}
+
+const fieldText = (answers: Answers, part: Part, key: string) => answers[part.id]?.fields?.[key] ?? "";
+const editableFields = (p: Part) => p.fields.filter((f) => !f.numeric);
+const partPlayerText = (answers: Answers, p: Part) => editableFields(p).map((f) => fieldText(answers, p, f.key)).join(" ");
+const partRefText = (p: Part) => editableFields(p).map((f) => f.hiReference).join(" ");
+const SENTENCE_PARTS = new Set(["passage", "body", "headnote", "footnote", "annexure_ref"]);
+
+/** Groups that count for completion: editable parts with a tick group (§6). */
+export function tickGroups(parts: Part[]): Map<string, Part[]> {
+  const g = new Map<string, Part[]>();
+  for (const p of parts) {
+    if (!p.editable || !p.tickGroup) continue;
+    g.set(p.tickGroup, [...(g.get(p.tickGroup) ?? []), p]);
+  }
+  return g;
+}
+
+export function countFinishedSentences(text: string, minWords: number): number {
+  return sentences(text).filter((s) => s.terminated && words(s.text).length >= minWords).length;
+}
+
+/** Completion counts for the live progress bar and the report card. */
+export function completion(round: RoundConfig, page: PageData, answers: Answers, minWords: number) {
+  if (round.completionCountedBy === "sentence") {
+    const total = page.parts.reduce((n, p) => n + (p.enSentences?.length ?? 0), 0) || 1;
+    const done = Math.min(total, page.parts.reduce((n, p) => n + countFinishedSentences(partPlayerText(answers, p), minWords), 0));
+    return { done, total };
+  }
+  const groups = tickGroups(page.parts);
+  let done = 0;
+  groups.forEach((ps) => {
+    if (ps.every((p) => answers[p.id]?.done && normalise(partPlayerText(answers, p)).length > 0)) done++;
+  });
+  return { done, total: groups.size };
+}
+
+function grammarIssues(round: RoundConfig, page: PageData, answers: Answers, minWords: number): GrammarIssue[] {
+  const out: GrammarIssue[] = [];
+  for (const p of page.parts) {
+    if (!p.editable) continue;
+    for (const f of editableFields(p)) {
+      const text = normalise(fieldText(answers, p, f.key));
+      if (!text) continue;
+      const refLatin = new Set(words(f.hiReference).filter((w) => LATIN_WORD.test(w)).map((w) => w.toLowerCase()));
+      const ws = words(text);
+      for (const w of ws) {
+        if (LATIN_WORD.test(w) && !refLatin.has(w.toLowerCase()) && !f.locked.includes(w))
+          out.push({ code: "latin_word", partId: p.id, fieldKey: f.key, text: w, penalty: 0.05 });
+        if (DEPENDENT_SIGN.test(w)) out.push({ code: "vowel_sign_start", partId: p.id, fieldKey: f.key, text: w, penalty: 0.03 });
+      }
+      for (let i = 1; i < ws.length; i++)
+        if (ws[i] === ws[i - 1] && !/^\d/.test(ws[i]))
+          out.push({ code: "repeated_word", partId: p.id, fieldKey: f.key, text: ws[i], penalty: 0.02 });
+      if (SENTENCE_PARTS.has(p.type)) {
+        for (const s of sentences(text))
+          if (!s.terminated && words(s.text).length >= minWords)
+            out.push({ code: "missing_danda", partId: p.id, fieldKey: f.key, text: s.text.split(" ").slice(-3).join(" "), penalty: 0.05 });
+      }
+      const unb = Math.abs((text.match(/\(/g)?.length ?? 0) - (text.match(/\)/g)?.length ?? 0))
+        + Math.abs((text.match(/\[/g)?.length ?? 0) - (text.match(/\]/g)?.length ?? 0));
+      for (let i = 0; i < unb; i++) out.push({ code: "unbalanced_bracket", partId: p.id, fieldKey: f.key, text: "( )", penalty: 0.05 });
+      if (round.key === "trial") {
+        const have = new Set(numberTokens(text).map(numericCore));
+        for (const n of new Set(numberTokens(f.en).map(numericCore)))
+          if (!have.has(n)) out.push({ code: "number_missing", partId: p.id, fieldKey: f.key, text: n, penalty: 0.02 });
+      }
+    }
+  }
+  return out;
+}
+
+export interface ScoreInput {
+  config: GameConfig;
+  round: RoundConfig;
+  page: PageData;
+  answers: Answers;
+  usedSeconds: number;
+}
+
+export function scoreAttempt({ config, round, page, answers, usedSeconds }: ScoreInput): ScoreResult {
+  const sc = config.scoring;
+  const limitSeconds = round.timeLimitMinutes * 60;
+  const allText = page.parts.map((p) => partPlayerText(answers, p)).join(" ");
+  const empty = normalise(allText).length === 0;
+
+  // अनुवाद: length-weighted calibrated chrF per part
+  let wSum = 0, tSum = 0;
+  for (const p of page.parts) {
+    if (!p.editable) continue;
+    const ref = partRefText(p);
+    const w = normalise(ref).length;
+    if (!w) continue;
+    const c = calibrateChrF(chrF(partPlayerText(answers, p), ref, sc.chrfOrder, sc.chrfBeta), sc.chrfFloor, sc.chrfCeil);
+    tSum += c * w;
+    wSum += w;
+  }
+  const translation = wSum ? tSum / wSum : 0;
+
+  const comp = completion(round, page, answers, sc.minWordsPerSentence);
+  const grammar = grammarIssues(round, page, answers, sc.minWordsPerSentence);
+  const sentence = empty ? 0 : clamp01(1 - grammar.reduce((s, g) => s + g.penalty, 0));
+  const termChecks = page.terms.map((t) => checkTerm(allText, t));
+  const glossaryCorrect = termChecks.filter((t) => t.correct).length;
+  const glossary = page.terms.length ? glossaryCorrect / page.terms.length : 1;
+  const tm = config.timeMarks;
+  const time = timeMeasure(usedSeconds, limitSeconds, tm.fullMarksIfFinishedWithinShareOfLimit, tm.marksAtTimeLimit);
+
+  const measures: Measures = { translation, completion: comp.done / (comp.total || 1), sentence, glossary, time };
+  const w = config.scoringWeights;
+  const score = empty
+    ? 0
+    : Math.round(measures.translation * w.translation + measures.completion * w.completion + measures.sentence * w.sentenceConstruction + measures.glossary * w.glossary + measures.time * w.time);
+
+  const firstBadTerm = termChecks.find((t) => !t.correct);
+  const tip: Tip = firstBadTerm
+    ? { kind: "term", en: firstBadTerm.term.en, hi: firstBadTerm.term.hi, wrong: firstBadTerm.avoidFound }
+    : grammar[0]
+      ? { kind: "grammar", code: grammar[0].code, text: grammar[0].text }
+      : { kind: "praise" };
+
+  return {
+    score: Math.max(0, Math.min(config.scoreOutOf, score)),
+    measures,
+    counts: {
+      translation10: Math.round(translation * 10),
+      sentence10: Math.round(sentence * 10),
+      completionDone: comp.done,
+      completionTotal: comp.total,
+      completionUnit: round.completionCountedBy,
+      glossaryCorrect,
+      glossaryTotal: page.terms.length,
+      usedMinutes: Math.min(round.timeLimitMinutes, Math.round(usedSeconds / 60)),
+      limitMinutes: round.timeLimitMinutes,
+    },
+    tip,
+    termChecks,
+    grammar,
+    flags: buildFlags(page, answers, termChecks, grammar),
+    empty,
+  };
+}
+
+/** Underlines for the player's own review view (§15.6). Never includes the reference or slip fixes. */
+export function buildFlags(page: PageData, answers: Answers, termChecks: TermCheck[], grammar: GrammarIssue[]): Flag[] {
+  const flags: Flag[] = [];
+  for (const p of page.parts) {
+    for (const f of editableFields(p)) {
+      const text = fieldText(answers, p, f.key);
+      if (!text) continue;
+      for (const tc of termChecks) {
+        if (tc.avoidFound && containsHindi(text, tc.avoidFound))
+          flags.push({ partId: p.id, fieldKey: f.key, text: tc.avoidFound, kind: "avoid", enTerm: tc.term.en });
+      }
+      for (const s of page.slips) {
+        if (s.partId === p.id && containsHindi(text, s.wrongText))
+          flags.push({ partId: p.id, fieldKey: f.key, text: s.wrongText, kind: "slip", enTerm: s.enTerm ?? undefined });
+      }
+    }
+  }
+  for (const g of grammar) {
+    if (g.code === "latin_word" || g.code === "repeated_word" || g.code === "vowel_sign_start")
+      flags.push({ partId: g.partId, fieldKey: g.fieldKey, text: g.text, kind: g.code === "latin_word" ? "latin" : "grammar" });
+  }
+  for (const tc of termChecks) {
+    if (!tc.present) flags.push({ partId: "", fieldKey: "", text: tc.term.en, kind: "missing_term", enTerm: tc.term.en });
+  }
+  // de-duplicate
+  const seen = new Set<string>();
+  return flags.filter((f) => {
+    const k = `${f.partId}|${f.fieldKey}|${f.text}|${f.kind}`;
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}

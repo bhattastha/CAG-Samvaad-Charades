@@ -1,0 +1,36 @@
+[
+  {
+    "english_term": "Annexure",
+    "hindi_term": "अनुलग्नक",
+    "accepted_variants": [],
+    "avoid_forms": [
+      "एनेक्सर",
+      "परिशिष्ट",
+      "संलग्नक",
+      "अनुलिपि"
+    ],
+    "reason": "Concept Note v2 and the Sahayika script both use अनुलग्नक and teach 'Appendix = परिशिष्ट'. Overrides the glossary file's संलग्नक / अनुलिपि. CAG Hindi cell to confirm.",
+    "status": "pending_confirmation"
+  },
+  {
+    "english_term": "Appendix",
+    "hindi_term": "परिशिष्ट",
+    "accepted_variants": [],
+    "avoid_forms": [
+      "अपेंडिक्स",
+      "अनुलग्नक"
+    ],
+    "reason": "Pairs with the Annexure override (Sahayika script: 'Annexure = अनुलग्नक, Appendix = परिशिष्ट').",
+    "status": "pending_confirmation"
+  },
+  {
+    "english_term": "Report",
+    "hindi_term": "प्रतिवेदन",
+    "accepted_variants": [],
+    "avoid_forms": [
+      "रिपोर्ट"
+    ],
+    "reason": "Sahayika script tip: 'Report' is 'प्रतिवेदन' in CAG, not 'रिपोर्ट'. Applies to audit-report text only.",
+    "status": "pending_confirmation"
+  }
+]

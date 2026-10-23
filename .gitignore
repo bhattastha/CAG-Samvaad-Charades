@@ -1,0 +1,12 @@
+node_modules
+dist
+.data
+.env
+*.log
+.DS_Store
+apps/web/public/fonts
+test-results
+playwright-report
+test-results
+playwright-report
+.env

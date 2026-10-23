@@ -1,0 +1,7 @@
+# HTTPS only (§1). Set SITE_ADDRESS to the public host name; Caddy obtains and renews the certificate.
+# For an internal CA (NIC), replace "tls" with the issued cert/key paths.
+{$SITE_ADDRESS:localhost} {
+  encode gzip zstd
+  header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  reverse_proxy web:80
+}

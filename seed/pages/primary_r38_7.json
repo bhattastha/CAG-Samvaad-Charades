@@ -1,0 +1,323 @@
+{
+ "page_id": "seed-primary-r38-2025-p-7",
+ "round": "primary",
+ "status": "draft",
+ "reference_status": "needs_verification",
+ "draft_status": "sample_authored_not_bhashini",
+ "label": "Report 38/2025 · p. 7",
+ "source": {
+  "report": "Report No. 38 of 2025 (Performance Audit – Commercial), Performance of Blast Furnaces in SAIL",
+  "english_pdf_page": 27,
+  "hindi_pdf_pages": [
+   33
+  ],
+  "printed_page": "7",
+  "hindi_printed_page": "9",
+  "sector_hidden_from_player": "commercial"
+ },
+ "notes": "Part of printed p. 7 (English PDF p. 27): the chapter opener, para 2.1 (lead line + four bullets) and footnotes 16-17. Para 2.2 (nine one-line bullets) and 2.3 (runs on to p. 8, so it cannot be cut cleanly) are left out to keep the page self-contained (≈ 170 words). Hindi reference transcribed by hand from the rendered Hindi PDF p. 33 (printed p. 9); the Hindi text layer was not used. Report 38 has no bottom footer text: the running line 'Report No. 38 of 2025' (printed top-right) is used as the footer part, and the chapter tab ('CHAPTER II · Audit Approach') as the header part. Footnote markers are kept as superscripts (¹⁶ ¹⁷) in both languages and are not locked tokens. The Roman numeral II is locked so it is never scored as a Latin word. The Hindi page number is 9; the English page number 7 is shown read-only. BHASHINI drafts are hand-authored samples in machine-translation style with planted slips; regenerate with the live NMT service before publishing.",
+ "parts": [
+  {
+   "part_id": "p01",
+   "type": "header",
+   "tick_group": "g01",
+   "en": "Chapter II - Audit Approach",
+   "hi_reference": "अध्याय II - लेखापरीक्षा दृष्टिकोण",
+   "bhashini_draft": "अध्याय II - ऑडिट दृष्टिकोण",
+   "locked_tokens": [
+    "II"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p02",
+   "type": "heading",
+   "tick_group": "g02",
+   "en": "2.1 Audit Objectives",
+   "hi_reference": "2.1 लेखापरीक्षा उद्देश्य",
+   "bhashini_draft": "2.1 लेखापरीक्षा उद्देश्य",
+   "locked_tokens": [
+    "2.1"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p03",
+   "type": "body",
+   "tick_group": "g03",
+   "en": "The audit objectives were to assess whether:",
+   "hi_reference": "लेखापरीक्षा का उद्देश्य यह आकलन करना था कि क्या:",
+   "bhashini_draft": "लेखापरीक्षा उद्देश्य यह आकलन करना था कि क्या:",
+   "locked_tokens": [],
+   "editable": true
+  },
+  {
+   "part_id": "p04",
+   "type": "body",
+   "tick_group": "g04",
+   "en": "Requirement of raw materials was assessed adequately; raw materials were available in desired quantity and used as per desired proportion and whether Coke rate¹⁶, Coal Dust Injection rate¹⁷, other operating indices and consumption of services were within the norms/plan;",
+   "hi_reference": "कच्चे माल की आवश्यकता का पर्याप्त आकलन किया गया था; कच्चा माल वांछित मात्रा में उपलब्ध था एवं उसका उपयोग निर्धारित अनुपात के अनुसार किया गया था; तथा कोक दर¹⁶, कोल डस्ट इंजेक्शन दर¹⁷, अन्य परिचालन सूचकांकों एवं सेवाओं की खपत निर्धारित मानकों/योजनाओं के भीतर थी।",
+   "bhashini_draft": "कच्चे माल की आवश्यकता का पर्याप्त रूप से आकलन किया गया था; कच्चा माल वांछित मात्रा में उपलब्ध था और वांछित अनुपात के अनुसार उपयोग किया गया था और क्या कोक रेट¹⁶, कोल डस्ट इंजेक्शन रेट¹⁷, अन्य परिचालन सूचकांक और सेवाओं की खपत मानदंडों/योजना के भीतर थी;",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p05",
+   "type": "body",
+   "tick_group": "g05",
+   "en": "Blast Furnaces were operated economically, efficiently and effectively as per the Annual Production Plan/Perspective;",
+   "hi_reference": "ब्लास्ट फर्नेस को वार्षिक उत्पादन योजना/परिप्रेक्ष्य के अनुसार मितव्ययतापूर्वक, कुशलतापूर्वक एवं प्रभावी ढंग से संचालित किया गया;",
+   "bhashini_draft": "ब्लास्ट फर्नेस को वार्षिक उत्पादन योजना/परिप्रेक्ष्य के अनुसार किफायती, कुशलतापूर्वक और प्रभावी ढंग से संचालित किया गई;",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p06",
+   "type": "body",
+   "tick_group": "g06",
+   "en": "Capital repairs, preventive repairs & maintenance of blast furnaces were carried out as per schedule and techno-economic parameters were achieved;",
+   "hi_reference": "पूंजीगत मरम्मत, निवारक मरम्मत एवं ब्लास्ट फर्नेस का अनुरक्षण निर्धारित समय के अनुसार किया गया एवं तकनीकी-आर्थिक मापदंडों को प्राप्त किया गया;",
+   "bhashini_draft": "पूंजीगत मरम्मत, निवारक मरम्मत और ब्लास्ट फर्नेस का रखरखाव कार्यक्रम के अनुसार किया गया और टेक्नो-इकोनॉमिक पैरामीटर प्राप्त किए गए;",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p07",
+   "type": "body",
+   "tick_group": "g07",
+   "en": "Projects relating to upstream and downstream facilities of blast furnace were planned judiciously and carried out economically and efficiently. Blast Furnaces were operated with adherence to the safety and environmental laws.",
+   "hi_reference": "ब्लास्ट फर्नेस की अपस्ट्रीम और डाउनस्ट्रीम सुविधाओं से संबंधित परियोजनाओं की योजना विवेकपूर्ण ढंग से बनाई गई तथा उन्हें किफायती और कुशलतापूर्वक पूरा किया गया। ब्लास्ट फर्नेस का परिचालन सुरक्षा एवं पर्यावरण कानूनों का पालन करते हुए किया गया।",
+   "bhashini_draft": "ब्लास्ट फर्नेस की अपस्ट्रीम और डाउनस्ट्रीम सुविधाओं से संबंधित परियोजनाओं की योजना विवेकपूर्ण ढंग से बनाई गई और किफायती और कुशलता से पूरी की गई।",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p08",
+   "type": "footnote",
+   "tick_group": "g08",
+   "en": "¹⁶ Quantity of coke consumed to produce one tonne of hot metal. Coke rate is measured in Kg/thm.",
+   "hi_reference": "¹⁶ एक टन गर्म धातु के उत्पादन के लिए खपत कोक की मात्रा। कोक दर को किग्रा/टीएचएम में मापा जाता है।",
+   "bhashini_draft": "¹⁶ एक टन गर्म धातु का उत्पादन करने के लिए खपत किए गए कोक की मात्रा। कोक दर को किग्रा/टीएचएम में मापा जाता है।",
+   "locked_tokens": [],
+   "editable": true
+  },
+  {
+   "part_id": "p09",
+   "type": "footnote",
+   "tick_group": "g09",
+   "en": "¹⁷ Coal Dust Injection rate is the quantity of Coal Dust injected to produce one tonne of hot metal. It is measured in Kg/thm.",
+   "hi_reference": "¹⁷ कोल डस्ट इंजेक्शन दर वह मात्रा है जितनी कोल डस्ट एक टन तप्त धातु के उत्पादन के लिए डाली जाती है। इसे किलोग्राम प्रति टन तप्त धातु (किग्रा/टीएचएम) में मापा जाता है।",
+   "bhashini_draft": "¹⁷ कोल डस्ट इंजेक्शन दर एक टन गर्म धातु का उत्पादन करने के लिए इंजेक्ट की गई कोल डस्ट की मात्रा है। इसे किग्रा/टीएचएम में मापा जाता है।",
+   "locked_tokens": [],
+   "editable": true
+  },
+  {
+   "part_id": "p10",
+   "type": "footer",
+   "tick_group": "g10",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38",
+   "locked_tokens": [
+    "38",
+    "2025"
+   ],
+   "editable": true,
+   "layout": {
+    "printed_position": "top-right running line"
+   }
+  },
+  {
+   "part_id": "p11",
+   "type": "page_number",
+   "tick_group": null,
+   "en": "7",
+   "hi_reference": "7",
+   "bhashini_draft": "7",
+   "locked_tokens": [
+    "7"
+   ],
+   "editable": false
+  }
+ ],
+ "planted_slips": [
+  {
+   "part_id": "p01",
+   "kind": "transliteration",
+   "wrong_text": "ऑडिट",
+   "en_term": "Audit",
+   "fix_hint": "लेखापरीक्षा"
+  },
+  {
+   "part_id": "p04",
+   "kind": "transliteration",
+   "wrong_text": "कोक रेट",
+   "en_term": "Coke rate",
+   "fix_hint": "कोक दर"
+  },
+  {
+   "part_id": "p05",
+   "kind": "grammar",
+   "wrong_text": "संचालित किया गई",
+   "en_term": null,
+   "fix_hint": "'संचालित किया गया' – क्रिया का लिंग कर्म के अनुसार पुल्लिंग होगा"
+  },
+  {
+   "part_id": "p06",
+   "kind": "transliteration",
+   "wrong_text": "टेक्नो-इकोनॉमिक पैरामीटर",
+   "en_term": "techno-economic parameters",
+   "fix_hint": "तकनीकी-आर्थिक मापदंड"
+  },
+  {
+   "part_id": "p07",
+   "kind": "omission",
+   "wrong_text": "किफायती और कुशलता से पूरी की गई।",
+   "en_term": "Blast Furnaces were operated with adherence to the safety and environmental laws.",
+   "fix_hint": "अंतिम वाक्य छूट गया है: सुरक्षा एवं पर्यावरण कानूनों के पालन वाली बात जोड़ें"
+  },
+  {
+   "part_id": "p10",
+   "kind": "term",
+   "wrong_text": "रिपोर्ट",
+   "en_term": "Report",
+   "fix_hint": "प्रतिवेदन"
+  }
+ ],
+ "glossary_terms": [
+  {
+   "english_term": "audit",
+   "hindi_term": "लेखापरीक्षा",
+   "accepted_variants": [
+    "लेखापरीक्षा करना",
+    "संपरीक्षा"
+   ],
+   "avoid_forms": [
+    "ऑडिट"
+   ]
+  },
+  {
+   "english_term": "Report",
+   "hindi_term": "प्रतिवेदन",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "रिपोर्ट"
+   ],
+   "override": "seed/glossary_overrides.json (pending_confirmation, D3)"
+  },
+  {
+   "english_term": "objective",
+   "hindi_term": "उद्देश्य",
+   "accepted_variants": [
+    "लक्ष्य",
+    "वस्तुनिष्ठ"
+   ],
+   "avoid_forms": [
+    "ऑब्जेक्टिव"
+   ]
+  },
+  {
+   "english_term": "raw material",
+   "hindi_term": "कच्चा माल",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "राव मटीरियल"
+   ]
+  },
+  {
+   "english_term": "requirement",
+   "hindi_term": "आवश्यकता",
+   "accepted_variants": [
+    "अपेक्षा",
+    "जरूरत"
+   ],
+   "avoid_forms": [
+    "रिक्वायरमेंट"
+   ]
+  },
+  {
+   "english_term": "consumption",
+   "hindi_term": "उपभोग",
+   "accepted_variants": [
+    "खपत"
+   ],
+   "avoid_forms": [
+    "कंजम्पशन"
+   ]
+  },
+  {
+   "english_term": "norm",
+   "hindi_term": "मानक",
+   "accepted_variants": [
+    "मानदंड"
+   ],
+   "avoid_forms": [
+    "नॉर्म"
+   ]
+  },
+  {
+   "english_term": "preventive",
+   "hindi_term": "निवारक",
+   "accepted_variants": [
+    "एहतियाती"
+   ],
+   "avoid_forms": [
+    "प्रिवेंटिव"
+   ]
+  },
+  {
+   "english_term": "maintenance",
+   "hindi_term": "रखरखाव",
+   "accepted_variants": [
+    "अनुरक्षण",
+    "भरण-पोषण",
+    "रख-रखाव"
+   ],
+   "avoid_forms": [
+    "मेंटेनेंस"
+   ]
+  },
+  {
+   "english_term": "parameter",
+   "hindi_term": "प्राचल",
+   "accepted_variants": [
+    "मापदंड"
+   ],
+   "avoid_forms": [
+    "पैरामीटर"
+   ]
+  },
+  {
+   "english_term": "project",
+   "hindi_term": "परियोजना",
+   "accepted_variants": [
+    "प्रक्षेपित करना"
+   ],
+   "avoid_forms": [
+    "प्रोजेक्ट"
+   ]
+  },
+  {
+   "english_term": "safety",
+   "hindi_term": "सुरक्षा",
+   "accepted_variants": [
+    "क्षेम"
+   ],
+   "avoid_forms": [
+    "सेफ्टी"
+   ]
+  }
+ ]
+}

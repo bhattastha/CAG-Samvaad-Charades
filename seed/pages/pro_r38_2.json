@@ -1,0 +1,630 @@
+{
+ "page_id": "seed-pro-r38-2025-p-2",
+ "round": "pro",
+ "status": "draft",
+ "reference_status": "needs_verification",
+ "draft_status": "sample_authored_not_bhashini",
+ "label": "Report 38/2025 · p. 2",
+ "source": {
+  "report": "Report No. 38 of 2025 (Performance Audit – Commercial), Performance of Blast Furnaces in SAIL",
+  "english_pdf_page": 20,
+  "hindi_pdf_pages": [
+   24,
+   25
+  ],
+  "printed_page": "2",
+  "hindi_printed_page": "2-3",
+  "sector_hidden_from_player": "commercial"
+ },
+ "notes": "Printed p. 2 (English PDF p. 20), paras 1.3 and 1.4 in full: Chart-1 and Table 1 with their sources and the text around them (≈ 240 words). Para 1.5 is left out because it runs on to p. 3 and cannot be cut without breaking a sentence. Hindi reference transcribed by hand from rendered Hindi PDF pp. 24-25 (printed pp. 2-3): 1.3 and Chart-1 are on Hindi p. 24, 1.4 and Table 1 on p. 25. This English page has no footnotes; footnote 4 on Hindi p. 24 belongs to earlier text and is not used. Report 38 has no bottom footer text, so the running line is the header and there is no footer part. Chart values are as printed on the bars (three decimals); xLabels are numeric years. The chart has no y-axis title (ticks 0.000-25.000 only), so yAxis is null and the ticks are given in yTicks. The CAG Hindi keeps 'टर्नओवर' as a column head (it is an avoid form of 'turnover' in the glossary), so 'turnover' is NOT used as a glossary term on this page. BHASHINI drafts are hand-authored samples in machine-translation style with planted slips; regenerate with the live NMT service before publishing.",
+ "parts": [
+  {
+   "part_id": "p01",
+   "type": "header",
+   "tick_group": "g01",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की प्रतिवेदन संख्या 38",
+   "locked_tokens": [
+    "38",
+    "2025"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p02",
+   "type": "heading",
+   "tick_group": "g02",
+   "en": "1.3 Production Performance",
+   "hi_reference": "1.3 उत्पादन निष्पादन",
+   "bhashini_draft": "1.3 उत्पादन प्रदर्शन",
+   "locked_tokens": [
+    "1.3"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p03",
+   "type": "body",
+   "tick_group": "g03",
+   "en": "Production of Hot metal, Crude Steel and Saleable Steel in SAIL during 2017-18 to 2023-24 is as below:",
+   "hi_reference": "2017-18 से 2023-24 के दौरान सेल में तप्त धातु, क्रूड स्टील एवं विक्रय योग्य इस्पात का उत्पादन निम्नानुसार है:",
+   "bhashini_draft": "2017-18 से 2023-24 के दौरान सेल में गर्म धातु, क्रूड स्टील और सेलेबल स्टील का उत्पादन नीचे दिया गया है:",
+   "locked_tokens": [
+    "2017-18",
+    "2023-24"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p04",
+   "type": "chart",
+   "tick_group": "g04",
+   "en": "",
+   "hi_reference": "",
+   "bhashini_draft": "",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "kind": "bar",
+    "title": {
+     "en": "Chart-1 : Production of Hot metal, Crude steel and Saleable steel in SAIL during 2017-24 (Qty in million tonne)",
+     "hi_reference": "चार्ट-1: 2017-24 के दौरान सेल में तप्त धातु, क्रूड स्टील एवं विक्रय योग्य इस्पात का उत्पादन (मात्रा मिलियन टन में)",
+     "bhashini_draft": "चार्ट-1: 2017-24 के दौरान सेल में गर्म धातु, क्रूड स्टील और विक्रय योग्य स्टील का उत्पादन (मात्रा मिलियन टन में)",
+     "locked_tokens": [
+      "1",
+      "2017-24"
+     ]
+    },
+    "xLabels": [
+     {
+      "en": "2017-18",
+      "numeric": true
+     },
+     {
+      "en": "2018-19",
+      "numeric": true
+     },
+     {
+      "en": "2019-20",
+      "numeric": true
+     },
+     {
+      "en": "2020-21",
+      "numeric": true
+     },
+     {
+      "en": "2021-22",
+      "numeric": true
+     },
+     {
+      "en": "2022-23",
+      "numeric": true
+     },
+     {
+      "en": "2023-24",
+      "numeric": true
+     }
+    ],
+    "series": [
+     {
+      "name": {
+       "en": "Hot Metal",
+       "hi_reference": "तप्त धातु",
+       "bhashini_draft": "गर्म धातु"
+      },
+      "values": [
+       15.982,
+       17.513,
+       17.438,
+       16.582,
+       18.733,
+       19.409,
+       20.496
+      ]
+     },
+     {
+      "name": {
+       "en": "Crude Steel",
+       "hi_reference": "क्रूड स्टील",
+       "bhashini_draft": "क्रूड स्टील"
+      },
+      "values": [
+       15.02,
+       16.266,
+       16.155,
+       15.215,
+       17.366,
+       18.291,
+       19.24
+      ]
+     },
+     {
+      "name": {
+       "en": "Saleable Steel",
+       "hi_reference": "विक्रय योग्य इस्पात",
+       "bhashini_draft": "विक्रय योग्य इस्पात"
+      },
+      "values": [
+       14.074,
+       15.069,
+       15.147,
+       14.602,
+       16.896,
+       17.246,
+       18.437
+      ]
+     }
+    ],
+    "valueDecimals": 3,
+    "yAxis": null,
+    "yTicks": [
+     0,
+     5,
+     10,
+     15,
+     20,
+     25
+    ],
+    "source": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।",
+     "bhashini_draft": "स्रोत: प्रबंधन द्वारा प्रस्तुत डाटा।"
+    }
+   }
+  },
+  {
+   "part_id": "p05",
+   "type": "body",
+   "tick_group": "g05",
+   "en": "Production of hot metal in SAIL was 15.98 million tonne in 2017-18 which increased gradually to 20.50 million tonne in 2023-24 (except in 2019-20 and 2020-21 when the production was lower than the preceding year).",
+   "hi_reference": "सेल में तप्त धातु का उत्पादन 2017-18 में 15.98 मिलियन टन था जो धीरे-धीरे बढ़कर 2023-24 में 20.50 मिलियन टन हो गया (2019-20 एवं 2020-21 को छोड़कर जब उत्पादन पिछले वर्ष की तुलना में कम था)।",
+   "bhashini_draft": "सेल में हॉट मेटल का उत्पादन 2017-18 में 15.98 मिलियन टन था जो धीरे-धीरे बढ़कर 2023-24 में 20.50 मिलियन टन हो गया (2019-20 और 2020-21 को छोड़कर जब उत्पादन पिछले वर्ष से कम था)।",
+   "locked_tokens": [
+    "15.98",
+    "2017-18",
+    "20.50",
+    "2023-24",
+    "2019-20",
+    "2020-21"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p06",
+   "type": "heading",
+   "tick_group": "g06",
+   "en": "1.4 Financial Performance",
+   "hi_reference": "1.4 वित्तीय प्रदर्शन",
+   "bhashini_draft": "1.4 वित्तीय प्रदर्शन",
+   "locked_tokens": [
+    "1.4"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p07",
+   "type": "body",
+   "tick_group": "g07",
+   "en": "The financial performance of SAIL from 2017-18 to 2023-24 is as below.",
+   "hi_reference": "2017-18 से 2023-24 तक सेल का वित्तीय प्रदर्शन निम्नानुसार है।",
+   "bhashini_draft": "2017-18 से 2023-24 तक सेल का वित्तीय प्रदर्शन नीचे दिया गया है।",
+   "locked_tokens": [
+    "2017-18",
+    "2023-24"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p08",
+   "type": "table",
+   "tick_group": "g08",
+   "en": "",
+   "hi_reference": "",
+   "bhashini_draft": "",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "title": {
+     "en": "Table 1: Financial Performance of SAIL",
+     "hi_reference": "तालिका 1: सेल का वित्तीय प्रदर्शन",
+     "bhashini_draft": "तालिका 1: सेल का वित्तीय प्रदर्शन",
+     "locked_tokens": [
+      "1"
+     ]
+    },
+    "unit": {
+     "en": "(Amount: ₹ in crore)",
+     "hi_reference": "(राशि: करोड़ ₹ में)",
+     "bhashini_draft": "(राशि: ₹ करोड़ में)"
+    },
+    "columns": [
+     {
+      "en": "Year",
+      "hi_reference": "वर्ष",
+      "bhashini_draft": "वर्ष"
+     },
+     {
+      "en": "Turnover",
+      "hi_reference": "टर्नओवर",
+      "bhashini_draft": "टर्नओवर"
+     },
+     {
+      "en": "Total Expense",
+      "hi_reference": "कुल व्यय",
+      "bhashini_draft": "कुल खर्च"
+     },
+     {
+      "en": "Profit Before Tax",
+      "hi_reference": "कर से पहले का लाभ",
+      "bhashini_draft": "कर से पहले लाभ"
+     },
+     {
+      "en": "Net worth",
+      "hi_reference": "निवल मूल्य",
+      "bhashini_draft": "नेट वर्थ"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "2017-18",
+       "numeric": true
+      },
+      {
+       "en": "58,297",
+       "numeric": true
+      },
+      {
+       "en": "60,232",
+       "numeric": true
+      },
+      {
+       "en": "(-)759",
+       "numeric": true
+      },
+      {
+       "en": "35,714",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "2018-19",
+       "numeric": true
+      },
+      {
+       "en": "66,267",
+       "numeric": true
+      },
+      {
+       "en": "63,773",
+       "numeric": true
+      },
+      {
+       "en": "3,338",
+       "numeric": true
+      },
+      {
+       "en": "38,152",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "2019-20",
+       "numeric": true
+      },
+      {
+       "en": "61,025",
+       "numeric": true
+      },
+      {
+       "en": "58,703",
+       "numeric": true
+      },
+      {
+       "en": "3,171",
+       "numeric": true
+      },
+      {
+       "en": "39,777",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "2020-21",
+       "numeric": true
+      },
+      {
+       "en": "68,452",
+       "numeric": true
+      },
+      {
+       "en": "63,301",
+       "numeric": true
+      },
+      {
+       "en": "6,879",
+       "numeric": true
+      },
+      {
+       "en": "43,495",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "2021-22",
+       "numeric": true
+      },
+      {
+       "en": "1,02,805",
+       "numeric": true
+      },
+      {
+       "en": "88,123",
+       "numeric": true
+      },
+      {
+       "en": "16,039",
+       "numeric": true
+      },
+      {
+       "en": "52,017",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "2022-23",
+       "numeric": true
+      },
+      {
+       "en": "1,03,729",
+       "numeric": true
+      },
+      {
+       "en": "1,03,423",
+       "numeric": true
+      },
+      {
+       "en": "2,637",
+       "numeric": true
+      },
+      {
+       "en": "52,139",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "2023-24",
+       "numeric": true
+      },
+      {
+       "en": "1,04,545",
+       "numeric": true
+      },
+      {
+       "en": "1,01,994",
+       "numeric": true
+      },
+      {
+       "en": "3,688",
+       "numeric": true
+      },
+      {
+       "en": "54,131",
+       "numeric": true
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।",
+     "bhashini_draft": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।"
+    }
+   }
+  },
+  {
+   "part_id": "p09",
+   "type": "body",
+   "tick_group": "g09",
+   "en": "SAIL was in loss in 2017-18 but became profitable from 2018-19 onwards. There was an increase of around 50 per cent in the turnover in 2021-22 over 2020-21 on account of increase in net sales realization of saleable steel, increase in sales, better technical parameters etc. Profit of SAIL came down drastically in 2022-23 in comparison to 2021-22 due to higher input cost, increase in stores & spares consumption, repairs & maintenance expenses, increased purchased power rates, higher usage of raw materials, higher interest, and depreciation etc. There was a marginal increase in profit in 2023-24.",
+   "hi_reference": "सेल 2017-18 में घाटे में थी लेकिन 2018-19 से लाभ में आ गयी। विक्रय योग्य इस्पात की निवल बिक्री प्राप्ति में वृद्धि, बिक्री में वृद्धि, बेहतर तकनीकी मापदंडों आदि के कारण 2020-21 की तुलना में 2021-22 में कारोबार में लगभग 50 प्रतिशत की वृद्धि हुई। उच्च इनपुट लागत, स्टोर एवं स्पेयर्स की खपत में वृद्धि, मरम्मत एवं रखरखाव खर्च, खरीदी गई बिजली दरों में वृद्धि, कच्चे माल का अधिक उपयोग, उच्च ब्याज एवं मूल्यह्रास आदि के कारण 2021-22 की तुलना में 2022-23 में सेल का लाभ काफी कम हो गया। 2023-24 में लाभ में मामूली वृद्धि हुई।",
+   "bhashini_draft": "सेल 2017-18 में घाटे में थी लेकिन 2018-19 से लाभदायक हो गई। विक्रय योग्य इस्पात की शुद्ध बिक्री प्राप्ति में वृद्धि, बिक्री में वृद्धि, बेहतर तकनीकी मापदंडों आदि के कारण 2020-21 की तुलना में 2021-22 में टर्नओवर में लगभग 50 प्रतिशत की वृद्धि हुई। उच्च इनपुट लागत, स्टोर और स्पेयर्स की खपत में वृद्धि, मरम्मत और रखरखाव खर्च, खरीदी गई बिजली दरों में वृद्धि, कच्चे माल का अधिक उपयोग, उच्च ब्याज और डेप्रिशिएशन आदि के कारण 2021-22 की तुलना में 2022-23 में सेल का लाभ काफी कम हो गई। 2023-24 में लाभ में मामूली वृद्धि हुई।",
+   "locked_tokens": [
+    "2017-18",
+    "2018-19",
+    "50",
+    "2021-22",
+    "2020-21",
+    "2022-23",
+    "2023-24"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p10",
+   "type": "page_number",
+   "tick_group": null,
+   "en": "2",
+   "hi_reference": "2",
+   "bhashini_draft": "2",
+   "locked_tokens": [
+    "2"
+   ],
+   "editable": false
+  }
+ ],
+ "planted_slips": [
+  {
+   "part_id": "p03",
+   "kind": "transliteration",
+   "wrong_text": "सेलेबल स्टील",
+   "en_term": "Saleable Steel",
+   "fix_hint": "विक्रय योग्य इस्पात"
+  },
+  {
+   "part_id": "p04",
+   "location": "layout.source",
+   "kind": "transliteration",
+   "wrong_text": "डाटा",
+   "en_term": "Data",
+   "fix_hint": "आंकड़े"
+  },
+  {
+   "part_id": "p05",
+   "kind": "transliteration",
+   "wrong_text": "हॉट मेटल",
+   "en_term": "hot metal",
+   "fix_hint": "तप्त धातु"
+  },
+  {
+   "part_id": "p08",
+   "location": "layout.columns[4]",
+   "kind": "transliteration",
+   "wrong_text": "नेट वर्थ",
+   "en_term": "Net worth",
+   "fix_hint": "निवल मूल्य"
+  },
+  {
+   "part_id": "p09",
+   "kind": "transliteration",
+   "wrong_text": "डेप्रिशिएशन",
+   "en_term": "depreciation",
+   "fix_hint": "मूल्यह्रास"
+  },
+  {
+   "part_id": "p09",
+   "kind": "grammar",
+   "wrong_text": "लाभ काफी कम हो गई",
+   "en_term": null,
+   "fix_hint": "'लाभ' पुल्लिंग है: 'लाभ काफी कम हो गया'"
+  }
+ ],
+ "glossary_terms": [
+  {
+   "english_term": "production",
+   "hindi_term": "उत्पादन",
+   "accepted_variants": [
+    "निर्माण"
+   ],
+   "avoid_forms": [
+    "प्रोडक्शन"
+   ]
+  },
+  {
+   "english_term": "performance",
+   "hindi_term": "निष्पादन",
+   "accepted_variants": [
+    "पालन",
+    "प्रदर्शन"
+   ],
+   "avoid_forms": [
+    "परफॉर्मेंस"
+   ]
+  },
+  {
+   "english_term": "financial",
+   "hindi_term": "वित्तीय",
+   "accepted_variants": [
+    "वित्त"
+   ],
+   "avoid_forms": [
+    "फाइनेंशियल"
+   ]
+  },
+  {
+   "english_term": "net worth",
+   "hindi_term": "निवल मूल्य",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "नेट वर्थ"
+   ]
+  },
+  {
+   "english_term": "depreciation",
+   "hindi_term": "मूल्यह्रास",
+   "accepted_variants": [
+    "छीजन"
+   ],
+   "avoid_forms": [
+    "डेप्रिशिएशन"
+   ]
+  },
+  {
+   "english_term": "interest",
+   "hindi_term": "ब्याज",
+   "accepted_variants": [
+    "अभिरुचि २ हित ३ ब्याज",
+    "रुचि",
+    "व्याज",
+    "हित",
+    "१ रुचि"
+   ],
+   "avoid_forms": [
+    "इंटरेस्ट"
+   ]
+  },
+  {
+   "english_term": "management",
+   "hindi_term": "प्रबंधन",
+   "accepted_variants": [
+    "प्रबंध"
+   ],
+   "avoid_forms": [
+    "मैनेजमेंट"
+   ]
+  },
+  {
+   "english_term": "data",
+   "hindi_term": "आंकड़े",
+   "accepted_variants": [
+    "आँकड़ा",
+    "आधार सामग्री"
+   ],
+   "avoid_forms": [
+    "डाटा"
+   ]
+  },
+  {
+   "english_term": "source",
+   "hindi_term": "स्रोत",
+   "accepted_variants": [
+    "सोर्स"
+   ],
+   "avoid_forms": []
+  },
+  {
+   "english_term": "profit",
+   "hindi_term": "लाभ",
+   "accepted_variants": [
+    "फायदा"
+   ],
+   "avoid_forms": [
+    "प्रॉफिट"
+   ]
+  },
+  {
+   "english_term": "cost",
+   "hindi_term": "लागत",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "कॉस्ट"
+   ]
+  },
+  {
+   "english_term": "marginal",
+   "hindi_term": "मामूली",
+   "accepted_variants": [
+    "सीमांत"
+   ],
+   "avoid_forms": [
+    "मार्जिनल"
+   ]
+  }
+ ]
+}

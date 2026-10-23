@@ -1,0 +1,468 @@
+{
+ "page_id": "seed-secondary-r38-2025-p-49",
+ "round": "secondary",
+ "status": "draft",
+ "reference_status": "needs_verification",
+ "draft_status": "sample_authored_not_bhashini",
+ "label": "Report 38/2025 · p. 49",
+ "source": {
+  "report": "Report No. 38 of 2025 (Performance Audit – Commercial), Performance of Blast Furnaces in SAIL",
+  "english_pdf_page": 75,
+  "hindi_pdf_pages": [
+   97,
+   98
+  ],
+  "printed_page": "49",
+  "hindi_printed_page": "67-68",
+  "sector_hidden_from_player": "commercial"
+ },
+ "notes": "Part of printed p. 49 (English PDF p. 75): the lead sentence introducing Table 15, Table 15 itself, the three bullets that follow it, and footnote 60. Left out: the opening half-sentence (it starts on p. 48) and the two Management/Ministry reply paragraphs (keeps the page ≈ 270 words). Report 38 has no headnote boxes; the lead sentence above the table is used as the nearest equivalent (type 'headnote'). Report 38 has NO annexure references, so no annexure_ref part is included; a माध्यमिक page with an annexure reference must come from another report. Report 38 has no bottom footer text and this page has no section heading of its own, so the running line 'Report No. 38 of 2025' is the header and there is no footer part. Hindi reference transcribed by hand from rendered Hindi PDF pp. 97-98 (printed pp. 67-68); the Hindi edition places the table on p. 67 and the bullets on p. 68. The CAG Hindi itself is inconsistent for 'yield' (उपज / यील्ड / उत्पादन प्रतिशत), so 'yield' is NOT used as a glossary term on this page. English writes '84 -88 per cent' and Hindi '84-88'; 84 and 88 are locked separately. Footnote marker ⁶⁰ is kept as a superscript in both languages. BHASHINI drafts are hand-authored samples in machine-translation style with planted slips; regenerate with the live NMT service before publishing.",
+ "parts": [
+  {
+   "part_id": "p01",
+   "type": "header",
+   "tick_group": "g01",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38",
+   "locked_tokens": [
+    "38",
+    "2025"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p02",
+   "type": "headnote",
+   "tick_group": "g02",
+   "en": "Details of hot metal sent and production of pig iron vis-à-vis yield percentage during 2017-24 is depicted in table below:",
+   "hi_reference": "2017-24 के दौरान भेजे गए हॉट मेटल एवं पिग आयरन के उत्पादन का विवरण, उपज प्रतिशत के अनुसार नीचे दी गई तालिका में दर्शाया गया है:",
+   "bhashini_draft": "2017-24 के दौरान भेजे गए हॉट मेटल और पिग आयरन के उत्पादन का विवरण बनाम उपज प्रतिशत नीचे तालिका में दर्शाया गया है:",
+   "locked_tokens": [
+    "2017-24"
+   ],
+   "editable": true
+  },
+  {
+   "part_id": "p03",
+   "type": "table",
+   "tick_group": "g03",
+   "en": "",
+   "hi_reference": "",
+   "bhashini_draft": "",
+   "locked_tokens": [],
+   "editable": true,
+   "layout": {
+    "title": {
+     "en": "Table 15: Production of pig iron vis a vis yield percentage",
+     "hi_reference": "तालिका 15: पिग आयरन का उत्पादन, यील्ड प्रतिशत के अनुसार",
+     "bhashini_draft": "तालिका 15: पिग आयरन का उत्पादन बनाम यील्ड प्रतिशत",
+     "locked_tokens": [
+      "15"
+     ]
+    },
+    "columns": [
+     {
+      "en": "Name of the Steel Plant",
+      "hi_reference": "इस्पात संयंत्र का नाम",
+      "bhashini_draft": "स्टील प्लांट का नाम"
+     },
+     {
+      "en": "Hot metal sent to PCM (tonne)",
+      "hi_reference": "पीसीएम को भेजी गई हॉट मेटल (टन)",
+      "bhashini_draft": "पीसीएम को भेजा गया हॉट मेटल (टन)"
+     },
+     {
+      "en": "Production of Pig Iron (tonne)",
+      "hi_reference": "पिग आयरन का उत्पादन (टन)",
+      "bhashini_draft": "पिग आयरन का उत्पादन (टन)"
+     },
+     {
+      "en": "Range of annual yield of Pig Iron (in per cent)",
+      "hi_reference": "पिग आयरन की वार्षिक यील्ड की सीमा (प्रतिशत में)",
+      "bhashini_draft": "पिग आयरन की वार्षिक उपज की रेंज (प्रतिशत में)"
+     },
+     {
+      "en": "Average yield (in per cent)",
+      "hi_reference": "औसत यील्ड (प्रतिशत में)",
+      "bhashini_draft": "औसत उपज (प्रतिशत में)"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "en": "Bhilai Steel Plant",
+       "hi_reference": "भिलाई इस्पात संयंत्र",
+       "bhashini_draft": "भिलाई इस्पात संयंत्र"
+      },
+      {
+       "en": "6,93,867",
+       "numeric": true
+      },
+      {
+       "en": "6,42,729",
+       "numeric": true
+      },
+      {
+       "en": "92.63",
+       "numeric": true
+      },
+      {
+       "en": "92.63",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "Bokaro Steel Plant",
+       "hi_reference": "बोकारो इस्पात संयंत्र",
+       "bhashini_draft": "बोकारो इस्पात संयंत्र"
+      },
+      {
+       "en": "10,16,782",
+       "numeric": true
+      },
+      {
+       "en": "9,05,482",
+       "numeric": true
+      },
+      {
+       "en": "84.00-93.00",
+       "numeric": true
+      },
+      {
+       "en": "89.05",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "Durgapur Steel Plant",
+       "hi_reference": "दुर्गापुर इस्पात संयंत्र",
+       "bhashini_draft": "दुर्गापुर इस्पात संयंत्र"
+      },
+      {
+       "en": "3,68,334",
+       "numeric": true
+      },
+      {
+       "en": "3,31,506",
+       "numeric": true
+      },
+      {
+       "en": "90.00",
+       "numeric": true
+      },
+      {
+       "en": "90.00",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "IISCO Steel Plant",
+       "hi_reference": "इस्को इस्पात संयंत्र",
+       "bhashini_draft": "इस्को इस्पात संयंत्र"
+      },
+      {
+       "en": "4,84,705",
+       "numeric": true
+      },
+      {
+       "en": "4,26,728",
+       "numeric": true
+      },
+      {
+       "en": "83.47-89.42",
+       "numeric": true
+      },
+      {
+       "en": "88.04",
+       "numeric": true
+      }
+     ],
+     [
+      {
+       "en": "Rourkela Steel Plant",
+       "hi_reference": "राउरकेला इस्पात संयंत्र",
+       "bhashini_draft": "राउरकेला इस्पात संयंत्र"
+      },
+      {
+       "en": "10,03,311",
+       "numeric": true
+      },
+      {
+       "en": "8,64,135",
+       "numeric": true
+      },
+      {
+       "en": "84.81-88.00",
+       "numeric": true
+      },
+      {
+       "en": "86.13",
+       "numeric": true
+      }
+     ]
+    ],
+    "note": {
+     "en": "Source: Data furnished by Management.",
+     "hi_reference": "स्रोत: प्रबंधन द्वारा उपलब्ध कराए गए आंकड़े।",
+     "bhashini_draft": "स्रोत: प्रबंधन द्वारा प्रस्तुत आंकड़े।"
+    }
+   }
+  },
+  {
+   "part_id": "p04",
+   "type": "body",
+   "tick_group": "g04",
+   "en": "The average yield percentage of pig iron in the Steel Plants of SAIL ranged between 86 to 92 per cent during the period 2017-2024.",
+   "hi_reference": "सेल के इस्पात संयंत्रों में वर्ष 2017-2024 की अवधि के दौरान पिग आयरन का औसत उत्पादन प्रतिशत 86 से 92 प्रतिशत के बीच रहा।",
+   "bhashini_draft": "सेल के इस्पात संयंत्रों में पिग आयरन का औसत उपज प्रतिशत 2017-2024 की अवधि के दौरान 86 से 92 प्रतिशत के बीच रहा।",
+   "locked_tokens": [
+    "86",
+    "92",
+    "2017-2024"
+   ],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p05",
+   "type": "body",
+   "tick_group": "g05",
+   "en": "It was noted that Bhilai and Durgapur Steel Plants fixed the yield percentage of pig iron (92.63 per cent and 90 per cent respectively) irrespective of the actual pig iron generated. Bokaro Steel Plant also fixed the yield percentage (93 per cent) up to 2020-21. Thereafter the yield percentage ranged between 84 -88 per cent during 2021-24. In the absence of assessment of the actual pig iron generated, the operational efficiency of the pig casting machines could not be assessed by Audit.",
+   "hi_reference": "यह देखा गया कि भिलाई एवं दुर्गापुर इस्पात संयंत्रों ने वास्तविक उत्पादन की परवाह किए बिना पिग आयरन का उत्पादन प्रतिशत (क्रमशः 92.63 प्रतिशत एवं 90 प्रतिशत) निर्धारित किया। बोकारो इस्पात संयंत्र ने भी वर्ष 2020-21 तक उत्पादन प्रतिशत (93 प्रतिशत) निर्धारित किया। इसके बाद वर्ष 2021-24 के दौरान उत्पादन प्रतिशत 84-88 प्रतिशत के मध्य रहा। वास्तविक उत्पादन के आकलन के अभाव में, लेखापरीक्षा द्वारा पिग कास्टिंग मशीनों की परिचालन दक्षता का आकलन नहीं किया जा सका।",
+   "bhashini_draft": "यह नोट किया गया कि भिलाई और दुर्गापुर इस्पात संयंत्रों ने उत्पन्न वास्तविक पिग आयरन की परवाह किए बिना पिग आयरन का उपज प्रतिशत (क्रमशः 92.63 प्रतिशत और 90 प्रतिशत) निर्धारित किया। बोकारो इस्पात संयंत्र ने भी 2020-21 तक उपज प्रतिशत (93 प्रतिशत) निर्धारित किया। इसके बाद 2021-24 के दौरान उपज प्रतिशत 84 -88 प्रतिशत के बीच रहा। उत्पन्न वास्तविक पिग आयरन के आकलन के अभाव में, ऑडिट द्वारा पिग कास्टिंग मशीनों की ऑपरेशनल एफिशिएंसी का आकलन नहीं किया जा सका।",
+   "locked_tokens": [
+    "92.63",
+    "90",
+    "93",
+    "2020-21",
+    "84",
+    "88",
+    "2021-24"
+   ],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p06",
+   "type": "body",
+   "tick_group": "g06",
+   "en": "Year wise average yield loss⁶⁰ was between 7 and 17 per cent in the Pig Casting Machine across SAIL. There was less production of 77,870 tonne of pig iron in all the five steel plants (considering the norm in case of Rourkela Steel Plant and the minimum yield loss of 7 per cent in Bokaro Steel Plant achieved during 2017-21 for the other four steel plants) valuing ₹249.66 crore during 2017-24.",
+   "hi_reference": "सेल में पिग कास्टिंग मशीनों में वर्ष-वार औसत उत्पादन हानि⁶⁰ 7 से 17 प्रतिशत के मध्य रही। सभी पांचों इस्पात संयंत्रों में 2017-24 के दौरान 77,870 टन पिग आयरन का कम उत्पादन हुआ (राउरकेला इस्पात संयंत्र के मामले में मानक एवं अन्य चार इस्पात संयंत्रों के लिए 2017-21 के दौरान बोकारो इस्पात संयंत्र में प्राप्त 7 प्रतिशत की न्यूनतम यील्ड हानि को ध्यान में रखते हुए) जिसका मूल्य ₹249.66 करोड़ था।",
+   "bhashini_draft": "सेल में पिग कास्टिंग मशीन में वर्षवार औसत उपज हानि⁶⁰ 7 से 17 प्रतिशत के बीच था। सभी पांच इस्पात संयंत्रों में 2017-21 के दौरान प्राप्त 7 प्रतिशत की न्यूनतम उपज हानि के आधार पर 2017-24 के दौरान ₹249.66 करोड़ मूल्य के 77,870 टन पिग आयरन का कम उत्पादन हुआ।",
+   "locked_tokens": [
+    "7",
+    "17",
+    "77,870",
+    "2017-21",
+    "₹249.66",
+    "2017-24"
+   ],
+   "editable": true,
+   "layout": {
+    "list": "bullet"
+   }
+  },
+  {
+   "part_id": "p07",
+   "type": "footnote",
+   "tick_group": "g07",
+   "en": "⁶⁰ It is the hot metal lost due to processes in the Pig Casting Machine expressed as a percentage of hot metal poured into the pig casting machine.",
+   "hi_reference": "⁶⁰ यह पिग कास्टिंग मशीन में प्रक्रियाओं के कारण कम हुई गर्म धातु है, जिसे पिग कास्टिंग मशीन में डाली गई गर्म धातु के प्रतिशत के रूप में व्यक्त किया जाता है।",
+   "bhashini_draft": "⁶⁰ यह पिग कास्टिंग मशीन में प्रक्रियाओं के कारण खोई गई हॉट मेटल है जिसे पिग कास्टिंग मशीन में डाली गई हॉट मेटल के प्रतिशत के रूप में व्यक्त किया जाता है।",
+   "locked_tokens": [],
+   "editable": true
+  },
+  {
+   "part_id": "p08",
+   "type": "page_number",
+   "tick_group": null,
+   "en": "49",
+   "hi_reference": "49",
+   "bhashini_draft": "49",
+   "locked_tokens": [
+    "49"
+   ],
+   "editable": false
+  }
+ ],
+ "planted_slips": [
+  {
+   "part_id": "p01",
+   "kind": "term",
+   "wrong_text": "रिपोर्ट",
+   "en_term": "Report",
+   "fix_hint": "प्रतिवेदन"
+  },
+  {
+   "part_id": "p03",
+   "location": "layout.columns[0]",
+   "kind": "transliteration",
+   "wrong_text": "स्टील प्लांट",
+   "en_term": "Steel Plant",
+   "fix_hint": "इस्पात संयंत्र"
+  },
+  {
+   "part_id": "p03",
+   "location": "layout.columns[3]",
+   "kind": "transliteration",
+   "wrong_text": "रेंज",
+   "en_term": "Range",
+   "fix_hint": "सीमा"
+  },
+  {
+   "part_id": "p05",
+   "kind": "transliteration",
+   "wrong_text": "ऑडिट",
+   "en_term": "Audit",
+   "fix_hint": "लेखापरीक्षा"
+  },
+  {
+   "part_id": "p05",
+   "kind": "transliteration",
+   "wrong_text": "ऑपरेशनल एफिशिएंसी",
+   "en_term": "operational efficiency",
+   "fix_hint": "परिचालन दक्षता"
+  },
+  {
+   "part_id": "p06",
+   "kind": "grammar",
+   "wrong_text": "17 प्रतिशत के बीच था",
+   "en_term": null,
+   "fix_hint": "'हानि' स्त्रीलिंग है: '... के मध्य रही'"
+  },
+  {
+   "part_id": "p06",
+   "kind": "omission",
+   "wrong_text": "के आधार पर",
+   "en_term": "considering the norm in case of Rourkela Steel Plant ... for the other four steel plants",
+   "fix_hint": "कोष्ठक वाला अंश अधूरा है: राउरकेला इस्पात संयंत्र के मानक और बोकारो के 7 प्रतिशत न्यूनतम हानि को बाकी चार संयंत्रों पर लागू करने की बात"
+  }
+ ],
+ "glossary_terms": [
+  {
+   "english_term": "audit",
+   "hindi_term": "लेखापरीक्षा",
+   "accepted_variants": [
+    "लेखापरीक्षा करना",
+    "संपरीक्षा"
+   ],
+   "avoid_forms": [
+    "ऑडिट"
+   ]
+  },
+  {
+   "english_term": "Report",
+   "hindi_term": "प्रतिवेदन",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "रिपोर्ट"
+   ],
+   "override": "seed/glossary_overrides.json (pending_confirmation, D3)"
+  },
+  {
+   "english_term": "plant",
+   "hindi_term": "संयंत्र",
+   "accepted_variants": [
+    "पौधा",
+    "रोपना"
+   ],
+   "avoid_forms": [
+    "प्लांट"
+   ]
+  },
+  {
+   "english_term": "average",
+   "hindi_term": "औसत",
+   "accepted_variants": [
+    "एवरेज",
+    "सामान्य"
+   ],
+   "avoid_forms": []
+  },
+  {
+   "english_term": "percentage",
+   "hindi_term": "प्रतिशतता",
+   "accepted_variants": [
+    "परसेंटेज",
+    "प्रतिशत"
+   ],
+   "avoid_forms": []
+  },
+  {
+   "english_term": "Operational efficiency",
+   "hindi_term": "परिचालन कुशलता",
+   "accepted_variants": [
+    "दक्षता"
+   ],
+   "avoid_forms": [
+    "ऑपरेशनल एफिशिएंसी"
+   ]
+  },
+  {
+   "english_term": "absence",
+   "hindi_term": "अनुपस्थिति",
+   "accepted_variants": [
+    "अभाव",
+    "गैरहाजिरी"
+   ],
+   "avoid_forms": [
+    "एब्सेंस"
+   ]
+  },
+  {
+   "english_term": "actual",
+   "hindi_term": "वास्तविक",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "एक्चुअल"
+   ]
+  },
+  {
+   "english_term": "production",
+   "hindi_term": "उत्पादन",
+   "accepted_variants": [
+    "निर्माण"
+   ],
+   "avoid_forms": [
+    "प्रोडक्शन"
+   ]
+  },
+  {
+   "english_term": "management",
+   "hindi_term": "प्रबंधन",
+   "accepted_variants": [
+    "प्रबंध"
+   ],
+   "avoid_forms": [
+    "मैनेजमेंट"
+   ]
+  },
+  {
+   "english_term": "source",
+   "hindi_term": "स्रोत",
+   "accepted_variants": [
+    "सोर्स"
+   ],
+   "avoid_forms": []
+  },
+  {
+   "english_term": "data",
+   "hindi_term": "आंकड़े",
+   "accepted_variants": [
+    "आँकड़ा",
+    "आधार सामग्री"
+   ],
+   "avoid_forms": [
+    "डाटा"
+   ]
+  }
+ ]
+}

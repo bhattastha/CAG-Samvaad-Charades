@@ -1,0 +1,2250 @@
+{
+  "_comment": "Sahayika script and knowledge, converted from the original guide script supplied on 22 Oct 2026 and renamed per Concept Note v2 §12 (see CLAUDE.md §10). Fixed page numbers became {page_no}. Passage-specific facts sit in samplePageFacts and must come from each page's data at runtime. 'en' is spoken, 'hi' is shown; spoken=false lines are shown only.",
+  "placeholders": [
+    "name",
+    "total_credits",
+    "chance",
+    "best_score",
+    "score",
+    "chances_left",
+    "marks_short",
+    "credits",
+    "leaves",
+    "parts_left",
+    "time_left",
+    "wrong_word",
+    "en_term",
+    "hi_term",
+    "grammar_tip",
+    "page_no"
+  ],
+  "lines": [
+    {
+      "id": "before_game.screen.registration_open",
+      "section": "before_game",
+      "part": "screen",
+      "moment": "registration_open",
+      "when": "Registration screen opens",
+      "spoken": true,
+      "en": "Hello, friend! I'm so happy you're here! Fill this in just once, and I'll keep your credits safe with your email.",
+      "hi": "नमस्ते दोस्त! बस एक बार यह फ़ॉर्म भर दीजिए। आपके क्रेडिट आपकी ईमेल के साथ सुरक्षित रहेंगे।"
+    },
+    {
+      "id": "before_game.screen.registration_done",
+      "section": "before_game",
+      "part": "screen",
+      "moment": "registration_done",
+      "when": "Registration form submitted",
+      "spoken": true,
+      "en": "Yay, you're in! You just earned your first 2 credits.",
+      "hi": "पंजीकरण हो गया! आपके पहले 2 क्रेडिट मिल गए।"
+    },
+    {
+      "id": "before_game.screen.how_to_play_new",
+      "section": "before_game",
+      "part": "screen",
+      "moment": "how_to_play_new",
+      "when": "How-to-play screen opens (new player)",
+      "spoken": true,
+      "en": "Hi, I'm Sahayika! I'll be right beside you in every round. Let's have lots of fun together!",
+      "hi": "नमस्ते, मैं सहायिका हूँ! हर राउंड में मैं आपके साथ रहूँगी। चलिए, मज़े से खेलते हैं!"
+    },
+    {
+      "id": "before_game.screen.how_to_play_returning",
+      "section": "before_game",
+      "part": "screen",
+      "moment": "how_to_play_returning",
+      "when": "How-to-play screen opens (player already registered)",
+      "spoken": true,
+      "en": "Welcome back, {name}! Your {total_credits} credits are safe with me. Shall we play on?",
+      "hi": "फिर से स्वागत है, {name} जी! आपके {total_credits} क्रेडिट सुरक्षित हैं। चलिए, वहीं से आगे खेलते हैं।"
+    },
+    {
+      "id": "before_game.screen.rules_open",
+      "section": "before_game",
+      "part": "screen",
+      "moment": "rules_open",
+      "when": "Rules screen opens",
+      "spoken": true,
+      "en": "There are four rounds, and you get 3 chances in each one. Your best try is the one that counts! Score 33 or more out of 100 to win the round's title.",
+      "hi": "चार राउंड हैं और हर राउंड के तीन मौके। तीनों में से सबसे अच्छा स्कोर गिना जाएगा। राउंड की उपाधि के लिए कम से कम 33 / 100 अंक चाहिए।"
+    },
+    {
+      "id": "before_game.screen.rules_credits",
+      "section": "before_game",
+      "part": "screen",
+      "moment": "rules_credits",
+      "when": "Rules screen, under the credit pills",
+      "spoken": true,
+      "en": "You can earn up to 50 credits! The better you do, the more credits you collect.",
+      "hi": "कुल 50 क्रेडिट अर्न कर सकते हैं: पंजीकरण 2, परख 3, प्राथमिक 5, माध्यमिक 15 और वृत्तिक 25। जितना अच्छा स्कोर, उतने ज़्यादा क्रेडिट!"
+    },
+    {
+      "id": "trial.pre_round.first_chance",
+      "section": "trial",
+      "part": "pre_round",
+      "moment": "first_chance",
+      "when": "Before-round screen, first chance",
+      "spoken": true,
+      "en": "Ready, {name}? I know you can do it! Let's go!",
+      "hi": "तैयार हैं, {name} जी? आप कर लेंगे!"
+    },
+    {
+      "id": "trial.pre_round.retry",
+      "section": "trial",
+      "part": "pre_round",
+      "moment": "retry",
+      "when": "Before-round screen, chance 2 or 3",
+      "spoken": true,
+      "en": "This is chance {chance}, {name}! Last time you got {best_score}. Let's beat it!",
+      "hi": "यह आपका मौका {chance} है, {name} जी। पिछली बार आपके {best_score} अंक थे। इस बार और बेहतर!"
+    },
+    {
+      "id": "trial.pre_round.tip.1",
+      "section": "trial",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Put a full stop (।) at the end of every sentence, so it gets counted.",
+      "hi": "हर वाक्य के आख़िर में पूर्ण विराम (।) लगाइए, तभी वाक्य पूरा गिना जाएगा।"
+    },
+    {
+      "id": "trial.pre_round.tip.2",
+      "section": "trial",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Use the proper Hindi word, not an English word in Hindi letters. Write 'lekhapariksha', not 'audit'!",
+      "hi": "अंग्रेज़ी शब्द को देवनागरी में लिखने के बजाय मानक हिंदी शब्द लिखिए: ‘ऑडिट’ नहीं, ‘लेखापरीक्षा’।"
+    },
+    {
+      "id": "trial.in_round.round_start",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "round_start",
+      "when": "Trial round starts",
+      "spoken": true,
+      "en": "Hello, {name}! In the trial round, you translate all by yourself. You can type or speak, whatever feels easy. You have 20 minutes. Have fun!",
+      "hi": "नमस्ते {name} जी! परख में भाषिणी का अनुवाद नहीं मिलेगा, अनुवाद आपको खुद करना है। बोलकर या टाइप करके, जैसे आसान लगे, लिखिए। आपके पास 20 मिनट हैं।"
+    },
+    {
+      "id": "trial.in_round.mic_tapped",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "mic_tapped",
+      "when": "Trial: player taps the mic",
+      "spoken": true,
+      "en": "Go ahead and speak! At the end of a sentence, say 'poorn viraam'.",
+      "hi": "बोलिए… वाक्य ख़त्म हो तो “पूर्ण विराम” बोलिए।"
+    },
+    {
+      "id": "trial.in_round.under_source",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "under_source",
+      "when": "Trial round, under the English passage",
+      "spoken": true,
+      "en": "You're doing great! Stuck on a word? Tap the glossary, it's full of helpful words.",
+      "hi": "बहुत बढ़िया चल रहा है! कोई शब्द अटक रहा है? ‘शब्दावली’ दबाइए।"
+    },
+    {
+      "id": "trial.in_round.half_time",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "half_time",
+      "when": "Half the time limit has passed",
+      "spoken": true,
+      "en": "Half the time is gone, and you're doing so well! Keep going!",
+      "hi": "आधा समय हो गया। आप अच्छा कर रहे हैं, ऐसे ही चलते रहिए!"
+    },
+    {
+      "id": "trial.in_round.all_done_before_submit",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "all_done_before_submit",
+      "when": "Every paragraph ticked, before submit",
+      "spoken": true,
+      "en": "Every sentence is done! Read it all once more, then press submit.",
+      "hi": "सारे वाक्य पूरे! जमा करने से पहले एक बार पूरा पढ़ लीजिए।"
+    },
+    {
+      "id": "trial.in_round.copy_paste_blocked",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "copy_paste_blocked",
+      "when": "Translation box; also when copy or paste is tried",
+      "spoken": true,
+      "en": "Oops, no copy and paste here! Write it yourself. I believe in you!",
+      "hi": "यहाँ कॉपी-पेस्ट नहीं होगा। खुद लिखिए, आप कर लेंगे!"
+    },
+    {
+      "id": "trial.in_round.five_min_left",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "five_min_left",
+      "when": "5 minutes left",
+      "spoken": true,
+      "en": "Just 5 minutes left! Take a quick look at what you've written.",
+      "hi": "बस 5 मिनट बचे हैं! जो लिखा है, एक बार देख लीजिए।"
+    },
+    {
+      "id": "trial.in_round.one_min_left",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "one_min_left",
+      "when": "1 minute left",
+      "spoken": true,
+      "en": "Only one minute left! Submit what you have. Unfinished parts only cost a few completion marks.",
+      "hi": "बस एक मिनट बचा है! जो लिखा है, जमा कर दीजिए। अधूरे हिस्सों से सिर्फ़ पूर्णता के अंक कटेंगे।"
+    },
+    {
+      "id": "trial.in_round.time_up",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "time_up",
+      "when": "Time limit reached (auto-submit)",
+      "spoken": true,
+      "en": "Time's up! Don't worry, your answer has been saved and sent.",
+      "hi": "समय पूरा! आपका अनुवाद जमा हो गया।"
+    },
+    {
+      "id": "trial.in_round.submit_with_parts_left",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "submit_with_parts_left",
+      "when": "Submit pressed with paragraphs still open",
+      "spoken": true,
+      "en": "You still have {parts_left} sentences to go. Want to submit anyway? Press the button again.",
+      "hi": "अभी {parts_left} वाक्य बाकी हैं। फिर भी जमा करना है तो दोबारा दबाइए।"
+    },
+    {
+      "id": "trial.in_round.left_popup_title",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "left_popup_title",
+      "when": "Player left the page or full screen (pop-up title)",
+      "spoken": true,
+      "en": "Hey, where did you go?",
+      "hi": "अरे, आप कहाँ चले गए?"
+    },
+    {
+      "id": "trial.in_round.left_tab",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "left_tab",
+      "when": "Player switched tab or app",
+      "spoken": true,
+      "en": "You left the game page! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप पेज छोड़कर कहीं और चले गए थे। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "trial.in_round.left_fullscreen",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "left_fullscreen",
+      "when": "Player left full screen",
+      "spoken": true,
+      "en": "You left full screen! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप फ़ुल स्क्रीन से बाहर आ गए। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "trial.in_round.left_count_note",
+      "section": "trial",
+      "part": "in_round",
+      "moment": "left_count_note",
+      "when": "Under the pop-up message (shown, not spoken)",
+      "spoken": false,
+      "en": "Times you left the page: {leaves}. This shows on your report card.",
+      "hi": "पेज छोड़ा: {leaves} बार। यह आपके रिपोर्ट कार्ड में दिखेगा।"
+    },
+    {
+      "id": "trial.chat.quick_buttons",
+      "section": "trial",
+      "part": "chat",
+      "moment": "quick_buttons",
+      "when": "Quick-question buttons (shown, not spoken)",
+      "spoken": false,
+      "en": "Give me a hint / How am I scored? / How do I use the glossary? / How much time is left?",
+      "hi": "एक इशारा दीजिए / मेरे अंक कैसे बनते हैं? / शब्दावली कैसे इस्तेमाल करूँ? / कितना समय बचा है?"
+    },
+    {
+      "id": "trial.chat.input_placeholder",
+      "section": "trial",
+      "part": "chat",
+      "moment": "input_placeholder",
+      "when": "Empty question box (shown, not spoken)",
+      "spoken": false,
+      "en": "Ask Sahayika about a word or rule…",
+      "hi": "किसी शब्द या नियम के बारे में सहायिका से पूछिए…"
+    },
+    {
+      "id": "trial.chat.hint_all_good",
+      "section": "trial",
+      "part": "chat",
+      "moment": "hint_all_good",
+      "when": "Hint asked, nothing left to fix",
+      "spoken": true,
+      "en": "Looking good! Read it once more, tick every part, and then submit.",
+      "hi": "बढ़िया चल रहा है! एक बार पूरा पढ़कर देखिए कि वाक्य आसानी से पढ़े जा रहे हैं, हर हिस्से पर ✓ लगाइए और जमा कर दीजिए।"
+    },
+    {
+      "id": "trial.chat.hint_wrong_word",
+      "section": "trial",
+      "part": "chat",
+      "moment": "hint_wrong_word",
+      "when": "Hint asked, a known wrong word is in the text",
+      "spoken": true,
+      "en": "Look again at '{wrong_word}'. The CAG glossary has a proper Hindi word for '{en_term}'. Open the glossary to find it!",
+      "hi": "“{wrong_word}” को फिर से देखिए। CAG की शब्दावली में “{en_term}” के लिए एक मानक हिंदी शब्द है। ‘शब्दावली’ खोलकर देखिए।"
+    },
+    {
+      "id": "trial.chat.hint_missing_term",
+      "section": "trial",
+      "part": "chat",
+      "moment": "hint_missing_term",
+      "when": "Hint asked, a term is missing",
+      "spoken": true,
+      "en": "How did you write '{en_term}'? Peek in the glossary for the right CAG word.",
+      "hi": "आपने “{en_term}” कैसे लिखा है? CAG का मानक शब्द ‘शब्दावली’ में देखिए।"
+    },
+    {
+      "id": "trial.chat.ask_score",
+      "section": "trial",
+      "part": "chat",
+      "moment": "ask_score",
+      "when": "Score question",
+      "spoken": true,
+      "en": "Five things count: your translation, your time, the sentences you finish, the glossary words you use, and how well you build sentences. Together they make your score out of 100. You get 3 chances, and your best one counts. Score 33 or more to win the title!",
+      "hi": "पाँच चीज़ें गिनी जाती हैं: अनुवाद (10 में से), लगा समय, पूरे हुए वाक्य, शब्दावली के शब्द और वाक्य संरचना (10 में से)। इनसे 100 में से आपका स्कोर बनता है। हर राउंड के तीन मौके हैं, और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। उपाधि के लिए कम से कम 33 अंक चाहिए।"
+    },
+    {
+      "id": "trial.chat.ask_glossary",
+      "section": "trial",
+      "part": "chat",
+      "moment": "ask_glossary",
+      "when": "Glossary question",
+      "spoken": true,
+      "en": "Put your cursor where the word goes, tap the glossary,. Use the proper Hindi word, like 'anulagnak', not 'annexure' in Hindi letters.",
+      "hi": "जहाँ शब्द लिखना है वहाँ कर्सर रखिए, ‘शब्दावली’ प्रेस करिए। अंग्रेज़ी शब्द को देवनागरी में मत लिखिए, जैसे “एनेक्सर”; मानक शब्द “अनुलग्नक” लिखिए।"
+    },
+    {
+      "id": "trial.chat.ask_time",
+      "section": "trial",
+      "part": "chat",
+      "moment": "ask_time",
+      "when": "Time question",
+      "spoken": true,
+      "en": "You have {time_left} left out of 20 minutes. Finishing early gives you a few extra marks, but getting it right matters most!",
+      "hi": "20 मिनट में से {time_left} बचा है। जल्दी पूरा करने से समय के अंक बढ़ते हैं, पर सही अनुवाद और पूरा अनुवाद ज़्यादा मायने रखता है।"
+    },
+    {
+      "id": "trial.chat.ask_credits",
+      "section": "trial",
+      "part": "chat",
+      "moment": "ask_credits",
+      "when": "Question about credits, chances or attempts",
+      "spoken": true,
+      "en": "You can earn up to 50 credits: 2 for joining, then 3, 5, 15 and 25 for the four rounds. You get 3 chances per round, and your best score counts. Score 33 or more to win each title!",
+      "hi": "पंजीकरण 2, परख 3, प्राथमिक 5, माध्यमिक 15, वृत्तिक 25: कुल 50 क्रेडिट। हर राउंड के तीन मौके हैं और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। राउंड की उपाधि के लिए कम से कम 33 / 100 अंक चाहिए।"
+    },
+    {
+      "id": "trial.chat.thinking",
+      "section": "trial",
+      "part": "chat",
+      "moment": "thinking",
+      "when": "While an answer loads",
+      "spoken": true,
+      "en": "Hmm, let me think…",
+      "hi": "सोच रही हूँ…"
+    },
+    {
+      "id": "trial.chat.unknown_question",
+      "section": "trial",
+      "part": "chat",
+      "moment": "unknown_question",
+      "when": "Question Sahayika cannot answer",
+      "spoken": true,
+      "en": "Ooh, that one's tricky for me! Ask me about a word, or tap 'Give me a hint'.",
+      "hi": "यह सवाल मेरी पहुँच से बाहर है। शब्द के बारे में पूछिए, या ‘एक इशारा दीजिए’ दबाइए।"
+    },
+    {
+      "id": "trial.chat.opened_outside_round",
+      "section": "trial",
+      "part": "chat",
+      "moment": "opened_outside_round",
+      "when": "Sahayika opened outside a round",
+      "spoken": true,
+      "en": "Start a round, and I'll help you there!",
+      "hi": "पहले कोई राउंड शुरू कीजिए, वहाँ मैं आपकी मदद करूँगी!"
+    },
+    {
+      "id": "trial.report_card.title_earned_first_chance",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "title_earned_first_chance",
+      "when": "Score 33 or more, chance 1",
+      "spoken": true,
+      "en": "Wow, {name}! You finished the trial round! You are now:",
+      "hi": "वाह, {name} जी! आपने परख राउंड पूरा कर लिया। अब आप हैं:"
+    },
+    {
+      "id": "trial.report_card.title_name",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "title_name",
+      "when": "Said right after the win line",
+      "spoken": true,
+      "en": "Anuvad Pathik!",
+      "hi": "अनुवाद पथिक"
+    },
+    {
+      "id": "trial.report_card.new_best",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "new_best",
+      "when": "Chance 2 or 3, new best score, 33 or more",
+      "spoken": true,
+      "en": "Super, {name}! {score} this time, better than before! You are now:",
+      "hi": "शाबाश, {name} जी! इस बार {score} अंक, पिछली बार से बेहतर! अब आप हैं:"
+    },
+    {
+      "id": "trial.report_card.not_new_best",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "not_new_best",
+      "when": "Chance 2 or 3, not a new best, best still 33 or more",
+      "spoken": true,
+      "en": "Good try, {name}! Your best score of {best_score} still counts. You are still:",
+      "hi": "अच्छी कोशिश, {name} जी! आपका सबसे अच्छा स्कोर {best_score} ही गिना जाएगा। आप हैं:"
+    },
+    {
+      "id": "trial.report_card.first_pass_on_retry",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "first_pass_on_retry",
+      "when": "Chance 2 or 3, best score reaches 33 for the first time",
+      "spoken": true,
+      "en": "Yes! {score} this time, {name}, and the title is yours! You are now:",
+      "hi": "ये हुई ना बात, {name} जी! इस बार {score} अंक, और उपाधि आपकी। अब आप हैं:"
+    },
+    {
+      "id": "trial.report_card.below_pass_chances_left",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "below_pass_chances_left",
+      "when": "Best score under 33, chances left",
+      "spoken": true,
+      "en": "Good effort, {name}! You need 33 out of 100 to win the title. You still have {chances_left} chances, so let's try again!",
+      "hi": "अच्छी कोशिश, {name} जी! उपाधि के लिए 100 में से कम से कम 33 अंक चाहिए। अभी {chances_left} मौके बाकी हैं, एक बार और खेलिए!"
+    },
+    {
+      "id": "trial.report_card.so_close",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "so_close",
+      "when": "Best score 28 to 32, chances left (used instead of the line above)",
+      "spoken": true,
+      "en": "So close, {name}! Just {marks_short} more marks for the title. One more try, you can do it!",
+      "hi": "{name} जी, उपाधि बस {marks_short} अंक दूर है! एक मौका और लीजिए, इस बार पक्का।"
+    },
+    {
+      "id": "trial.report_card.below_pass_no_chances",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "below_pass_no_chances",
+      "when": "Best score under 33, all chances used",
+      "spoken": true,
+      "en": "Good effort, {name}! No title this time, but you still earned {credits} credits. Keep practising, you'll win the next one!",
+      "hi": "अच्छी कोशिश, {name} जी! इस बार उपाधि नहीं मिली, पर {credits} क्रेडिट आपके हो गए। अभ्यास करते रहिए, अगले राउंड में ज़रूर मिलेगी!"
+    },
+    {
+      "id": "trial.report_card.title_needed_note",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "title_needed_note",
+      "when": "Shown instead of the title when the best score is under 33",
+      "spoken": false,
+      "en": "You need 33 out of 100 for 'Anuvad Pathik'",
+      "hi": "‘अनुवाद पथिक’ के लिए कम से कम 33 / 100 अंक चाहिए"
+    },
+    {
+      "id": "trial.report_card.credits_line",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "credits_line",
+      "when": "Said after the title",
+      "spoken": true,
+      "en": "You earned {credits} credits in this round! Now you have {total_credits} out of 50.",
+      "hi": "इस राउंड से {credits} क्रेडिट मिले। अब आपके कुल {total_credits} / 50 क्रेडिट हैं।"
+    },
+    {
+      "id": "trial.report_card.typing_only_next",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "typing_only_next",
+      "when": "Trial report",
+      "spoken": true,
+      "en": "From the next round, you'll type your answers.",
+      "hi": "अगले राउंड से आपको टाइप करके ही लिखना होगा।"
+    },
+    {
+      "id": "trial.report_card.left_count_note",
+      "section": "trial",
+      "part": "report_card",
+      "moment": "left_count_note",
+      "when": "Added when the player left the page (shown, not spoken)",
+      "spoken": false,
+      "en": "(You left the page {leaves} times this round.)",
+      "hi": "(इस बार पेज छोड़ा: {leaves} बार)"
+    },
+    {
+      "id": "primary.pre_round.first_chance",
+      "section": "primary",
+      "part": "pre_round",
+      "moment": "first_chance",
+      "when": "Before-round screen, first chance",
+      "spoken": true,
+      "en": "Ready, {name}? I know you can do it! Let's go!",
+      "hi": "तैयार हैं, {name} जी? आप कर लेंगे!"
+    },
+    {
+      "id": "primary.pre_round.retry",
+      "section": "primary",
+      "part": "pre_round",
+      "moment": "retry",
+      "when": "Before-round screen, chance 2 or 3",
+      "spoken": true,
+      "en": "This is chance {chance}, {name}! Last time you got {best_score}. Let's beat it!",
+      "hi": "यह आपका मौका {chance} है, {name} जी। पिछली बार आपके {best_score} अंक थे। इस बार और बेहतर!"
+    },
+    {
+      "id": "primary.pre_round.typing_only_notice",
+      "section": "primary",
+      "part": "pre_round",
+      "moment": "typing_only_notice",
+      "when": "Before-round screen, first time after the trial",
+      "spoken": true,
+      "en": "From now on, you'll type your answers. Speaking was just for the trial round!",
+      "hi": "अब से आपको टाइप करके ही लिखना है। बोलकर लिखना सिर्फ़ परख में था।"
+    },
+    {
+      "id": "primary.pre_round.tip.1",
+      "section": "primary",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "BHASHINI is a helper, not a boss! Check its words against the glossary.",
+      "hi": "भाषिणी का अनुवाद मदद के लिए है, हर शब्द पर आँख मूँदकर भरोसा मत कीजिए। शब्दावली से मिलाइए।"
+    },
+    {
+      "id": "primary.pre_round.tip.2",
+      "section": "primary",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Read the whole paragraph first, then write. Don't leave anything out!",
+      "hi": "पहले पूरा पैराग्राफ पढ़िए, फिर लिखिए। अर्थ पूरा आना चाहिए, कुछ छूटे नहीं।"
+    },
+    {
+      "id": "primary.pre_round.tip.3",
+      "section": "primary",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Check your verbs: 'nigrani ki' is right, 'nigrani kiya' is not.",
+      "hi": "क्रिया का लिंग देखिए: ‘निगरानी की’ सही है, ‘निगरानी किया’ नहीं।"
+    },
+    {
+      "id": "primary.in_round.round_start",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "round_start",
+      "when": "Round starts",
+      "spoken": true,
+      "en": "Hi, {name}! BHASHINI has translated page {page_no} for you. Read each part, fix anything that looks wrong, and tap the tick when it looks good. You have 1 hour. Let's go!",
+      "hi": "नमस्ते {name} जी! भाषिणी ने पेज {page_no} का अनुवाद कर दिया है। हर हिस्सा पढ़िए, जहाँ गलती दिखे ठीक कीजिए, और सही लगे तो ✓ दबाइए। आपके पास 1 घंटा है। चलिए, शुरू करते हैं!"
+    },
+    {
+      "id": "primary.in_round.round_start_followup",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "round_start_followup",
+      "when": "Right after the round-start line",
+      "spoken": true,
+      "en": "This page has a heading, the main text, a footnote and a footer. Look at every part carefully. You've got this!",
+      "hi": "इस पेज में शीर्ष-लेख, शीर्षक, मुख्य पाठ, पाद-टिप्पणी और पाद-लेख हैं। हर हिस्से का पूरा अर्थ आना चाहिए।"
+    },
+    {
+      "id": "primary.in_round.half_time",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "half_time",
+      "when": "Half the time limit has passed",
+      "spoken": true,
+      "en": "Half the time is gone, and you're doing so well! Keep going!",
+      "hi": "आधा समय हो गया। आप अच्छा कर रहे हैं, ऐसे ही चलते रहिए!"
+    },
+    {
+      "id": "primary.in_round.half_parts_done",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "half_parts_done",
+      "when": "Half the paragraphs ticked ✓",
+      "spoken": true,
+      "en": "Wow, half the paragraphs are done! Keep it up!",
+      "hi": "आधे पैराग्राफ हो गए! बस इसी तरह आगे बढ़िए।"
+    },
+    {
+      "id": "primary.in_round.all_done_before_submit",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "all_done_before_submit",
+      "when": "Every paragraph ticked, before submit",
+      "spoken": true,
+      "en": "Everything's done! Read it all once more, then press submit.",
+      "hi": "सब हिस्से पूरे! जमा करने से पहले एक बार पूरा पढ़ लीजिए।"
+    },
+    {
+      "id": "primary.in_round.copy_paste_blocked",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "copy_paste_blocked",
+      "when": "Translation box; also when copy or paste is tried",
+      "spoken": true,
+      "en": "Oops, no copy and paste here! Write it yourself. I believe in you!",
+      "hi": "यहाँ कॉपी-पेस्ट नहीं होगा। खुद लिखिए, आप कर लेंगे!"
+    },
+    {
+      "id": "primary.in_round.five_min_left",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "five_min_left",
+      "when": "5 minutes left",
+      "spoken": true,
+      "en": "Just 5 minutes left! Take a quick look at what you've written.",
+      "hi": "बस 5 मिनट बचे हैं! जो लिखा है, एक बार देख लीजिए।"
+    },
+    {
+      "id": "primary.in_round.one_min_left",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "one_min_left",
+      "when": "1 minute left",
+      "spoken": true,
+      "en": "Only one minute left! Submit what you have. Unfinished parts only cost a few completion marks.",
+      "hi": "बस एक मिनट बचा है! जो लिखा है, जमा कर दीजिए। अधूरे हिस्सों से सिर्फ़ पूर्णता के अंक कटेंगे।"
+    },
+    {
+      "id": "primary.in_round.time_up",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "time_up",
+      "when": "Time limit reached (auto-submit)",
+      "spoken": true,
+      "en": "Time's up! Don't worry, your answer has been saved and sent.",
+      "hi": "समय पूरा! आपका अनुवाद जमा हो गया।"
+    },
+    {
+      "id": "primary.in_round.submit_with_parts_left",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "submit_with_parts_left",
+      "when": "Submit pressed with paragraphs still open",
+      "spoken": true,
+      "en": "You still have {parts_left} paragraphs to go. Want to submit anyway? Press the button again.",
+      "hi": "अभी {parts_left} पैराग्राफ बाकी हैं। फिर भी जमा करना है तो दोबारा दबाइए।"
+    },
+    {
+      "id": "primary.in_round.left_popup_title",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "left_popup_title",
+      "when": "Player left the page or full screen (pop-up title)",
+      "spoken": true,
+      "en": "Hey, where did you go?",
+      "hi": "अरे, आप कहाँ चले गए?"
+    },
+    {
+      "id": "primary.in_round.left_tab",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "left_tab",
+      "when": "Player switched tab or app",
+      "spoken": true,
+      "en": "You left the game page! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप पेज छोड़कर कहीं और चले गए थे। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "primary.in_round.left_fullscreen",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "left_fullscreen",
+      "when": "Player left full screen",
+      "spoken": true,
+      "en": "You left full screen! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप फ़ुल स्क्रीन से बाहर आ गए। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "primary.in_round.left_count_note",
+      "section": "primary",
+      "part": "in_round",
+      "moment": "left_count_note",
+      "when": "Under the pop-up message (shown, not spoken)",
+      "spoken": false,
+      "en": "Times you left the page: {leaves}. This shows on your report card.",
+      "hi": "पेज छोड़ा: {leaves} बार। यह आपके रिपोर्ट कार्ड में दिखेगा।"
+    },
+    {
+      "id": "primary.chat.quick_buttons",
+      "section": "primary",
+      "part": "chat",
+      "moment": "quick_buttons",
+      "when": "Quick-question buttons (shown, not spoken)",
+      "spoken": false,
+      "en": "Give me a hint / How am I scored? / How do I use the glossary? / How much time is left?",
+      "hi": "एक इशारा दीजिए / मेरे अंक कैसे बनते हैं? / शब्दावली कैसे इस्तेमाल करूँ? / कितना समय बचा है?"
+    },
+    {
+      "id": "primary.chat.input_placeholder",
+      "section": "primary",
+      "part": "chat",
+      "moment": "input_placeholder",
+      "when": "Empty question box (shown, not spoken)",
+      "spoken": false,
+      "en": "Ask Sahayika about a word or rule…",
+      "hi": "किसी शब्द या नियम के बारे में सहायिका से पूछिए…"
+    },
+    {
+      "id": "primary.chat.hint_all_good",
+      "section": "primary",
+      "part": "chat",
+      "moment": "hint_all_good",
+      "when": "Hint asked, nothing left to fix",
+      "spoken": true,
+      "en": "Looking good! Read it once more, tick every part, and then submit.",
+      "hi": "बढ़िया चल रहा है! एक बार पूरा पढ़कर देखिए कि वाक्य आसानी से पढ़े जा रहे हैं, हर हिस्से पर ✓ लगाइए और जमा कर दीजिए।"
+    },
+    {
+      "id": "primary.chat.hint_grammar",
+      "section": "primary",
+      "part": "chat",
+      "moment": "hint_grammar",
+      "when": "Hint asked, a grammar error is open",
+      "spoken": true,
+      "en": "Look closely at the sentence with '{en_term}'. Check the verb, and see if the sentence is complete.",
+      "hi": "“{en_term}” वाले वाक्य को ध्यान से देखिए। लिंग और क्रिया जाँचिए, और देखिए कि वाक्य पूरा है या नहीं।"
+    },
+    {
+      "id": "primary.chat.hint_wrong_word",
+      "section": "primary",
+      "part": "chat",
+      "moment": "hint_wrong_word",
+      "when": "Hint asked, a known wrong word is in the text",
+      "spoken": true,
+      "en": "Look again at '{wrong_word}'. The CAG glossary has a proper Hindi word for '{en_term}'. Open the glossary to find it!",
+      "hi": "“{wrong_word}” को फिर से देखिए। CAG की शब्दावली में “{en_term}” के लिए एक मानक हिंदी शब्द है। ‘शब्दावली’ खोलकर देखिए।"
+    },
+    {
+      "id": "primary.chat.hint_missing_term",
+      "section": "primary",
+      "part": "chat",
+      "moment": "hint_missing_term",
+      "when": "Hint asked, a term is missing",
+      "spoken": true,
+      "en": "How did you write '{en_term}'? Peek in the glossary for the right CAG word.",
+      "hi": "आपने “{en_term}” कैसे लिखा है? CAG का मानक शब्द ‘शब्दावली’ में देखिए।"
+    },
+    {
+      "id": "primary.chat.ask_score",
+      "section": "primary",
+      "part": "chat",
+      "moment": "ask_score",
+      "when": "Score question",
+      "spoken": true,
+      "en": "Five things count: your translation, your time, the paragraphs you finish, the glossary words you use, and how well you build sentences. Together they make your score out of 100. You get 3 chances, and your best one counts. Score 33 or more to win the title!",
+      "hi": "पाँच चीज़ें गिनी जाती हैं: अनुवाद (10 में से), लगा समय, पूरे हुए पैराग्राफ, शब्दावली के शब्द और वाक्य संरचना (10 में से)। इनसे 100 में से आपका स्कोर बनता है। हर राउंड के तीन मौके हैं, और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। उपाधि के लिए कम से कम 33 अंक चाहिए।"
+    },
+    {
+      "id": "primary.chat.ask_glossary",
+      "section": "primary",
+      "part": "chat",
+      "moment": "ask_glossary",
+      "when": "Glossary question",
+      "spoken": true,
+      "en": "Put your cursor where the word goes, tap the glossary, search in English or Hindi, and tap 'add'. Use the proper Hindi word, like 'anulagnak', not 'annexure' in Hindi letters.",
+      "hi": "जहाँ शब्द लिखना है वहाँ कर्सर रखिए, ‘शब्दावली’ दबाइए, अंग्रेज़ी या हिंदी में खोजिए और ‘जोड़ें’ दबाइए। अंग्रेज़ी शब्द को देवनागरी में मत लिखिए, जैसे “एनेक्सर”; मानक शब्द “अनुलग्नक” लिखिए।"
+    },
+    {
+      "id": "primary.chat.ask_time",
+      "section": "primary",
+      "part": "chat",
+      "moment": "ask_time",
+      "when": "Time question",
+      "spoken": true,
+      "en": "You have {time_left} left out of 1 hour. Finishing early gives you a few extra marks, but getting it right matters most!",
+      "hi": "1 घंटे में से {time_left} बचा है। जल्दी पूरा करने से समय के अंक बढ़ते हैं, पर सही अनुवाद और पूरा अनुवाद ज़्यादा मायने रखता है।"
+    },
+    {
+      "id": "primary.chat.ask_credits",
+      "section": "primary",
+      "part": "chat",
+      "moment": "ask_credits",
+      "when": "Question about credits, chances or attempts",
+      "spoken": true,
+      "en": "You can earn up to 50 credits: 2 for joining, then 3, 5, 15 and 25 for the four rounds. You get 3 chances per round, and your best score counts. Score 33 or more to win each title!",
+      "hi": "पंजीकरण 2, परख 3, प्राथमिक 5, माध्यमिक 15, वृत्तिक 25: कुल 50 क्रेडिट। हर राउंड के तीन मौके हैं और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। राउंड की उपाधि के लिए कम से कम 33 / 100 अंक चाहिए।"
+    },
+    {
+      "id": "primary.chat.ask_term",
+      "section": "primary",
+      "part": "chat",
+      "moment": "ask_term",
+      "when": "Question names a glossary term",
+      "spoken": true,
+      "en": "In CAG reports, '{en_term}' is '{hi_term}'. Try not to write '{wrong_word}'.",
+      "hi": "CAG प्रतिवेदनों में “{en_term}” को “{hi_term}” लिखते हैं। “{wrong_word}” मत लिखिए।"
+    },
+    {
+      "id": "primary.chat.thinking",
+      "section": "primary",
+      "part": "chat",
+      "moment": "thinking",
+      "when": "While an answer loads",
+      "spoken": true,
+      "en": "Hmm, let me think…",
+      "hi": "सोच रही हूँ…"
+    },
+    {
+      "id": "primary.chat.unknown_question",
+      "section": "primary",
+      "part": "chat",
+      "moment": "unknown_question",
+      "when": "Question Sahayika cannot answer",
+      "spoken": true,
+      "en": "Ooh, that one's tricky for me! Ask me about a word, or tap 'Give me a hint'.",
+      "hi": "यह सवाल मेरी पहुँच से बाहर है। शब्द के बारे में पूछिए, या ‘एक इशारा दीजिए’ दबाइए।"
+    },
+    {
+      "id": "primary.chat.opened_outside_round",
+      "section": "primary",
+      "part": "chat",
+      "moment": "opened_outside_round",
+      "when": "Sahayika opened outside a round",
+      "spoken": true,
+      "en": "Start a round, and I'll help you there!",
+      "hi": "पहले कोई राउंड शुरू कीजिए, वहाँ मैं आपकी मदद करूँगी!"
+    },
+    {
+      "id": "primary.report_card.title_earned_first_chance",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "title_earned_first_chance",
+      "when": "Score 33 or more, chance 1",
+      "spoken": true,
+      "en": "Super, {name}! You cleared the primary round! You are now:",
+      "hi": "शाबाश, {name} जी! आपने प्राथमिक राउंड पार कर लिया। अब आप हैं:"
+    },
+    {
+      "id": "primary.report_card.title_name",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "title_name",
+      "when": "Said right after the win line",
+      "spoken": true,
+      "en": "Anuvad Nipun!",
+      "hi": "अनुवाद निपुण"
+    },
+    {
+      "id": "primary.report_card.new_best",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "new_best",
+      "when": "Chance 2 or 3, new best score, 33 or more",
+      "spoken": true,
+      "en": "Super, {name}! {score} this time, better than before! You are now:",
+      "hi": "शाबाश, {name} जी! इस बार {score} अंक, पिछली बार से बेहतर! अब आप हैं:"
+    },
+    {
+      "id": "primary.report_card.not_new_best",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "not_new_best",
+      "when": "Chance 2 or 3, not a new best, best still 33 or more",
+      "spoken": true,
+      "en": "Good try, {name}! Your best score of {best_score} still counts. You are still:",
+      "hi": "अच्छी कोशिश, {name} जी! आपका सबसे अच्छा स्कोर {best_score} ही गिना जाएगा। आप हैं:"
+    },
+    {
+      "id": "primary.report_card.first_pass_on_retry",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "first_pass_on_retry",
+      "when": "Chance 2 or 3, best score reaches 33 for the first time",
+      "spoken": true,
+      "en": "Yes! {score} this time, {name}, and the title is yours! You are now:",
+      "hi": "ये हुई ना बात, {name} जी! इस बार {score} अंक, और उपाधि आपकी। अब आप हैं:"
+    },
+    {
+      "id": "primary.report_card.below_pass_chances_left",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "below_pass_chances_left",
+      "when": "Best score under 33, chances left",
+      "spoken": true,
+      "en": "Good effort, {name}! You need 33 out of 100 to win the title. You still have {chances_left} chances, so let's try again!",
+      "hi": "अच्छी कोशिश, {name} जी! उपाधि के लिए 100 में से कम से कम 33 अंक चाहिए। अभी {chances_left} मौके बाकी हैं, एक बार और खेलिए!"
+    },
+    {
+      "id": "primary.report_card.so_close",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "so_close",
+      "when": "Best score 28 to 32, chances left (used instead of the line above)",
+      "spoken": true,
+      "en": "So close, {name}! Just {marks_short} more marks for the title. One more try, you can do it!",
+      "hi": "{name} जी, उपाधि बस {marks_short} अंक दूर है! एक मौका और लीजिए, इस बार पक्का।"
+    },
+    {
+      "id": "primary.report_card.below_pass_no_chances",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "below_pass_no_chances",
+      "when": "Best score under 33, all chances used",
+      "spoken": true,
+      "en": "Good effort, {name}! No title this time, but you still earned {credits} credits. Keep practising, you'll win the next one!",
+      "hi": "अच्छी कोशिश, {name} जी! इस बार उपाधि नहीं मिली, पर {credits} क्रेडिट आपके हो गए। अभ्यास करते रहिए, अगले राउंड में ज़रूर मिलेगी!"
+    },
+    {
+      "id": "primary.report_card.title_needed_note",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "title_needed_note",
+      "when": "Shown instead of the title when the best score is under 33",
+      "spoken": false,
+      "en": "You need 33 out of 100 for 'Anuvad Nipun'",
+      "hi": "‘अनुवाद निपुण’ के लिए कम से कम 33 / 100 अंक चाहिए"
+    },
+    {
+      "id": "primary.report_card.credits_line",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "credits_line",
+      "when": "Said after the title",
+      "spoken": true,
+      "en": "You earned {credits} credits in this round! Now you have {total_credits} out of 50.",
+      "hi": "इस राउंड से {credits} क्रेडिट मिले। अब आपके कुल {total_credits} / 50 क्रेडिट हैं।"
+    },
+    {
+      "id": "primary.report_card.tip_term",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "tip_term",
+      "when": "Tip on the report card: a word still wrong",
+      "spoken": true,
+      "en": "Next time, write '{hi_term}' for '{en_term}'.",
+      "hi": "अगली बार ‘{en_term}’ के लिए ‘{hi_term}’ लिखिए।"
+    },
+    {
+      "id": "primary.report_card.tip_grammar",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "tip_grammar",
+      "when": "Tip on the report card: a grammar slip still there",
+      "spoken": true,
+      "en": "Next time, watch out: {grammar_tip}",
+      "hi": "अगली बार ध्यान दीजिए: {grammar_tip}"
+    },
+    {
+      "id": "primary.report_card.tip_praise",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "tip_praise",
+      "when": "Tip on the report card: no mistakes left",
+      "spoken": true,
+      "en": "Brilliant! No big mistakes left on this page.",
+      "hi": "बहुत बढ़िया! इस पेज में कोई बड़ी गलती नहीं बची।"
+    },
+    {
+      "id": "primary.report_card.left_count_note",
+      "section": "primary",
+      "part": "report_card",
+      "moment": "left_count_note",
+      "when": "Added when the player left the page (shown, not spoken)",
+      "spoken": false,
+      "en": "(You left the page {leaves} times this round.)",
+      "hi": "(इस बार पेज छोड़ा: {leaves} बार)"
+    },
+    {
+      "id": "secondary.pre_round.first_chance",
+      "section": "secondary",
+      "part": "pre_round",
+      "moment": "first_chance",
+      "when": "Before-round screen, first chance",
+      "spoken": true,
+      "en": "Ready, {name}? I know you can do it! Let's go!",
+      "hi": "तैयार हैं, {name} जी? आप कर लेंगे!"
+    },
+    {
+      "id": "secondary.pre_round.retry",
+      "section": "secondary",
+      "part": "pre_round",
+      "moment": "retry",
+      "when": "Before-round screen, chance 2 or 3",
+      "spoken": true,
+      "en": "This is chance {chance}, {name}! Last time you got {best_score}. Let's beat it!",
+      "hi": "यह आपका मौका {chance} है, {name} जी। पिछली बार आपके {best_score} अंक थे। इस बार और बेहतर!"
+    },
+    {
+      "id": "secondary.pre_round.tip.1",
+      "section": "secondary",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Keep numbers, dates and rupee amounts exactly as they are.",
+      "hi": "अंक, तारीख़ें और रुपये के आँकड़े जैसे हैं, वैसे ही रहने दीजिए।"
+    },
+    {
+      "id": "secondary.pre_round.tip.2",
+      "section": "secondary",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "In CAG reports, 'Report' is 'prativedan'. Remember that one!",
+      "hi": "‘Report’ के लिए CAG में ‘प्रतिवेदन’ लिखा जाता है, ‘रिपोर्ट’ नहीं।"
+    },
+    {
+      "id": "secondary.in_round.round_start",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "round_start",
+      "when": "Round starts",
+      "spoken": true,
+      "en": "Hi, {name}! BHASHINI has translated page {page_no} for you. Read each part, fix anything that looks wrong, and tap the tick when it looks good. You have 1.5 hours. Let's go!",
+      "hi": "नमस्ते {name} जी! भाषिणी ने पेज {page_no} का अनुवाद कर दिया है। हर हिस्सा पढ़िए, जहाँ गलती दिखे ठीक कीजिए, और सही लगे तो ✓ दबाइए। आपके पास 1.5 घंटे हैं। चलिए, शुरू करते हैं!"
+    },
+    {
+      "id": "secondary.in_round.round_start_followup",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "round_start_followup",
+      "when": "Right after the round-start line",
+      "spoken": true,
+      "en": "Ooh, this time there's a table too! Keep all the numbers just as they are, and fix the words around them.",
+      "hi": "इस बार तालिका, पाद-टिप्पणी और अनुलग्नक भी हैं। अंक और आँकड़े जैसे हैं, वैसे ही रहने दीजिए।"
+    },
+    {
+      "id": "secondary.in_round.half_time",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "half_time",
+      "when": "Half the time limit has passed",
+      "spoken": true,
+      "en": "Half the time is gone, and you're doing so well! Keep going!",
+      "hi": "आधा समय हो गया। आप अच्छा कर रहे हैं, ऐसे ही चलते रहिए!"
+    },
+    {
+      "id": "secondary.in_round.half_parts_done",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "half_parts_done",
+      "when": "Half the paragraphs ticked ✓",
+      "spoken": true,
+      "en": "Wow, half the paragraphs are done! Keep it up!",
+      "hi": "आधे पैराग्राफ हो गए! बस इसी तरह आगे बढ़िए।"
+    },
+    {
+      "id": "secondary.in_round.all_done_before_submit",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "all_done_before_submit",
+      "when": "Every paragraph ticked, before submit",
+      "spoken": true,
+      "en": "Everything's done! Read it all once more, then press submit.",
+      "hi": "सब हिस्से पूरे! जमा करने से पहले एक बार पूरा पढ़ लीजिए।"
+    },
+    {
+      "id": "secondary.in_round.copy_paste_blocked",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "copy_paste_blocked",
+      "when": "Translation box; also when copy or paste is tried",
+      "spoken": true,
+      "en": "Oops, no copy and paste here! Write it yourself. I believe in you!",
+      "hi": "यहाँ कॉपी-पेस्ट नहीं होगा। खुद लिखिए, आप कर लेंगे!"
+    },
+    {
+      "id": "secondary.in_round.five_min_left",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "five_min_left",
+      "when": "5 minutes left",
+      "spoken": true,
+      "en": "Just 5 minutes left! Take a quick look at what you've written.",
+      "hi": "बस 5 मिनट बचे हैं! जो लिखा है, एक बार देख लीजिए।"
+    },
+    {
+      "id": "secondary.in_round.one_min_left",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "one_min_left",
+      "when": "1 minute left",
+      "spoken": true,
+      "en": "Only one minute left! Submit what you have. Unfinished parts only cost a few completion marks.",
+      "hi": "बस एक मिनट बचा है! जो लिखा है, जमा कर दीजिए। अधूरे हिस्सों से सिर्फ़ पूर्णता के अंक कटेंगे।"
+    },
+    {
+      "id": "secondary.in_round.time_up",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "time_up",
+      "when": "Time limit reached (auto-submit)",
+      "spoken": true,
+      "en": "Time's up! Don't worry, your answer has been saved and sent.",
+      "hi": "समय पूरा! आपका अनुवाद जमा हो गया।"
+    },
+    {
+      "id": "secondary.in_round.submit_with_parts_left",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "submit_with_parts_left",
+      "when": "Submit pressed with paragraphs still open",
+      "spoken": true,
+      "en": "You still have {parts_left} paragraphs to go. Want to submit anyway? Press the button again.",
+      "hi": "अभी {parts_left} पैराग्राफ बाकी हैं। फिर भी जमा करना है तो दोबारा दबाइए।"
+    },
+    {
+      "id": "secondary.in_round.left_popup_title",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "left_popup_title",
+      "when": "Player left the page or full screen (pop-up title)",
+      "spoken": true,
+      "en": "Hey, where did you go?",
+      "hi": "अरे, आप कहाँ चले गए?"
+    },
+    {
+      "id": "secondary.in_round.left_tab",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "left_tab",
+      "when": "Player switched tab or app",
+      "spoken": true,
+      "en": "You left the game page! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप पेज छोड़कर कहीं और चले गए थे। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "secondary.in_round.left_fullscreen",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "left_fullscreen",
+      "when": "Player left full screen",
+      "spoken": true,
+      "en": "You left full screen! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप फ़ुल स्क्रीन से बाहर आ गए। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "secondary.in_round.left_count_note",
+      "section": "secondary",
+      "part": "in_round",
+      "moment": "left_count_note",
+      "when": "Under the pop-up message (shown, not spoken)",
+      "spoken": false,
+      "en": "Times you left the page: {leaves}. This shows on your report card.",
+      "hi": "पेज छोड़ा: {leaves} बार। यह आपके रिपोर्ट कार्ड में दिखेगा।"
+    },
+    {
+      "id": "secondary.chat.quick_buttons",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "quick_buttons",
+      "when": "Quick-question buttons (shown, not spoken)",
+      "spoken": false,
+      "en": "Give me a hint / How am I scored? / How do I use the glossary? / How much time is left?",
+      "hi": "एक इशारा दीजिए / मेरे अंक कैसे बनते हैं? / शब्दावली कैसे इस्तेमाल करूँ? / कितना समय बचा है?"
+    },
+    {
+      "id": "secondary.chat.input_placeholder",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "input_placeholder",
+      "when": "Empty question box (shown, not spoken)",
+      "spoken": false,
+      "en": "Ask Sahayika about a word or rule…",
+      "hi": "किसी शब्द या नियम के बारे में सहायिका से पूछिए…"
+    },
+    {
+      "id": "secondary.chat.hint_all_good",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "hint_all_good",
+      "when": "Hint asked, nothing left to fix",
+      "spoken": true,
+      "en": "Looking good! Read it once more, tick every part, and then submit.",
+      "hi": "बढ़िया चल रहा है! एक बार पूरा पढ़कर देखिए कि वाक्य आसानी से पढ़े जा रहे हैं, हर हिस्से पर ✓ लगाइए और जमा कर दीजिए।"
+    },
+    {
+      "id": "secondary.chat.hint_grammar",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "hint_grammar",
+      "when": "Hint asked, a grammar error is open",
+      "spoken": true,
+      "en": "Look closely at the sentence with '{en_term}'. Check the verb, and see if the sentence is complete.",
+      "hi": "“{en_term}” वाले वाक्य को ध्यान से देखिए। लिंग और क्रिया जाँचिए, और देखिए कि वाक्य पूरा है या नहीं।"
+    },
+    {
+      "id": "secondary.chat.hint_wrong_word",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "hint_wrong_word",
+      "when": "Hint asked, a known wrong word is in the text",
+      "spoken": true,
+      "en": "Look again at '{wrong_word}'. The CAG glossary has a proper Hindi word for '{en_term}'. Open the glossary to find it!",
+      "hi": "“{wrong_word}” को फिर से देखिए। CAG की शब्दावली में “{en_term}” के लिए एक मानक हिंदी शब्द है। ‘शब्दावली’ खोलकर देखिए।"
+    },
+    {
+      "id": "secondary.chat.hint_missing_term",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "hint_missing_term",
+      "when": "Hint asked, a term is missing",
+      "spoken": true,
+      "en": "How did you write '{en_term}'? Peek in the glossary for the right CAG word.",
+      "hi": "आपने “{en_term}” कैसे लिखा है? CAG का मानक शब्द ‘शब्दावली’ में देखिए।"
+    },
+    {
+      "id": "secondary.chat.ask_score",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "ask_score",
+      "when": "Score question",
+      "spoken": true,
+      "en": "Five things count: your translation, your time, the paragraphs you finish, the glossary words you use, and how well you build sentences. Together they make your score out of 100. You get 3 chances, and your best one counts. Score 33 or more to win the title!",
+      "hi": "पाँच चीज़ें गिनी जाती हैं: अनुवाद (10 में से), लगा समय, पूरे हुए पैराग्राफ, शब्दावली के शब्द और वाक्य संरचना (10 में से)। इनसे 100 में से आपका स्कोर बनता है। हर राउंड के तीन मौके हैं, और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। उपाधि के लिए कम से कम 33 अंक चाहिए।"
+    },
+    {
+      "id": "secondary.chat.ask_glossary",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "ask_glossary",
+      "when": "Glossary question",
+      "spoken": true,
+      "en": "Put your cursor where the word goes, tap the glossary, search in English or Hindi, and tap 'add'. Use the proper Hindi word, like 'anulagnak', not 'annexure' in Hindi letters.",
+      "hi": "जहाँ शब्द लिखना है वहाँ कर्सर रखिए, ‘शब्दावली’ दबाइए, अंग्रेज़ी या हिंदी में खोजिए और ‘जोड़ें’ दबाइए। अंग्रेज़ी शब्द को देवनागरी में मत लिखिए, जैसे “एनेक्सर”; मानक शब्द “अनुलग्नक” लिखिए।"
+    },
+    {
+      "id": "secondary.chat.ask_time",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "ask_time",
+      "when": "Time question",
+      "spoken": true,
+      "en": "You have {time_left} left out of 1.5 hours. Finishing early gives you a few extra marks, but getting it right matters most!",
+      "hi": "1.5 घंटे में से {time_left} बचा है। जल्दी पूरा करने से समय के अंक बढ़ते हैं, पर सही अनुवाद और पूरा अनुवाद ज़्यादा मायने रखता है।"
+    },
+    {
+      "id": "secondary.chat.ask_credits",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "ask_credits",
+      "when": "Question about credits, chances or attempts",
+      "spoken": true,
+      "en": "You can earn up to 50 credits: 2 for joining, then 3, 5, 15 and 25 for the four rounds. You get 3 chances per round, and your best score counts. Score 33 or more to win each title!",
+      "hi": "पंजीकरण 2, परख 3, प्राथमिक 5, माध्यमिक 15, वृत्तिक 25: कुल 50 क्रेडिट। हर राउंड के तीन मौके हैं और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। राउंड की उपाधि के लिए कम से कम 33 / 100 अंक चाहिए।"
+    },
+    {
+      "id": "secondary.chat.ask_term",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "ask_term",
+      "when": "Question names a glossary term",
+      "spoken": true,
+      "en": "In CAG reports, '{en_term}' is '{hi_term}'. Try not to write '{wrong_word}'.",
+      "hi": "CAG प्रतिवेदनों में “{en_term}” को “{hi_term}” लिखते हैं। “{wrong_word}” मत लिखिए।"
+    },
+    {
+      "id": "secondary.chat.thinking",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "thinking",
+      "when": "While an answer loads",
+      "spoken": true,
+      "en": "Hmm, let me think…",
+      "hi": "सोच रही हूँ…"
+    },
+    {
+      "id": "secondary.chat.unknown_question",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "unknown_question",
+      "when": "Question Sahayika cannot answer",
+      "spoken": true,
+      "en": "Ooh, that one's tricky for me! Ask me about a word, or tap 'Give me a hint'.",
+      "hi": "यह सवाल मेरी पहुँच से बाहर है। शब्द के बारे में पूछिए, या ‘एक इशारा दीजिए’ दबाइए।"
+    },
+    {
+      "id": "secondary.chat.opened_outside_round",
+      "section": "secondary",
+      "part": "chat",
+      "moment": "opened_outside_round",
+      "when": "Sahayika opened outside a round",
+      "spoken": true,
+      "en": "Start a round, and I'll help you there!",
+      "hi": "पहले कोई राउंड शुरू कीजिए, वहाँ मैं आपकी मदद करूँगी!"
+    },
+    {
+      "id": "secondary.report_card.title_earned_first_chance",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "title_earned_first_chance",
+      "when": "Score 33 or more, chance 1",
+      "spoken": true,
+      "en": "Amazing work, {name}! Tables, footnotes, all done so well! You are now:",
+      "hi": "कमाल कर दिया, {name} जी! तालिका, पाद-टिप्पणी, अनुलग्नक, सब बढ़िया। अब आप हैं:"
+    },
+    {
+      "id": "secondary.report_card.title_name",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "title_name",
+      "when": "Said right after the win line",
+      "spoken": true,
+      "en": "Anuvad Vidvaan!",
+      "hi": "अनुवाद विद्वान"
+    },
+    {
+      "id": "secondary.report_card.new_best",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "new_best",
+      "when": "Chance 2 or 3, new best score, 33 or more",
+      "spoken": true,
+      "en": "Super, {name}! {score} this time, better than before! You are now:",
+      "hi": "शाबाश, {name} जी! इस बार {score} अंक, पिछली बार से बेहतर! अब आप हैं:"
+    },
+    {
+      "id": "secondary.report_card.not_new_best",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "not_new_best",
+      "when": "Chance 2 or 3, not a new best, best still 33 or more",
+      "spoken": true,
+      "en": "Good try, {name}! Your best score of {best_score} still counts. You are still:",
+      "hi": "अच्छी कोशिश, {name} जी! आपका सबसे अच्छा स्कोर {best_score} ही गिना जाएगा। आप हैं:"
+    },
+    {
+      "id": "secondary.report_card.first_pass_on_retry",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "first_pass_on_retry",
+      "when": "Chance 2 or 3, best score reaches 33 for the first time",
+      "spoken": true,
+      "en": "Yes! {score} this time, {name}, and the title is yours! You are now:",
+      "hi": "ये हुई ना बात, {name} जी! इस बार {score} अंक, और उपाधि आपकी। अब आप हैं:"
+    },
+    {
+      "id": "secondary.report_card.below_pass_chances_left",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "below_pass_chances_left",
+      "when": "Best score under 33, chances left",
+      "spoken": true,
+      "en": "Good effort, {name}! You need 33 out of 100 to win the title. You still have {chances_left} chances, so let's try again!",
+      "hi": "अच्छी कोशिश, {name} जी! उपाधि के लिए 100 में से कम से कम 33 अंक चाहिए। अभी {chances_left} मौके बाकी हैं, एक बार और खेलिए!"
+    },
+    {
+      "id": "secondary.report_card.so_close",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "so_close",
+      "when": "Best score 28 to 32, chances left (used instead of the line above)",
+      "spoken": true,
+      "en": "So close, {name}! Just {marks_short} more marks for the title. One more try, you can do it!",
+      "hi": "{name} जी, उपाधि बस {marks_short} अंक दूर है! एक मौका और लीजिए, इस बार पक्का।"
+    },
+    {
+      "id": "secondary.report_card.below_pass_no_chances",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "below_pass_no_chances",
+      "when": "Best score under 33, all chances used",
+      "spoken": true,
+      "en": "Good effort, {name}! No title this time, but you still earned {credits} credits. Keep practising, you'll win the next one!",
+      "hi": "अच्छी कोशिश, {name} जी! इस बार उपाधि नहीं मिली, पर {credits} क्रेडिट आपके हो गए। अभ्यास करते रहिए, अगले राउंड में ज़रूर मिलेगी!"
+    },
+    {
+      "id": "secondary.report_card.title_needed_note",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "title_needed_note",
+      "when": "Shown instead of the title when the best score is under 33",
+      "spoken": false,
+      "en": "You need 33 out of 100 for 'Anuvad Vidvaan'",
+      "hi": "‘अनुवाद विद्वान’ के लिए कम से कम 33 / 100 अंक चाहिए"
+    },
+    {
+      "id": "secondary.report_card.credits_line",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "credits_line",
+      "when": "Said after the title",
+      "spoken": true,
+      "en": "You earned {credits} credits in this round! Now you have {total_credits} out of 50.",
+      "hi": "इस राउंड से {credits} क्रेडिट मिले। अब आपके कुल {total_credits} / 50 क्रेडिट हैं।"
+    },
+    {
+      "id": "secondary.report_card.tip_term",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "tip_term",
+      "when": "Tip on the report card: a word still wrong",
+      "spoken": true,
+      "en": "Next time, write '{hi_term}' for '{en_term}'.",
+      "hi": "अगली बार ‘{en_term}’ के लिए ‘{hi_term}’ लिखिए।"
+    },
+    {
+      "id": "secondary.report_card.tip_grammar",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "tip_grammar",
+      "when": "Tip on the report card: a grammar slip still there",
+      "spoken": true,
+      "en": "Next time, watch out: {grammar_tip}",
+      "hi": "अगली बार ध्यान दीजिए: {grammar_tip}"
+    },
+    {
+      "id": "secondary.report_card.tip_praise",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "tip_praise",
+      "when": "Tip on the report card: no mistakes left",
+      "spoken": true,
+      "en": "Brilliant! No big mistakes left on this page.",
+      "hi": "बहुत बढ़िया! इस पेज में कोई बड़ी गलती नहीं बची।"
+    },
+    {
+      "id": "secondary.report_card.left_count_note",
+      "section": "secondary",
+      "part": "report_card",
+      "moment": "left_count_note",
+      "when": "Added when the player left the page (shown, not spoken)",
+      "spoken": false,
+      "en": "(You left the page {leaves} times this round.)",
+      "hi": "(इस बार पेज छोड़ा: {leaves} बार)"
+    },
+    {
+      "id": "pro.pre_round.first_chance",
+      "section": "pro",
+      "part": "pre_round",
+      "moment": "first_chance",
+      "when": "Before-round screen, first chance",
+      "spoken": true,
+      "en": "Ready, {name}? I know you can do it! Let's go!",
+      "hi": "तैयार हैं, {name} जी? आप कर लेंगे!"
+    },
+    {
+      "id": "pro.pre_round.retry",
+      "section": "pro",
+      "part": "pre_round",
+      "moment": "retry",
+      "when": "Before-round screen, chance 2 or 3",
+      "spoken": true,
+      "en": "This is chance {chance}, {name}! Last time you got {best_score}. Let's beat it!",
+      "hi": "यह आपका मौका {chance} है, {name} जी। पिछली बार आपके {best_score} अंक थे। इस बार और बेहतर!"
+    },
+    {
+      "id": "pro.pre_round.tip.1",
+      "section": "pro",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Got time left? Read everything once more before you submit.",
+      "hi": "समय बचे तो जमा करने से पहले एक बार पूरा पढ़ लीजिए।"
+    },
+    {
+      "id": "pro.pre_round.tip.2",
+      "section": "pro",
+      "part": "pre_round",
+      "moment": "tip",
+      "when": "Before-round screen, one tip picked in turn",
+      "spoken": true,
+      "en": "Keep numbers, dates and rupee amounts exactly as they are.",
+      "hi": "अंक, तारीख़ें और रुपये के आँकड़े जैसे हैं, वैसे ही रहने दीजिए।"
+    },
+    {
+      "id": "pro.in_round.round_start",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "round_start",
+      "when": "Round starts",
+      "spoken": true,
+      "en": "Hi, {name}! BHASHINI has translated page {page_no} for you. Read each part, fix anything that looks wrong, and tap the tick when it looks good. You have 2 hours. Let's go!",
+      "hi": "नमस्ते {name} जी! भाषिणी ने पेज {page_no} का अनुवाद कर दिया है। हर हिस्सा पढ़िए, जहाँ गलती दिखे ठीक कीजिए, और सही लगे तो ✓ दबाइए। आपके पास 2 घंटे हैं। चलिए, शुरू करते हैं!"
+    },
+    {
+      "id": "pro.in_round.round_start_followup",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "round_start_followup",
+      "when": "Right after the round-start line",
+      "spoken": true,
+      "en": "This is the biggest round of all, with a chart and a table! Don't worry. Go one small part at a time.",
+      "hi": "यह सबसे बड़ा राउंड है: चार्ट, तालिका, सब कुछ। घबराइए नहीं, एक-एक हिस्सा करके चलिए।"
+    },
+    {
+      "id": "pro.in_round.half_time",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "half_time",
+      "when": "Half the time limit has passed",
+      "spoken": true,
+      "en": "Half the time is gone, and you're doing so well! Keep going!",
+      "hi": "आधा समय हो गया। आप अच्छा कर रहे हैं, ऐसे ही चलते रहिए!"
+    },
+    {
+      "id": "pro.in_round.half_parts_done",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "half_parts_done",
+      "when": "Half the paragraphs ticked ✓",
+      "spoken": true,
+      "en": "Wow, half the paragraphs are done! Keep it up!",
+      "hi": "आधे पैराग्राफ हो गए! बस इसी तरह आगे बढ़िए।"
+    },
+    {
+      "id": "pro.in_round.all_done_before_submit",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "all_done_before_submit",
+      "when": "Every paragraph ticked, before submit",
+      "spoken": true,
+      "en": "Everything's done! Read it all once more, then press submit.",
+      "hi": "सब हिस्से पूरे! जमा करने से पहले एक बार पूरा पढ़ लीजिए।"
+    },
+    {
+      "id": "pro.in_round.copy_paste_blocked",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "copy_paste_blocked",
+      "when": "Translation box; also when copy or paste is tried",
+      "spoken": true,
+      "en": "Oops, no copy and paste here! Write it yourself. I believe in you!",
+      "hi": "यहाँ कॉपी-पेस्ट नहीं होगा। खुद लिखिए, आप कर लेंगे!"
+    },
+    {
+      "id": "pro.in_round.five_min_left",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "five_min_left",
+      "when": "5 minutes left",
+      "spoken": true,
+      "en": "Just 5 minutes left! Take a quick look at what you've written.",
+      "hi": "बस 5 मिनट बचे हैं! जो लिखा है, एक बार देख लीजिए।"
+    },
+    {
+      "id": "pro.in_round.one_min_left",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "one_min_left",
+      "when": "1 minute left",
+      "spoken": true,
+      "en": "Only one minute left! Submit what you have. Unfinished parts only cost a few completion marks.",
+      "hi": "बस एक मिनट बचा है! जो लिखा है, जमा कर दीजिए। अधूरे हिस्सों से सिर्फ़ पूर्णता के अंक कटेंगे।"
+    },
+    {
+      "id": "pro.in_round.time_up",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "time_up",
+      "when": "Time limit reached (auto-submit)",
+      "spoken": true,
+      "en": "Time's up! Don't worry, your answer has been saved and sent.",
+      "hi": "समय पूरा! आपका अनुवाद जमा हो गया।"
+    },
+    {
+      "id": "pro.in_round.submit_with_parts_left",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "submit_with_parts_left",
+      "when": "Submit pressed with paragraphs still open",
+      "spoken": true,
+      "en": "You still have {parts_left} paragraphs to go. Want to submit anyway? Press the button again.",
+      "hi": "अभी {parts_left} पैराग्राफ बाकी हैं। फिर भी जमा करना है तो दोबारा दबाइए।"
+    },
+    {
+      "id": "pro.in_round.left_popup_title",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "left_popup_title",
+      "when": "Player left the page or full screen (pop-up title)",
+      "spoken": true,
+      "en": "Hey, where did you go?",
+      "hi": "अरे, आप कहाँ चले गए?"
+    },
+    {
+      "id": "pro.in_round.left_tab",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "left_tab",
+      "when": "Player switched tab or app",
+      "spoken": true,
+      "en": "You left the game page! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप पेज छोड़कर कहीं और चले गए थे। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "pro.in_round.left_fullscreen",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "left_fullscreen",
+      "when": "Player left full screen",
+      "spoken": true,
+      "en": "You left full screen! The round and the clock are still running. Stay here until you finish, okay?",
+      "hi": "आप फ़ुल स्क्रीन से बाहर आ गए। राउंड चल रहा है और घड़ी भी। अनुवाद पूरा होने तक इसी पेज पर रहिए।"
+    },
+    {
+      "id": "pro.in_round.left_count_note",
+      "section": "pro",
+      "part": "in_round",
+      "moment": "left_count_note",
+      "when": "Under the pop-up message (shown, not spoken)",
+      "spoken": false,
+      "en": "Times you left the page: {leaves}. This shows on your report card.",
+      "hi": "पेज छोड़ा: {leaves} बार। यह आपके रिपोर्ट कार्ड में दिखेगा।"
+    },
+    {
+      "id": "pro.chat.quick_buttons",
+      "section": "pro",
+      "part": "chat",
+      "moment": "quick_buttons",
+      "when": "Quick-question buttons (shown, not spoken)",
+      "spoken": false,
+      "en": "Give me a hint / How am I scored? / How do I use the glossary? / How much time is left?",
+      "hi": "एक इशारा दीजिए / मेरे अंक कैसे बनते हैं? / शब्दावली कैसे इस्तेमाल करूँ? / कितना समय बचा है?"
+    },
+    {
+      "id": "pro.chat.input_placeholder",
+      "section": "pro",
+      "part": "chat",
+      "moment": "input_placeholder",
+      "when": "Empty question box (shown, not spoken)",
+      "spoken": false,
+      "en": "Ask Sahayika about a word or rule…",
+      "hi": "किसी शब्द या नियम के बारे में सहायिका से पूछिए…"
+    },
+    {
+      "id": "pro.chat.hint_all_good",
+      "section": "pro",
+      "part": "chat",
+      "moment": "hint_all_good",
+      "when": "Hint asked, nothing left to fix",
+      "spoken": true,
+      "en": "Looking good! Read it once more, tick every part, and then submit.",
+      "hi": "बढ़िया चल रहा है! एक बार पूरा पढ़कर देखिए कि वाक्य आसानी से पढ़े जा रहे हैं, हर हिस्से पर ✓ लगाइए और जमा कर दीजिए।"
+    },
+    {
+      "id": "pro.chat.hint_grammar",
+      "section": "pro",
+      "part": "chat",
+      "moment": "hint_grammar",
+      "when": "Hint asked, a grammar error is open",
+      "spoken": true,
+      "en": "Look closely at the sentence with '{en_term}'. Check the verb, and see if the sentence is complete.",
+      "hi": "“{en_term}” वाले वाक्य को ध्यान से देखिए। लिंग और क्रिया जाँचिए, और देखिए कि वाक्य पूरा है या नहीं।"
+    },
+    {
+      "id": "pro.chat.hint_wrong_word",
+      "section": "pro",
+      "part": "chat",
+      "moment": "hint_wrong_word",
+      "when": "Hint asked, a known wrong word is in the text",
+      "spoken": true,
+      "en": "Look again at '{wrong_word}'. The CAG glossary has a proper Hindi word for '{en_term}'. Open the glossary to find it!",
+      "hi": "“{wrong_word}” को फिर से देखिए। CAG की शब्दावली में “{en_term}” के लिए एक मानक हिंदी शब्द है। ‘शब्दावली’ खोलकर देखिए।"
+    },
+    {
+      "id": "pro.chat.hint_missing_term",
+      "section": "pro",
+      "part": "chat",
+      "moment": "hint_missing_term",
+      "when": "Hint asked, a term is missing",
+      "spoken": true,
+      "en": "How did you write '{en_term}'? Peek in the glossary for the right CAG word.",
+      "hi": "आपने “{en_term}” कैसे लिखा है? CAG का मानक शब्द ‘शब्दावली’ में देखिए।"
+    },
+    {
+      "id": "pro.chat.ask_score",
+      "section": "pro",
+      "part": "chat",
+      "moment": "ask_score",
+      "when": "Score question",
+      "spoken": true,
+      "en": "Five things count: your translation, your time, the paragraphs you finish, the glossary words you use, and how well you build sentences. Together they make your score out of 100. You get 3 chances, and your best one counts. Score 33 or more to win the title!",
+      "hi": "पाँच चीज़ें गिनी जाती हैं: अनुवाद (10 में से), लगा समय, पूरे हुए पैराग्राफ, शब्दावली के शब्द और वाक्य संरचना (10 में से)। इनसे 100 में से आपका स्कोर बनता है। हर राउंड के तीन मौके हैं, और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। उपाधि के लिए कम से कम 33 अंक चाहिए।"
+    },
+    {
+      "id": "pro.chat.ask_glossary",
+      "section": "pro",
+      "part": "chat",
+      "moment": "ask_glossary",
+      "when": "Glossary question",
+      "spoken": true,
+      "en": "Put your cursor where the word goes, tap the glossary, search in English or Hindi, and tap 'add'. Use the proper Hindi word, like 'anulagnak', not 'annexure' in Hindi letters.",
+      "hi": "जहाँ शब्द लिखना है वहाँ कर्सर रखिए, ‘शब्दावली’ दबाइए, अंग्रेज़ी या हिंदी में खोजिए और ‘जोड़ें’ दबाइए। अंग्रेज़ी शब्द को देवनागरी में मत लिखिए, जैसे “एनेक्सर”; मानक शब्द “अनुलग्नक” लिखिए।"
+    },
+    {
+      "id": "pro.chat.ask_time",
+      "section": "pro",
+      "part": "chat",
+      "moment": "ask_time",
+      "when": "Time question",
+      "spoken": true,
+      "en": "You have {time_left} left out of 2 hours. Finishing early gives you a few extra marks, but getting it right matters most!",
+      "hi": "2 घंटे में से {time_left} बचा है। जल्दी पूरा करने से समय के अंक बढ़ते हैं, पर सही अनुवाद और पूरा अनुवाद ज़्यादा मायने रखता है।"
+    },
+    {
+      "id": "pro.chat.ask_credits",
+      "section": "pro",
+      "part": "chat",
+      "moment": "ask_credits",
+      "when": "Question about credits, chances or attempts",
+      "spoken": true,
+      "en": "You can earn up to 50 credits: 2 for joining, then 3, 5, 15 and 25 for the four rounds. You get 3 chances per round, and your best score counts. Score 33 or more to win each title!",
+      "hi": "पंजीकरण 2, परख 3, प्राथमिक 5, माध्यमिक 15, वृत्तिक 25: कुल 50 क्रेडिट। हर राउंड के तीन मौके हैं और सबसे अच्छे स्कोर पर क्रेडिट मिलते हैं। राउंड की उपाधि के लिए कम से कम 33 / 100 अंक चाहिए।"
+    },
+    {
+      "id": "pro.chat.ask_term",
+      "section": "pro",
+      "part": "chat",
+      "moment": "ask_term",
+      "when": "Question names a glossary term",
+      "spoken": true,
+      "en": "In CAG reports, '{en_term}' is '{hi_term}'. Try not to write '{wrong_word}'.",
+      "hi": "CAG प्रतिवेदनों में “{en_term}” को “{hi_term}” लिखते हैं। “{wrong_word}” मत लिखिए।"
+    },
+    {
+      "id": "pro.chat.thinking",
+      "section": "pro",
+      "part": "chat",
+      "moment": "thinking",
+      "when": "While an answer loads",
+      "spoken": true,
+      "en": "Hmm, let me think…",
+      "hi": "सोच रही हूँ…"
+    },
+    {
+      "id": "pro.chat.unknown_question",
+      "section": "pro",
+      "part": "chat",
+      "moment": "unknown_question",
+      "when": "Question Sahayika cannot answer",
+      "spoken": true,
+      "en": "Ooh, that one's tricky for me! Ask me about a word, or tap 'Give me a hint'.",
+      "hi": "यह सवाल मेरी पहुँच से बाहर है। शब्द के बारे में पूछिए, या ‘एक इशारा दीजिए’ दबाइए।"
+    },
+    {
+      "id": "pro.chat.opened_outside_round",
+      "section": "pro",
+      "part": "chat",
+      "moment": "opened_outside_round",
+      "when": "Sahayika opened outside a round",
+      "spoken": true,
+      "en": "Start a round, and I'll help you there!",
+      "hi": "पहले कोई राउंड शुरू कीजिए, वहाँ मैं आपकी मदद करूँगी!"
+    },
+    {
+      "id": "pro.report_card.title_earned_first_chance",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "title_earned_first_chance",
+      "when": "Score 33 or more, chance 1",
+      "spoken": true,
+      "en": "You did it, {name}! You beat the biggest round of all! You are now:",
+      "hi": "अद्भुत, {name} जी! आपने सबसे बड़ा राउंड जीत लिया। अब आप हैं:"
+    },
+    {
+      "id": "pro.report_card.title_name",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "title_name",
+      "when": "Said right after the win line",
+      "spoken": true,
+      "en": "Anuvad Visheshagya!",
+      "hi": "अनुवाद विशेषज्ञ"
+    },
+    {
+      "id": "pro.report_card.new_best",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "new_best",
+      "when": "Chance 2 or 3, new best score, 33 or more",
+      "spoken": true,
+      "en": "Super, {name}! {score} this time, better than before! You are now:",
+      "hi": "शाबाश, {name} जी! इस बार {score} अंक, पिछली बार से बेहतर! अब आप हैं:"
+    },
+    {
+      "id": "pro.report_card.not_new_best",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "not_new_best",
+      "when": "Chance 2 or 3, not a new best, best still 33 or more",
+      "spoken": true,
+      "en": "Good try, {name}! Your best score of {best_score} still counts. You are still:",
+      "hi": "अच्छी कोशिश, {name} जी! आपका सबसे अच्छा स्कोर {best_score} ही गिना जाएगा। आप हैं:"
+    },
+    {
+      "id": "pro.report_card.first_pass_on_retry",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "first_pass_on_retry",
+      "when": "Chance 2 or 3, best score reaches 33 for the first time",
+      "spoken": true,
+      "en": "Yes! {score} this time, {name}, and the title is yours! You are now:",
+      "hi": "ये हुई ना बात, {name} जी! इस बार {score} अंक, और उपाधि आपकी। अब आप हैं:"
+    },
+    {
+      "id": "pro.report_card.below_pass_chances_left",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "below_pass_chances_left",
+      "when": "Best score under 33, chances left",
+      "spoken": true,
+      "en": "Good effort, {name}! You need 33 out of 100 to win the title. You still have {chances_left} chances, so let's try again!",
+      "hi": "अच्छी कोशिश, {name} जी! उपाधि के लिए 100 में से कम से कम 33 अंक चाहिए। अभी {chances_left} मौके बाकी हैं, एक बार और खेलिए!"
+    },
+    {
+      "id": "pro.report_card.so_close",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "so_close",
+      "when": "Best score 28 to 32, chances left (used instead of the line above)",
+      "spoken": true,
+      "en": "So close, {name}! Just {marks_short} more marks for the title. One more try, you can do it!",
+      "hi": "{name} जी, उपाधि बस {marks_short} अंक दूर है! एक मौका और लीजिए, इस बार पक्का।"
+    },
+    {
+      "id": "pro.report_card.below_pass_no_chances",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "below_pass_no_chances",
+      "when": "Best score under 33, all chances used",
+      "spoken": true,
+      "en": "Good effort, {name}! No title this time, but you still earned {credits} credits. Keep practising, you'll win the next one!",
+      "hi": "अच्छी कोशिश, {name} जी! इस बार उपाधि नहीं मिली, पर {credits} क्रेडिट आपके हो गए। अभ्यास करते रहिए, अगले राउंड में ज़रूर मिलेगी!"
+    },
+    {
+      "id": "pro.report_card.title_needed_note",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "title_needed_note",
+      "when": "Shown instead of the title when the best score is under 33",
+      "spoken": false,
+      "en": "You need 33 out of 100 for 'Anuvad Visheshagya'",
+      "hi": "‘अनुवाद विशेषज्ञ’ के लिए कम से कम 33 / 100 अंक चाहिए"
+    },
+    {
+      "id": "pro.report_card.credits_line",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "credits_line",
+      "when": "Said after the title",
+      "spoken": true,
+      "en": "You earned {credits} credits in this round! Now you have {total_credits} out of 50.",
+      "hi": "इस राउंड से {credits} क्रेडिट मिले। अब आपके कुल {total_credits} / 50 क्रेडिट हैं।"
+    },
+    {
+      "id": "pro.report_card.tip_term",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "tip_term",
+      "when": "Tip on the report card: a word still wrong",
+      "spoken": true,
+      "en": "Next time, write '{hi_term}' for '{en_term}'.",
+      "hi": "अगली बार ‘{en_term}’ के लिए ‘{hi_term}’ लिखिए।"
+    },
+    {
+      "id": "pro.report_card.tip_grammar",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "tip_grammar",
+      "when": "Tip on the report card: a grammar slip still there",
+      "spoken": true,
+      "en": "Next time, watch out: {grammar_tip}",
+      "hi": "अगली बार ध्यान दीजिए: {grammar_tip}"
+    },
+    {
+      "id": "pro.report_card.tip_praise",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "tip_praise",
+      "when": "Tip on the report card: no mistakes left",
+      "spoken": true,
+      "en": "Brilliant! No big mistakes left on this page.",
+      "hi": "बहुत बढ़िया! इस पेज में कोई बड़ी गलती नहीं बची।"
+    },
+    {
+      "id": "pro.report_card.left_count_note",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "left_count_note",
+      "when": "Added when the player left the page (shown, not spoken)",
+      "spoken": false,
+      "en": "(You left the page {leaves} times this round.)",
+      "hi": "(इस बार पेज छोड़ा: {leaves} बार)"
+    },
+    {
+      "id": "pro.report_card.all_rounds_played",
+      "section": "pro",
+      "part": "report_card",
+      "moment": "all_rounds_played",
+      "when": "All four rounds played",
+      "spoken": true,
+      "en": "Hooray! All four rounds done. You collected every star!",
+      "hi": "वाह! चारों राउंड पूरे, आपने सारे सितारे हासिल कर लिए।"
+    },
+    {
+      "id": "end.screen.total_open",
+      "section": "end",
+      "part": "screen",
+      "moment": "total_open",
+      "when": "Total score screen opens",
+      "spoken": true,
+      "en": "Congratulations, {name}!",
+      "hi": "बधाई हो, {name} जी!"
+    },
+    {
+      "id": "end.screen.total_open.2",
+      "section": "end",
+      "part": "screen",
+      "moment": "total_open",
+      "when": "Total score screen opens",
+      "spoken": true,
+      "en": "Fantastic! Your credits are saved. See you at Hindi Pakhwada!",
+      "hi": "शानदार! आपके क्रेडिट सेव हो गए हैं। हिंदी पखवाड़ा में मिलते हैं!"
+    },
+    {
+      "id": "end.screen.all_titles_won",
+      "section": "end",
+      "part": "screen",
+      "moment": "all_titles_won",
+      "when": "All four titles won (used instead of the line above)",
+      "spoken": true,
+      "en": "You won all four titles! You're an Anuvad Visheshagya now! Your credits are saved. See you at Hindi Pakhwada!",
+      "hi": "आपने चारों उपाधियाँ जीत लीं, अब आप अनुवाद विशेषज्ञ हैं! आपके क्रेडिट सेव हो गए हैं। हिंदी पखवाड़ा में मिलते हैं!"
+    },
+    {
+      "id": "end.screen.titles_missing",
+      "section": "end",
+      "part": "screen",
+      "moment": "titles_missing",
+      "when": "A title still missing, and that round has chances left",
+      "spoken": true,
+      "en": "Some titles are still waiting for you! Use your chances left and score 33 to win them.",
+      "hi": "कुछ उपाधियाँ अभी बाकी हैं। बचे मौकों में 33 अंक पार कीजिए और उन्हें भी अपने नाम कीजिए!"
+    },
+    {
+      "id": "end.screen.replay_note",
+      "section": "end",
+      "part": "screen",
+      "moment": "replay_note",
+      "when": "Some round still has chances (shown, not spoken)",
+      "spoken": false,
+      "en": "Rounds with chances left can be played again to raise your score.",
+      "hi": "जिन राउंड में मौके बचे हैं, उन्हें दोबारा खेलकर स्कोर बढ़ा सकते हैं।"
+    }
+  ],
+  "knowledge": {
+    "before_game": [
+      "Hindi Charades (हिंदी शराड्स) is a Hindi translation game made by BHASHINI for officers of CAG, the Indian Audit and Accounts Department. It is only for CAG officers.",
+      "Players translate real pages from CAG audit reports from English into Hindi.",
+      "Why play: it helps in appraisal, gives translation practice, and earns credits for the Hindi Pakhwada contest.",
+      "Registration asks for name, mobile number, email, office (from a list) and office address. Email is a must: all credits are saved with it. Registering earns 2 credits.",
+      "There are four rounds in order: Trial (20 min), Primary (1 hr), Secondary (1.5 hr) and Pro (2 hr). Each round gives a title: Anuvad Pathik, Anuvad Nipun, Anuvad Vidvaan, Anuvad Visheshagya.",
+      "Credits: registration 2, trial 3, primary 5, secondary 15, pro 25. That is 50 in all.",
+      "Each round can be played 3 times (3 chances, called मौका). The best of the three scores counts.",
+      "Round credits = best score / 100 × the round's credits, to one decimal. Example: 80 in the primary round gives 80/100 × 5 = 4 credits.",
+      "To earn a round's title, the best score must be at least 33 out of 100. Below 33 the player still earns credits by the formula, but no title.",
+      "Score out of 100 from five things: translation quality, time taken, completion (sentences in the trial, paragraphs later), glossary words used, and sentence construction. Proposed weights: translation 30, completion 20, sentence construction 20, glossary 20, time 10.",
+      "Time marks: full time marks if you finish within half the time limit, then they slowly drop to 60% of the time marks at the limit.",
+      "Ways to type Hindi: Roman typing with BHASHINI suggestions (write in Roman letters, pick a suggestion or press space for the first one), the on-screen Hindi InScript keyboard, or the device's own Hindi keyboard. Speaking to type works only in the trial round.",
+      "During a round the screen is frozen: full screen, no copy, cut or paste, no right-click. Leaving the page shows a warning, the clock keeps running, and the number of times you left shows on the report card.",
+      "The glossary (शब्दावली) button opens CAG's standard Hindi terms. Search in English or Hindi, put the cursor in your translation and tap जोड़ें to add the word.",
+      "The game works in a browser with nothing to install: Chrome or Edge on Windows, Safari on Mac, iPhone and iPad."
+    ],
+    "trial": [
+      "Time 20 minutes. Up to 3 credits. Title: Anuvad Pathik.",
+      "No BHASHINI translation here: the player translates on their own.",
+      "Speaking to type (voice typing) works only in this round. Say 'poorn viraam' to put a full stop (।).",
+      "Completion is counted by sentences: every finished sentence ending in । counts."
+    ],
+    "primary": [
+      "Time 1 hour. Up to 5 credits. Title: Anuvad Nipun.",
+      "One page of a real CAG audit report: header, heading, body text, footnote, footer and page number.",
+      "BHASHINI gives a Hindi draft with some mistakes. The player reads each part, fixes mistakes, and taps ✓ when a part is right.",
+      "Typing only from this round: no voice typing.",
+      "Completion is counted by paragraphs (parts of the page)."
+    ],
+    "secondary": [
+      "Time 1.5 hours. Up to 15 credits. Title: Anuvad Vidvaan.",
+      "The page adds a headnote, a table, footnotes and an annexure reference. BHASHINI gives the draft; typing only; completion by paragraphs.",
+      "Numbers in tables stay exactly as they are; only the words are translated."
+    ],
+    "pro": [
+      "Time 2 hours. Up to 25 credits, the biggest prize. Title: Anuvad Visheshagya.",
+      "The page has everything: headnote, a chart with its title and source, a table, body text, footnote and footer. BHASHINI draft; typing only; completion by paragraphs."
+    ],
+    "end": [
+      "After every round a report card shows: translation out of 10, time taken (like 16 min / 20 min), sentences or paragraphs done, glossary words used (like 9 / 12), sentence construction out of 10, the score out of 100, and all chances with the best one starred.",
+      "The total score screen lists every round's best score and credits, and the total out of 50.",
+      "A certificate can be downloaded. It lists only the titles earned (33 or more).",
+      "Rounds with chances left can be replayed to raise the score. Credits are used in the Hindi Pakhwada contest."
+    ]
+  },
+  "faq": {
+    "before_game": [
+      {
+        "q": "What is this game?",
+        "en": "It's Hindi Charades, a fun Hindi translation game for CAG officers! You translate real audit report pages from English to Hindi, win titles and earn credits.",
+        "hi": "यह हिंदी शराड्स है, कैग अधिकारियों के लिए हिंदी अनुवाद का मज़ेदार खेल! आप लेखापरीक्षा प्रतिवेदन के असली पेज अंग्रेज़ी से हिंदी में अनुवाद करते हैं, उपाधियाँ जीतते हैं और क्रेडिट अर्न करते हैं।"
+      },
+      {
+        "q": "Why should I play?",
+        "en": "Three good reasons! It helps your appraisal, you practise translation, and you earn credits for the Hindi Pakhwada contest.",
+        "hi": "तीन बढ़िया वजहें! अप्रेज़ल में फ़ायदा, अनुवाद का अभ्यास, और हिंदी पखवाड़ा प्रतियोगिता के क्रेडिट।"
+      },
+      {
+        "q": "Why do you need my email?",
+        "en": "Your email is like your treasure box. All your credits are saved with it, so you never lose them.",
+        "hi": "ईमेल आपका ख़ज़ाना है। आपके सारे क्रेडिट उसी पर जमा होते हैं, ताकि कभी खोएँ नहीं।"
+      },
+      {
+        "q": "How many rounds are there?",
+        "en": "Four! Trial, primary, secondary and pro. Each one is a little bigger than the last.",
+        "hi": "चार! परख, प्राथमिक, माध्यमिक और प्रो। हर राउंड पिछले से थोड़ा बड़ा है।"
+      },
+      {
+        "q": "How many credits can I earn?",
+        "en": "Up to 50! 2 for joining, then 3, 5, 15 and 25 for the four rounds.",
+        "hi": "50 तक! पंजीकरण के 2, फिर चारों राउंड के 3, 5, 15 और 25।"
+      },
+      {
+        "q": "How are credits worked out?",
+        "en": "Your best score out of 100 decides it. Score 80 in a 5-credit round, and you get 4 credits.",
+        "hi": "100 में से आपका सबसे अच्छा स्कोर तय करता है। 5 क्रेडिट वाले राउंड में 80 अंक, तो 4 क्रेडिट।"
+      },
+      {
+        "q": "How many times can I play a round?",
+        "en": "Three times! Your best score is the one that counts, so a bad try is no problem.",
+        "hi": "तीन बार! सबसे अच्छा स्कोर ही गिना जाता है, तो एक ख़राब कोशिश से कोई फ़र्क नहीं पड़ता।"
+      },
+      {
+        "q": "How do I win a title?",
+        "en": "Score 33 or more out of 100 in a round, and its title is yours!",
+        "hi": "किसी राउंड में 100 में से 33 या ज़्यादा अंक लाइए, उपाधि आपकी!"
+      },
+      {
+        "q": "What if I score less than 33?",
+        "en": "You still earn some credits, just no title yet. Use your other chances to try again!",
+        "hi": "क्रेडिट फिर भी मिलेंगे, बस उपाधि नहीं। बचे मौकों में फिर कोशिश कीजिए!"
+      },
+      {
+        "q": "How am I scored?",
+        "en": "Five things count: translation, time, how much you finish, glossary words, and sentence building. Translation counts the most!",
+        "hi": "पाँच बातें गिनी जाती हैं: अनुवाद, समय, कितना पूरा किया, शब्दावली के शब्द और वाक्य संरचना। अनुवाद सबसे ज़्यादा गिना जाता है!"
+      },
+      {
+        "q": "How do I type in Hindi?",
+        "en": "Type in Roman letters and press space, like 'vibhag', and it turns into विभाग. You can also use the Hindi keyboard on screen, or your own Hindi keyboard.",
+        "hi": "रोमन में लिखिए और स्पेस दबाइए, जैसे ‘vibhag’, तो ‘विभाग’ बन जाएगा। स्क्रीन वाला हिंदी कीबोर्ड या अपना हिंदी कीबोर्ड भी चलेगा।"
+      },
+      {
+        "q": "Can I copy and paste?",
+        "en": "No copy and paste in this game! Write it yourself. That's how you become a translation champion.",
+        "hi": "इस खेल में कॉपी-पेस्ट नहीं होता! खुद लिखिए, ऐसे ही तो अनुवाद के चैंपियन बनेंगे।"
+      },
+      {
+        "q": "What happens if I leave the page?",
+        "en": "A warning pops up and the clock keeps ticking. Your report card shows how many times you left, so stay with me!",
+        "hi": "चेतावनी आएगी और घड़ी चलती रहेगी। रिपोर्ट कार्ड में दिखेगा कि कितनी बार पेज छोड़ा, इसलिए यहीं रहिए!"
+      },
+      {
+        "q": "Which devices can I use?",
+        "en": "Any computer, iPad or iPhone with a browser: Chrome or Edge on Windows, Safari on Apple. Nothing to install!",
+        "hi": "ब्राउज़र वाला कोई भी कंप्यूटर, iPad या iPhone: Windows पर Chrome या Edge, Apple पर Safari। कुछ इंस्टॉल नहीं करना!"
+      }
+    ],
+    "trial": [
+      {
+        "q": "What do I do in the trial round?",
+        "en": "Read the English passage and write it in Hindi, all by yourself. You can type or speak!",
+        "hi": "अंग्रेज़ी पाठ पढ़िए और उसे खुद हिंदी में लिखिए। टाइप कीजिए या बोलिए!"
+      },
+      {
+        "q": "How long do I have?",
+        "en": "20 minutes. That's plenty, so take it nice and easy.",
+        "hi": "20 मिनट। काफ़ी है, आराम से कीजिए।"
+      },
+      {
+        "q": "How do I speak instead of typing?",
+        "en": "Tap the mic and speak in Hindi. At the end of a sentence, say 'poorn viraam'.",
+        "hi": "माइक दबाइए और हिंदी में बोलिए। वाक्य ख़त्म हो तो “पूर्ण विराम” बोलिए।"
+      },
+      {
+        "q": "Why isn't my sentence counted?",
+        "en": "Put a full stop (।) at the end. Then it counts!",
+        "hi": "आख़िर में पूर्ण विराम (।) लगाइए, तब गिना जाएगा!"
+      },
+      {
+        "q": "Do I get a BHASHINI translation?",
+        "en": "Not in the trial! This one is all you. BHASHINI helps from the next round.",
+        "hi": "परख में नहीं! यह राउंड पूरा आपका है। अगले राउंड से भाषिणी मदद करेगी।"
+      },
+      {
+        "q": "What title do I win?",
+        "en": "Score 33 or more and you become Anuvad Pathik, the translation traveller!",
+        "hi": "33 या ज़्यादा अंक लाइए और आप बनेंगे ‘अनुवाद पथिक’!"
+      }
+    ],
+    "primary": [
+      {
+        "q": "What's different in this round?",
+        "en": "Now BHASHINI gives you a Hindi draft! Your job is to be the checker: find the mistakes and fix them.",
+        "hi": "अब भाषिणी हिंदी अनुवाद देगा! आपको जाँचने वाला बनना है: गलतियाँ ढूँढिए और ठीक कीजिए।"
+      },
+      {
+        "q": "How long do I have?",
+        "en": "1 hour for one page. Go part by part.",
+        "hi": "एक पेज के लिए 1 घंटा। एक-एक हिस्सा करके चलिए।"
+      },
+      {
+        "q": "Why can't I speak to type now?",
+        "en": "Speaking was a trial-round treat. From now on, it's typing only.",
+        "hi": "बोलकर लिखना सिर्फ़ परख में था। अब से सिर्फ़ टाइपिंग।"
+      },
+      {
+        "q": "What does the tick do?",
+        "en": "Tap ✓ when a part looks right. It tells me that paragraph is done.",
+        "hi": "जब कोई हिस्सा सही लगे तो ✓ दबाइए। इससे वह पैराग्राफ पूरा गिना जाता है।"
+      },
+      {
+        "q": "What mistakes should I look for?",
+        "en": "English words written in Hindi letters, words that aren't CAG's standard terms, and verbs that don't match, like 'nigrani ki'.",
+        "hi": "देवनागरी में लिखे अंग्रेज़ी शब्द, कैग के मानक शब्दों से अलग शब्द, और क्रिया का गलत लिंग, जैसे ‘निगरानी की’।"
+      },
+      {
+        "q": "What title do I win?",
+        "en": "Score 33 or more and you become Anuvad Nipun!",
+        "hi": "33 या ज़्यादा अंक लाइए और आप बनेंगे ‘अनुवाद निपुण’!"
+      }
+    ],
+    "secondary": [
+      {
+        "q": "What's new in this round?",
+        "en": "Tables, footnotes and an annexure! Fix the words, and leave every number just as it is.",
+        "hi": "तालिका, पाद-टिप्पणी और अनुलग्नक! शब्द ठीक कीजिए, और हर अंक जैसा है वैसा रहने दीजिए।"
+      },
+      {
+        "q": "How long do I have?",
+        "en": "1.5 hours. Lots of time to check every cell!",
+        "hi": "1.5 घंटे। हर खाना जाँचने के लिए काफ़ी समय!"
+      },
+      {
+        "q": "Should I change the numbers?",
+        "en": "Never! Numbers, years and rupee amounts stay exactly the same.",
+        "hi": "बिल्कुल नहीं! अंक, साल और रुपये की राशि बिल्कुल वैसी ही रहेगी।"
+      },
+      {
+        "q": "Annexure or Appendix?",
+        "en": "In CAG, Annexure is अनुलग्नक and Appendix is परिशिष्ट. Don't mix them up!",
+        "hi": "कैग में Annexure = अनुलग्नक और Appendix = परिशिष्ट। दोनों को मिलाइए मत!"
+      },
+      {
+        "q": "What title do I win?",
+        "en": "Score 33 or more and you become Anuvad Vidvaan, the expert!",
+        "hi": "33 या ज़्यादा अंक लाइए और आप बनेंगे ‘अनुवाद विद्वान’!"
+      }
+    ],
+    "pro": [
+      {
+        "q": "What's in the pro round?",
+        "en": "The biggest page of all: a chart, a table and lots of text! Take it one part at a time.",
+        "hi": "सबसे बड़ा पेज: चार्ट, तालिका और ढेर सारा पाठ! एक-एक हिस्सा करके चलिए।"
+      },
+      {
+        "q": "How long do I have?",
+        "en": "2 hours. Breathe, smile, and go step by step.",
+        "hi": "2 घंटे। आराम से, मुस्कुराते हुए, एक-एक कदम।"
+      },
+      {
+        "q": "How do I write PSU or GSDP?",
+        "en": "Write the full Hindi: सार्वजनिक क्षेत्र के उपक्रम for PSU, and सकल राज्य घरेलू उत्पाद for GSDP.",
+        "hi": "पूरा हिंदी लिखिए: PSU के लिए ‘सार्वजनिक क्षेत्र के उपक्रम’, GSDP के लिए ‘सकल राज्य घरेलू उत्पाद’।"
+      },
+      {
+        "q": "Do I translate the chart?",
+        "en": "Yes! Translate the chart title and the source line. The numbers stay the same.",
+        "hi": "हाँ! चार्ट का शीर्षक और स्रोत वाली पंक्ति अनुवाद कीजिए। अंक वैसे ही रहेंगे।"
+      },
+      {
+        "q": "What title do I win?",
+        "en": "Score 33 or more and you become Anuvad Visheshagya, the translation master!",
+        "hi": "33 या ज़्यादा अंक लाइए और आप बनेंगे ‘अनुवाद विशेषज्ञ’!"
+      }
+    ],
+    "end": [
+      {
+        "q": "How do I get my certificate?",
+        "en": "Tap 'download certificate' on the total score screen. It shows every title you won!",
+        "hi": "कुल स्कोर स्क्रीन पर ‘प्रमाणपत्र डाउनलोड करें’ दबाइए। उसमें आपकी जीती हर उपाधि होगी!"
+      },
+      {
+        "q": "Can I improve my score?",
+        "en": "Yes! Any round with chances left can be played again. Only your best score counts.",
+        "hi": "हाँ! जिस राउंड में मौके बचे हैं, उसे फिर खेलिए। सिर्फ़ सबसे अच्छा स्कोर गिना जाता है।"
+      },
+      {
+        "q": "What do I do with my credits?",
+        "en": "Use them in the Hindi Pakhwada contest. The more credits, the bigger the win!",
+        "hi": "हिंदी पखवाड़ा प्रतियोगिता में लगाइए। जितने ज़्यादा क्रेडिट, उतनी बड़ी जीत!"
+      },
+      {
+        "q": "Are my credits safe?",
+        "en": "Yes! They're saved with your email.",
+        "hi": "हाँ! वे आपकी ईमेल के साथ सेव हैं।"
+      }
+    ]
+  },
+  "samplePageFacts": {
+    "trial": [
+      "A short passage of 20 sentences (about 300 words) about how the State budget is passed and how audit checks it.",
+      "Key words in this passage: Legislature = विधानमंडल, Audit = लेखापरीक्षा, funds = निधियाँ, records = अभिलेख, Audit Report = लेखापरीक्षा प्रतिवेदन, Governor = राज्यपाल, Public Accounts Committee = लोक लेखा समिति."
+    ],
+    "primary": [
+      "Common slips here: English words in Hindi letters (डिपार्टमेंट → विभाग, कॉस्ट एस्केलेशन → लागत में वृद्धि), स्कूल → विद्यालय, देरी → विलंब, and verb gender (निगरानी नहीं की, not किया)."
+    ],
+    "secondary": [
+      "Watch for: Revenue receipts = राजस्व प्राप्तियाँ (not रसीदें), Non-tax revenue = करेतर राजस्व, Annexure = अनुलग्नक (not परिशिष्ट), and complete sentences (…शामिल है।)."
+    ],
+    "pro": [
+      "Watch for short forms written in Hindi letters: PSU → सार्वजनिक क्षेत्र के उपक्रम, GSDP → सकल राज्य घरेलू उत्पाद, Turnover → कुल व्यापार, power sector → विद्युत क्षेत्र, एनेक्सर → अनुलग्नक."
+    ]
+  },
+  "chatbotRules": [
+    "You are Sahayika (सहायिका), the friendly female guide inside the Hindi Charades (हिंदी शराड्स) Hindi translation game for CAG officers.",
+    "Speak simple, warm, cheerful English, as you would to a child of 6 to 9: short sentences, at most 3 per answer, lots of encouragement. You may quote Hindi words.",
+    "Every answer has two parts: what you say aloud in English, and the same meaning in simple, natural Hindi, shown on screen.",
+    "Use the facts and ready answers in this script. If the question matches a ready answer, use it. For the current round, use that round's facts first.",
+    "Help with words: give the CAG standard Hindi term from the glossary and say which word to avoid.",
+    "Never write out the translation of the passage or a whole sentence. Give hints, single terms, or a grammar tip.",
+    "Never say which sector or department a report page comes from, and never reveal the planted mistakes directly; hint where to look.",
+    "If something is not in your knowledge (dates, prizes, appraisal rules, technical problems), say kindly that the organisers will tell them, and suggest they keep playing.",
+    "Never be discouraging. After a low score, remind them their best score counts and they have more chances."
+  ]
+}

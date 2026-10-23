@@ -1,0 +1,58 @@
+@import "@fontsource/noto-sans-devanagari/devanagari-400.css";
+@import "@fontsource/noto-sans-devanagari/devanagari-600.css";
+@import "@fontsource/noto-sans-devanagari/devanagari-700.css";
+@import "@fontsource/noto-sans/latin-400.css";
+@import "@fontsource/noto-sans/latin-600.css";
+@import "@fontsource/noto-sans/latin-700.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html, body, #root { min-height: 100%; }
+body {
+  @apply bg-white text-navy font-sans antialiased;
+  background-image:
+    radial-gradient(circle at 8% -10%, #FFE8D6 0, transparent 38%),
+    radial-gradient(circle at 105% 20%, #E3EDFF 0, transparent 34%),
+    radial-gradient(#E8590C14 1px, transparent 1px);
+  background-size: auto, auto, 22px 22px;
+  background-attachment: fixed;
+}
+.en { font-family: "Noto Sans", system-ui, sans-serif; }
+
+@layer components {
+  .card { @apply bg-white rounded-card shadow-card border border-orange-100/70; }
+  /* orange buttons always carry ≥ 18px bold labels (white on #E8590C is 3.6:1) */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-lg font-bold transition active:scale-[.97] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4; }
+  .btn-primary { @apply btn bg-primary text-white shadow-glow hover:bg-primary-strong focus-visible:ring-primary-ring; }
+  .btn-blue { @apply btn bg-royal-bright text-white hover:bg-royal focus-visible:ring-blue-300; }
+  .btn-ghost { @apply btn bg-white text-primary-strong border-2 border-primary/70 hover:bg-primary-soft focus-visible:ring-primary-ring; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-semibold border; }
+  .chip-plain { @apply chip bg-white border-gray-200 text-navy; }
+  .chip-timer { @apply chip bg-timer-bg border-red-200 text-timer-text tabular-nums; }
+  .chip-credit { @apply chip bg-primary-soft border-orange-200 text-primary-strong; }
+  .input { @apply w-full rounded-xl border-2 border-gray-200 bg-white px-4 py-2.5 text-[17px] outline-none transition focus:border-royal-bright focus:ring-4 focus:ring-blue-100; }
+  .label { @apply block text-[15px] font-semibold text-navy mb-1; }
+  .err { @apply mt-1 text-sm font-semibold text-timer-text; }
+  .sahayika-panel { @apply rounded-card text-white shadow-pop; background: linear-gradient(140deg, #1E3A8A 0%, #2563EB 62%, #3B82F6 100%); }
+  .stripe { background-image: linear-gradient(45deg, rgba(255,255,255,.22) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.22) 75%, transparent 75%); background-size: 18px 18px; }
+}
+
+/* translation editor */
+.hc-editor .ProseMirror { outline: none; font-size: 19px; line-height: 1.7; min-height: 2.2em; white-space: pre-wrap; word-break: break-word; }
+.hc-editor.compact .ProseMirror { font-size: 16px; line-height: 1.5; min-height: 1.6em; }
+.hc-editor .ProseMirror p { margin: 0; }
+.hc-editor .ProseMirror p + p { margin-top: .5em; }
+.hc-editor .ProseMirror[contenteditable="false"] { cursor: default; }
+.hc-lock { display: inline-block; padding: 0 .35em; margin: 0 .05em; border-radius: 6px; background: #EAF2FF; color: #1E3A8A; font-family: "Noto Sans", sans-serif; font-weight: 600; font-size: .92em; border: 1px solid #BFD3FF; user-select: none; }
+.hc-roman { text-decoration: underline; text-decoration-color: #2563EB; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.hc-watch { text-decoration: underline dotted #E8590C; text-decoration-thickness: 2.5px; text-underline-offset: 5px; background: #FFF4E5; border-radius: 3px; cursor: pointer; }
+.hc-latin { text-decoration: underline dotted #B42318; text-decoration-thickness: 2.5px; text-underline-offset: 5px; }
+.hc-done-mark { color: #16A34A; font-weight: 700; margin-right: .2em; }
+.hc-interim { color: #9CA3AF; }
+.hc-source-term { text-decoration: underline; text-decoration-style: dashed; text-decoration-color: #2563EB; text-underline-offset: 4px; cursor: pointer; border-radius: 3px; }
+.hc-source-term:hover { background: #EAF2FF; }
+.no-select { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.linked { box-shadow: 0 0 0 3px #93C5FD; border-radius: 8px; background: #F5F9FF; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

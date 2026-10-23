@@ -1,0 +1,132 @@
+{
+  "game": {
+    "name": "हिंदी शराड्स",
+    "nameEn": "Hindi Charades",
+    "guide": "सहायिका",
+    "guideEn": "Sahayika"
+  },
+  "registration": {
+    "credits": 2
+  },
+  "rounds": [
+    {
+      "key": "trial",
+      "name": "परख राउंड",
+      "nameEn": "Trial",
+      "title": "अनुवाद पथिक",
+      "timeLimitMinutes": 20,
+      "creditCap": 3,
+      "bhashiniDraft": false,
+      "voiceTyping": true,
+      "completionCountedBy": "sentence"
+    },
+    {
+      "key": "primary",
+      "name": "प्राथमिक राउंड",
+      "nameEn": "Primary",
+      "title": "अनुवाद निपुण",
+      "timeLimitMinutes": 60,
+      "creditCap": 5,
+      "bhashiniDraft": true,
+      "voiceTyping": false,
+      "completionCountedBy": "paragraph"
+    },
+    {
+      "key": "secondary",
+      "name": "माध्यमिक राउंड",
+      "nameEn": "Secondary",
+      "title": "अनुवाद विद्वान",
+      "timeLimitMinutes": 90,
+      "creditCap": 15,
+      "bhashiniDraft": true,
+      "voiceTyping": false,
+      "completionCountedBy": "paragraph"
+    },
+    {
+      "key": "pro",
+      "name": "वृत्तिक राउंड",
+      "nameEn": "Pro",
+      "title": "अनुवाद विशेषज्ञ",
+      "timeLimitMinutes": 120,
+      "creditCap": 25,
+      "bhashiniDraft": true,
+      "voiceTyping": false,
+      "completionCountedBy": "paragraph"
+    }
+  ],
+  "maxCredits": 50,
+  "maxChancesPerRound": 3,
+  "bestOfChancesCounts": true,
+  "titlePassMark": 33,
+  "scoreOutOf": 100,
+  "scoringWeights": {
+    "translation": 30,
+    "completion": 20,
+    "sentenceConstruction": 20,
+    "glossary": 20,
+    "time": 10
+  },
+  "timeMarks": {
+    "fullMarksIfFinishedWithinShareOfLimit": 0.5,
+    "marksAtTimeLimit": 0.6
+  },
+  "creditFormula": "round credits = best score / 100 x round credit cap",
+  "creditDecimals": 1,
+  "_comment_extensions": "Keys below are build settings added by the spec (CLAUDE.md §5). They are not in the concept note's JSON; change them here, never in code.",
+  "creditsBelowPassMark": true,
+  "roundUnlockRule": "previous round played at least once",
+  "fairPlay": {
+    "warnAtMinutesLeft": 5,
+    "confirmSubmitWindowSeconds": 4,
+    "autosaveIntervalSeconds": 10,
+    "graceSecondsAfterDeadline": 30,
+    "warnAtMinutesLeftSecond": 1
+  },
+  "stars": {
+    "total": 5,
+    "rule": "1 for registration + 1 per round title earned"
+  },
+  "trialSentenceTerminator": "।",
+  "sahayika": {
+    "maxSpokenSentences": 3,
+    "chatMaxQuestionsPerAttempt": 20,
+    "llmServiceId": "bhashini/google/gemma-4-26B-A4B-it",
+    "quickQuestions": [
+      "hint",
+      "score",
+      "glossary",
+      "time"
+    ]
+  },
+  "glossary": {
+    "transliterationAvoidThreshold": 0.7
+  },
+  "scoring": {
+    "provider": "local",
+    "anuvadTimeoutSeconds": 5,
+    "chrfOrder": 6,
+    "chrfBeta": 2,
+    "chrfFloor": 0.2,
+    "chrfCeil": 0.85,
+    "minWordsPerSentence": 2
+  },
+  "auth": {
+    "mode": "email-otp",
+    "otpLength": 6,
+    "otpTtlMinutes": 10,
+    "devFixedCode": "only when NODE_ENV=development"
+  },
+  "transliteration": {
+    "enabledIn": "translation editor only",
+    "endpoint": "https://anuvaad-backend.bhashini.co.in/v1/pipeline",
+    "serviceId": "ai4bharat/indicxlit--cpu-fsv2",
+    "sourceLanguage": "en",
+    "targetLanguage": "hi",
+    "targetLanguageScriptCode": "Latn",
+    "isSentence": false,
+    "numSuggestions": 4,
+    "minInputChars": 1,
+    "debounceMs": 150,
+    "timeoutMs": 2500
+  }
+}
