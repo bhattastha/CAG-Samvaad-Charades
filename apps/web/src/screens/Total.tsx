@@ -54,7 +54,7 @@ export function Total() {
             <div className="card p-5">
               <h3 className="font-extrabold mb-3">{t("journey.titles")}</h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {cfg.rounds.map((r, i) => (
+                {cfg.rounds.filter((r) => r.playable !== false).map((r, i) => (
                   <motion.div key={r.key} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.12 }}
                     className={`rounded-xl border p-3 text-center ${s.rounds[i].titleEarned ? "border-amber-200 bg-amber-50" : "border-gray-100"}`}>
                     <div className="flex justify-center"><Medal k={r.key} size={56} locked={!s.rounds[i].titleEarned} shine={s.rounds[i].titleEarned} /></div>
@@ -69,7 +69,7 @@ export function Total() {
                 <thead><tr className="text-sm text-muted text-left"><th className="pb-2">{t("total.colRound")}</th><th className="pb-2 text-center">{t("total.colBest")}</th><th className="pb-2 text-right">{t("total.colCredits")}</th></tr></thead>
                 <tbody>
                   <tr className="border-t border-gray-100"><td className="py-2.5 font-bold">🎟 {t("total.registration")}</td><td /><td className="text-right font-extrabold text-amber-700">+{s.registrationCredits}</td></tr>
-                  {s.rounds.map((r, i) => (
+                  {s.rounds.filter((r) => r.playable).map((r, i) => (
                     <tr key={r.key} className="border-t border-gray-100">
                       <td className="py-2.5"><span className="font-bold">{cfg.rounds[i].nameEn} Round</span><div className={`text-sm ${r.titleEarned ? "text-primary-strong font-semibold" : "text-muted"}`}>{cfg.rounds[i].titleEn}{r.titleEarned ? " ✓" : ""}</div></td>
                       <td className="text-center"><span className="font-bold tabular-nums">{r.best ?? "—"} / 100</span><div className="text-xs text-muted">{t("total.chancesUsed", { n: r.chancesUsed })}</div></td>
@@ -82,6 +82,14 @@ export function Total() {
               <p className="mt-2 text-sm text-muted">{t("total.bestAdded")}</p>
             </section>
             <SahayikaPanel lines={said} />
+            {cfg.rounds.some((r) => r.playable === false) && (
+              <motion.button whileHover={{ y: -3 }} onClick={() => nav("/play/varchaspati")} className="w-full text-left rounded-card bg-gradient-to-r from-purple-700 to-fuchsia-600 text-white p-5 flex items-center gap-4 shadow-pop">
+                <Medal k="varchaspati" size={60} shine />
+                <span className="flex-1"><span className="block text-xs font-extrabold uppercase tracking-widest text-purple-200">{t("varchaspati.kicker")}</span>
+                  <span className="block text-xl font-extrabold">{t("varchaspati.teaser")}</span><span className="block text-sm text-purple-100">{t("varchaspati.tagline")}</span></span>
+                <span className="text-2xl" aria-hidden>→</span>
+              </motion.button>
+            )}
           </div>
         </div>
       </Page>

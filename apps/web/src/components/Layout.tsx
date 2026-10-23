@@ -2,7 +2,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import cagLogo from "@assets/brand/cag-logo.png";
 import bhashiniLogo from "@assets/brand/bhashini-logo.png";
-import { useProgress } from "../lib/queries";
+import { useConfig, useProgress } from "../lib/queries";
+import { useEffect, useState } from "react";
 import { useToasts } from "../lib/store";
 import { t } from "../lib/strings";
 import { sfx } from "../lib/sfx";
@@ -33,6 +34,30 @@ export function Coin({ size = 20 }: { size?: number }) {
   );
 }
 
+/** The page language (the BHASHINI translation plugin may change <html lang>). */
+function useHtmlLang() {
+  const [lang, setLang] = useState(document.documentElement.lang || "en");
+  useEffect(() => {
+    const o = new MutationObserver(() => setLang(document.documentElement.lang || "en"));
+    o.observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
+    return () => o.disconnect();
+  }, []);
+  return lang;
+}
+
+/** "Samvaad Charades" is a brand: never translated, only shown in its localised spelling for the page language. */
+export function BrandName({ split = false, className = "" }: { split?: boolean; className?: string }) {
+  const { data: cfg } = useConfig();
+  const lang = useHtmlLang().slice(0, 2);
+  const name = cfg?.brand?.localized?.[lang] ?? cfg?.brand?.name ?? t("common.gameName");
+  const [first, ...rest] = name.split(" ");
+  return (
+    <span translate="no" className={`notranslate ${className}`} data-brand>
+      {split ? <><span className="text-navy">{first}</span> <span className="text-primary">{rest.join(" ")}</span></> : name}
+    </span>
+  );
+}
+
 /** HUD credits meter: glanceable progress toward 50, gold = reward. */
 export function CreditMeter({ value, max = 50, compact = false }: { value: number; max?: number; compact?: boolean }) {
   return (
@@ -56,8 +81,8 @@ export function Header({ compact = false, hud = true }: { compact?: boolean; hud
       <div className={`mx-auto max-w-7xl px-3 sm:px-6 flex items-center gap-2 sm:gap-3 ${compact ? "h-14" : "h-16 sm:h-[72px]"}`}>
         <img src={cagLogo} alt="CAG" className={`${compact ? "h-9" : "h-10 sm:h-12"} w-auto rounded-md border border-gray-100 bg-white p-0.5`} />
         <Link to={data?.registered ? "/journey" : "/"} className="flex-1 text-center leading-tight min-w-0">
-          <div className={`${compact ? "text-base sm:text-lg" : "text-lg sm:text-2xl"} font-extrabold text-navy truncate`}>
-            {t("common.gameName")} <span className="text-primary">{t("common.gameNameHi")}</span>
+          <div className={`${compact ? "text-[0.95rem] sm:text-lg" : "text-[0.95rem] sm:text-2xl"} font-extrabold whitespace-nowrap`}>
+            <BrandName split />
           </div>
           <div className="en text-[10px] sm:text-[11px] tracking-[0.3em] text-muted">{t("common.brandLine")}</div>
         </Link>

@@ -1,11 +1,11 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { parseGameConfig, seedToPage, summarise, type PageData, type SeedPage } from "@hc/shared";
+import { parseGameConfig, RoundKey, seedToPage, summarise, type PageData, type SeedPage } from "@hc/shared";
 import { z } from "zod";
 import { requireAdmin } from "../auth.js";
 import { health, isConfigured, translateBatch, tts } from "../bhashini/client.js";
-import { allLines, baseConfig, config, loadLines, loadOverrides } from "../content.js";
+import { allLines, applySettings, baseConfig, config, loadLines, loadOverrides } from "../content.js";
 import type { Db } from "../db.js";
 import { ROOT } from "../env.js";
 import { loadGlossary, loadPage, savePage } from "../pages.js";
@@ -17,11 +17,11 @@ const audit = (db: Db, actor: string, action: string, target: string, meta?: unk
 
 const PartSchema = z.object({
   id: z.string(), order: z.number(), type: z.string(), tickGroup: z.string().nullable(), editable: z.boolean(),
-  layout: z.any(), enSentences: z.array(z.string()).optional(),
+  layout: z.any(), enSentences: z.array(z.string()).optional(), pageNo: z.number().int().positive().optional(),
   fields: z.array(z.object({ key: z.string(), en: z.string(), hiReference: z.string(), draft: z.string().nullable(), locked: z.array(z.string()), numeric: z.boolean() })),
 });
 const PageSchema = z.object({
-  id: z.string().regex(/^[a-z0-9-]+$/), roundKey: z.enum(["trial", "primary", "secondary", "pro"]), label: z.string().min(1),
+  id: z.string().regex(/^[a-z0-9-]+$/), roundKey: RoundKey, label: z.string().min(1),
   printedPageNo: z.string().nullable(), parts: z.array(PartSchema),
   terms: z.array(z.object({ en: z.string(), hi: z.string(), variants: z.array(z.string()), avoid: z.array(z.string()) })),
   slips: z.array(z.object({ partId: z.string(), kind: z.enum(["term", "transliteration", "grammar", "omission"]), wrongText: z.string(), enTerm: z.string().nullable(), fixHint: z.string() })),
@@ -61,7 +61,8 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
   // ---------- pages ----------
   app.get("/admin/pages", async (req, reply) => {
     if (!viewer(req, reply)) return;
-    return db.query(`SELECT p.id, p.round_key, p.label, p.printed_page_no, p.status, p.sample, p.version, p.active,
+    return db.query(`SELECT p.id, p.round_key, p.label, p.printed_page_no, p.status, p.sample, p.version, p.active, p.scope,
+      (SELECT count(DISTINCT x.page_no)::int FROM page_parts x WHERE x.page_id=p.id) AS report_pages,
       (SELECT count(*)::int FROM page_parts x WHERE x.page_id=p.id AND x.editable) AS parts,
       (SELECT count(*)::int FROM page_parts x WHERE x.page_id=p.id AND x.editable AND x.reference_verified) AS verified,
       (SELECT count(*)::int FROM attempts a WHERE a.page_id=p.id) AS times_used
@@ -73,7 +74,7 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     const { id } = parse(z.object({ id: z.string() }), req.params);
     const p = await loadPage(db, id);
     if (!p) return reply.code(404).send({ error: "not_found" });
-    const row = await db.one("SELECT status, sample, source, sector FROM pages WHERE id=$1", [id]);
+    const row = await db.one("SELECT status, sample, source, sector, scope FROM pages WHERE id=$1", [id]);
     const verified = await db.query<{ id: string; reference_verified: boolean }>("SELECT id, reference_verified FROM page_parts WHERE page_id=$1", [id]);
     return { ...p.page, ...row, verified: Object.fromEntries(verified.map((v) => [v.id, v.reference_verified])), extras: p.extras };
   });
@@ -96,11 +97,11 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     const who = manager(req, reply);
     if (!who) return;
     const { id } = parse(z.object({ id: z.string() }), req.params);
-    const body = parse(PageSchema.extend({ sector: z.string().optional() }), req.body);
+    const body = parse(PageSchema.extend({ sector: z.string().optional(), scope: z.string().max(60).optional() }), req.body);
     if (body.id !== id) return reply.code(400).send({ error: "id_mismatch" });
     const row = await db.one<{ status: string; sector: string; source: any; sample: boolean }>("SELECT status, sector, source, sample FROM pages WHERE id=$1", [id]);
     if (!row) return reply.code(404).send({ error: "not_found" });
-    await savePage(db, body as PageData, { sector: body.sector ?? row.sector, source: row.source, sample: row.sample });
+    await savePage(db, body as PageData, { sector: body.sector ?? row.sector, source: row.source, sample: row.sample, scope: body.scope });
     await audit(db, who, "page.update", id);
     return { ok: true };
   });
@@ -357,6 +358,25 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     await audit(db, who, "config.credits", "creditCaps", caps);
     return { ok: true };
   });
+  /** All game settings from the console: time, credits and pages per level, Trial qualifying score, pass mark, weights. */
+  app.put("/admin/config/settings", async (req, reply) => {
+    const who = manager(req, reply);
+    if (!who) return;
+    const body = parse(z.object({
+      rounds: z.record(z.object({ timeLimitMinutes: z.number().positive().max(6000).optional(), creditCap: z.number().nonnegative().optional(), pages: z.number().int().nonnegative().max(1000).optional() })).optional(),
+      trialQualifyingScore: z.number().min(0).max(100).optional(),
+      titlePassMark: z.number().min(0).max(100).optional(),
+      maxChancesPerRound: z.number().int().min(1).max(10).optional(),
+      scoringWeights: z.object({ translation: z.number().min(0), completion: z.number().min(0), sentenceConstruction: z.number().min(0), glossary: z.number().min(0), time: z.number().min(0) }).optional(),
+    }), req.body);
+    const caps = await db.query("SELECT key, value FROM config_overrides WHERE key='creditCaps'");
+    try { applySettings(baseConfig, [...caps, { key: "settings", value: body }]); } catch (e: any) { return reply.code(400).send({ error: "invalid", message: e.message }); }
+    await db.query("INSERT INTO config_overrides (key, value, by) VALUES ('settings', $1, $2) ON CONFLICT (key) DO UPDATE SET value=$1, by=$2, at=now()", [JSON.stringify(body), who]);
+    await loadOverrides(db);
+    await audit(db, who, "config.settings", "settings", body);
+    return { ok: true, effective: config() };
+  });
+
   app.get("/admin/audit", async (req, reply) => {
     if (!viewer(req, reply)) return;
     return db.query("SELECT * FROM audit_logs ORDER BY at DESC LIMIT 300");

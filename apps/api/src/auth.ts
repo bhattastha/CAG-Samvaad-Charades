@@ -1,7 +1,7 @@
 import { createHash, randomInt, timingSafeEqual } from "node:crypto";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { SignJWT, jwtVerify } from "jose";
-import { config } from "./content.js";
+import { config, str } from "./content.js";
 import type { Db } from "./db.js";
 import { env } from "./env.js";
 
@@ -11,7 +11,7 @@ const DEV_CODE = "123456";
 const OTP_PER_HOUR = 5;
 const MAX_TRIES = 5;
 
-export interface Session { email: string; pid?: string; role?: "manager" | "viewer" }
+export interface Session { email: string; pid?: string; role?: "manager" | "viewer"; sid?: string }
 
 declare module "fastify" {
   interface FastifyRequest { session: Session | null }
@@ -29,8 +29,8 @@ async function sendOtp(email: string, code: string) {
     await createTransport(env.SMTP_URL).sendMail({
       from: env.OTP_FROM,
       to: email,
-      subject: "हिंदी शराड्स: आपका कोड",
-      text: `आपका हिंदी शराड्स कोड: ${code}\nयह ${config().auth.otpTtlMinutes} मिनट तक चलेगा।`,
+      subject: str("email.otpSubject").replace("{brand}", config().brand.name),
+      text: str("email.otpBody").replace("{brand}", config().brand.name).replace("{code}", code).replace("{minutes}", String(config().auth.otpTtlMinutes)),
     });
   } else if (env.isDev) {
     console.log(`[otp] ${email} → ${code} (development)`);
@@ -82,7 +82,7 @@ export async function readSession(req: FastifyRequest): Promise<Session | null> 
   if (!t) return null;
   try {
     const { payload } = await jwtVerify(t, key);
-    return { email: String(payload.email), pid: payload.pid ? String(payload.pid) : undefined, role: payload.role as Session["role"] };
+    return { email: String(payload.email), pid: payload.pid ? String(payload.pid) : undefined, role: payload.role as Session["role"], sid: payload.sid ? String(payload.sid) : undefined };
   } catch {
     return null;
   }

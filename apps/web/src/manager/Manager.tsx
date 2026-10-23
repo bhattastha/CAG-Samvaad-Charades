@@ -8,7 +8,7 @@ import { DraftPanel, SourcePanel } from "../round/PageViews";
 
 // The console is staff-facing (not player-facing), desktop-first, same design system (§8).
 
-const ROUNDS = ["trial", "primary", "secondary", "pro"] as const;
+const ROUNDS = ["trial", "primary", "secondary", "pro", "varchaspati"] as const;
 const PART_TYPES = ["passage", "header", "heading", "headnote", "body", "footnote", "footer", "page_number", "table", "chart", "annexure_ref"];
 const card = "card p-5";
 const btn = "rounded-lg px-3.5 py-2 text-sm font-semibold border";
@@ -142,7 +142,7 @@ function Pages() {
 }
 const StatusChip = ({ s }: { s: string }) => <span className={`chip text-xs ${s === "published" ? "bg-success-soft border-green-200 text-green-800" : s === "retired" ? "bg-gray-100 border-gray-200 text-muted" : "bg-amber-50 border-amber-200 text-amber-800"}`}>{s}</span>;
 
-interface AdminPage { id: string; roundKey: string; label: string; printedPageNo: string | null; parts: Part[]; terms: GlossaryEntry[]; slips: PlantedSlip[]; status: string; sample: boolean; sector: string; verified: Record<string, boolean> }
+interface AdminPage { id: string; roundKey: string; label: string; printedPageNo: string | null; parts: Part[]; terms: GlossaryEntry[]; slips: PlantedSlip[]; status: string; sample: boolean; sector: string; scope: string; verified: Record<string, boolean> }
 
 function PageEditor() {
   const { id = "" } = useParams();
@@ -155,7 +155,7 @@ function PageEditor() {
   if (!pg) return null;
   const save = async () => {
     try {
-      await api(`/admin/pages/${id}`, { method: "PUT", body: { id: pg.id, roundKey: pg.roundKey, label: pg.label, printedPageNo: pg.printedPageNo, parts: pg.parts, terms: pg.terms, slips: pg.slips, sector: pg.sector } });
+      await api(`/admin/pages/${id}`, { method: "PUT", body: { id: pg.id, roundKey: pg.roundKey, label: pg.label, printedPageNo: pg.printedPageNo, parts: pg.parts, terms: pg.terms, slips: pg.slips, sector: pg.sector, scope: pg.scope } });
       setMsg("Saved."); qc.invalidateQueries({ queryKey: ["page", id] });
     } catch (e) { setMsg(`Save failed: ${(e as ApiError).code}`); }
   };
@@ -174,6 +174,11 @@ function PageEditor() {
         <div className="flex-1 min-w-[16rem]">
           <input className={ta + " font-bold text-lg"} value={pg.label} onChange={(e) => setPg({ ...pg, label: e.target.value })} />
           <div className="text-xs text-muted mt-1 en">{pg.id} · round {pg.roundKey} · printed p. {pg.printedPageNo ?? "—"} · sector (never shown to players): {pg.sector || "—"}</div>
+          <label className="text-xs text-muted mt-1 flex items-center gap-2">Report scope (office mapping)
+            <input className={ta + " w-56 py-0.5"} value={pg.scope ?? "union"} onChange={(e) => setPg({ ...pg, scope: e.target.value })} placeholder="union, or a state name e.g. Bihar" list="scopes" />
+            <datalist id="scopes"><option value="union" /></datalist>
+            <span>· {new Set(pg.parts.map((x) => x.pageNo).filter(Boolean)).size || 1} report page(s) in this bundle</span>
+          </label>
         </div>
         <StatusChip s={pg.status} />
         <button className={btnG} onClick={save}>Save</button>
@@ -190,6 +195,7 @@ function PageEditor() {
             <span className="font-bold en">{p.id}</span>
             <select className={ta + " w-auto"} value={p.type} onChange={(e) => setPart(pi, { type: e.target.value as Part["type"] })}>{PART_TYPES.map((t) => <option key={t}>{t}</option>)}</select>
             <label className="text-sm">tick group <input className={ta + " w-24 inline"} value={p.tickGroup ?? ""} onChange={(e) => setPart(pi, { tickGroup: e.target.value || null })} /></label>
+            <label className="text-sm">report page <input type="number" min={1} className={ta + " w-20 inline"} value={p.pageNo ?? ""} onChange={(e) => setPart(pi, { pageNo: e.target.value ? Number(e.target.value) : undefined })} /></label>
             <label className="text-sm flex items-center gap-1"><input type="checkbox" checked={p.editable} onChange={(e) => setPart(pi, { editable: e.target.checked })} /> editable</label>
             <span className="flex-1" />
             {p.editable && <label className={`text-sm font-semibold flex items-center gap-1.5 ${data?.verified[p.id] ? "text-success" : "text-timer-text"}`}>
@@ -476,21 +482,66 @@ function Results() {
 function Settings() {
   const qc = useQueryClient();
   const { data } = useQuery({ queryKey: ["acfg"], queryFn: () => api<any>("/admin/config") });
-  const [caps, setCaps] = useState<Record<string, number>>({});
+  const [rounds, setRounds] = useState<Record<string, { timeLimitMinutes: number; creditCap: number; pages: number }>>({});
+  const [w, setW] = useState<Record<string, number>>({});
+  const [qual, setQual] = useState(33);
+  const [pass, setPass] = useState(33);
+  const [chances, setChances] = useState(3);
   const [msg, setMsg] = useState("");
-  useEffect(() => { if (data) setCaps(Object.fromEntries(data.effective.rounds.map((r: any) => [r.key, r.creditCap]))); }, [data]);
+  useEffect(() => {
+    if (!data) return;
+    const e = data.effective;
+    setRounds(Object.fromEntries(e.rounds.map((r: any) => [r.key, { timeLimitMinutes: r.timeLimitMinutes, creditCap: r.creditCap, pages: r.pages ?? 0 }])));
+    setW(e.scoringWeights); setQual(e.levels?.trialQualifyingScore ?? 33); setPass(e.titlePassMark); setChances(e.maxChancesPerRound);
+  }, [data]);
   if (!data) return null;
-  const sum = data.effective.registration.credits + Object.values(caps).reduce((a, b) => a + b, 0);
+  const e = data.effective;
+  const credits = e.registration.credits + Object.values(rounds).reduce((a, r) => a + (r.creditCap || 0), 0);
+  const wsum = Object.values(w).reduce((a, b) => a + (Number(b) || 0), 0);
+  const ok = credits === e.maxCredits && wsum === e.scoreOutOf;
+  const save = async () => {
+    try {
+      await api("/admin/config/settings", { method: "PUT", body: { rounds, scoringWeights: w, trialQualifyingScore: qual, titlePassMark: pass, maxChancesPerRound: chances } });
+      setMsg("Saved. Players see the new settings on their next screen."); qc.invalidateQueries();
+    } catch (err) { setMsg((err as ApiError).body?.message ?? "Save failed"); }
+  };
+  const num = (v: number, on: (n: number) => void, wcls = "w-24") => <input type="number" className={ta + " " + wcls} value={v} onChange={(ev) => on(Number(ev.target.value))} />;
   return (
     <div className="space-y-4">
       <div className={card}>
-        <h2 className="font-bold text-lg">Credit caps (audited)</h2>
-        <p className="text-sm text-muted">Registration {data.effective.registration.credits} + caps must equal {data.effective.maxCredits}. Current sum: <b className={sum === data.effective.maxCredits ? "text-success" : "text-timer-text"}>{sum}</b></p>
-        <div className="flex gap-3 mt-3">{data.effective.rounds.map((r: any) => <label key={r.key} className="text-sm">{r.name}<input type="number" className={ta + " w-24 block"} value={caps[r.key] ?? 0} onChange={(e) => setCaps({ ...caps, [r.key]: Number(e.target.value) })} /></label>)}</div>
-        <button className={btnP + " mt-3"} disabled={sum !== data.effective.maxCredits} onClick={async () => { try { await api("/admin/config/credits", { method: "PUT", body: caps }); setMsg("Saved."); qc.invalidateQueries(); } catch (e) { setMsg((e as ApiError).body?.message ?? "failed"); } }}>Save caps</button>
-        {msg && <div className="text-sm mt-2">{msg}</div>}
+        <h2 className="font-bold text-lg">Levels</h2>
+        <p className="text-sm text-muted">Trial is the entry level. Passing it unlocks every other playable level, independently. Report pages = pages per bundle (Trial is measured in words).</p>
+        <table className="w-full text-[15px] mt-3"><thead><tr className="text-left text-sm text-muted"><th>Level</th><th>Time (min)</th><th>Credit cap</th><th>Report pages</th><th>Status</th></tr></thead>
+          <tbody>{e.rounds.map((r: any) => (
+            <tr key={r.key} className="border-t border-gray-100">
+              <td className="py-2 font-semibold">{r.levelLabel} · {r.nameEn}</td>
+              <td>{rounds[r.key] && num(rounds[r.key].timeLimitMinutes, (n) => setRounds({ ...rounds, [r.key]: { ...rounds[r.key], timeLimitMinutes: n } }))}</td>
+              <td>{rounds[r.key] && num(rounds[r.key].creditCap, (n) => setRounds({ ...rounds, [r.key]: { ...rounds[r.key], creditCap: n } }))}</td>
+              <td>{rounds[r.key] && (r.key === "trial" ? <span className="text-sm text-muted">~{e.levels?.trialWords?.min}–{e.levels?.trialWords?.max} words</span> : num(rounds[r.key].pages, (n) => setRounds({ ...rounds, [r.key]: { ...rounds[r.key], pages: n } })))}</td>
+              <td>{r.playable === false ? <span className="chip bg-purple-50 border-purple-200 text-purple-800 text-xs">{r.phase ?? "preview"}</span> : <span className="chip bg-success-soft border-green-200 text-green-800 text-xs">playable</span>}</td>
+            </tr>
+          ))}</tbody></table>
+        <p className="text-sm mt-2">Registration {e.registration.credits} + caps = <b className={credits === e.maxCredits ? "text-success" : "text-timer-text"}>{credits}</b> (must be {e.maxCredits})</p>
       </div>
-      <div className={card}><h2 className="font-bold text-lg mb-2">Effective config (read-only)</h2><pre className="text-xs en overflow-x-auto bg-gray-50 rounded-lg p-3 max-h-[60vh]">{JSON.stringify(data.effective, null, 2)}</pre></div>
+      <div className={card}>
+        <h2 className="font-bold text-lg">Rules</h2>
+        <div className="flex flex-wrap gap-6 mt-2 text-sm">
+          <label>Trial qualifying score (unlocks the other levels){num(qual, setQual)}</label>
+          <label>Title pass mark{num(pass, setPass)}</label>
+          <label>Chances per level{num(chances, setChances)}</label>
+        </div>
+      </div>
+      <div className={card}>
+        <h2 className="font-bold text-lg">Scoring weights</h2>
+        <div className="flex flex-wrap gap-4 mt-2 text-sm">
+          {[["translation", "Translation quality"], ["completion", "Completion"], ["sentenceConstruction", "Sentence construction"], ["glossary", "Glossary"], ["time", "Time"]].map(([k, l]) => (
+            <label key={k}>{l}{num(w[k] ?? 0, (n) => setW({ ...w, [k]: n }))}</label>
+          ))}
+        </div>
+        <p className="text-sm mt-2">Total <b className={wsum === e.scoreOutOf ? "text-success" : "text-timer-text"}>{wsum}</b> (must be {e.scoreOutOf})</p>
+      </div>
+      <div className="flex items-center gap-3"><button className={btnP} disabled={!ok} onClick={save}>Save settings (audited)</button>{msg && <span className="text-sm">{msg}</span>}</div>
+      <div className={card}><h2 className="font-bold text-lg mb-2">Effective config (read-only)</h2><pre className="text-xs en overflow-x-auto bg-gray-50 rounded-lg p-3 max-h-[50vh]">{JSON.stringify(e, null, 2)}</pre></div>
     </div>
   );
 }

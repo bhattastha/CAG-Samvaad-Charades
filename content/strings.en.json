@@ -1,10 +1,10 @@
 {
   "_comment": "Player-facing English (config.ui.locale = en). Hindi is produced from this by the BHASHINI website-translation plugin; the workbench (English source page + the player's Hindi) is never page-translated. Placeholders in {braces}.",
   "common": {
-    "gameName": "Hindi Charades",
-    "gameNameHi": "हिंदी शराड्स",
+    "gameName": "Samvaad Charades",
+    "gameNameHi": "संवाद शराड्स",
     "brandLine": "CAG × BHASHINI",
-    "guide": "Sahayika",
+    "guide": "Sahayak",
     "guideRole": "Your guide",
     "listen": "Listen",
     "pause": "Pause",
@@ -16,7 +16,7 @@
     "skip": "Skip",
     "continue": "Continue",
     "glossaryButton": "Glossary",
-    "sahayikaButton": "Ask Sahayika",
+    "sahayikaButton": "Ask Sahayak",
     "copyPasteOffBadge": "Copy-paste locked",
     "chanceOf": "Chance {n}/{max}",
     "creditsUpTo": "Up to {n} credits",
@@ -33,11 +33,11 @@
   },
   "settings": {
     "heading": "Game settings",
-    "voice": "Sahayika's voice",
+    "voice": "Sahayak voice guide",
     "voiceOff": "Off",
     "voiceTap": "Only when I tap Listen",
     "voiceAuto": "Read lines aloud automatically",
-    "voiceHint": "Sahayika never talks over you: you can pause or stop her anytime from the player at the bottom.",
+    "voiceHint": "Sahayak never talks over you: pause or stop the voice anytime from the player at the bottom.",
     "sound": "Sound effects",
     "volume": "Volume",
     "haptics": "Vibration on phones",
@@ -54,13 +54,17 @@
   },
   "title": {
     "kicker": "A Hindi Pakhwada game",
-    "heading": "Hindi Charades",
-    "subheading": "Translate real CAG audit pages. Climb four levels. Earn titles and up to 50 credits.",
+    "heading": "Samvaad Charades",
+    "subheading": "Translate real CAG audit reports. Clear the Trial, then take on Primary, Secondary and Pro. Earn titles and up to 50 credits.",
     "start": "Press Start",
     "resume": "Continue your journey",
     "artCaption": "English → हिंदी",
-    "levelsLabel": "4 levels · 4 titles · 50 credits",
-    "pressAnyKey": "Press Enter to start"
+    "levelsLabel": "5 levels · 4 titles · 50 credits",
+    "pressAnyKey": "Press Enter to start",
+    "voiceToggle": "Sahayak voice guide",
+    "voiceOn": "On",
+    "voiceOff": "Off",
+    "voiceHelp": "Turn on to hear Sahayak read every tip aloud. You can change this anytime in ⚙️ Settings."
   },
   "registration": {
     "heading": "Create your player profile",
@@ -124,7 +128,7 @@
       },
       {
         "title": "Your guide",
-        "body": "Sahayika is with you in every level. Ask her for a hint, a glossary word or the time left. She'll never give away the answer."
+        "body": "Sahayak is with you in every level. Ask for a hint, a glossary word or the time left. Sahayak never gives away the answer."
       }
     ],
     "points": [
@@ -167,10 +171,10 @@
   },
   "journey": {
     "heading": "Your journey",
-    "headingEn": "Four levels to Anuvad Visheshagya",
+    "headingEn": "Clear the Trial, then pick any level you like",
     "youAreHere": "You are here",
     "locked": "Locked",
-    "lockedHint": "Play the previous level once to unlock",
+    "lockedHint": "Pass the Trial ({n}+) to unlock",
     "play": "Play",
     "replay": "Play again",
     "resume": "Resume",
@@ -183,7 +187,20 @@
     "allDone": "Every level played! Visit the Hall of Fame.",
     "hallOfFame": "Hall of Fame",
     "rewards": "Rewards",
-    "statsStars": "Stars"
+    "statsStars": "Stars",
+    "trialFirst": "Start here: the Trial is your entry ticket. Score {n}+ to unlock every level.",
+    "trialRetry": "So close! Score {n}+ in the Trial to unlock the other levels. {left} chances left.",
+    "trialLockedOut": "All Trial chances are used. Please contact the game manager.",
+    "unlockedAll": "Trial cleared! Primary, Secondary and Pro are open. Play them in any order.",
+    "comingSoon": "Coming soon",
+    "phase2": "Phase 2",
+    "preview": "Preview",
+    "pagesLabel": "{n}-page report",
+    "wordsLabel": "~{n} words",
+    "leaderboard": "Leaderboard",
+    "yourRank": "You're #{rank} of {of}",
+    "leaderEmpty": "Be the first on the board!",
+    "entry": "Entry level"
   },
   "preRound": {
     "heading": "Mission briefing",
@@ -276,7 +293,10 @@
       "chart": "Chart",
       "annexure_ref": "Annexure reference",
       "passage": "Passage"
-    }
+    },
+    "pageNav": "Page {n} of {total}",
+    "prevPage": "Previous page",
+    "nextPage": "Next page"
   },
   "glossary": {
     "searchPlaceholder": "Search in English or Hindi",
@@ -284,7 +304,7 @@
     "avoid": "Avoid"
   },
   "chat": {
-    "title": "Ask Sahayika",
+    "title": "Ask Sahayak",
     "placeholder": "Ask about a word or a rule…",
     "send": "Send",
     "quick": {
@@ -307,7 +327,7 @@
   "reportCard": {
     "heading": "Report card · {roundName}",
     "headingEn": "How did you do?",
-    "sahayikaAnnounces": "Sahayika announces",
+    "sahayikaAnnounces": "Sahayak announces",
     "thisTime": "this attempt",
     "howYouDid": "Your five stats",
     "measureTranslation": "Translation",
@@ -351,7 +371,12 @@
     "nextGoal": "Next goal",
     "goalTitle": "Score {n} more to win {title}",
     "goalNext": "Unlock {title} in {round}",
-    "goalDone": "All four titles: visit the Hall of Fame"
+    "goalDone": "All four titles: visit the Hall of Fame",
+    "retryTrial": "Try the Trial again · {n} left",
+    "trialUnlocked": "Trial cleared! Every level is now open.",
+    "sessionId": "Session",
+    "goalTrial": "Score {n} more in the Trial to unlock every level",
+    "goalPick": "Pick your next level on the map"
   },
   "total": {
     "heading": "Hall of Fame",
@@ -402,14 +427,14 @@
       "en": "That part is your job, and I know you can do it! I can give you a hint or a glossary word instead.",
       "hi": "यह हिस्सा तो आपको ही लिखना है, और आप कर लेंगे! मैं आपको एक इशारा या शब्दावली का शब्द दे सकती हूँ।"
     },
-    "sahayikaSays": "Sahayika says",
+    "sahayikaSays": "Sahayak says",
     "chatLimit": "You've used all your questions for this mission. You can do the rest on your own!"
   },
   "certificate": {
-    "docTitle": "Hindi Charades · Certificate",
+    "docTitle": "Samvaad Charades · Certificate",
     "certify": "This is to certify that",
-    "bodyTitles": "translated CAG audit report pages from English into Hindi in Hindi Charades, the CAG × BHASHINI game for Hindi Pakhwada, and earned the following titles:",
-    "bodyNoTitles": "took part in Hindi Charades, the CAG × BHASHINI game for Hindi Pakhwada, and practised translating CAG audit reports from English into Hindi.",
+    "bodyTitles": "translated CAG audit report pages from English into Hindi in Samvaad Charades, the CAG × BHASHINI game for Hindi Pakhwada, and earned the following titles:",
+    "bodyNoTitles": "took part in Samvaad Charades, the CAG × BHASHINI game for Hindi Pakhwada, and practised translating CAG audit reports from English into Hindi.",
     "creditsLabel": "Total credits:",
     "date": "Date",
     "verification": "Verification ID",
@@ -417,5 +442,70 @@
   },
   "_authoredInSpec_reviewBeforeLaunch": [
     "entire file: English UI written during the build (23 Oct 2026)"
-  ]
+  ],
+  "email": {
+    "otpSubject": "{brand}: your sign-in code",
+    "otpBody": "Your {brand} sign-in code is {code}. It is valid for {minutes} minutes."
+  },
+  "varchaspati": {
+    "kicker": "Level 5 · Phase 2 preview",
+    "heading": "Varchaspati",
+    "tagline": "The PhD of translation: one complex ~300-page CAG report, start to finish.",
+    "teaser": "Still hungry for more?",
+    "teaserBody": "Finished every level? Varchaspati is the ultimate challenge: a full 300-page report with tables, charts, annexures and everything in between.",
+    "notYet": "Varchaspati opens in Phase 2. Keep sharpening your skills in the other levels!",
+    "frameworkHeading": "How Varchaspati will be judged (proposed)",
+    "framework": [
+      {
+        "name": "Translation accuracy",
+        "weight": 25,
+        "desc": "Closeness to CAG's published Hindi, part by part"
+      },
+      {
+        "name": "Contextual & document-wide consistency",
+        "weight": 15,
+        "desc": "The same term and style from page 1 to page 300"
+      },
+      {
+        "name": "Glossary adherence",
+        "weight": 15,
+        "desc": "CAG standard terms used, avoid-forms kept out"
+      },
+      {
+        "name": "Sentence construction",
+        "weight": 10,
+        "desc": "Grammar, gender agreement, punctuation (।)"
+      },
+      {
+        "name": "Formatting fidelity",
+        "weight": 10,
+        "desc": "Headers, footers, numbering, footnotes in place"
+      },
+      {
+        "name": "Tables & charts",
+        "weight": 10,
+        "desc": "Every label, legend and source line translated; numbers untouched"
+      },
+      {
+        "name": "Annexures & cross-references",
+        "weight": 5,
+        "desc": "Annexure/Appendix references and section links correct"
+      },
+      {
+        "name": "Completion",
+        "weight": 5,
+        "desc": "Share of the document cleared"
+      },
+      {
+        "name": "Time management",
+        "weight": 5,
+        "desc": "Pace across multiple sessions"
+      }
+    ],
+    "format": [
+      "~300 pages, played across several saved sessions",
+      "Everything from Primary, Secondary and Pro, plus long-range consistency",
+      "BHASHINI draft for the whole report; you check and fix it"
+    ]
+  }
 }

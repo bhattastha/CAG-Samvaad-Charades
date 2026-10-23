@@ -6,14 +6,14 @@ import { formatLimit, type RoundConfig } from "@hc/shared";
 import { api, ApiError, clientId } from "../lib/api";
 import { sfx } from "../lib/sfx";
 import { usePrefs } from "../lib/store";
-import { roundName, t } from "../lib/strings";
+import { roundName, t, tList } from "../lib/strings";
 import type { Line } from "../lib/voice";
 import { Coin, Header, Page, Spinner } from "../components/Layout";
 import { SahayikaLine } from "../components/Sahayika";
 import { Ambient, Countdown, GameButton, Medal } from "../components/Juice";
 import { micCheck } from "../editor/voice";
 
-interface Intro { round: RoundConfig; chance: number; maxChances: number; unlocked: boolean; chancesLeft: number; active: boolean; best: number | null; lines: Line[] }
+interface Intro { round: RoundConfig; chance: number; maxChances: number; unlocked: boolean; playable: boolean; chancesLeft: number; active: boolean; best: number | null; trialQualifyingScore: number; lines: Line[] }
 
 export async function enterFullscreen() {
   const el: any = document.documentElement;
@@ -64,6 +64,7 @@ export function PreRound() {
   useEffect(() => { if (error && (error as ApiError).status === 401) nav("/register"); }, [error]);
   if (!data) return <><Header /><Spinner /></>;
   const r = data.round;
+  if (data.playable === false) return <VarchaspatiPreview r={r} onBack={() => nav("/journey")} />;
 
   const begin = async () => {
     unlock();
@@ -138,11 +139,65 @@ export function PreRound() {
           <div className="px-6 sm:px-8 pb-6 flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-4">
             <button className="text-muted font-semibold underline" onClick={() => nav("/journey")}>← {t("common.back")}</button>
             <span className="text-xs text-muted">{t("preRound.fullscreenNote")}</span>
-            {!data.unlocked ? <div className="text-muted font-semibold">🔒 {t("journey.lockedHint")}</div>
+            {!data.unlocked ? <div className="text-muted font-semibold">🔒 {t("journey.lockedHint", { n: data.trialQualifyingScore })}</div>
               : data.chancesLeft === 0 && !data.active ? <div className="text-muted font-semibold">{t("journey.noChances")}</div>
                 : <GameButton sound="pop" className="px-9 py-4 text-xl animate-breathe" onClick={begin}>{data.active ? t("journey.resume") : t("preRound.start")} ▶</GameButton>}
           </div>
           {err && <div className="err px-8 pb-4">{t("common.error")} ({err})</div>}
+        </motion.div>
+      </Page>
+    </>
+  );
+}
+
+/** Level 5 (Phase 2): introduction and the proposed assessment framework; not playable yet. */
+function VarchaspatiPreview({ r, onBack }: { r: RoundConfig; onBack(): void }) {
+  const framework = tList<{ name: string; weight: number; desc: string }>("varchaspati.framework");
+  return (
+    <>
+      <Header />
+      <Ambient density={10} />
+      <Page>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="relative mx-auto max-w-4xl card shadow-pop overflow-hidden">
+          <div className="bg-gradient-to-r from-purple-900 via-purple-700 to-fuchsia-600 text-white px-6 sm:px-8 py-7 flex items-center gap-5">
+            <motion.div initial={{ rotate: -30, scale: 0 }} animate={{ rotate: 0, scale: 1 }} transition={{ type: "spring", delay: 0.2 }}><Medal k="varchaspati" size={90} shine /></motion.div>
+            <div className="flex-1">
+              <div className="text-xs font-extrabold uppercase tracking-[0.25em] text-purple-200">{t("varchaspati.kicker")}</div>
+              <h1 className="text-4xl font-extrabold">{t("varchaspati.heading")}</h1>
+              <div className="text-purple-100 mt-1">{t("varchaspati.tagline")}</div>
+            </div>
+          </div>
+          <div className="p-6 sm:p-8 grid md:grid-cols-[1fr_1.2fr] gap-6">
+            <div className="space-y-4">
+              <div className="rounded-card bg-purple-50 border border-purple-200 p-4">
+                <div className="text-sm font-extrabold uppercase tracking-widest text-purple-700">{t("varchaspati.teaser")}</div>
+                <p className="mt-1">{t("varchaspati.teaserBody")}</p>
+              </div>
+              <ul className="space-y-2">
+                {tList("varchaspati.format").map((f) => <li key={f} className="flex gap-2"><span className="text-purple-600">◆</span>{f}</li>)}
+              </ul>
+              <div className="flex gap-2 flex-wrap text-sm">
+                <span className="chip bg-purple-100 border-purple-200 text-purple-800">📄 {t("journey.pagesLabel", { n: r.pages || 300 })}</span>
+                <span className="chip bg-purple-100 border-purple-200 text-purple-800">{r.phase ?? t("journey.phase2")}</span>
+              </div>
+            </div>
+            <div>
+              <h2 className="font-extrabold mb-3">{t("varchaspati.frameworkHeading")}</h2>
+              <div className="space-y-2.5">
+                {framework.map((f, i) => (
+                  <motion.div key={f.name} initial={{ opacity: 0, x: 14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.06 }}>
+                    <div className="flex justify-between text-sm"><span className="font-semibold">{f.name}</span><span className="font-extrabold tabular-nums">{f.weight}</span></div>
+                    <div className="h-2 rounded-full bg-gray-100 overflow-hidden"><motion.div className="h-full bg-gradient-to-r from-purple-500 to-fuchsia-500" initial={{ width: 0 }} animate={{ width: `${f.weight * 4}%` }} transition={{ delay: 0.3 + i * 0.06 }} /></div>
+                    <div className="text-xs text-muted">{f.desc}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="px-6 sm:px-8 pb-6 flex flex-wrap items-center justify-between gap-3 border-t border-gray-100 pt-4">
+            <button className="text-muted font-semibold underline" onClick={onBack}>← {t("common.back")}</button>
+            <span className="font-semibold text-purple-700">✨ {t("varchaspati.notYet")}</span>
+          </div>
         </motion.div>
       </Page>
     </>

@@ -106,7 +106,7 @@ export async function loadPage(db: Db, id: string): Promise<{ page: PageData; se
     printedPageNo: row.printed_page_no,
     parts: parts.map((p): Part => ({
       id: p.id, order: p.ord, type: p.type, tickGroup: p.tick_group, editable: p.editable, layout: p.layout,
-      fields: p.fields, ...(p.en_sentences ? { enSentences: p.en_sentences } : {}),
+      fields: p.fields, ...(p.en_sentences ? { enSentences: p.en_sentences } : {}), ...(p.page_no ? { pageNo: p.page_no } : {}),
     })),
     slips: slips.map((s) => ({ partId: s.part_id, kind: s.kind, wrongText: s.wrong_text, enTerm: s.en_term, fixHint: s.fix_hint })),
     terms: applyOverrides(terms.map((t) => ({ en: t.en, hi: t.hi, variants: t.variants, avoid: t.avoid })), glossary?.overrides ?? []),
@@ -122,21 +122,21 @@ export function playerPage(p: { page: PageData; extras: PageExtras }, sample: bo
   return { ...clientPage(p.page), sample, sourceTerms: p.extras.sourceTerms, watchWords: p.extras.watchWords.map(({ kind: _k, ...w }) => ({ ...w })) };
 }
 
-export async function savePage(db: Db, page: PageData, opts: { sector: string; source?: unknown; status?: string; sample?: boolean; verified?: boolean }) {
+export async function savePage(db: Db, page: PageData, opts: { sector: string; source?: unknown; status?: string; sample?: boolean; verified?: boolean; scope?: string }) {
   await db.tx(async (q) => {
     const existing = await q.one<{ version: number }>("SELECT version FROM pages WHERE id=$1", [page.id]);
     if (existing) {
-      await q.query("UPDATE pages SET round_key=$2, label=$3, printed_page_no=$4, sector=$5, source=$6, status=COALESCE($7,status), sample=$8, version=version+1 WHERE id=$1",
-        [page.id, page.roundKey, page.label, page.printedPageNo, opts.sector, JSON.stringify(opts.source ?? {}), opts.status ?? null, !!opts.sample]);
+      await q.query("UPDATE pages SET round_key=$2, label=$3, printed_page_no=$4, sector=$5, source=$6, status=COALESCE($7,status), sample=$8, scope=COALESCE($9,scope), version=version+1 WHERE id=$1",
+        [page.id, page.roundKey, page.label, page.printedPageNo, opts.sector, JSON.stringify(opts.source ?? {}), opts.status ?? null, !!opts.sample, opts.scope ?? null]);
     } else {
-      await q.query("INSERT INTO pages (id, round_key, label, printed_page_no, sector, source, status, sample) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)",
-        [page.id, page.roundKey, page.label, page.printedPageNo, opts.sector, JSON.stringify(opts.source ?? {}), opts.status ?? "draft", !!opts.sample]);
+      await q.query("INSERT INTO pages (id, round_key, label, printed_page_no, sector, source, status, sample, scope) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)",
+        [page.id, page.roundKey, page.label, page.printedPageNo, opts.sector, JSON.stringify(opts.source ?? {}), opts.status ?? "draft", !!opts.sample, opts.scope ?? "union"]);
     }
     const verified = new Map((await q.query<{ id: string; reference_verified: boolean }>("SELECT id, reference_verified FROM page_parts WHERE page_id=$1", [page.id])).map((r) => [r.id, r.reference_verified]));
     await q.query("DELETE FROM page_parts WHERE page_id=$1", [page.id]);
     for (const p of page.parts) {
-      await q.query("INSERT INTO page_parts (id, page_id, ord, type, tick_group, editable, layout, fields, en_sentences, reference_verified) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-        [p.id, page.id, p.order, p.type, p.tickGroup, p.editable, JSON.stringify(p.layout), JSON.stringify(p.fields), p.enSentences ? JSON.stringify(p.enSentences) : null, opts.verified ?? verified.get(p.id) ?? false]);
+      await q.query("INSERT INTO page_parts (id, page_id, ord, type, tick_group, editable, layout, fields, en_sentences, reference_verified, page_no) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)",
+        [p.id, page.id, p.order, p.type, p.tickGroup, p.editable, JSON.stringify(p.layout), JSON.stringify(p.fields), p.enSentences ? JSON.stringify(p.enSentences) : null, opts.verified ?? verified.get(p.id) ?? false, p.pageNo ?? null]);
     }
     await q.query("DELETE FROM planted_slips WHERE page_id=$1", [page.id]);
     for (const s of page.slips)

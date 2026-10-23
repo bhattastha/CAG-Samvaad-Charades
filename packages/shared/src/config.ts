@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const RoundKey = z.enum(["trial", "primary", "secondary", "pro"]);
+export const RoundKey = z.enum(["trial", "primary", "secondary", "pro", "varchaspati"]);
 export type RoundKey = z.infer<typeof RoundKey>;
 
 const RoundSchema = z.object({
@@ -16,6 +16,11 @@ const RoundSchema = z.object({
   titleEn: z.string().default(""),
   titleMeaning: z.string().default(""),
   levelLabel: z.string().default(""),
+  /** false = shown in the game architecture but not yet playable (Varchaspati, Phase 2) */
+  playable: z.boolean().default(true),
+  /** report pages per bundle for this level (0 = Trial passage measured in words) */
+  pages: z.number().int().nonnegative().default(0),
+  phase: z.string().optional(),
 });
 export type RoundConfig = z.infer<typeof RoundSchema>;
 
@@ -23,7 +28,13 @@ export const GameConfigSchema = z
   .object({
     game: z.object({ name: z.string(), nameEn: z.string(), guide: z.string(), guideEn: z.string() }),
     registration: z.object({ credits: z.number().nonnegative() }),
-    rounds: z.array(RoundSchema).length(4),
+    rounds: z.array(RoundSchema).min(4),
+    brand: z.object({ name: z.string(), short: z.string(), localized: z.record(z.string()) }).default({ name: "Samvaad Charades", short: "Samvaad", localized: {} }),
+    levels: z.object({
+      trialQualifyingScore: z.number().min(0).max(100).default(33),
+      unlockRule: z.string().default("trial-pass-unlocks-all"),
+      trialWords: z.object({ min: z.number(), max: z.number(), sourceSection: z.string() }).default({ min: 300, max: 400, sourceSection: "Conclusion" }),
+    }).default({}),
     maxCredits: z.number().positive(),
     maxChancesPerRound: z.number().int().positive(),
     bestOfChancesCounts: z.boolean(),
@@ -98,10 +109,12 @@ export const GameConfigSchema = z
         message: `registration.credits + Σ creditCap = ${sum}, but maxCredits = ${c.maxCredits}`,
       });
     }
-    const keys = c.rounds.map((r) => r.key).join(",");
-    if (keys !== "trial,primary,secondary,pro") {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: `rounds must be trial,primary,secondary,pro in order (got ${keys})` });
-    }
+    const keys = c.rounds.map((r) => r.key);
+    if (keys[0] !== "trial") ctx.addIssue({ code: z.ZodIssueCode.custom, message: "the first round must be trial (mandatory entry level)" });
+    if (new Set(keys).size !== keys.length) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `duplicate round keys: ${keys.join(",")}` });
+    const w = c.scoringWeights;
+    const ws = w.translation + w.completion + w.sentenceConstruction + w.glossary + w.time;
+    if (Math.abs(ws - c.scoreOutOf) > 1e-9) ctx.addIssue({ code: z.ZodIssueCode.custom, message: `scoring weights sum to ${ws}, expected ${c.scoreOutOf}` });
   });
 
 export type GameConfig = z.infer<typeof GameConfigSchema>;
@@ -135,6 +148,8 @@ export function publicConfig(c: GameConfig) {
     auth: { otpLength: c.auth.otpLength },
     scoring: { minWordsPerSentence: c.scoring.minWordsPerSentence },
     ui: c.ui,
+    brand: c.brand,
+    levels: { trialQualifyingScore: c.levels.trialQualifyingScore, unlockRule: c.levels.unlockRule, trialWords: c.levels.trialWords },
   };
 }
 export type PublicConfig = ReturnType<typeof publicConfig>;

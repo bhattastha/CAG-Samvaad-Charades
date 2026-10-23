@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
+import { RoundKey } from "@hc/shared";
 import { requirePlayer } from "../auth.js";
 import { config } from "../content.js";
 import type { Db } from "../db.js";
@@ -13,9 +14,9 @@ export async function playRoutes(app: FastifyInstance, db: Db) {
   app.post("/rounds/:key/attempts", async (req, reply) => {
     const pid = requirePlayer(req, reply);
     if (!pid) return;
-    const { key } = parse(z.object({ key: z.enum(["trial", "primary", "secondary", "pro"]) }), req.params);
+    const { key } = parse(z.object({ key: RoundKey }), req.params);
     const { clientId } = parse(z.object({ clientId: z.string().min(8).max(64) }), req.body);
-    const a = await startAttempt(db, pid, key, clientId);
+    const a = await startAttempt(db, pid, key, clientId, req.session?.sid);
     return attemptView(db, a, clientId);
   });
 

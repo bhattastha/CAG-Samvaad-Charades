@@ -5,6 +5,16 @@ const shot = async (page: any, name: string) => { if (shots) { await page.waitFo
 
 test.describe.configure({ mode: "serial" });
 
+/** For the browser journey the Trial qualifying score is lowered from the console API (configurable, not hard-coded), then restored. */
+async function setQualify(request: any, baseURL: string, n: number) {
+  await request.post(`${baseURL}/api/auth/otp/request`, { data: { email: "manager@cag.gov.in" } });
+  await request.post(`${baseURL}/api/auth/otp/verify`, { data: { email: "manager@cag.gov.in", code: "123456" } });
+  const r = await request.put(`${baseURL}/api/admin/config/settings`, { data: { trialQualifyingScore: n } });
+  if (!r.ok()) throw new Error(`settings ${r.status()}`);
+}
+test.beforeAll(async ({ playwright }, info) => { const base = info.project.use.baseURL!; const rq = await playwright.request.newContext(); await setQualify(rq, base, 10); await rq.dispose(); });
+test.afterAll(async ({ playwright }, info) => { const base = info.project.use.baseURL!; const rq = await playwright.request.newContext(); await setQualify(rq, base, 33); await rq.dispose(); });
+
 test("new player: profile → training → rules → map → briefing → Level 1 → report → Level 2", async ({ page }) => {
   // Sahayika must never start talking on her own (default voice mode: tap to listen)
   await page.addInitScript(() => {
@@ -15,6 +25,8 @@ test("new player: profile → training → rules → map → briefing → Level 
   const email = `e2e.${Date.now()}@cag.gov.in`;
   await page.goto("/");
   await expect(page.getByRole("button", { name: /Press Start/ })).toBeVisible();
+  await expect(page.getByText("Samvaad").first()).toBeVisible();
+  await expect(page.getByRole("switch", { name: "Sahayak voice guide" })).toHaveAttribute("aria-checked", "false");
   await shot(page, "01_title");
   await page.getByRole("button", { name: /Press Start/ }).click();
 
@@ -54,7 +66,13 @@ test("new player: profile → training → rules → map → briefing → Level 
   await page.getByRole("button", { name: /Open the map/ }).click();
   await expect(page).toHaveURL(/journey/);
   await expect(page.getByText("You are here")).toBeVisible();
+  await expect(page.getByText(/Start here: the Trial is your entry ticket/)).toBeVisible();
   await shot(page, "05_journey");
+  // Level 5 is visible but preview-only
+  await page.getByRole("button", { name: /Level 5 Varchaspati Round/ }).click();
+  await expect(page.getByText(/Varchaspati opens in Phase 2/)).toBeVisible();
+  await shot(page, "05b_varchaspati_preview");
+  await page.getByRole("button", { name: /Back/ }).click();
   await page.getByRole("button", { name: /Level 1 Trial Round/ }).click();
 
   await expect(page).toHaveURL(/play\/trial/);
@@ -67,7 +85,7 @@ test("new player: profile → training → rules → map → briefing → Level 
   await page.locator("#kbd").selectOption("device");
   await ed.click();
   await page.keyboard.type("स्टील अथॉरिटी ऑफ इंडिया लिमिटेड भारत की अग्रणी इस्पात उत्पादक कंपनियों में से एक है। कंपनी के पास लौह अयस्क की खदानें हैं।");
-  await expect(page.getByText("2/16 sentences").first()).toBeVisible();
+  await expect(page.getByText(/^2\/(12|16) sentences$/).first()).toBeVisible();
   await page.waitForTimeout(2600);
   await expect(page.getByText("Saved").first()).toBeVisible();
   await shot(page, "07_trial_round");
@@ -90,7 +108,15 @@ test("new player: profile → training → rules → map → briefing → Level 
   await page.getByRole("link", { name: /Review my translation/ }).click();
   await expect(page.locator("p.whitespace-pre-wrap").first()).toContainText("लौह अयस्क");
   await page.goBack();
-  await page.getByRole("button", { name: /Next: Primary Round/ }).click();
+  await expect(page.getByText("Trial cleared! Every level is now open.")).toBeVisible();
+  // Secondary can be opened directly, without Primary
+  await page.getByRole("link", { name: /Back to map/ }).click();
+  await expect(page.getByText(/Trial cleared! Primary, Secondary and Pro are open/)).toBeVisible();
+  await shot(page, "05c_journey_unlocked");
+  await page.getByRole("button", { name: /Level 3 Secondary Round/ }).click();
+  await expect(page).toHaveURL(/play\/secondary/);
+  await page.getByRole("button", { name: /Back/ }).click();
+  await page.getByRole("button", { name: /Level 2 Primary Round/ }).click();
   await expect(page).toHaveURL(/play\/primary/);
   await page.getByRole("button", { name: /Start mission/ }).click();
   await expect(page.getByText("BHASHINI draft").first()).toBeVisible({ timeout: 10_000 });
@@ -112,7 +138,7 @@ test("new player: profile → training → rules → map → briefing → Level 
 test("settings: voice control and accessibility toggles", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Settings" }).click();
-  await expect(page.getByText("Sahayika's voice")).toBeVisible();
+  await expect(page.getByText("Sahayak voice guide").first()).toBeVisible();
   await page.getByRole("button", { name: "XL" }).click();
   await page.getByRole("switch", { name: /High contrast/ }).click();
   await shot(page, "11_settings");

@@ -45,6 +45,8 @@ export interface Part {
   fields: Field[];
   /** परख only: English sentences, for linked focus */
   enSentences?: string[];
+  /** printed page this part sits on, inside a multi-page report bundle (10/20/30 pages) */
+  pageNo?: number;
 }
 export type ClientPart = Omit<Part, "fields"> & { fields: ClientField[] };
 

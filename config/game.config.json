@@ -1,9 +1,9 @@
 {
   "game": {
-    "name": "हिंदी शराड्स",
-    "nameEn": "Hindi Charades",
-    "guide": "सहायिका",
-    "guideEn": "Sahayika"
+    "name": "संवाद शराड्स",
+    "nameEn": "Samvaad Charades",
+    "guide": "सहायक",
+    "guideEn": "Sahayak"
   },
   "registration": {
     "credits": 2
@@ -21,7 +21,9 @@
       "completionCountedBy": "sentence",
       "titleEn": "Anuvad Pathik",
       "titleMeaning": "The Translation Traveller",
-      "levelLabel": "Level 1"
+      "levelLabel": "Level 1",
+      "playable": true,
+      "pages": 0
     },
     {
       "key": "primary",
@@ -35,7 +37,9 @@
       "completionCountedBy": "paragraph",
       "titleEn": "Anuvad Nipun",
       "titleMeaning": "The Skilled Translator",
-      "levelLabel": "Level 2"
+      "levelLabel": "Level 2",
+      "playable": true,
+      "pages": 10
     },
     {
       "key": "secondary",
@@ -49,7 +53,9 @@
       "completionCountedBy": "paragraph",
       "titleEn": "Anuvad Vidvaan",
       "titleMeaning": "The Translation Scholar",
-      "levelLabel": "Level 3"
+      "levelLabel": "Level 3",
+      "playable": true,
+      "pages": 20
     },
     {
       "key": "pro",
@@ -63,7 +69,26 @@
       "completionCountedBy": "paragraph",
       "titleEn": "Anuvad Visheshagya",
       "titleMeaning": "The Translation Expert",
-      "levelLabel": "Level 4"
+      "levelLabel": "Level 4",
+      "playable": true,
+      "pages": 30
+    },
+    {
+      "key": "varchaspati",
+      "name": "वाचस्पति राउंड",
+      "nameEn": "Varchaspati",
+      "title": "अनुवाद वाचस्पति",
+      "timeLimitMinutes": 600,
+      "creditCap": 0,
+      "bhashiniDraft": true,
+      "voiceTyping": false,
+      "completionCountedBy": "paragraph",
+      "titleEn": "Anuvad Varchaspati",
+      "titleMeaning": "The PhD-level master translator",
+      "levelLabel": "Level 5",
+      "playable": false,
+      "pages": 300,
+      "phase": "Phase 2"
     }
   ],
   "maxCredits": 50,
@@ -86,7 +111,7 @@
   "creditDecimals": 1,
   "_comment_extensions": "Keys below are build settings added by the spec (CLAUDE.md §5). They are not in the concept note's JSON; change them here, never in code.",
   "creditsBelowPassMark": true,
-  "roundUnlockRule": "previous round played at least once",
+  "roundUnlockRule": "Trial must be passed (levels.trialQualifyingScore); then Primary, Secondary and Pro are independent",
   "fairPlay": {
     "warnAtMinutesLeft": 5,
     "confirmSubmitWindowSeconds": 4,
@@ -160,5 +185,35 @@
     "ttsEnglish": "Bhashini/IITM/TTS",
     "ttsGender": "female",
     "transliteration": "ai4bharat/indicxlit--cpu-fsv2"
+  },
+  "brand": {
+    "_comment": "Samvaad is a brand name: never translated, only localised (transliterated). UI renders it with translate=\"no\" and swaps in the localised form for the page language. Localised forms need native-speaker review.",
+    "name": "Samvaad Charades",
+    "short": "Samvaad",
+    "localized": {
+      "en": "Samvaad Charades",
+      "hi": "संवाद शराड्स",
+      "mr": "संवाद शराड्स",
+      "bn": "সংবাদ শারাডস",
+      "as": "সংবাদ শাৰাডছ",
+      "gu": "સંવાદ શરાડ્સ",
+      "pa": "ਸੰਵਾਦ ਸ਼ਰਾਡਜ਼",
+      "or": "ସମ୍ବାଦ ଶରାଡ୍ସ",
+      "ta": "சம்வாத் ஷரேட்ஸ்",
+      "te": "సంవాద్ షరాడ్స్",
+      "kn": "ಸಂವಾದ ಶರಾಡ್ಸ್",
+      "ml": "സംവാദ് ഷറാഡ്സ്",
+      "ur": "سنواد شریڈز"
+    }
+  },
+  "levels": {
+    "_comment": "Trial is the mandatory entry level. Passing it (best score >= trialQualifyingScore) unlocks Primary, Secondary and Pro, each independently playable.",
+    "trialQualifyingScore": 33,
+    "unlockRule": "trial-pass-unlocks-all",
+    "trialWords": {
+      "min": 300,
+      "max": 400,
+      "sourceSection": "Conclusion"
+    }
   }
 }

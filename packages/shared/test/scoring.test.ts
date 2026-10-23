@@ -75,8 +75,27 @@ describe("credits and totals", () => {
     expect(t.best).toBe(70);
     expect(t.credits).toBe(2.1);
     expect(t.chancesLeft).toBe(0);
-    expect(s.rounds[1].unlocked).toBe(true);
-    expect(s.rounds[2].unlocked).toBe(false);
+    // Trial passed (70 >= 33): Primary, Secondary and Pro all unlock independently; Varchaspati is preview-only
+    expect(s.rounds.slice(1, 4).every((r) => r.unlocked)).toBe(true);
+    expect(s.rounds[4].key).toBe("varchaspati");
+    expect(s.rounds[4].unlocked).toBe(false);
+    expect(s.trialPassed).toBe(true);
+  });
+  it("a Trial below the qualifying score keeps every other level locked", () => {
+    const s = summarise(config, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 20 }]);
+    expect(s.trialPassed).toBe(false);
+    expect(s.rounds.slice(1).some((r) => r.unlocked)).toBe(false);
+    expect(s.nextRound).toBe("trial");
+    const lowered = summarise({ ...config, levels: { ...config.levels, trialQualifyingScore: 15 } }, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 20 }]);
+    expect(lowered.rounds[3].unlocked).toBe(true);
+  });
+  it("Secondary or Pro can be played without Primary", () => {
+    const s = summarise(config, [
+      { roundKey: "trial", chanceNo: 1, status: "submitted", score: 40 },
+      { roundKey: "pro", chanceNo: 1, status: "submitted", score: 50 },
+    ]);
+    expect(s.rounds.find((r) => r.key === "secondary")!.unlocked).toBe(true);
+    expect(s.totalCredits).toBe(2 + 1.2 + 12.5);
   });
   it("below 33: credits still apply, no title", () => {
     const s = summarise(config, [{ roundKey: "trial", chanceNo: 1, status: "submitted", score: 30 }]);

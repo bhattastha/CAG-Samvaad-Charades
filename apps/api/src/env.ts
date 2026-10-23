@@ -15,7 +15,7 @@ export const env = {
   PUBLIC_ORIGIN: e.PUBLIC_ORIGIN ?? "http://localhost:5173",
   COOKIE_SECURE: (e.COOKIE_SECURE ?? (e.NODE_ENV === "production" ? "1" : "0")) === "1",
   SMTP_URL: e.SMTP_URL ?? "",
-  OTP_FROM: e.OTP_FROM ?? "Hindi Charades <no-reply@cag.gov.in>",
+  OTP_FROM: e.OTP_FROM ?? "Samvaad Charades <no-reply@cag.gov.in>",
   ADMIN_EMAILS: (e.ADMIN_EMAILS ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean),
   // One ULCA "Inference API key" (Authorization value) works for every Dhruva task; per-task keys override it.
   DHRUVA_ASR_KEY: e.DHRUVA_ASR_KEY || e.DHRUVA_API_KEY || "",

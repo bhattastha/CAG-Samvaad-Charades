@@ -1,4 +1,4 @@
-# हिंदी शराड्स · Hindi Charades (CAG × BHASHINI)
+# Samvaad Charades (CAG × BHASHINI)
 
 A four-round Hindi translation game for IA&AD officers, played on real CAG audit-report pages and scored against CAG's own published Hindi. Spec: [CLAUDE.md](CLAUDE.md). Run it: [docs/RUNBOOK.md](docs/RUNBOOK.md). Status: [docs/PROGRESS.md](docs/PROGRESS.md). Deviations: [docs/DECISIONS.md](docs/DECISIONS.md).
 

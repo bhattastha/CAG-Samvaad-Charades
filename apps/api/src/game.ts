@@ -14,7 +14,7 @@ export interface AttemptRow {
   id: string; player_id: string; round_key: RoundKey; chance_no: number; page_id: string;
   started_at: Date; deadline_at: Date; last_saved_at: Date | null; submitted_at: Date | null; auto_submitted: boolean;
   status: "active" | "submitted"; answers: Answers; answers_version: number; active_client_id: string | null;
-  left_page_count: number; paste_blocked_count: number; measures: any; score: number | null; tip: any; result: any; chat_count: number;
+  left_page_count: number; paste_blocked_count: number; measures: any; score: number | null; tip: any; result: any; chat_count: number; session_id: string | null;
 }
 
 export const firstName = (n: string) => n.trim().split(/\s+/)[0] ?? n;
@@ -51,7 +51,7 @@ export class GameError extends Error {
 }
 
 /** §12 Start: resume any active attempt; unlocked; chances < max; pick a page; the chance is used from now. */
-export async function startAttempt(db: Db, pid: string, key: RoundKey, clientId: string): Promise<AttemptRow> {
+export async function startAttempt(db: Db, pid: string, key: RoundKey, clientId: string, sessionId?: string): Promise<AttemptRow> {
   const active = await db.one<AttemptRow>("SELECT * FROM attempts WHERE player_id=$1 AND status='active'", [pid]);
   if (active) {
     if (active.round_key !== key) throw new GameError(409, "other_round_active");
@@ -63,11 +63,15 @@ export async function startAttempt(db: Db, pid: string, key: RoundKey, clientId:
   const check = canStart(summary, key);
   if (!check.ok) throw new GameError(check.status, check.reason);
   const round = roundOf(config(), key);
-  const pages = await db.query<{ id: string; times_used: number }>(
-    `SELECT p.id, (SELECT count(*)::int FROM attempts a WHERE a.page_id=p.id) AS times_used FROM pages p
+  const all = await db.query<{ id: string; times_used: number; scope: string }>(
+    `SELECT p.id, p.scope, (SELECT count(*)::int FROM attempts a WHERE a.page_id=p.id) AS times_used FROM pages p
      WHERE p.round_key=$1 AND p.active AND (p.status='published' OR ($2::boolean AND p.sample))`,
     [key, env.SEED_ALLOW_UNVERIFIED],
   );
+  // office mapping: Union reports for everyone, State reports for officers of that state
+  const office = await db.one<{ state: string }>("SELECT state FROM offices WHERE id=$1", [player.office_id]);
+  const mapped = all.filter((p) => p.scope === "union" || p.scope.toLowerCase() === (office?.state ?? "").toLowerCase());
+  const pages = mapped.length ? mapped : all;
   const chanceNo = attempts.filter((a) => a.round_key === key).length + 1;
   const used = new Set(attempts.filter((a) => a.round_key === key).map((a) => a.page_id));
   const pageId = choosePage(pages.map((p) => ({ id: p.id, timesUsed: p.times_used })), used, `${player.email}|${key}|${chanceNo}`);
@@ -78,9 +82,9 @@ export async function startAttempt(db: Db, pid: string, key: RoundKey, clientId:
   const id = randomUUID();
   try {
     await db.query(
-      `INSERT INTO attempts (id, player_id, round_key, chance_no, page_id, started_at, deadline_at, status, answers, active_client_id)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,'active',$8,$9)`,
-      [id, pid, key, chanceNo, pageId, now, deadline, JSON.stringify(initialAnswers(page)), clientId],
+      `INSERT INTO attempts (id, player_id, round_key, chance_no, page_id, started_at, deadline_at, status, answers, active_client_id, session_id)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,'active',$8,$9,$10)`,
+      [id, pid, key, chanceNo, pageId, now, deadline, JSON.stringify(initialAnswers(page)), clientId, sessionId ?? null],
     );
   } catch (e: any) {
     // unique (player, round, chance) is the backstop for double clicks and a 4th chance
@@ -219,9 +223,12 @@ export async function report(db: Db, a: AttemptRow) {
   };
   const round = roundOf(config(), a.round_key);
   const idx = config().rounds.findIndex((x) => x.key === a.round_key);
-  const next = config().rounds[idx + 1];
+  // suggest the next step: retry Trial until it is passed, then the first playable level not yet played
+  const next = !summary.trialPassed ? undefined
+    : config().rounds.find((x, i) => x.playable !== false && summary.rounds[i].played === 0 && summary.rounds[i].unlocked) ?? undefined;
   return {
     attemptId: a.id,
+    sessionId: a.session_id,
     roundKey: a.round_key,
     roundName: round.name,
     title: round.title,
@@ -249,7 +256,9 @@ export async function report(db: Db, a: AttemptRow) {
     titleNeeded: sel.titleEarned ? null : say(`${a.round_key}.report_card.title_needed_note`, vars),
     tip: tipLine(a.round_key, a.tip),
     after: sel.after.map((id) => say(id, vars)).filter(Boolean),
-    nextRound: next ? { key: next.key, name: next.name, unlocked: summary.rounds[idx + 1].unlocked } : null,
+    nextRound: next ? { key: next.key, name: next.name, unlocked: true } : null,
+    trialPassed: summary.trialPassed,
+    trialQualifyingScore: summary.trialQualifyingScore,
   };
 }
 

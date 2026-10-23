@@ -30,12 +30,28 @@ export const config = () => effective;
 
 export async function loadOverrides(db: Db) {
   const rows = await db.query<{ key: string; value: any }>("SELECT key, value FROM config_overrides");
+  effective = applySettings(baseConfig, rows);
+}
+
+/** Admin-console overrides on top of the file: credit caps (legacy key) and the full "settings" block. */
+export interface SettingsOverride {
+  rounds?: Record<string, { timeLimitMinutes?: number; creditCap?: number; pages?: number }>;
+  trialQualifyingScore?: number;
+  titlePassMark?: number;
+  scoringWeights?: GameConfig["scoringWeights"];
+  maxChancesPerRound?: number;
+}
+export function applySettings(base: GameConfig, rows: { key: string; value: any }[]): GameConfig {
   const caps = rows.find((r) => r.key === "creditCaps")?.value as Record<string, number> | undefined;
-  const regCredits = rows.find((r) => r.key === "registrationCredits")?.value as number | undefined;
-  const next = structuredClone(baseConfig);
+  const st = rows.find((r) => r.key === "settings")?.value as SettingsOverride | undefined;
+  const next = structuredClone(base);
   if (caps) next.rounds = next.rounds.map((r) => ({ ...r, creditCap: caps[r.key] ?? r.creditCap }));
-  if (typeof regCredits === "number") next.registration.credits = regCredits;
-  effective = parseGameConfig(next); // the 50-credit invariant still holds
+  if (st?.rounds) next.rounds = next.rounds.map((r) => ({ ...r, ...(st.rounds![r.key] ?? {}) }));
+  if (typeof st?.trialQualifyingScore === "number") next.levels.trialQualifyingScore = st.trialQualifyingScore;
+  if (typeof st?.titlePassMark === "number") next.titlePassMark = st.titlePassMark;
+  if (typeof st?.maxChancesPerRound === "number") next.maxChancesPerRound = st.maxChancesPerRound;
+  if (st?.scoringWeights) next.scoringWeights = st.scoringWeights;
+  return parseGameConfig(next); // invariants (50 credits, weights = 100) still hold
 }
 
 /** Lines as edited in the console (DB) fall back to the script file. */

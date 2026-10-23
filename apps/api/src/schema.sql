@@ -1,4 +1,4 @@
--- Hindi Charades schema (PostgreSQL 16; also runs on PGlite for local development).
+-- Samvaad Charades schema (PostgreSQL 16; also runs on PGlite for local development).
 -- Round results are computed from attempts, never stored (CLAUDE.md §6).
 
 CREATE TABLE IF NOT EXISTS offices (
@@ -79,5 +79,10 @@ CREATE TABLE IF NOT EXISTS otp_challenges (email text PRIMARY KEY, code_hash tex
 CREATE TABLE IF NOT EXISTS admin_users (email text PRIMARY KEY, role text NOT NULL CHECK (role IN ('manager','viewer')));
 
 CREATE TABLE IF NOT EXISTS config_overrides (key text PRIMARY KEY, value jsonb NOT NULL, by text NOT NULL, at timestamptz NOT NULL DEFAULT now());
+
+-- iteration 3: report scope (Union / state) for office mapping, page numbers inside multi-page bundles, play sessions
+ALTER TABLE pages ADD COLUMN IF NOT EXISTS scope text NOT NULL DEFAULT 'union';
+ALTER TABLE page_parts ADD COLUMN IF NOT EXISTS page_no int;
+ALTER TABLE attempts ADD COLUMN IF NOT EXISTS session_id text;
 
 CREATE TABLE IF NOT EXISTS audit_logs (id serial PRIMARY KEY, actor text NOT NULL, action text NOT NULL, target text NOT NULL, at timestamptz NOT NULL DEFAULT now(), meta jsonb);

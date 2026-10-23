@@ -181,6 +181,12 @@ export function Round() {
   const [chatOpen, setChatOpen] = useState(false);
   const [mobilePane, setMobilePane] = useState<"src" | "dst">("dst");
   const watchWords = view?.page.watchWords ?? [];
+  // multi-page report bundles (10/20/30 pages): one printed page at a time in both panels
+  const pageNos = useMemo(() => [...new Set((view?.page.parts ?? []).map((p) => p.pageNo).filter((n): n is number => typeof n === "number"))].sort((a, b) => a - b), [view]);
+  const [pageIdx, setPageIdx] = useState(0);
+  const curPage = pageNos[pageIdx];
+  const visibleParts = useMemo(() => (pageNos.length > 1 ? (view?.page.parts ?? []).filter((p) => (p.pageNo ?? pageNos[0]) === curPage) : view?.page.parts ?? []), [view, pageNos, curPage]);
+  const pageDone = (n: number) => (view?.page.parts ?? []).filter((p) => p.pageNo === n && p.editable && p.tickGroup).every((p) => answers[p.id]?.done);
   const watchTexts = useMemo(() => watchWords.map((w) => w.text), [watchWords]);
 
   // ---------- voice (परख only) ----------
@@ -242,6 +248,21 @@ export function Round() {
         </div>
       </div>
 
+      {pageNos.length > 1 && (
+        <nav className="mx-auto w-full max-w-[1400px] px-3 sm:px-6 mt-3 flex items-center gap-3" aria-label={t("round.pageNav", { n: pageIdx + 1, total: pageNos.length })}>
+          <button className="btn-ghost py-1.5 px-4 text-base" disabled={pageIdx === 0} onClick={() => { setPageIdx(pageIdx - 1); sfx("whoosh"); }}>← {t("round.prevPage")}</button>
+          <div className="flex-1 flex items-center gap-1 overflow-x-auto py-1">
+            {pageNos.map((n, i) => (
+              <button key={n} onClick={() => { setPageIdx(i); sfx("tap"); }} aria-current={i === pageIdx}
+                className={`shrink-0 min-w-8 h-8 px-2 rounded-full text-xs font-extrabold border-2 ${i === pageIdx ? "bg-primary border-primary text-white" : pageDone(n) ? "bg-success-soft border-green-300 text-green-800" : "bg-white border-gray-200 text-muted"}`}>
+                {pageDone(n) && i !== pageIdx ? "✓" : n}
+              </button>
+            ))}
+          </div>
+          <span className="text-sm font-bold whitespace-nowrap">{t("round.pageNav", { n: pageIdx + 1, total: pageNos.length })}</span>
+          <button className="btn-primary py-1.5 px-4 text-base" disabled={pageIdx === pageNos.length - 1} onClick={() => { setPageIdx(pageIdx + 1); sfx("whoosh"); }}>{t("round.nextPage")} →</button>
+        </nav>
+      )}
       <main className="mx-auto w-full max-w-[1400px] flex-1 px-3 sm:px-6 py-3 grid lg:grid-cols-2 gap-4 pb-40">
         <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabel")}>
           <div className="px-4 py-2.5 border-b border-gray-100 bg-gray-50 rounded-t-card flex items-center gap-2">
@@ -249,7 +270,7 @@ export function Round() {
             <span className="ml-auto text-xs text-royal hidden sm:inline">{t("round.glossaryHint")}</span>
           </div>
           <div className="p-4 sm:p-5 overflow-y-auto max-h-[calc(100vh-260px)]">
-            <SourcePanel parts={view.page.parts} terms={view.page.sourceTerms} focusedPart={focusedPart} sentenceIndex={isTrial ? sentenceIdx : null}
+            <SourcePanel parts={visibleParts} terms={view.page.sourceTerms} focusedPart={focusedPart} sentenceIndex={isTrial ? sentenceIdx : null}
               onPartClick={(pid) => { setFocusedPart(pid); const f = view.page.parts.find((p) => p.id === pid)?.fields.find((x) => !x.numeric); if (f) editors.current.get(fk(pid, f.key))?.focus(); }}
               onTerm={(pid, key, tm, rect) => {
                 const part = view.page.parts.find((p) => p.id === pid);
@@ -283,7 +304,7 @@ export function Round() {
                 onXlitAccept={xlitAccept}
               />
             ) : (
-              <DraftPanel parts={view.page.parts} answers={answers} readOnly={readOnly} watch={watchTexts} focusedPart={focusedPart} register={register}
+              <DraftPanel parts={visibleParts} answers={answers} readOnly={readOnly} watch={watchTexts} focusedPart={focusedPart} register={register}
                 onField={(pid, key, v) => at.update(pid, { field: [key, v] })}
                 onTick={(pid, done) => { at.update(pid, { done }); if (!done) sfx("tap"); }}
                 onFocus={onFocus} onBlocked={onBlocked} onTyping={onTyping} onXlit={xlitAccept}

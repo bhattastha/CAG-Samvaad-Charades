@@ -27,6 +27,7 @@ interface SeedPart {
   locked_tokens?: string[];
   editable?: boolean;
   layout?: any;
+  page_no?: number;
 }
 export interface SeedPage {
   page_id: string;
@@ -91,7 +92,7 @@ export function seedToPage(s: SeedPage): { page: PageData; sector: string } {
   }
   (s.parts ?? []).forEach((p, i) => {
     const editable = p.editable !== false && p.type !== "page_number";
-    const base = { id: p.part_id, order: i + 1, type: p.type, tickGroup: editable ? p.tick_group : null, editable };
+    const base = { id: p.part_id, order: i + 1, type: p.type, tickGroup: editable ? p.tick_group : null, editable, ...(p.page_no ? { pageNo: p.page_no } : {}) };
     if (p.type === "table") {
       const L = p.layout ?? {};
       const { fields, rows } = tableFields(L);

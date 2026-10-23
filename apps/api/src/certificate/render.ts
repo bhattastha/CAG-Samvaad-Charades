@@ -57,7 +57,7 @@ h1 .a{color:#22293B}h1 .b{color:#E8590C}
 .sign{border-top:1px solid #9CA3AF;padding-top:1mm;min-width:60mm}
 </style></head><body><div class="frame">
 <div class="top"><img src="${brand("cag-logo.png")}" alt=""><img src="${brand("bhashini-logo.png")}" alt=""></div>
-${en ? `<h1><span class="a">Hindi</span> <span class="b">Charades</span></h1><div style="font-size:16pt;color:#C2410C;font-weight:700">हिंदी शराड्स</div>` : `<h1><span class="a">हिंदी</span> <span class="b">शराड्स</span></h1>`}
+${(() => { const b = config().brand; const name = en ? b.name : b.localized.hi ?? b.name; const [w1, ...rest] = name.split(" "); return `<h1><span class="a">${esc(w1)}</span> <span class="b">${esc(rest.join(" "))}</span></h1>`; })()}
 <div class="brand">CAG × BHASHINI · HINDI PAKHWADA</div>
 <div class="lead">${esc(c.certify)}</div>
 <div class="name">${esc(p.name)}</div>

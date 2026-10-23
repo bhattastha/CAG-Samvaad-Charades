@@ -129,6 +129,7 @@ export function Stamp({ text, tone = "good" }: { text: string; tone?: "good" | "
 
 const MEDAL: Record<string, [string, string, string]> = {
   trial: ["#FDBA74", "#E8590C", "🌱"], primary: ["#93C5FD", "#2563EB", "📄"], secondary: ["#86EFAC", "#16A34A", "📊"], pro: ["#FDE047", "#D97706", "🏆"],
+  varchaspati: ["#D8B4FE", "#7C3AED", "📜"],
 };
 export function Medal({ k, size = 72, locked = false, shine = false }: { k: string; size?: number; locked?: boolean; shine?: boolean }) {
   const [a, b, icon] = MEDAL[k] ?? MEDAL.trial;

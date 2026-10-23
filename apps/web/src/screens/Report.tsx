@@ -20,6 +20,9 @@ export interface ReportData {
   stars: number; starsTotal: number; chancesLeft: number; leftCount: number;
   announce: Line[]; titleNeeded: Line | null; tip: Line; after: Line[];
   nextRound: { key: string; name: string; unlocked: boolean } | null;
+  trialPassed: boolean;
+  trialQualifyingScore: number;
+  sessionId: string | null;
 }
 
 type Phase = "stamp" | "scoring" | "card";
@@ -84,10 +87,14 @@ export function Report() {
   const nav = useNavigate();
   const { data: cfg } = useConfig();
   const { data: r } = useQuery({ queryKey: ["report", id], queryFn: () => api<ReportData>(`/attempts/${id}/report`) });
-  const [phase, setPhase] = useState<Phase>(sp.get("fx") ? "stamp" : "card");
+  // the mission-complete sequence plays once per attempt (not again on Back / refresh)
+  const seenKey = `hc.fx.${id}`;
+  const seen = (() => { try { return sessionStorage.getItem(seenKey) === "1"; } catch { return false; } })();
+  const [phase, setPhase] = useState<Phase>(sp.get("fx") && !seen ? "stamp" : "card");
   const [burst, setBurst] = useState(0);
   useEffect(() => {
     if (phase !== "card" || !r) return;
+    try { sessionStorage.setItem(seenKey, "1"); } catch { /* ignore */ }
     if (sp.get("fx")) setSp({}, { replace: true });
     if (r.titleEarned) { const tm = setTimeout(() => { setBurst(1); sfx("fanfare"); }, 700); return () => clearTimeout(tm); }
     sfx("coin");
@@ -134,8 +141,9 @@ export function Report() {
               <div className="flex-1">
                 <div className="text-[11px] font-extrabold uppercase tracking-widest text-royal">🎯 {t("reportCard.nextGoal")}</div>
                 <div className="font-bold leading-snug">
-                  {!r.titleEarned ? t("reportCard.goalTitle", { n: Math.max(0, (cfg?.titlePassMark ?? 33) - r.best), title: round?.titleEn ?? r.title })
-                    : next ? t("reportCard.goalNext", { title: next.titleEn, round: `${next.nameEn} Round` }) : t("reportCard.goalDone")}
+                  {r.roundKey === "trial" && !r.trialPassed ? t("reportCard.goalTrial", { n: Math.max(0, r.trialQualifyingScore - r.best) })
+                    : !r.titleEarned ? t("reportCard.goalTitle", { n: Math.max(0, (cfg?.titlePassMark ?? 33) - r.best), title: round?.titleEn ?? r.title })
+                      : next ? t("reportCard.goalNext", { title: next.titleEn, round: `${next.nameEn} Round` }) : t("reportCard.goalDone")}
                 </div>
               </div>
             </motion.div>
@@ -147,6 +155,8 @@ export function Report() {
                 <div className="text-2xl font-bold">{r.playerName}</div>
                 <div className="text-muted">{round ? `${round.nameEn} Round` : r.roundName} · {r.limitMinutes} min · {t("common.chanceOf", { n: r.chanceNo, max: r.maxChances })}</div>
                 {r.autoSubmitted && <div className="text-sm text-timer-text font-semibold mt-1">⏱ {t("reportCard.autoSubmitted")}</div>}
+                {r.roundKey === "trial" && r.trialPassed && <div className="text-sm text-success font-bold mt-1">🔓 {t("reportCard.trialUnlocked")}</div>}
+                {r.sessionId && <div className="text-[11px] text-muted mt-1">{t("reportCard.sessionId")}: <span className="font-mono">{r.sessionId.slice(0, 8)}</span></div>}
               </div>
               <motion.div initial={{ scale: 0.5, rotate: 8 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 220, damping: 12 }}
                 className="relative rounded-2xl bg-gradient-to-br from-primary-soft to-amber-50 border-2 border-orange-200 px-6 py-3 text-center">
@@ -182,9 +192,12 @@ export function Report() {
               <Link to={`/review/${r.attemptId}`} className="text-royal font-semibold underline">🔍 {t("reportCard.reviewOwn")}</Link>
               <Link to="/journey" className="text-muted font-semibold underline">🗺 {t("reportCard.map")}</Link>
               <span className="flex-1" />
-              {r.chancesLeft > 0 && <GameButton variant="ghost" onClick={() => nav(`/play/${r.roundKey}`)}>↻ {t("reportCard.replay", { n: r.chancesLeft })}</GameButton>}
-              {!next ? <GameButton sound="fanfare" onClick={() => nav("/total")}>{t("reportCard.totalScore")}</GameButton>
-                : <GameButton sound="whoosh" onClick={() => nav(`/play/${next.key}`)}>{t("reportCard.nextRound", { roundName: `${next.nameEn} Round` })}</GameButton>}
+              {r.chancesLeft > 0 && (r.roundKey === "trial" && !r.trialPassed
+                ? <GameButton onClick={() => nav("/play/trial")}>↻ {t("reportCard.retryTrial", { n: r.chancesLeft })}</GameButton>
+                : <GameButton variant="ghost" onClick={() => nav(`/play/${r.roundKey}`)}>↻ {t("reportCard.replay", { n: r.chancesLeft })}</GameButton>)}
+              {!r.trialPassed ? null
+                : next ? <GameButton sound="whoosh" onClick={() => nav(`/play/${next.key}`)}>{t("reportCard.nextRound", { roundName: `${next.nameEn} Round` })}</GameButton>
+                  : <GameButton sound="fanfare" onClick={() => nav("/total")}>{t("reportCard.totalScore")}</GameButton>}
             </div>
           </motion.section>
         </div>

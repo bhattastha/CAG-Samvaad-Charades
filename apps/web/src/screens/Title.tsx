@@ -8,8 +8,32 @@ import { sfx } from "../lib/sfx";
 import { usePrefs } from "../lib/store";
 import { t } from "../lib/strings";
 import { Ambient, GameButton, Medal } from "../components/Juice";
+import { BrandName } from "../components/Layout";
 import { useSettingsOpen } from "../components/Settings";
 import { routeFor } from "./flow";
+
+/** Landing: Sahayak voice guide on/off, right where the player starts. */
+function VoiceToggle() {
+  const voice = usePrefs((s) => s.voice);
+  const set = usePrefs((s) => s.set);
+  const unlock = usePrefs((s) => s.unlockAudio);
+  const on = voice === "auto";
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="mt-6 flex items-center gap-3 rounded-2xl bg-white/90 border border-blue-100 shadow-card px-4 py-3 max-w-md">
+      <span className="text-2xl" aria-hidden>🎙</span>
+      <div className="flex-1">
+        <div className="font-bold">{t("title.voiceToggle")}</div>
+        <div className="text-xs text-muted">{t("title.voiceHelp")}</div>
+      </div>
+      <button role="switch" aria-checked={on} aria-label={t("title.voiceToggle")}
+        onClick={() => { unlock(); set("voice", on ? "tap" : "auto"); }}
+        className={`relative w-16 h-8 rounded-full transition ${on ? "bg-success" : "bg-gray-300"}`}>
+        <motion.span layout className={`absolute top-1 w-6 h-6 rounded-full bg-white shadow ${on ? "right-1" : "left-1"}`} />
+        <span className={`absolute inset-y-0 grid place-items-center text-[10px] font-extrabold text-white ${on ? "left-2" : "right-2 text-gray-600"}`}>{on ? t("title.voiceOn") : t("title.voiceOff")}</span>
+      </button>
+    </motion.div>
+  );
+}
 
 /** §7.1 Title — design 01, as a game start screen. */
 export function Title() {
@@ -41,15 +65,10 @@ export function Title() {
           <motion.span initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="chip bg-primary-soft border-orange-200 text-primary-strong tracking-[0.2em] text-xs uppercase">
             {t("common.brandLine")} · {t("title.kicker")}
           </motion.span>
-          <h1 className="mt-5 font-extrabold leading-[1.02]">
-            {t("title.heading").split(" ").map((w, i) => (
-              <motion.span key={w} className={`block text-6xl sm:text-8xl ${i ? "text-primary" : "text-navy"}`}
-                initial={{ opacity: 0, y: 40, rotate: i ? 3 : -3 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.1 + i * 0.15 }}>
-                {w}
-              </motion.span>
-            ))}
-          </h1>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-2 text-3xl font-bold text-primary/80">{t("common.gameNameHi")}</motion.div>
+          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.1 }}
+            className="mt-5 font-extrabold leading-[1.02] text-6xl sm:text-8xl [&_span]:block">
+            <BrandName split />
+          </motion.h1>
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-5 text-xl text-navy/85 leading-relaxed max-w-lg">
             {t("title.subheading")}
           </motion.p>
@@ -61,7 +80,8 @@ export function Title() {
             ))}
             <span className="text-sm font-semibold text-muted ml-1">{t("title.levelsLabel")}</span>
           </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1, type: "spring" }} className="mt-8 flex items-center gap-4">
+          <VoiceToggle />
+          <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1, type: "spring" }} className="mt-6 flex items-center gap-4">
             <GameButton sound={null} onClick={start} className="px-10 py-4 text-xl animate-breathe hover:animate-none">
               {data?.registered ? t("title.resume") : t("title.start")} <span aria-hidden>▶</span>
             </GameButton>

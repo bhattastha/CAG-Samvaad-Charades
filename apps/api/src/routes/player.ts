@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
+import { RoundKey as RoundKeySchema } from "@hc/shared";
 import type { FastifyInstance } from "fastify";
-import { publicConfig, roundOf, totalScreenLines, type RoundKey } from "@hc/shared";
+import { publicConfig, roundOf, summarise, totalScreenLines, type RoundKey } from "@hc/shared";
 import { z } from "zod";
 import { adminRole, clearSession, emailAllowed, normEmail, requestOtp, requirePlayer, setSession, verifyOtp } from "../auth.js";
 import { allLines, config, strings } from "../content.js";
@@ -28,7 +29,7 @@ export async function playerRoutes(app: FastifyInstance, db: Db) {
     if (!(await verifyOtp(db, e, code))) return reply.code(400).send({ error: "otp_invalid" });
     const p = await db.one<{ id: string }>("SELECT id FROM players WHERE email=$1", [e]);
     const role = await adminRole(db, e);
-    await setSession(reply, { email: e, pid: p?.id, role });
+    await setSession(reply, { email: e, pid: p?.id, role, sid: randomUUID() });
     return { status: p ? "existing" : "new", role: role ?? null };
   });
 
@@ -124,11 +125,29 @@ export async function playerRoutes(app: FastifyInstance, db: Db) {
     return { playerName: player!.name, summary, maxCredits: config().maxCredits, lines: totalScreenLines(summary).map((id) => say(id, vars)).filter(Boolean) };
   });
 
+  /** Leaderboard: top players by credits (then stars), with your own rank. Shows first name + initial and office city. */
+  app.get("/leaderboard", async (req, reply) => {
+    const pid = requirePlayer(req, reply);
+    if (!pid) return;
+    const players = await db.query<any>("SELECT p.id, p.name, p.registration_credits, o.city, o.state FROM players p JOIN offices o ON o.id=p.office_id");
+    const atts = await db.query<any>("SELECT player_id, round_key, chance_no, status, score FROM attempts");
+    const byPlayer = new Map<string, any[]>();
+    for (const a of atts) byPlayer.set(a.player_id, [...(byPlayer.get(a.player_id) ?? []), { roundKey: a.round_key, chanceNo: a.chance_no, status: a.status, score: a.score }]);
+    const rows = players.map((p) => {
+      const s = summarise(config(), byPlayer.get(p.id) ?? [], Number(p.registration_credits));
+      const [first, ...rest] = String(p.name).trim().split(/\s+/);
+      return { id: p.id, name: rest.length ? `${first} ${rest[rest.length - 1][0]}.` : first, office: `${p.city}, ${p.state}`, credits: s.totalCredits, stars: s.stars, titles: s.rounds.filter((r) => r.titleEarned).length };
+    }).sort((a, b) => b.credits - a.credits || b.stars - a.stars || a.name.localeCompare(b.name));
+    const ranked = rows.map((r, i) => ({ ...r, rank: i + 1 }));
+    const me = ranked.find((r) => r.id === pid);
+    return { top: ranked.slice(0, 10).map(({ id, ...r }) => ({ ...r, me: id === pid })), me: me ? { rank: me.rank, credits: me.credits, of: ranked.length } : null };
+  });
+
   /** Pop-up lines (§7.5): first_chance or retry (+ best), typing-only notice before प्राथमिक, rotating tip. */
   app.get("/rounds/:key/intro", async (req, reply) => {
     const pid = requirePlayer(req, reply);
     if (!pid) return;
-    const key = parse(z.object({ key: z.enum(["trial", "primary", "secondary", "pro"]) }), req.params).key as RoundKey;
+    const key = parse(z.object({ key: RoundKeySchema }), req.params).key as RoundKey;
     const { player, summary } = await summaryFor(db, pid);
     const r = summary.rounds.find((x) => x.key === key)!;
     const chance = r.active ? r.chancesUsed : r.chancesUsed + 1;
@@ -139,6 +158,6 @@ export async function playerRoutes(app: FastifyInstance, db: Db) {
     const tips = allLines().filter((l) => l.id.startsWith(`${key}.pre_round.tip.`));
     if (tips.length) lines.push(say(tips[(chance - 1) % tips.length].id, vars));
     const round = roundOf(config(), key);
-    return { round, chance, maxChances: config().maxChancesPerRound, unlocked: r.unlocked, chancesLeft: r.chancesLeft, active: r.active, best: r.best, lines: lines.filter(Boolean) };
+    return { round, chance, maxChances: config().maxChancesPerRound, unlocked: r.unlocked, playable: r.playable, chancesLeft: r.chancesLeft, active: r.active, best: r.best, trialPassed: summary.trialPassed, trialQualifyingScore: summary.trialQualifyingScore, lines: lines.filter(Boolean) };
   });
 }

@@ -91,7 +91,7 @@ describe("player journey", () => {
     const s = await call("POST", `/api/attempts/${attemptId}/submit`, cookie, {});
     expect(s.status).toBe(200);
     const rep = await call("GET", `/api/attempts/${attemptId}/report`, cookie);
-    expect(rep.json.counts.completionTotal).toBe(16);
+    expect([12, 16]).toContain(rep.json.counts.completionTotal); // two Trial passages exist
     expect(rep.json.counts.completionDone).toBe(2);
     expect(rep.json.chances).toHaveLength(3);
     expect(rep.json.after.map((l: any) => l.id)).toContain("trial.report_card.typing_only_next");
@@ -99,13 +99,29 @@ describe("player journey", () => {
     const rv = await call("GET", `/api/attempts/${attemptId}/review`, cookie);
     expect(JSON.stringify(rv.json)).not.toMatch(/hiReference/);
   });
-  it("allows 3 chances and refuses the 4th", async () => {
+  it("keeps Primary locked after a Trial below the qualifying score", async () => {
+    expect((await call("POST", "/api/rounds/primary/attempts", cookie, { clientId: "client-aaaa" })).status).toBe(403);
+  });
+  it("allows 3 chances and refuses the 4th; passing the Trial unlocks every level", async () => {
     for (const n of [2, 3]) {
       const a = await call("POST", "/api/rounds/trial/attempts", cookie, { clientId: "client-aaaa" });
       expect(a.json.chanceNo).toBe(n);
+      if (n === 2) {
+        // answer with CAG's own Hindi (read straight from the DB) to pass the Trial
+        const parts = await db.query<{ fields: any[] }>("SELECT fields FROM page_parts WHERE page_id=(SELECT page_id FROM attempts WHERE id=$1)", [a.json.id]);
+        const answers = { passage: { fields: { t: parts[0].fields[0].hiReference }, done: false } };
+        await call("PUT", `/api/attempts/${a.json.id}/autosave`, cookie, { version: 1, clientId: "client-aaaa", answers });
+      }
       await call("POST", `/api/attempts/${a.json.id}/submit`, cookie, {});
     }
     expect((await call("POST", "/api/rounds/trial/attempts", cookie, { clientId: "client-aaaa" })).status).toBe(409);
+    const p = await call("GET", "/api/me/progress", cookie);
+    expect(p.json.summary.trialPassed).toBe(true);
+    expect(p.json.summary.rounds.filter((r: any) => ["primary", "secondary", "pro"].includes(r.key)).every((r: any) => r.unlocked)).toBe(true);
+    // Varchaspati is shown but cannot be started (Phase 2)
+    expect((await call("POST", "/api/rounds/varchaspati/attempts", cookie, { clientId: "client-aaaa" })).json.error).toBe("coming_soon");
+    const lb = await call("GET", "/api/leaderboard", cookie);
+    expect(lb.json.me.rank).toBe(1);
   });
   it("opens primary with a BHASHINI draft and locked numbers kept on autosave", async () => {
     const a = await call("POST", "/api/rounds/primary/attempts", cookie, { clientId: "client-aaaa" });

@@ -23,6 +23,7 @@ export interface RoundResult {
   chances: (number | null)[];
   bestChance: number | null;
   titleEarned: boolean;
+  playable: boolean;
   credits: number;
   active: boolean;
 }
@@ -35,13 +36,21 @@ export interface Summary {
   starsTotal: number;
   allPlayed: boolean;
   nextRound: RoundKey | null;
+  trialPassed: boolean;
+  trialQualifyingScore: number;
 }
 
 /** Round results are computed from attempts, never stored (§6). */
 export function summarise(config: GameConfig, attempts: AttemptLite[], registrationCredits = config.registration.credits): Summary {
   const max = config.maxChancesPerRound;
   const rounds: RoundResult[] = [];
-  let prevPlayed = true;
+  // Trial is the mandatory entry level: passing it unlocks every other playable level, each independently.
+  const qualify = config.levels.trialQualifyingScore;
+  const trialBest = (() => {
+    const t = attempts.filter((a) => a.roundKey === "trial" && a.status === "submitted" && a.score !== null);
+    return t.length ? Math.max(...t.map((a) => a.score!)) : null;
+  })();
+  const trialPassed = trialBest !== null && trialBest >= qualify;
   for (const r of config.rounds) {
     const mine = attempts.filter((a) => a.roundKey === r.key);
     const submitted = mine.filter((a) => a.status === "submitted" && a.score !== null);
@@ -53,14 +62,15 @@ export function summarise(config: GameConfig, attempts: AttemptLite[], registrat
     const bestChance = best === null ? null : chances.findIndex((s) => s === best) + 1;
     const titleEarned = best !== null && best >= config.titlePassMark;
     const credits = best === null || (!titleEarned && !config.creditsBelowPassMark) ? 0 : roundCredits(best, r.creditCap, config.creditDecimals);
+    const playable = r.playable !== false;
     rounds.push({
       key: r.key,
       name: r.name,
       title: r.title,
       creditCap: r.creditCap,
-      unlocked: prevPlayed,
+      unlocked: playable && (r.key === "trial" || trialPassed),
       chancesUsed: mine.length,
-      chancesLeft: Math.max(0, max - mine.length),
+      chancesLeft: playable ? Math.max(0, max - mine.length) : 0,
       played: submitted.length,
       best,
       chances,
@@ -68,27 +78,32 @@ export function summarise(config: GameConfig, attempts: AttemptLite[], registrat
       titleEarned,
       credits,
       active: mine.some((a) => a.status === "active"),
+      playable,
     });
-    prevPlayed = submitted.length > 0;
   }
   const p = 10 ** config.creditDecimals;
   const totalCredits = Math.min(config.maxCredits, Math.round((registrationCredits + rounds.reduce((s, r) => s + r.credits, 0)) * p) / p);
-  const next = rounds.find((r) => r.unlocked && r.played === 0 && r.chancesLeft > 0);
+  // until the Trial is passed, the Trial is always the next step
+  const next = !trialPassed ? (rounds[0].chancesLeft > 0 ? rounds[0] : undefined) : rounds.find((r) => r.unlocked && r.played === 0 && r.chancesLeft > 0);
   return {
     rounds,
     registrationCredits,
     totalCredits,
-    stars: Math.min(config.stars.total, 1 + rounds.filter((r) => r.titleEarned).length),
+    stars: Math.min(config.stars.total, 1 + rounds.filter((r) => r.playable && r.titleEarned).length),
     starsTotal: config.stars.total,
-    allPlayed: rounds.every((r) => r.played > 0),
+    allPlayed: rounds.filter((r) => r.playable).every((r) => r.played > 0),
     nextRound: next?.key ?? null,
+    trialPassed,
+    trialQualifyingScore: qualify,
   };
 }
 
-export type StartCheck = { ok: true } | { ok: false; status: 403 | 409; reason: "locked" | "no_chances" };
+export type StartCheck = { ok: true } | { ok: false; status: 403 | 404 | 409; reason: "locked" | "no_chances" | "coming_soon" | "unknown_round" };
 
 export function canStart(summary: Summary, key: RoundKey): StartCheck {
-  const r = summary.rounds.find((x) => x.key === key)!;
+  const r = summary.rounds.find((x) => x.key === key);
+  if (!r) return { ok: false, status: 404, reason: "unknown_round" };
+  if (!r.playable) return { ok: false, status: 403, reason: "coming_soon" };
   if (!r.unlocked) return { ok: false, status: 403, reason: "locked" };
   if (r.chancesLeft <= 0) return { ok: false, status: 409, reason: "no_chances" };
   return { ok: true };
