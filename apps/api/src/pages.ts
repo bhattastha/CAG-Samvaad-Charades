@@ -37,7 +37,10 @@ export async function loadGlossary(db: Db) {
     // workbench underlines: every approved term except function words and very short or
     // transliterated single words, so the page is not drowned in dashes
     const multi = k.includes(" ");
-    const strong = multi || (k.length >= 4 && !r.flags.includes("primary_looks_transliterated"));
+    // an entry whose approved Hindi is itself a transliteration ("Report No." → रिपोर्ट नं.) is never offered inline
+    // (it would also win the longest-match over a CAG-approved shorter term), unless a manager override fixed it
+    const translit = r.flags.includes("primary_looks_transliterated") && !ov;
+    const strong = !translit && (multi || k.length >= 4);
     if (strong && !STOP.has(k) && !byEn.has(k)) byEn.set(k, e);
     if (!allByEn.has(k) || !e.sector) allByEn.set(k, e);
   }
@@ -96,7 +99,7 @@ function computeExtras(page: PageData, sector = ""): PageExtras {
         const scoped = page.terms.some((t) => t.en === entry.en) ? [entry] : entriesForSector(g.entries.get(glossaryKey(entry.en)), sector);
         const best = scoped[0] ?? entry;
         return {
-          start, end, en: best.en, hi: best.hi, variants: best.variants.slice(0, 4), avoid: best.avoid.slice(0, 4), area: best.sector ?? null,
+          start, end, en: best.en, hi: best.hi, variants: best.variants.slice(0, 6), avoid: best.avoid.slice(0, 6), area: best.sector ?? null,
           ...(scoped.length > 1 ? { alternatives: scoped.slice(1).map((x) => ({ hi: x.hi, area: x.sector ?? null })) } : {}),
         };
       });

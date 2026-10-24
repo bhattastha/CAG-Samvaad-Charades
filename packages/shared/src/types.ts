@@ -93,8 +93,11 @@ export interface PageData {
 }
 
 export interface PartAnswer {
+  /** Plain text per field: the only value the scorer ever reads. */
   fields: Record<string, string>;
   done: boolean;
+  /** Optional rich-text (Word-like) formatting per field, stored beside the plain text; never scored. */
+  html?: Record<string, string>;
 }
 export type Answers = Record<string, PartAnswer>;
 

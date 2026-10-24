@@ -98,10 +98,20 @@ export function useAttempt(id: string, autosaveSeconds = 10) {
     } finally { inFlight.current = false; }
   }, [id, save]);
 
-  const update = useCallback((partId: string, patch: { field?: [string, string]; done?: boolean }) => {
+  const update = useCallback((partId: string, patch: { field?: [string, string]; done?: boolean; html?: [string, string] }) => {
     const cur = ans.current[partId] ?? { fields: {}, done: false };
-    const next = { ...cur, fields: patch.field ? { ...cur.fields, [patch.field[0]]: patch.field[1] } : cur.fields, done: patch.done ?? cur.done };
-    if (patch.field && cur.fields[patch.field[0]] === patch.field[1] && patch.done === undefined) return;
+    let fields = cur.fields;
+    let html = cur.html;
+    let changed = false;
+    if (patch.field && fields[patch.field[0]] !== patch.field[1]) { fields = { ...fields, [patch.field[0]]: patch.field[1] }; changed = true; }
+    if (patch.html && (html?.[patch.html[0]] ?? "") !== patch.html[1]) {
+      html = { ...html };
+      if (patch.html[1]) html[patch.html[0]] = patch.html[1]; else delete html[patch.html[0]];
+      changed = true;
+    }
+    if (patch.done !== undefined) changed = true;
+    if (!changed) return;
+    const next = { fields, done: patch.done ?? cur.done, ...(html && Object.keys(html).length ? { html } : {}) };
     ans.current = { ...ans.current, [partId]: next };
     version.current += 1;
     dirty.current = true;

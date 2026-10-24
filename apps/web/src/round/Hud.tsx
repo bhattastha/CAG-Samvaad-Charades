@@ -4,6 +4,7 @@ import { roundName, t } from "../lib/strings";
 import { Coin } from "../components/Layout";
 import { Medal } from "../components/Juice";
 import { Icon } from "../components/Icon";
+import { SahayikaAvatar } from "../components/SahayikaAvatar";
 
 /** Circular timer: glanceable; colour + icon + pulse change at 5 min and 1 min (never colour alone). */
 export function TimerRing({ remaining, limit, warn5, warn1 }: { remaining: number; limit: number; warn5: number; warn1: number }) {
@@ -12,7 +13,7 @@ export function TimerRing({ remaining, limit, warn5, warn1 }: { remaining: numbe
   const color = state === "danger" ? "#F87171" : state === "warn" ? "#FBBF24" : "#E9D7A6";
   const r = 17, c = 2 * Math.PI * r;
   return (
-    <motion.div className={`flex items-center gap-2 rounded-ui border pl-1 pr-3 py-1 ${state === "danger" ? "border-red-400/60 bg-red-500/15" : "border-white/15 bg-white/[0.06]"}`}
+    <motion.div className={`flex items-center gap-2 rounded-ui border pl-1 pr-3 py-0.5 ${state === "danger" ? "border-red-400/60 bg-red-500/15" : "border-white/15 bg-white/[0.06]"}`}
       animate={state === "danger" ? { scale: [1, 1.04, 1] } : {}} transition={{ repeat: Infinity, duration: 1 }}
       role="timer" aria-label={t("common.timeLeft", { time: formatClock(remaining) })}>
       <svg width="42" height="42" viewBox="0 0 42 42" aria-hidden>
@@ -29,51 +30,62 @@ export function TimerRing({ remaining, limit, warn5, warn1 }: { remaining: numbe
   );
 }
 
-/** In-round HUD: level, chance, clock, progress, credits at stake, save state. Dark, so the page stays the focus. */
-export function Hud({ round, chanceNo, maxChances, remaining, limit, warn5, warn1, progress, total, isTrial, creditCap, save, sample }: {
+/** In-round HUD: level, chance, clock, progress, credits, save state, lock, Ask Sahayak and Submit. One compact sticky row. */
+export function Hud({ round, chanceNo, maxChances, remaining, limit, warn5, warn1, progress, total, isTrial, creditCap, save, sample, onAsk, onSubmit, submitting, confirming, partsLeft, readOnly }: {
   round: RoundConfig; chanceNo: number; maxChances: number; remaining: number; limit: number; warn5: number; warn1: number;
   progress: number; total: number; isTrial: boolean; creditCap: number; save: string; sample: boolean;
+  onAsk(): void; onSubmit(): void; submitting: boolean; confirming: boolean; partsLeft: number; readOnly: boolean;
 }) {
   const segmented = total <= 30;
   return (
     <div className="bg-navy text-white hud-grid border-b border-white/10 shadow-pop">
-      <div className="mx-auto w-full max-w-[1500px] px-3 sm:px-6 py-2 flex flex-wrap items-center gap-x-5 gap-y-2">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <Medal k={round.key} size={38} />
+      <div className="w-full px-2 sm:px-4 py-1.5 flex flex-wrap items-center gap-x-4 gap-y-1.5">
+        <div className="flex items-center gap-2 min-w-0">
+          <Medal k={round.key} size={32} />
           <div className="leading-tight min-w-0">
             <div className="text-[10px] font-bold uppercase tracking-[0.16em] text-gold-light">{round.levelLabel}{sample ? ` · ${t("round.reviewBuild")}` : ""}</div>
-            <div className="text-lg font-extrabold truncate">{roundName(round)}</div>
+            <div className="text-base font-extrabold truncate">{roundName(round)}</div>
           </div>
         </div>
         <div className="flex items-center gap-1" aria-label={t("common.chanceOf", { n: chanceNo, max: maxChances })} title={t("common.chanceOf", { n: chanceNo, max: maxChances })}>
-          <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-100/70 mr-1">{t("round.chance")}</span>
           {Array.from({ length: maxChances }, (_, i) => (
-            <span key={i} className={`w-6 h-6 rounded-md grid place-items-center text-[11px] font-bold border ${i + 1 === chanceNo ? "bg-primary border-primary text-white" : i + 1 < chanceNo ? "bg-white/10 border-white/10 text-blue-100/60" : "border-white/25 text-blue-100/70"}`}>{i + 1}</span>
+            <span key={i} className={`w-5 h-5 rounded grid place-items-center text-[10px] font-bold border ${i + 1 === chanceNo ? "bg-primary border-primary text-white" : i + 1 < chanceNo ? "bg-white/10 border-white/10 text-blue-100/60" : "border-white/25 text-blue-100/70"}`}>{i + 1}</span>
           ))}
         </div>
         <TimerRing remaining={remaining} limit={limit} warn5={warn5} warn1={warn1} />
-        <div className="flex-1 min-w-[12rem]">
-          <div className="flex justify-between text-[10px] font-bold uppercase tracking-[0.16em] text-blue-100/70"><span>{t("round.progress")}</span>
-            <span className="text-white normal-case tracking-normal text-sm font-bold tnum">{isTrial ? t("round.sentencesDone", { done: progress, total }) : t("round.paragraphsDone", { done: progress, total })}</span></div>
+        <div className="flex-1 min-w-[9rem]">
+          <div className="flex justify-between items-baseline text-[10px] font-bold uppercase tracking-[0.16em] text-blue-100/70"><span>{t("round.progress")}</span>
+            <span className="text-white normal-case tracking-normal text-[13px] font-bold tnum">{isTrial ? t("round.sentencesDone", { done: progress, total }) : t("round.paragraphsDone", { done: progress, total })}</span></div>
           {segmented ? (
-            <div className="mt-1.5 flex gap-[3px]" aria-hidden>
+            <div className="mt-1 flex gap-[3px]" aria-hidden>
               {Array.from({ length: total }, (_, i) => (
-                <motion.span key={i} className={`h-2 flex-1 rounded-sm ${i < progress ? "bg-success" : "bg-white/15"}`} animate={i === progress - 1 ? { scaleY: [1, 1.8, 1] } : {}} />
+                <motion.span key={i} className={`h-1.5 flex-1 rounded-sm ${i < progress ? "bg-success" : "bg-white/15"}`} animate={i === progress - 1 ? { scaleY: [1, 1.8, 1] } : {}} />
               ))}
             </div>
           ) : (
-            <div className="mt-1.5 h-2 rounded-sm bg-white/15 overflow-hidden" aria-hidden>
+            <div className="mt-1 h-1.5 rounded-sm bg-white/15 overflow-hidden" aria-hidden>
               <motion.div className="h-full bg-gradient-to-r from-success to-emerald-400" animate={{ width: `${(progress / (total || 1)) * 100}%` }} transition={{ type: "spring", stiffness: 90, damping: 20 }} />
             </div>
           )}
         </div>
-        <div className="flex items-center gap-1.5 rounded-ui border border-gold/40 bg-gold/10 px-2.5 py-1.5" title={t("common.creditsUpTo", { n: creditCap })}>
-          <Coin size={16} /><span className="text-sm font-bold text-gold-light">{t("common.creditsUpTo", { n: creditCap })}</span>
+        <div className="hidden lg:flex items-center gap-1.5 rounded-ui border border-gold/40 bg-gold/10 px-2 py-1" title={t("common.creditsUpTo", { n: creditCap })}>
+          <Coin size={14} /><span className="text-[13px] font-bold text-gold-light">{t("common.creditsUpTo", { n: creditCap })}</span>
         </div>
         <span className={`inline-flex items-center gap-1 text-xs font-bold rounded-md px-2 py-1 ${save === "offline" ? "bg-amber-400/20 text-amber-200" : "bg-success/20 text-emerald-200"}`} aria-live="polite">
           <Icon name={save === "saving" ? "refresh" : save === "offline" ? "alert" : "check"} size={13} />
           {save === "saving" ? t("round.saving") : save === "offline" ? t("round.offline") : t("round.saved")}
         </span>
+        <span className="text-blue-100/80" title={t("round.copyPasteLocked")} aria-label={t("common.copyPasteOffBadge")} role="img"><Icon name="lock" size={16} /></span>
+        <button onClick={onAsk} aria-label={t("common.sahayikaButton")} title={t("common.sahayikaButton")}
+          className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 hover:bg-white/20 pl-0.5 pr-0.5 lg:pr-3 py-0.5 text-sm font-semibold">
+          <SahayikaAvatar size={32} ring={false} /><span className="hidden lg:inline">{t("common.sahayikaButton")}</span>
+        </button>
+        <div className="flex items-center gap-2">
+          {confirming && <span className="text-sm font-semibold text-amber-200 animate-pop">{t("round.partsLeft", { n: partsLeft })}</span>}
+          <button onClick={onSubmit} disabled={readOnly || submitting} className={`btn-primary py-2 px-5 active:scale-95 transition-transform ${confirming ? "!bg-timer-text animate-wiggle" : ""}`}>
+            {submitting ? t("round.submitting") : confirming ? t("round.confirmSubmit") : t("round.submit")}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import { buildApp } from "../src/app.js";
 import { openDb, type Db } from "../src/db.js";
 import { seedAll } from "../src/seed.js";
 import { findForbidden } from "@hc/shared";
+import { sanitiseHtml } from "../src/game.js";
 
 process.env.SEED_ALLOW_UNVERIFIED = "1";
 let db: Db;
@@ -165,5 +166,17 @@ describe("contract (§14, §18.12)", () => {
   });
   it("admin routes are closed to players", async () => {
     expect((await app.inject({ method: "GET", url: "/api/admin/pages" })).statusCode).toBe(403);
+  });
+});
+
+describe("rich-text copy of an answer", () => {
+  it("keeps formatting, drops scripts and unknown attributes, and ignores plain paragraphs", () => {
+    const ok = sanitiseHtml('<p style="text-align: center"><strong>नमस्ते</strong> <span data-locked="83" class="x" onclick="a()">83</span></p>');
+    expect(ok).toContain("<strong>");
+    expect(ok).toContain('text-align: center');
+    expect(ok).toContain('data-locked="83"');
+    expect(ok).not.toContain("onclick");
+    expect(sanitiseHtml('<p>plain</p><script>alert(1)</script>')).toBe("");
+    expect(sanitiseHtml('<p><em>a</em><img src=x onerror=1><script>x</script></p>')).not.toMatch(/<img|<script|onerror/);
   });
 });

@@ -1,58 +1,41 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment } from "react";
 import type { Answers, ChartLayout, ClientField, ClientPart, FigureLayout, TableLayout } from "@hc/shared";
 import { Icon } from "../components/Icon";
 import { t } from "../lib/strings";
-import { TranslationEditor, type EditorHandle, type WatchClick } from "../editor/TranslationEditor";
+import { TranslationEditor, type EditorHandle, type GlossClick, type WatchClick } from "../editor/TranslationEditor";
+import type { GlossForm } from "../editor/extensions";
+import type { Editor } from "@tiptap/react";
 import type { SourceTerm, WatchWord } from "./useAttempt";
 
 export type FieldKey = `${string}:${string}`;
 export const fk = (partId: string, key: string): FieldKey => `${partId}:${key}`;
 
-// ---------------- glossary popover (source term or watch word) ----------------
+// ---------------- glossary pairs (English term <-> Hindi word) ----------------
 
-export interface PopoverState {
-  rect: DOMRect;
-  title: string;
-  options: string[];
-  avoid?: string[];
-  mode: "insert" | "replace";
-  target: FieldKey | null;
-  range?: { from: number; to: number };
-}
+/** Shared id of one glossary term in one field: the English underline and the Hindi underline carry the same one. */
+export const pairKey = (partId: string, fieldKey: string, en: string) =>
+  `${partId}__${fieldKey}__${en.toLowerCase()}`.replace(/[^A-Za-z0-9_]+/g, "_");
 
-export function GlossPopover({ s, onPick, onClose }: { s: PopoverState; onPick(v: string): void; onClose(): void }) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const h = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) onClose(); };
-    const k = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    setTimeout(() => document.addEventListener("mousedown", h), 0);
-    document.addEventListener("keydown", k);
-    return () => { document.removeEventListener("mousedown", h); document.removeEventListener("keydown", k); };
-  }, [onClose]);
-  const left = Math.max(8, Math.min(s.rect.left, window.innerWidth - 300));
-  const below = s.rect.bottom + 230 < window.innerHeight;
-  return (
-    <div ref={ref} role="dialog" aria-label={t("round.suggestFor")} onMouseDown={(e) => e.preventDefault()}
-      className="fixed z-[85] w-[290px] rounded-card bg-white border border-slate-200 shadow-pop p-3 animate-pop"
-      style={below ? { left, top: s.rect.bottom + 6 } : { left, bottom: window.innerHeight - s.rect.top + 6 }}>
-      <div className="kicker">{s.mode === "replace" ? t("round.watchWord") : t("round.suggestFor")}</div>
-      <div className="mt-0.5 font-semibold text-navy">{s.title}</div>
-      <div className="mt-2 flex flex-col gap-1.5">
-        {s.options.map((o, i) => (
-          <button key={o} onClick={() => onPick(o)} disabled={!s.target}
-            className={`text-left rounded-md px-3 py-1.5 text-[17px] border flex items-center justify-between gap-2 disabled:opacity-50 ${i === 0 ? "bg-gold-soft border-gold-light font-semibold" : "bg-white border-slate-200 hover:bg-slate-50"}`}>
-            <span>{o}</span><span className="text-xs font-bold text-navy-600 whitespace-nowrap">{s.mode === "replace" ? t("round.replaceWith") : "+ " + t("glossary.insert")}</span>
-          </button>
-        ))}
-      </div>
-      {s.avoid && s.avoid.length > 0 && <div className="mt-2 text-xs text-muted">{t("glossary.avoid")}: <s>{s.avoid.join(", ")}</s></div>}
-    </div>
-  );
+/** The glossary terms found in one field's English, as the Hindi spellings to underline in the player's text. */
+export function glossFormsFor(partId: string, fieldKey: string, terms: SourceTerm[] | undefined): GlossForm[] {
+  const seen = new Set<string>();
+  const out: GlossForm[] = [];
+  for (const tm of terms ?? []) {
+    const pair = pairKey(partId, fieldKey, tm.en);
+    if (seen.has(pair)) continue;
+    seen.add(pair);
+    const forms = [
+      ...[tm.hi, ...tm.variants, ...(tm.alternatives?.map((x) => x.hi) ?? [])].filter(Boolean).map((text) => ({ text, kind: "ok" as const })),
+      ...tm.avoid.filter((a) => a && !/[A-Za-z]/.test(a)).map((text) => ({ text, kind: "avoid" as const })),
+    ];
+    out.push({ pair, en: tm.en, forms });
+  }
+  return out;
 }
 
 // ---------------- English source ----------------
 
-export function TermText({ text, terms, onTerm }: { text: string; terms?: SourceTerm[]; onTerm?(term: SourceTerm, rect: DOMRect): void }) {
+export function TermText({ text, terms, onTerm, pair }: { text: string; terms?: SourceTerm[]; onTerm?(term: SourceTerm, rect: DOMRect): void; pair?(term: SourceTerm): string }) {
   if (!terms?.length) return <>{text}</>;
   const out: React.ReactNode[] = [];
   let last = 0;
@@ -60,7 +43,7 @@ export function TermText({ text, terms, onTerm }: { text: string; terms?: Source
     if (tm.start < last) continue;
     out.push(text.slice(last, tm.start));
     out.push(
-      <span key={tm.start} role="button" tabIndex={0} className="hc-source-term" title={`${tm.en} = ${tm.hi}`}
+      <span key={tm.start} role="button" tabIndex={0} className="hc-source-term" data-pair={pair?.(tm)} aria-haspopup="menu"
         onMouseDown={(e) => e.preventDefault()}
         onClick={(e) => onTerm?.(tm, (e.currentTarget as HTMLElement).getBoundingClientRect())}
         onKeyDown={(e) => { if (e.key === "Enter") onTerm?.(tm, (e.currentTarget as HTMLElement).getBoundingClientRect()); }}>
@@ -165,7 +148,7 @@ function SourceFigure({ part, render }: { part: ClientPart; render(f: ClientFiel
 
 /** One part of the English page, rendered with its structure. */
 export function PartSource({ p, terms, onTerm }: { p: ClientPart; terms: Record<string, Record<string, SourceTerm[]>>; onTerm(partId: string, fieldKey: string, term: SourceTerm, rect: DOMRect): void }) {
-  const render = (f?: ClientField) => f ? <TermText text={f.en} terms={terms[p.id]?.[f.key]} onTerm={(tm, r) => onTerm(p.id, f.key, tm, r)} /> : null;
+  const render = (f?: ClientField) => f ? <TermText text={f.en} terms={terms[p.id]?.[f.key]} onTerm={(tm, r) => onTerm(p.id, f.key, tm, r)} pair={(tm) => pairKey(p.id, f.key, tm.en)} /> : null;
   const f0 = p.fields[0];
   switch (p.type) {
     case "header": return <div className="text-[12.5px] italic text-muted">{render(f0)}</div>;
@@ -191,7 +174,7 @@ export function SourcePanel({ parts, terms, focusedPart, sentenceIndex, onTerm, 
   return (
     <div className="no-select en text-[15.5px] leading-[1.7] text-navy space-y-3" onCopy={(e) => e.preventDefault()}>
       {parts.map((p) => {
-        const render = (f?: ClientField) => f ? <TermText text={f.en} terms={terms[p.id]?.[f.key]} onTerm={(tm, r) => onTerm(p.id, f.key, tm, r)} /> : null;
+        const render = (f?: ClientField) => f ? <TermText text={f.en} terms={terms[p.id]?.[f.key]} onTerm={(tm, r) => onTerm(p.id, f.key, tm, r)} pair={(tm) => pairKey(p.id, f.key, tm.en)} /> : null;
         const linked = focusedPart === p.id && p.type !== "passage";
         const wrap = (cls: string, child: React.ReactNode) => (
           <div key={p.id} data-src={p.id} onClick={() => p.editable && onPartClick(p.id)} className={`${cls} ${linked ? "linked" : ""} transition-shadow ${p.editable ? "cursor-pointer" : ""} px-1 -mx-1`}>{child}</div>
@@ -214,7 +197,7 @@ export function SourcePanel({ parts, terms, focusedPart, sentenceIndex, onTerm, 
                 <Fragment key={i}>
                   {gap.includes("\n") ? <span className="block h-3" /> : i > 0 ? " " : null}
                   <span className={sentenceIndex === i ? "bg-amber-100 rounded px-0.5 transition-colors" : ""}>
-                    <TermText text={sent} terms={local} onTerm={(tm, r) => onTerm(p.id, f0.key, tm, r)} />
+                    <TermText text={sent} terms={local} onTerm={(tm, r) => onTerm(p.id, f0.key, tm, r)} pair={(tm) => pairKey(p.id, f0.key, tm.en)} />
                   </span>
                 </Fragment>
               );
@@ -247,11 +230,17 @@ export interface DraftProps {
   register(key: FieldKey, h: EditorHandle | null): void;
   onField(partId: string, key: string, v: string): void;
   onTick(partId: string, done: boolean): void;
-  onFocus(partId: string, key: string): void;
+  onFocus(partId: string, key: string, editor?: Editor): void;
   onBlocked(kind: string): void;
   onTyping(): void;
   onWatchClick(partId: string, key: string, w: WatchClick): void;
   onXlit(i: number): void;
+  /** Inline glossary (workbench): per-field source terms, so the Hindi side can underline the matching words. */
+  terms?: Record<string, Record<string, SourceTerm[]>>;
+  onGlossClick?(partId: string, key: string, g: GlossClick): void;
+  /** Word-like formatting with a parallel html value saved beside the plain text. */
+  rich?: boolean;
+  onHtml?(partId: string, key: string, html: string): void;
 }
 
 export function FieldEditor({ p, f, d, compact = false, singleLine = false }: { p: ClientPart; f: ClientField; d: DraftProps; compact?: boolean; singleLine?: boolean }) {
@@ -260,6 +249,11 @@ export function FieldEditor({ p, f, d, compact = false, singleLine = false }: { 
     <TranslationEditor
       ref={(h) => d.register(fk(p.id, f.key), h)}
       value={d.answers[p.id]?.fields[f.key] ?? ""}
+      html={d.answers[p.id]?.html?.[f.key]}
+      rich={d.rich}
+      onHtml={d.onHtml ? (h) => d.onHtml!(p.id, f.key, h) : undefined}
+      gloss={d.terms ? glossFormsFor(p.id, f.key, d.terms[p.id]?.[f.key]) : undefined}
+      onGlossClick={d.onGlossClick ? (g) => d.onGlossClick!(p.id, f.key, g) : undefined}
       locked={f.locked}
       readOnly={d.readOnly || !!d.answers[p.id]?.done}
       compact={compact}
@@ -268,7 +262,7 @@ export function FieldEditor({ p, f, d, compact = false, singleLine = false }: { 
       showLatin
       ariaLabel={`${p.type} ${f.key}`}
       onChange={(v) => d.onField(p.id, f.key, v)}
-      onFocus={() => d.onFocus(p.id, f.key)}
+      onFocus={(ed) => d.onFocus(p.id, f.key, ed)}
       onBlocked={d.onBlocked}
       onTyping={d.onTyping}
       onWatchClick={(w) => d.onWatchClick(p.id, f.key, w)}

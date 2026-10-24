@@ -49,7 +49,7 @@ export function Journey() {
           className={`mb-4 rounded-ui px-4 py-3 font-semibold flex items-center gap-3 border-l-4 bg-white border border-slate-200 shadow-card ${s.trialPassed ? "border-l-success text-navy" : "border-l-primary text-navy"}`}>
           <Icon name={s.trialPassed || (allOpen && trial.played > 0) ? "unlock" : "flame"} size={20} className={s.trialPassed || (allOpen && trial.played > 0) ? "text-success" : "text-primary"} />{banner}
         </motion.div>
-        <div className="grid 2xl:grid-cols-[1fr_20rem] gap-6 items-start">
+        <div className="grid min-[1800px]:grid-cols-[1fr_20rem] gap-6 items-start">
           {/* the trail */}
           <div className="relative card p-5 sm:p-8 overflow-hidden" style={{ backgroundImage: "linear-gradient(rgba(11,37,69,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(11,37,69,.04) 1px, transparent 1px)", backgroundSize: "32px 32px" }}>
             <svg className="absolute inset-0 w-full h-full hidden lg:block" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden>
@@ -111,7 +111,7 @@ export function Journey() {
             </div>
           </div>
           {/* stats */}
-          <motion.aside initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className="card p-5 grid gap-6 md:grid-cols-3 2xl:grid-cols-1 2xl:gap-5 items-start">
+          <motion.aside initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className="card p-5 grid gap-6 md:grid-cols-3 min-[1800px]:grid-cols-1 min-[1800px]:gap-5 items-start">
             <div className="space-y-4">
             <h2 className="kicker">{t("journey.stats")}</h2>
             <div>

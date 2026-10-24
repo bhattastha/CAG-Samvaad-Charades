@@ -6,11 +6,12 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 import History from "@tiptap/extension-history";
 import { Extension } from "@tiptap/core";
-import { INSCRIPT, romanToDevanagari } from "@hc/shared";
+import { romanToDevanagari } from "@hc/shared";
 import { api } from "../lib/api";
-import { usePrefs, type KeyboardMode } from "../lib/store";
+import type { KeyboardMode } from "../lib/store";
 import { t } from "../lib/strings";
-import { ALLOW_LOCKED, decorationsPlugin, fromDoc, guardPlugin, LockedToken, pendingKey, pendingPlugin, toDoc, TRUSTED, type Pending } from "./extensions";
+import { ALLOW_LOCKED, decorationsPlugin, fromDoc, guardPlugin, LockedToken, pendingKey, pendingPlugin, toDoc, TRUSTED, type GlossForm, type Pending } from "./extensions";
+import { hasFormatting, richExtensions } from "./rich";
 
 export interface EditorHandle {
   insertText(text: string, source: "glossary" | "asr" | "keyboard"): void;
@@ -18,9 +19,13 @@ export interface EditorHandle {
   focus(): void;
   setInterim(text: string): void;
   backspace(): void;
+  /** The live TipTap editor (for the formatting toolbar). */
+  editor(): Editor | null;
 }
 
 export interface WatchClick { word: string; from: number; to: number; rect: DOMRect }
+/** A click on an underlined glossary word in the Hindi text. */
+export interface GlossClick { pair: string; word: string; kind: "ok" | "avoid"; from: number; to: number; rect: DOMRect }
 
 interface Props {
   value: string;
@@ -31,15 +36,22 @@ interface Props {
   singleLine?: boolean;
   placeholder?: string;
   watch?: string[];
+  /** Glossary terms of this field: their Hindi forms are underlined in the player's text. */
+  gloss?: GlossForm[];
+  /** Word-like formatting (bold, italic, underline, headings, lists, alignment) with a parallel `html` value. */
+  rich?: boolean;
+  html?: string;
+  onHtml?(html: string): void;
   sentenceTicks?: boolean;
   /** "Latin words" highlight (main-round drafts). */
   showLatin?: boolean;
   modeOverride?: KeyboardMode;
   ariaLabel: string;
-  onFocus?(): void;
+  onFocus?(ed: Editor): void;
   onBlocked?(kind: "paste" | "copy" | "locked"): void;
   onTyping?(): void;
   onWatchClick?(w: WatchClick): void;
+  onGlossClick?(g: GlossClick): void;
   onCaretSentence?(index: number): void;
   onXlitAccept?(index: number): void;
 }
@@ -64,8 +76,7 @@ const isTouch = () => typeof window !== "undefined" && window.matchMedia?.("(poi
 
 /** The translation editor: one component for rounds, table cells and the practice box (§7.3). */
 export const TranslationEditor = forwardRef<EditorHandle, Props>(function TranslationEditor(p, ref) {
-  const prefMode = usePrefs((s) => s.keyboard);
-  const mode: KeyboardMode = p.modeOverride ?? prefMode;
+  const mode: KeyboardMode = p.modeOverride ?? "roman";
   const props = useRef(p);
   props.current = p;
   const modeRef = useRef(mode);
@@ -85,7 +96,9 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
   const lastDanda = useRef<number | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const pendingId = useRef(0);
-  const decoState = useRef({ watch: p.watch ?? [], showLatin: !!p.showLatin, sentenceTicks: !!p.sentenceTicks, romanRange: null as null | { from: number; to: number } });
+  const decoState = useRef({ gloss: p.gloss ?? [], watch: p.watch ?? [], showLatin: !!p.showLatin, sentenceTicks: !!p.sentenceTicks, romanRange: null as null | { from: number; to: number } });
+  decoState.current.gloss = p.gloss ?? [];
+  const glossSig = (p.gloss ?? []).map((g) => g.pair + ":" + g.forms.map((f) => f.kind[0] + f.text).join(",")).join("|");
   decoState.current.watch = p.watch ?? [];
   decoState.current.showLatin = !!p.showLatin;
   decoState.current.sentenceTicks = !!p.sentenceTicks;
@@ -145,8 +158,8 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
   };
 
   const editor = useEditor({
-    extensions: [Document, Paragraph, Text, History, LockedToken, ext],
-    content: toDoc(p.value, p.locked ?? []),
+    extensions: p.rich ? [...richExtensions(!!p.singleLine), LockedToken, ext] : [Document, Paragraph, Text, History, LockedToken, ext],
+    content: p.rich && p.html ? p.html : toDoc(p.value, p.locked ?? []),
     editable: !p.readOnly,
     editorProps: {
       attributes: {
@@ -168,6 +181,13 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
           return false;
         },
         click: (view, e) => {
+          const gl = (e.target as HTMLElement).closest("[data-gpair]") as HTMLElement | null;
+          if (gl && props.current.onGlossClick) {
+            const pos = view.posAtDOM(gl, 0);
+            const w = gl.dataset.gform!;
+            props.current.onGlossClick({ pair: gl.dataset.gpair!, word: w, kind: gl.dataset.gkind === "avoid" ? "avoid" : "ok", from: pos, to: pos + w.length, rect: gl.getBoundingClientRect() });
+            return false;
+          }
           const el = (e.target as HTMLElement).closest("[data-watch]") as HTMLElement | null;
           if (!el || !props.current.onWatchClick) return false;
           const pos = view.posAtDOM(el, 0);
@@ -227,11 +247,6 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
         const ed = editorRef.current!;
         const m = modeRef.current;
         props.current.onTyping?.();
-        if (m === "inscript") {
-          const mapped = [...text].map((ch) => INSCRIPT[ch] ?? ch).join("");
-          if (mapped !== text) { view.dispatch(view.state.tr.insertText(mapped, from, to).setMeta(TRUSTED, true)); return true; }
-          return false;
-        }
         if (m !== "roman") return false;
         const w = wordRef.current;
         if (/^[A-Za-z]$/.test(text)) { lastCommit.current = null; lastDanda.current = null; return false; }
@@ -274,9 +289,10 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
     },
     onUpdate: ({ editor }) => {
       props.current.onChange(fromDoc(editor.state.doc));
+      if (props.current.rich && props.current.onHtml) { const h = editor.getHTML(); props.current.onHtml(hasFormatting(h) ? h : ""); }
     },
     onSelectionUpdate: ({ editor }) => reportCaret(editor),
-    onFocus: () => props.current.onFocus?.(),
+    onFocus: ({ editor }) => props.current.onFocus?.(editor),
   });
   const editorRef = useRef<Editor | null>(null);
   editorRef.current = editor;
@@ -348,7 +364,7 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
   }, [p.value]);
 
   useEffect(() => { editor?.setEditable(!p.readOnly); }, [p.readOnly, editor]);
-  useEffect(() => { if (editor) editor.view.dispatch(editor.state.tr); }, [editor, p.watch?.join("|"), p.showLatin]);
+  useEffect(() => { if (editor) editor.view.dispatch(editor.state.tr); }, [editor, p.watch?.join("|"), p.showLatin, glossSig]);
   useEffect(() => { if (mode !== "roman") { setWord(null); setSugs(null); decoState.current.romanRange = null; } }, [mode]);
 
   useImperativeHandle(ref, () => ({
@@ -368,6 +384,7 @@ export const TranslationEditor = forwardRef<EditorHandle, Props>(function Transl
     focus() { editor?.commands.focus(); },
     setInterim(text) { setInterimText(text); },
     backspace() { editor?.commands.keyboardShortcut("Backspace"); },
+    editor() { return editor && !editor.isDestroyed ? editor : null; },
   }), [editor]);
 
   const list = word ? suggestionsFor(word.text) : null;

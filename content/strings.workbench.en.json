@@ -1,0 +1,39 @@
+{
+  "round": {
+    "glossMenu": {
+      "label": "Glossary options",
+      "approved": "Approved",
+      "variant": "Also accepted",
+      "current": "In your text",
+      "avoid": "Avoid",
+      "avoidUsed": "This form is best avoided",
+      "replace": "Replace with",
+      "insert": "Insert at the cursor",
+      "search": "Search the full glossary",
+      "otherArea": "{area}"
+    },
+    "toolbar": {
+      "label": "Text formatting",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "h1": "Heading 1",
+      "h2": "Heading 2",
+      "normal": "Normal text",
+      "bullets": "Bulleted list",
+      "numbers": "Numbered list",
+      "left": "Align left",
+      "center": "Centre",
+      "justify": "Justify",
+      "undo": "Undo",
+      "redo": "Redo",
+      "pick": "Click a segment to format it"
+    },
+    "pageControl": {
+      "label": "Page navigation",
+      "jump": "Jump to a page",
+      "pageOf": "{n} / {total}"
+    },
+    "copyPasteLocked": "Copy-paste is locked in every round"
+  }
+}

@@ -50,9 +50,12 @@ test("new player: landing → player card → training → rules → map → Tri
   await page.getByRole("button", { name: /Start training/ }).click();
 
   await expect(page).toHaveURL(/how-to-play/);
+  await expect(page.getByRole("heading", { name: "Your Mission" })).toBeVisible();
   await page.getByRole("button", { name: /^Next/ }).click();
+  await expect(page.getByRole("heading", { name: "How You Score" })).toBeVisible();
   await shot(page, "03_training_score");
   await page.getByRole("button", { name: /^Next/ }).click();
+  await expect(page.getByRole("heading", { name: "Your Translation Toolkit" })).toBeVisible();
   // practice pad: Roman → Hindi helper, Space commits suggestion 1
   const practice = page.locator(".hc-editor .ProseMirror").first();
   await practice.click();
@@ -64,18 +67,21 @@ test("new player: landing → player card → training → rules → map → Tri
   await expect(practice).toContainText("सरकार");
   // the Listen button plays only on tap, and can be paused/stopped
   await page.getByRole("button", { name: /^Next/ }).click();
+  await expect(page.getByRole("heading", { name: /Meet Your Guide/ })).toBeVisible();
   await page.getByRole("button", { name: /I'm ready/ }).click();
 
   await expect(page).toHaveURL(/rules/);
+  await expect(page.getByRole("button", { name: /Enter the Challenge/ })).toBeDisabled();
+  await page.getByLabel(/I have understood/).check();
   await shot(page, "04_rules");
-  await page.getByRole("button", { name: /Open the map/ }).click();
+  await page.getByRole("button", { name: /Enter the Challenge/ }).click();
   await expect(page).toHaveURL(/journey/);
   await expect(page.getByText("You are here")).toBeVisible();
   await expect(page.getByText(/Start with the Trial/).first()).toBeVisible();
   await shot(page, "05_journey");
   // Level 5 is visible but preview-only
-  await page.getByRole("button", { name: /Level 5 Varchaspati Round/ }).click();
-  await expect(page.getByText(/Varchaspati opens in Phase 2/)).toBeVisible();
+  await page.getByRole("button", { name: /Level 5 PhD Shodharthi Round/ }).click();
+  await expect(page.getByText(/PhD Shodharthi opens in Phase 2/)).toBeVisible();
   await shot(page, "05b_varchaspati_preview");
   await page.getByRole("button", { name: /Back/ }).click();
   await page.getByRole("button", { name: /Level 1 Trial Round/ }).click();
@@ -83,11 +89,10 @@ test("new player: landing → player card → training → rules → map → Tri
   await expect(page).toHaveURL(/play\/trial/);
   await expect(page.getByText("Chance 1/3")).toBeVisible();
   await shot(page, "06_briefing");
-  await page.getByRole("button", { name: /Start mission/ }).click();
+  await page.getByRole("button", { name: /Start mission/i }).click();
   await expect(page).toHaveURL(/round\//, { timeout: 10_000 });
 
   const ed = page.locator(".hc-editor .ProseMirror").first();
-  await page.locator("#kbd").selectOption("device");
   await ed.click();
   await page.keyboard.type("स्टील अथॉरिटी ऑफ इंडिया लिमिटेड भारत की अग्रणी इस्पात उत्पादक कंपनियों में से एक है। कंपनी के पास लौह अयस्क की खदानें हैं।");
   await expect(page.getByText(/^2\/(12|16) sentences$/).first()).toBeVisible();
@@ -132,14 +137,14 @@ test("new player: landing → player card → training → rules → map → Tri
   await page.goto("/journey");
   await page.getByRole("button", { name: /Level 2 Primary Round/ }).click();
   await expect(page).toHaveURL(/play\/primary/);
-  await page.getByRole("button", { name: /Start mission/ }).click();
+  await page.getByRole("button", { name: /Start mission/i }).click();
   await expect(page.getByText("BHASHINI draft").locator("visible=true").first()).toBeVisible({ timeout: 15_000 });
   // the 10-page report bundle has a page navigator
-  await expect(page.getByText(/Page 1 of 10/).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /Page 1 of 10/ })).toBeVisible();
   await page.waitForTimeout(800);
   await shot(page, "10_primary_round");
   await page.locator(".hc-source-term").first().click();
-  await expect(page.getByText("Glossary suggestion").first()).toBeVisible();
+  await expect(page.getByRole("menu", { name: "Glossary options" })).toBeVisible();
 
   // nothing was spoken without a tap
   expect(await page.evaluate(() => (window as any).__spoke)).toBe(0);

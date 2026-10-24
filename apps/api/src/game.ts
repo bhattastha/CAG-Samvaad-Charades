@@ -131,6 +131,39 @@ export async function attemptView(db: Db, a: AttemptRow, clientId?: string) {
   };
 }
 
+const BLOCK_TAGS = new Set(["p", "h1", "h2", "h3", "ul", "ol", "li"]);
+const MARK_TAGS = new Set(["strong", "b", "em", "i", "u", "br"]);
+const FORMAT_RE = /<(strong|em|u|h[1-3]|ul|ol)\b|text-align:\s*(center|right|justify)/;
+
+/**
+ * Whitelist sanitiser for the rich-text copy of a field: a handful of formatting tags, text-align on blocks and
+ * the locked-number span; everything else is dropped. The HTML is only ever re-parsed by the editor's schema,
+ * so this is defence in depth. Returns "" when the field has no formatting worth keeping.
+ */
+export function sanitiseHtml(html: unknown): string {
+  if (typeof html !== "string" || !html) return "";
+  const src = html.slice(0, 60_000);
+  let out = "";
+  let last = 0;
+  for (const m of src.matchAll(/<(\/?)([a-zA-Z0-9]+)([^>]*)>/g)) {
+    out += src.slice(last, m.index).replace(/</g, "&lt;");
+    last = m.index! + m[0].length;
+    const close = m[1] === "/";
+    const tag = m[2].toLowerCase();
+    if (tag === "span") {
+      if (close) { out += "</span>"; continue; }
+      const v = /data-locked="([^"<>]{1,40})"/.exec(m[3]);
+      out += v ? `<span data-locked="${v[1]}">` : "<span>";
+    } else if (BLOCK_TAGS.has(tag) || MARK_TAGS.has(tag)) {
+      if (close) { out += `</${tag}>`; continue; }
+      const al = BLOCK_TAGS.has(tag) ? /text-align:\s*(left|center|right|justify)/.exec(m[3]) : null;
+      out += al ? `<${tag} style="text-align: ${al[1]}">` : `<${tag}>`;
+    }
+  }
+  out += src.slice(last).replace(/</g, "&lt;");
+  return FORMAT_RE.test(out) ? out : "";
+}
+
 /** Validate an answers payload against the page; re-insert locked tokens a client removed. */
 export function sanitiseAnswers(page: PageData, incoming: Answers): Answers {
   const out: Answers = {};
@@ -138,13 +171,17 @@ export function sanitiseAnswers(page: PageData, incoming: Answers): Answers {
     if (!p.editable) continue;
     const inc = incoming?.[p.id];
     const fields: Record<string, string> = {};
+    const html: Record<string, string> = {};
     for (const f of p.fields) {
       if (f.numeric) continue;
       let t = String(inc?.fields?.[f.key] ?? "").slice(0, 20_000);
-      if (f.draft) for (const tok of f.locked) if (f.draft.includes(tok) && !t.includes(tok)) t = (t.trimEnd() + " " + tok).trim();
+      let reinserted = false;
+      if (f.draft) for (const tok of f.locked) if (f.draft.includes(tok) && !t.includes(tok)) { t = (t.trimEnd() + " " + tok).trim(); reinserted = true; }
       fields[f.key] = t;
+      const h = reinserted ? "" : sanitiseHtml(inc?.html?.[f.key]);
+      if (h && t) html[f.key] = h;
     }
-    out[p.id] = { fields, done: !!inc?.done };
+    out[p.id] = { fields, done: !!inc?.done, ...(Object.keys(html).length ? { html } : {}) };
   }
   return out;
 }

@@ -1,25 +1,28 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { completion, fill, formatClock, type PageData } from "@hc/shared";
 import { api } from "../lib/api";
 import { useConfig, useLines } from "../lib/queries";
-import { usePrefs, useToasts, type KeyboardMode } from "../lib/store";
+import { useToasts } from "../lib/store";
 import { t } from "../lib/strings";
 import { announce, type Line } from "../lib/voice";
 import { sfx } from "../lib/sfx";
 import { Burst, floatText } from "../components/Juice";
 import { Hud } from "../round/Hud";
-import { Header, ProgressBar, Spinner } from "../components/Layout";
+import { Header, Spinner } from "../components/Layout";
 import { SahayikaLine } from "../components/Sahayika";
 import { TranslationEditor, type EditorHandle } from "../editor/TranslationEditor";
-import { InscriptKeyboard } from "../editor/InscriptKeyboard";
+import { FormatToolbar } from "../editor/FormatToolbar";
+import type { Editor } from "@tiptap/react";
 import { GlossaryDrawer } from "../editor/GlossaryDrawer";
 import { VoiceTyping } from "../editor/voice";
-import { useAttempt } from "../round/useAttempt";
+import { useAttempt, type SourceTerm as SourceTermT } from "../round/useAttempt";
 import { useFairPlay } from "../round/useFairPlay";
-import { fk, GlossPopover, SourcePanel, type DraftProps, type FieldKey, type PopoverState } from "../round/PageViews";
-import { ContextPanel, SegmentRows } from "../round/Workbench";
+import { fk, glossFormsFor, pairKey, SourcePanel, type DraftProps, type FieldKey } from "../round/PageViews";
+import { SegmentRows } from "../round/Workbench";
+import { GlossMenu, PairStyle, type GlossMenuState } from "../round/GlossMenu";
+import { PageControl } from "../round/PageControl";
 import { Icon } from "../components/Icon";
 import { ChatPanel } from "../round/ChatPanel";
 import { enterFullscreen } from "./PreRound";
@@ -35,7 +38,6 @@ export function Round() {
   const round = cfg?.rounds.find((r) => r.key === view?.roundKey);
   const { data: lines } = useLines(view?.roundKey ?? "trial");
   const push = useToasts((s) => s.push);
-  const { keyboard, setKeyboard } = usePrefs();
 
   const active = view?.status === "active" && at.save !== "closed";
   const readOnly = !active || at.save === "other_window";
@@ -173,11 +175,23 @@ export function Round() {
   const [lastField, setLastField] = useState<FieldKey | null>(null);
   const [focusedPart, setFocusedPart] = useState<string | null>(null);
   const [sentenceIdx, setSentenceIdx] = useState<number | null>(null);
-  const onFocus = useCallback((partId: string, key: string) => { setLastField(fk(partId, key)); setFocusedPart(partId); }, []);
+  const [activeEditor, setActiveEditor] = useState<Editor | null>(null);
+  const onFocus = useCallback((partId: string, key: string, ed?: Editor) => { setLastField(fk(partId, key)); setFocusedPart(partId); if (ed) setActiveEditor(ed); }, []);
   const xlitAccept = useCallback((i: number) => { if (view) api(`/attempts/${view.id}/events`, { body: { type: "xlit_accept", meta: { index: i } } }).catch(() => {}); }, [view]);
 
   // ---------- popovers & drawers ----------
-  const [pop, setPop] = useState<PopoverState | null>(null);
+  const [menu, setMenu] = useState<GlossMenuState | null>(null);
+  const [hoverPair, setHoverPair] = useState<string | null>(null);
+  const hudRef = useRef<HTMLDivElement>(null);
+  const [hudH, setHudH] = useState(56);
+  useLayoutEffect(() => {
+    const el = hudRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setHudH(el.offsetHeight));
+    ro.observe(el);
+    setHudH(el.offsetHeight);
+    return () => ro.disconnect();
+  });
   const [glossOpen, setGlossOpen] = useState(false);
   const [glossQuery, setGlossQuery] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
@@ -220,53 +234,80 @@ export function Round() {
     const f = view.page.parts.find((p) => p.id === pid)?.fields.find((x) => !x.numeric);
     return f ? fk(pid, f.key) : null;
   };
-  const insertGlossary = (hi: string) => {
-    const k = (focusedPart && !isTrial ? focusField(focusedPart) : null) ?? lastField ?? (isTrial ? fk("passage", "t") : null);
-    const h = k ? editors.current.get(k) : null;
-    if (h && !readOnly) { h.insertText(hi, "glossary"); setGlossOpen(false); }
+  const termByPair = new Map<string, SourceTermT>();
+  for (const [pid, fields] of Object.entries(view.page.sourceTerms)) for (const [key, list] of Object.entries(fields)) for (const tm of list) termByPair.set(pairKey(pid, key, tm.en), tm);
+  const optionsOf = (tm: SourceTermT): GlossMenuState["options"] => [
+    { hi: tm.hi, tag: "approved" as const },
+    ...tm.variants.filter((v) => v && v !== tm.hi).map((hi) => ({ hi, tag: "variant" as const })),
+    ...(tm.alternatives ?? []).filter((x) => x.hi && x.hi !== tm.hi).map((x) => ({ hi: x.hi, tag: "other" as const, area: x.area })),
+  ].filter((o, i, all) => o.hi && all.findIndex((x) => x.hi === o.hi) === i);
+  const fieldTarget = (pid: string, key: string): FieldKey | null => {
+    if (isTrial) return fk("passage", "t");
+    return view.page.parts.find((p) => p.id === pid)?.fields.some((f) => f.key === key && !f.numeric) ? fk(pid, key) : null;
   };
-
-  const onTermPick = (pid: string, key: string, tm: { en: string; hi: string; variants: string[]; avoid: string[] }, rect: DOMRect) => {
-    const part = view.page.parts.find((p) => p.id === pid);
-    const target = isTrial ? fk("passage", "t") : part?.fields.some((f) => f.key === key && !f.numeric) ? fk(pid, key) : null;
-    setPop({ rect, title: `${tm.en} → ${tm.hi}`, options: [tm.hi, ...tm.variants].filter(Boolean).slice(0, 5), avoid: tm.avoid, mode: "insert", target });
+  /** English side: open the menu under the underlined term; picking inserts at the cursor of that field. */
+  const onTermPick = (pid: string, key: string, tm: SourceTermT, rect: DOMRect) => {
+    setMenu({ rect, pair: pairKey(pid, key, tm.en), en: tm.en, area: tm.area, options: optionsOf(tm), avoid: tm.avoid, mode: "insert", target: fieldTarget(pid, key) });
+  };
+  /** Hindi side: open the menu under the underlined word; picking replaces it. */
+  const onGlossClick = (pid: string, key: string, g: { pair: string; word: string; kind: "ok" | "avoid"; from: number; to: number; rect: DOMRect }) => {
+    const tm = termByPair.get(g.pair);
+    if (!tm) return;
+    setMenu({ rect: g.rect, pair: g.pair, en: tm.en, area: tm.area, options: optionsOf(tm), avoid: tm.avoid, mode: "replace", target: fieldTarget(pid, key), range: { from: g.from, to: g.to }, current: g.word, currentKind: g.kind });
   };
   const draftProps: DraftProps = {
     parts: visibleParts, answers, readOnly, watch: watchTexts, focusedPart, register,
     onField: (pid, key, v) => at.update(pid, { field: [key, v] }),
+    onHtml: (pid, key, h) => at.update(pid, { html: [key, h] }),
+    terms: view.page.sourceTerms, rich: true, onGlossClick,
     onTick: (pid, done) => { at.update(pid, { done }); if (!done) sfx("tap"); },
     onFocus, onBlocked, onTyping, onXlit: xlitAccept,
     onWatchClick: (pid, key, w) => {
       const ww = watchWords.find((x) => x.text === w.word);
-      setPop({ rect: w.rect, title: ww?.en ? `${w.word} · ${ww.en}` : w.word, options: ww?.options ?? [], mode: "replace", target: fk(pid, key), range: { from: w.from, to: w.to } });
-      if (!ww?.options?.length) { setGlossQuery(ww?.en ?? ""); }
+      setMenu({ rect: w.rect, pair: "", en: ww?.en ?? w.word, options: (ww?.options ?? []).map((hi, i) => ({ hi, tag: i === 0 ? "approved" as const : "variant" as const })), avoid: [w.word], mode: "replace", target: fieldTarget(pid, key), range: { from: w.from, to: w.to }, current: w.word, currentKind: "avoid" });
     },
   };
-  const editable = view.page.parts.filter((p) => p.editable);
-  const focused = editable.find((p) => p.id === focusedPart) ?? null;
-  const focusedTerms = focused ? Object.values(view.page.sourceTerms[focused.id] ?? {}).flat() : isTrial ? Object.values(view.page.sourceTerms.passage ?? {}).flat() : [];
-  const pageParts = visibleParts.filter((p) => p.editable && p.tickGroup);
-
-  const modeOptions: [KeyboardMode, string][] = [["roman", t("round.keyboardPhonetic").replace(/^.*:\s*/, "")], ["inscript", t("round.keyboardInscript")], ["device", t("round.keyboardDevice")]];
   const leftLine = (moment: string) => lines?.find((l) => l.id === `${view.roundKey}.in_round.${moment}`) ?? null;
 
+  const insertGlossary = (hi: string) => {
+    const k = lastField ?? (isTrial ? fk("passage", "t") : null);
+    const h = k ? editors.current.get(k) : null;
+    if (h && !readOnly) { h.insertText(hi, "glossary"); setGlossOpen(false); }
+  };
+  const liveEditor = activeEditor && !activeEditor.isDestroyed ? activeEditor : isTrial ? editors.current.get(fk("passage", "t"))?.editor() ?? null : null;
+  const mic = round.voiceTyping && (
+    <button onClick={toggleVoice} disabled={readOnly} onMouseDown={(e) => e.preventDefault()}
+      className={`shrink-0 rounded-md inline-flex items-center gap-1.5 px-3 h-8 text-[13px] font-bold text-white ${listening ? "bg-timer-text animate-pulse" : "bg-primary-strong"}`}>
+      <Icon name="mic" size={15} /> {listening ? t("round.listening") : t("round.speak")}
+    </button>
+  );
+  const toolbar = <FormatToolbar editor={liveEditor} disabled={readOnly} />;
+  const overPair = (e: React.MouseEvent) => {
+    const el = (e.target as HTMLElement).closest?.("[data-pair]") as HTMLElement | null;
+    setHoverPair(el?.dataset.pair ?? null);
+  };
+  const trialTerms = view.page.sourceTerms.passage?.t;
+  const stickTop = `calc(63px + ${hudH}px)`;
+
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header compact />
+    <div className="min-h-screen flex flex-col" style={{ ["--stick" as any]: stickTop }}>
+      <Header compact wide />
       <div className="sr-only" aria-live="assertive">{srNote}</div>
+      <PairStyle keys={[hoverPair, menu?.pair]} />
 
       {/* HUD (non-diegetic) + last-minute edge glow (meta) */}
-      <div data-hud-progress className="sticky top-[59px] z-20">
+      <div ref={hudRef} data-hud-progress className="sticky top-[63px] z-20">
         <Hud round={round} chanceNo={view.chanceNo} maxChances={cfg.maxChancesPerRound} remaining={remaining} limit={limitS}
           warn5={cfg.fairPlay.warnAtMinutesLeft * 60} warn1={cfg.fairPlay.warnAtMinutesLeftSecond * 60}
-          progress={prog.done} total={prog.total} isTrial={isTrial} creditCap={view.creditCap} save={at.save} sample={view.page.sample} />
+          progress={prog.done} total={prog.total} isTrial={isTrial} creditCap={view.creditCap} save={at.save} sample={view.page.sample}
+          onAsk={() => setChatOpen(true)} onSubmit={() => { sfx("tap"); pressSubmit(); }} submitting={submitting} confirming={confirming} partsLeft={partsLeft} readOnly={readOnly} />
       </div>
       {active && remaining > 0 && remaining <= cfg.fairPlay.warnAtMinutesLeftSecond * 60 && (
         <div className="pointer-events-none fixed inset-0 z-[35] animate-pulse" style={{ boxShadow: "inset 0 0 120px 20px rgba(180,35,24,.35)" }} aria-hidden />
       )}
       <Burst fire={burst} count={36} spread={300} />
-      {/* phone: switch panels */}
-      <div className={`lg:hidden mx-auto w-full px-3 mt-3 ${isTrial ? "" : "hidden"}`}>
+      {/* phone: switch panels (Passage round) */}
+      <div className={`lg:hidden w-full px-2 mt-2 ${isTrial ? "" : "hidden"}`}>
         <div className="grid grid-cols-2 rounded-ui bg-slate-100 p-1 text-[15px] font-semibold">
           {(["src", "dst"] as const).map((k) => (
             <button key={k} onClick={() => setMobilePane(k)} className={`rounded-md py-2 ${mobilePane === k ? "bg-white shadow text-navy" : "text-muted"}`}>
@@ -276,123 +317,79 @@ export function Round() {
         </div>
       </div>
 
-      {pageNos.length > 1 && (
-        <nav className="mx-auto w-full max-w-[1400px] px-3 sm:px-6 mt-3 flex items-center gap-3" aria-label={t("round.pageNav", { n: pageIdx + 1, total: pageNos.length })}>
-          <button className="btn-ghost py-1.5 px-3 text-sm" disabled={pageIdx === 0} onClick={() => { setPageIdx(pageIdx - 1); sfx("whoosh"); }}><Icon name="chevronLeft" size={16} />{t("round.prevPage")}</button>
-          <div className="flex-1 flex items-center gap-1 overflow-x-auto py-1">
-            {pageNos.map((n, i) => (
-              <button key={n} onClick={() => { setPageIdx(i); sfx("tap"); }} aria-current={i === pageIdx}
-                className={`shrink-0 min-w-8 h-8 px-2 rounded-md text-xs font-bold tnum border ${i === pageIdx ? "bg-navy border-navy text-white" : pageDone(n) ? "bg-success-soft border-success/40 text-success" : "bg-white border-slate-200 text-muted"}`}>
-                {pageDone(n) && i !== pageIdx ? <Icon name="check" size={14} stroke={2.6} className="mx-auto" /> : n}
-              </button>
-            ))}
-          </div>
-          <span className="text-sm font-bold whitespace-nowrap">{t("round.pageNav", { n: pageIdx + 1, total: pageNos.length })}</span>
-          <button className="btn-primary py-1.5 px-3 text-sm" disabled={pageIdx === pageNos.length - 1} onClick={() => { setPageIdx(pageIdx + 1); sfx("whoosh"); window.scrollTo({ top: 0 }); }}>{t("round.nextPage")}<Icon name="chevronRight" size={16} /></button>
-        </nav>
-      )}
       {isTrial ? (
-      <main className="mx-auto w-full max-w-[1400px] flex-1 px-3 sm:px-6 py-3 grid lg:grid-cols-2 gap-4 pb-40">
-        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabel")}>
-          <div className="px-4 py-2.5 border-b border-slate-200 bg-slate-50 rounded-t-card flex items-center gap-2">
+      <main className="w-full flex-1 px-2 sm:px-3 py-2 grid lg:grid-cols-2 gap-3 pb-16" onMouseOver={overPair} onMouseLeave={() => setHoverPair(null)}>
+        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] lg:h-[calc(100vh-var(--stick)-1rem)] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabel")}>
+          <div className="px-4 py-2 min-h-[3rem] border-b border-slate-200 bg-slate-50 rounded-t-card flex items-center gap-2">
             <span className="font-bold inline-flex items-center gap-1.5"><Icon name="file" size={16} />{t("round.sourceLabel")}</span><span className="text-sm text-muted">{t("round.sourceLabelEn")}</span>
             <span className="ml-auto text-xs text-navy-600 hidden sm:inline">{t("round.glossaryHint")}</span>
           </div>
-          <div className="p-4 sm:p-5 overflow-y-auto max-h-[calc(100vh-260px)]">
+          <div className="p-4 sm:p-5 overflow-y-auto flex-1">
             <SourcePanel parts={visibleParts} terms={view.page.sourceTerms} focusedPart={focusedPart} sentenceIndex={isTrial ? sentenceIdx : null}
               onPartClick={(pid) => { setFocusedPart(pid); const f = view.page.parts.find((p) => p.id === pid)?.fields.find((x) => !x.numeric); if (f) editors.current.get(fk(pid, f.key))?.focus(); }}
               onTerm={onTermPick} />
           </div>
         </section>
 
-        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
-          <div className="px-4 py-2.5 border-b border-slate-200 bg-navy-50 rounded-t-card flex items-center gap-2">
-            <span className="font-bold inline-flex items-center gap-1.5"><Icon name="edit" size={16} />{t("round.yourTranslation")}</span>
-            {readOnly && <span className="ml-auto chip-plain text-xs">{t("round.readOnly")}</span>}
+        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] lg:h-[calc(100vh-var(--stick)-1rem)] ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
+          <div className="px-3 py-2 min-h-[3rem] border-b border-slate-200 bg-navy-50 rounded-t-card flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="font-bold inline-flex items-center gap-1.5 shrink-0"><Icon name="edit" size={16} />{t("round.yourTranslation")}</span>
+            <div className="flex-1 min-w-[15rem] flex justify-end">{toolbar}</div>
+            {mic}
+            {readOnly && <span className="chip-plain text-xs">{t("round.readOnly")}</span>}
           </div>
-          <div className="p-4 sm:p-5 overflow-y-auto max-h-[calc(100vh-260px)] flex-1">
-            {isTrial ? (
-              <TranslationEditor
-                ref={(h) => register(fk("passage", "t"), h)}
-                value={answers.passage?.fields.t ?? ""}
-                onChange={(v) => at.update("passage", { field: ["t", v] })}
-                readOnly={readOnly}
-                sentenceTicks
-                showLatin
-                ariaLabel={t("round.yourTranslation")}
-                placeholder={t("round.xlitHint")}
-                onFocus={() => onFocus("passage", "t")}
-                onBlocked={onBlocked}
-                onTyping={onTyping}
-                onCaretSentence={setSentenceIdx}
-                onXlitAccept={xlitAccept}
-              />
-            ) : null}
+          <div className="p-4 sm:p-5 overflow-y-auto flex-1">
+            <TranslationEditor
+              ref={(h) => register(fk("passage", "t"), h)}
+              value={answers.passage?.fields.t ?? ""}
+              html={answers.passage?.html?.t}
+              rich
+              onHtml={(h) => at.update("passage", { html: ["t", h] })}
+              gloss={glossFormsFor("passage", "t", trialTerms)}
+              onGlossClick={(g) => onGlossClick("passage", "t", g)}
+              onChange={(v) => at.update("passage", { field: ["t", v] })}
+              readOnly={readOnly}
+              sentenceTicks
+              showLatin
+              ariaLabel={t("round.yourTranslation")}
+              placeholder={t("round.xlitHint")}
+              onFocus={(ed) => onFocus("passage", "t", ed)}
+              onBlocked={onBlocked}
+              onTyping={onTyping}
+              onCaretSentence={setSentenceIdx}
+              onXlitAccept={xlitAccept}
+            />
           </div>
         </section>
       </main>
       ) : (
-        <main className="mx-auto w-full max-w-[1500px] flex-1 px-3 sm:px-6 py-3 grid xl:grid-cols-[minmax(0,1fr)_20rem] gap-4 pb-40 items-start">
-          <section className="card overflow-hidden" aria-label={t("round.workbench")}>
-            <div className="hidden md:grid grid-cols-2 bg-slate-50 border-b border-slate-200 text-[12px] font-bold uppercase tracking-[0.12em] text-muted">
-              <div className="px-4 py-2.5 flex items-center gap-2 border-r border-slate-200"><Icon name="file" size={14} />{t("round.sourceLabel")} <span className="normal-case tracking-normal font-semibold">· {t("round.sourceLabelEn")}</span></div>
-              <div className="px-4 py-2.5 flex items-center gap-2"><Icon name="edit" size={14} />{t("round.draftLabel")}{readOnly && <span className="ml-auto chip-plain normal-case tracking-normal">{t("round.readOnly")}</span>}</div>
-            </div>
-            <div className="md:hidden px-4 py-2.5 bg-slate-50 border-b border-slate-200 text-[12px] font-bold uppercase tracking-[0.12em] text-muted flex items-center gap-2">
-              <Icon name="edit" size={14} />{t("round.draftLabel")}{readOnly && <span className="ml-auto chip-plain normal-case tracking-normal">{t("round.readOnly")}</span>}
+        <main className="w-full flex-1 px-2 sm:px-3 py-2 pb-16" onMouseOver={overPair} onMouseLeave={() => setHoverPair(null)}>
+          <section className="card" aria-label={t("round.workbench")}>
+            <div className="sticky z-10 grid md:grid-cols-2 bg-slate-50 border-b border-slate-200 rounded-t-card text-[12px] font-bold uppercase tracking-[0.12em] text-muted" style={{ top: "var(--stick)" }}>
+              <div className="hidden md:flex px-4 py-2 min-h-[3rem] items-center gap-2 border-r border-slate-200"><Icon name="file" size={14} />{t("round.sourceLabel")} <span className="normal-case tracking-normal font-semibold">· {t("round.sourceLabelEn")}</span></div>
+              <div className="px-3 py-2 min-h-[3rem] flex flex-wrap items-center gap-x-3 gap-y-1 bg-navy-50/60 min-w-0">
+                <span className="flex items-center gap-1.5 shrink-0 whitespace-nowrap"><Icon name="edit" size={14} />{t("round.draftLabel")}</span>
+                <div className="flex-1 min-w-[15rem] flex xl:justify-end normal-case tracking-normal">{toolbar}</div>
+                {readOnly && <span className="chip-plain normal-case tracking-normal">{t("round.readOnly")}</span>}
+              </div>
             </div>
             <SegmentRows parts={visibleParts} allParts={view.page.parts} terms={view.page.sourceTerms} onTerm={onTermPick} focusedPart={focusedPart}
               onSelect={(pid) => setFocusedPart(pid)} d={draftProps} />
           </section>
-          <div className="hidden xl:block sticky top-[8.75rem]">
-            <ContextPanel part={focused} index={focused ? editable.indexOf(focused) + 1 : 0} total={editable.length} terms={focusedTerms} answers={answers} watch={watchTexts} readOnly={readOnly}
-              onInsert={insertGlossary} onGlossary={(q) => { setGlossQuery(q); setGlossOpen(true); }}
-              pageDone={pageParts.filter((p) => answers[p.id]?.done).length} pageTotal={pageParts.length} />
-          </div>
         </main>
       )}
 
-      {pop && (
-        <GlossPopover s={pop} onClose={() => setPop(null)} onPick={(v) => {
-          const h = pop.target ? editors.current.get(pop.target) : null;
-          if (h && !readOnly) { pop.mode === "replace" && pop.range ? h.replaceRange(pop.range.from, pop.range.to, v) : h.insertText(v, "glossary"); }
-          setPop(null);
-        }} />
+      {menu && (
+        <GlossMenu s={menu} readOnly={readOnly} onClose={() => setMenu(null)} onSearch={(q) => { setGlossQuery(q); setGlossOpen(true); setMenu(null); }}
+          onPick={(v) => {
+            const h = menu.target ? editors.current.get(menu.target) : null;
+            if (h && !readOnly) { menu.mode === "replace" && menu.range ? h.replaceRange(menu.range.from, menu.range.to, v) : h.insertText(v, "glossary"); }
+            setMenu(null);
+          }} />
       )}
 
-      {/* bottom bar */}
-      <div className="fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-slate-200 shadow-[0_-8px_24px_-12px_rgba(11,37,69,.18)]">
-        <div className="mx-auto max-w-[1400px] px-3 sm:px-6">
-          {slim && <div className="pt-2"><SahayikaLine line={slim} autoSpeak={false} clamp onClose={() => setSlim(null)} /></div>}
-          {keyboard === "inscript" && !readOnly && (
-            <div className="pt-2"><InscriptKeyboard compact onKey={(c) => { const h = lastField && editors.current.get(lastField); h?.insertText(c, "keyboard"); }} onBackspace={() => { const h = lastField && editors.current.get(lastField); h?.backspace(); }} /></div>
-          )}
-          <div className="py-2.5 flex flex-wrap items-center gap-2">
-            <label className="sr-only" htmlFor="kbd">{t("round.keyboardPhonetic")}</label>
-            <select id="kbd" value={keyboard} onChange={(e) => setKeyboard(e.target.value as KeyboardMode)} className="rounded-ui border border-slate-300 bg-white px-3 py-2 text-[15px] font-semibold">
-              {modeOptions.map(([k, l]) => <option key={k} value={k}>{l}</option>)}
-            </select>
-            {round.voiceTyping && (
-              <button onClick={toggleVoice} disabled={readOnly} className={`rounded-ui inline-flex items-center gap-1.5 px-4 py-2 text-[15px] font-bold text-white ${listening ? "bg-timer-text animate-pulse" : "bg-primary-strong"}`}>
-                <Icon name="mic" size={17} /> {listening ? t("round.listening") : t("round.speak")}
-              </button>
-            )}
-            <button onClick={() => setGlossOpen(true)} aria-label={t("common.glossaryButton")} className="rounded-ui inline-flex items-center gap-1.5 border border-slate-300 px-3.5 py-2 text-[15px] font-semibold text-navy hover:bg-navy-50"><Icon name="book" size={17} /> <span className="hidden sm:inline">{t("common.glossaryButton")}</span></button>
-            <button onClick={() => setChatOpen(true)} aria-label={t("common.sahayikaButton")} className="rounded-ui inline-flex items-center gap-1.5 border border-slate-300 px-3.5 py-2 text-[15px] font-semibold text-navy hover:bg-navy-50"><Icon name="chat" size={17} /> <span className="hidden sm:inline">{t("common.sahayikaButton")}</span></button>
-            <span className="chip bg-timer-bg border-red-200 text-timer-text hidden md:inline-flex"><Icon name="lock" size={13} /> {t("common.copyPasteOffBadge")}</span>
-            <div className="flex-1 min-w-[10rem] flex items-center gap-3">
-              <span className="text-[14px] sm:text-[15px] font-semibold whitespace-nowrap">{isTrial ? t("round.sentencesDone", { done: prog.done, total: prog.total }) : t("round.paragraphsDone", { done: prog.done, total: prog.total })}</span>
-              <ProgressBar value={prog.done / (prog.total || 1)} striped />
-            </div>
-            <div className="flex items-center gap-2">
-              {confirming && <span className="text-sm font-semibold text-timer-text animate-pop">{t("round.partsLeft", { n: partsLeft })}</span>}
-              <button onClick={() => { sfx("tap"); pressSubmit(); }} disabled={readOnly || submitting} className={`btn-primary py-2.5 active:scale-90 transition-transform ${confirming ? "bg-timer-text hover:bg-timer-text animate-wiggle" : ""}`}>
-                {submitting ? t("round.submitting") : confirming ? t("round.confirmSubmit") : t("round.submit")}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {pageNos.length > 1 && <PageControl pageNos={pageNos} idx={pageIdx} onChange={(i) => { setPageIdx(i); sfx("whoosh"); }} done={pageDone} />}
+      {slim && <div className="fixed bottom-3 right-3 z-40 w-[min(34rem,calc(100vw-1.5rem))]"><SahayikaLine line={slim} autoSpeak={false} clamp onClose={() => setSlim(null)} /></div>}
 
       <GlossaryDrawer open={glossOpen} onClose={() => setGlossOpen(false)} onInsert={insertGlossary} initial={glossQuery} />
       <ChatPanel open={chatOpen} onClose={() => setChatOpen(false)} attemptId={view.id} quick={cfg.sahayika.quickQuestions}

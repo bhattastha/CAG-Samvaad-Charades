@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { lineText, t } from "../lib/strings";
 import { announce, stop, toggle, useVoice, type Line } from "../lib/voice";
-import { SahayikaAvatar } from "./SahayikaAvatar";
+import { SahayakFigure, SahayikaAvatar } from "./SahayikaAvatar";
 import { Icon } from "./Icon";
 
 /** Listen / Pause / Resume for one line; Stop while it's active. Player is always in control. */
@@ -54,7 +54,7 @@ export function SahayikaPanel({ lines, children, autoSpeak = true, title }: { li
       className="sahayika-panel hud-grid p-5 sm:p-6 flex flex-col gap-4 relative overflow-hidden">
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-gold to-transparent" aria-hidden />
       <div className="flex items-center gap-3 relative">
-        <SahayikaAvatar size={48} />
+        <SahayikaAvatar size={52} />
         <div className="flex-1">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-lg font-bold">{t("common.guide")}</span>
@@ -93,5 +93,45 @@ export function SahayikaLine({ line, autoSpeak = true, tone = "cream", onClose, 
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+/**
+ * Light guide card (registration, training, rules): the waist-up mascot at the left edge, name + online state,
+ * the line in a speech surface, and a user-controlled Listen (never autoplays unless the player chose "auto").
+ */
+export function SahayakGuide({ lines, children, autoSpeak = false, subtitle, figure = true, bob = false }: { lines: (Line | null | undefined)[]; children?: React.ReactNode; autoSpeak?: boolean; subtitle?: string; figure?: boolean; bob?: boolean }) {
+  const shown = lines.filter(Boolean) as Line[];
+  const combined = shown[0] ? { ...shown[0], id: shown.map((l) => l.id).join("+"), en: shown.map((l) => l.en).join(" ") } : null;
+  useAutoSpeak(combined, autoSpeak);
+  return (
+    <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 160, damping: 20 }}
+      className="relative overflow-hidden rounded-card border border-[#D9E3F0] bg-gradient-to-br from-[#EEF3FA] via-white to-[#F6F1E6] shadow-card" aria-label={t("common.guide")}>
+      <div className={`relative flex gap-3 sm:gap-4 ${figure ? "pl-[128px] sm:pl-[160px]" : "pl-4"} pr-4 py-4 min-h-[150px]`}>
+        {figure ? (bob
+          ? <motion.div className="absolute left-0 bottom-0 sm:left-1" animate={{ y: [0, -4, 0] }} transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}><SahayakFigure height={164} className="drop-shadow-[0_10px_18px_rgba(11,35,66,.25)]" /></motion.div>
+          : <SahayakFigure height={164} className="absolute left-0 bottom-0 sm:left-1 drop-shadow-[0_10px_18px_rgba(11,35,66,.25)]" />)
+          : <SahayikaAvatar size={44} className="mt-0.5" />}
+        <div className="flex-1 min-w-0">
+          <div className="flex items-start gap-2">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="text-lg font-extrabold text-navy">{t("common.guide")}</span>
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.16em] text-success"><span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />{t("sahayikaExtra.online")}</span>
+              </div>
+              <div className="text-[13px] text-muted">{subtitle ?? t("common.guideRole")}</div>
+            </div>
+            {combined && <span className="ml-auto"><VoiceControl line={combined} /></span>}
+          </div>
+          {shown.map((l, i) => (
+            <motion.p key={l.id + i} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.1 }}
+              className="mt-2.5 rounded-ui bg-white/90 border border-[#E3EAF4] px-3.5 py-2.5 text-[15px] leading-relaxed text-navy">
+              {lineText(l)}
+            </motion.p>
+          ))}
+          {children}
+        </div>
+      </div>
+    </motion.section>
   );
 }

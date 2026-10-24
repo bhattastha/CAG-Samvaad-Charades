@@ -7,7 +7,7 @@ import type { Db } from "../db.js";
 import { attemptView, autosave, GameError, logEvent, ownAttempt, report, review, startAttempt, submit } from "../game.js";
 import { parse } from "./util.js";
 
-const Answers = z.record(z.object({ fields: z.record(z.string().max(20_000)), done: z.boolean() }));
+const Answers = z.record(z.object({ fields: z.record(z.string().max(20_000)), done: z.boolean(), html: z.record(z.string().max(60_000)).optional() }));
 const LEAVE_TYPES = new Set(["left_tab", "left_fullscreen", "left_blur"]);
 
 export async function playRoutes(app: FastifyInstance, db: Db) {

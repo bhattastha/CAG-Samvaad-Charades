@@ -4,15 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: { DEFAULT: "#E85A1A", strong: "#C2410C", soft: "#FFF3EB", ring: "#FDBA74" },
-        royal: { DEFAULT: "#13315C", bright: "#1D4E89", soft: "#EEF3F9", deep: "#0B2545" },
-        navy: { DEFAULT: "#0B2545", 900: "#071A33", 800: "#0B2545", 700: "#13315C", 600: "#1D4E89", 50: "#F1F5FA" },
+        primary: { DEFAULT: "#F15A24", strong: "#C2410C", soft: "#FFF3EB", ring: "#FDBA74" },
+        royal: { DEFAULT: "#24558A", bright: "#24558A", soft: "#EEF3F9", deep: "#0B2342" },
+        navy: { DEFAULT: "#0B2342", 900: "#071830", 800: "#0B2342", 700: "#163A66", 600: "#24558A", 50: "#F1F5FA" },
         ink: "#0F172A",
         cream: "#FBF7F0",
         muted: "#5B6576",
         success: { DEFAULT: "#15803D", soft: "#DCFCE7" },
         timer: { bg: "#FDECEC", text: "#B42318" },
-        gold: { DEFAULT: "#C49B3D", light: "#E9D7A6", soft: "#FBF6EA", deep: "#8A6A1F" },
+        gold: { DEFAULT: "#D6A642", light: "#EED9A4", soft: "#FBF6EA", deep: "#8A6A1F" },
       },
       fontFamily: {
         sans: ['"Noto Sans Devanagari"', '"Noto Sans"', "system-ui", "sans-serif"],

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
-export type KeyboardMode = "roman" | "inscript" | "device";
+/** Typing is always Roman → Hindi suggestions plus direct Devanagari; "device" only switches suggestions off (practice box). */
+export type KeyboardMode = "roman" | "device";
 export type VoiceMode = "off" | "tap" | "auto";
 export type TextSize = "s" | "m" | "l" | "xl";
 
@@ -24,10 +25,8 @@ interface Prefs {
   contrast: boolean;
   reduceMotion: boolean;
   unlocked: boolean; // audio may only start after the first tap (§15.9)
-  keyboard: KeyboardMode;
-  set<K extends keyof Omit<Prefs, "set" | "unlockAudio" | "setKeyboard">>(k: K, v: Prefs[K]): void;
+  set<K extends keyof Omit<Prefs, "set" | "unlockAudio">>(k: K, v: Prefs[K]): void;
   unlockAudio(): void;
-  setKeyboard(k: KeyboardMode): void;
 }
 
 const sysReduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -41,14 +40,12 @@ export const usePrefs = create<Prefs>((setState, getState) => ({
   contrast: read("hc.contrast", "0") === "1",
   reduceMotion: read("hc.reduceMotion", sysReduce ? "1" : "0") === "1",
   unlocked: false,
-  keyboard: read("hc.keyboard", "roman") as KeyboardMode,
   set: (k, v) => {
     write(`hc.${k}`, typeof v === "boolean" ? (v ? "1" : "0") : String(v));
     setState({ [k]: v } as any);
     applyPrefs(getState());
   },
   unlockAudio: () => setState({ unlocked: true }),
-  setKeyboard: (k) => { write("hc.keyboard", k); setState({ keyboard: k }); },
 }));
 
 /** Toasts */

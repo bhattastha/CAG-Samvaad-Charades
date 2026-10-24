@@ -65,6 +65,7 @@ export function PreRound() {
   useEffect(() => { if (error && (error as ApiError).status === 401) nav("/register"); }, [error]);
   if (!data) return <><Header /><Spinner /></>;
   const r = data.round;
+  const first = r.key === "trial";
   if (data.playable === false) return <VarchaspatiPreview r={r} onBack={() => nav("/journey")} />;
 
   const begin = async () => {
@@ -108,8 +109,15 @@ export function PreRound() {
             <motion.div initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 260, damping: 22, delay: 0.15 }}><Medal k={r.key} size={84} shine /></motion.div>
             <div className="flex-1">
               <div className="kicker text-gold-light">{t("preRound.heading")} · {r.levelLabel}</div>
-              <h1 id="pre-title" className="text-3xl sm:text-4xl font-extrabold tracking-tight">{roundName(r)}</h1>
-              <div className="text-blue-100/80">{t("preRound.headingEn")}</div>
+              <h1 id="pre-title" className="text-3xl sm:text-4xl font-extrabold tracking-tight">{first ? t("ob.pre.heading") : roundName(r)}</h1>
+              <div className="text-blue-100/80">{first ? t("ob.pre.sub", { title: r.titleEn }) : t("preRound.headingEn")}</div>
+              {first && (
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-[12px]">
+                  <span className="chip bg-white/10 border-white/20 text-white"><span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />{t("ob.pre.statusKicker")}: {data.active ? t("ob.pre.statusResume") : t("ob.pre.statusReady")}</span>
+                  <span className="chip bg-gold/20 border-gold/50 text-gold-light"><Coin size={14} />{t("ob.pre.available")}: {r.creditCap}</span>
+                  <span className="chip bg-white/10 border-white/20 text-white">{roundName(r)}</span>
+                </div>
+              )}
             </div>
             <span className="chip bg-white/10 border-white/20 text-white text-base tnum">{t("common.chanceOf", { n: data.chance, max: data.maxChances })}</span>
           </div>
@@ -143,7 +151,7 @@ export function PreRound() {
             <span className="text-xs text-muted">{t("preRound.fullscreenNote")}</span>
             {!data.unlocked ? <div className="text-muted font-semibold inline-flex items-center gap-1.5"><Icon name="lock" size={16} /> {t("journey.lockedHint", { n: data.trialQualifyingScore })}</div>
               : data.chancesLeft === 0 && !data.active ? <div className="text-muted font-semibold">{t("journey.noChances")}</div>
-                : <GameButton sound="pop" className="px-9 py-4 text-xl" onClick={begin}>{data.active ? t("journey.resume") : t("preRound.start")} <Icon name="play" size={18} fill /></GameButton>}
+                : <GameButton sound="pop" className={`px-9 py-4 text-xl ${first ? "ob-pulse" : ""}`} onClick={begin}>{data.active ? (first ? t("ob.pre.resume") : t("journey.resume")) : first ? t("ob.pre.start") : t("preRound.start")} <Icon name="play" size={18} fill /></GameButton>}
           </div>
           {err && <div className="err px-8 pb-4">{t("common.error")} ({err})</div>}
         </motion.div>

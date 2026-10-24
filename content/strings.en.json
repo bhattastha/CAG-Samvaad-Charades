@@ -3,9 +3,9 @@
   "common": {
     "gameName": "Samvaad Charades",
     "gameNameHi": "संवाद शराड्स",
-    "brandLine": "CAG × BHASHINI",
+    "brandLine": "CAG · BHASHINI",
     "guide": "Sahayak",
-    "guideRole": "Your coach",
+    "guideRole": "Your game guide",
     "listen": "Listen",
     "pause": "Pause",
     "resume": "Resume",
@@ -194,7 +194,7 @@
       },
       {
         "title": "Your toolkit",
-        "body": "Type in Roman letters and pick a Hindi suggestion, use InScript keys, or use your device's Hindi keyboard. In the Trial you can also speak. Try it below."
+        "body": "Type in Roman letters and pick a Hindi suggestion, or use your device's Hindi keyboard. In the Trial you can also speak. Try it below."
       },
       {
         "title": "Your coach",
@@ -215,7 +215,6 @@
     "scoreLabel": "Score",
     "writeWaysHeading": "Try the controls",
     "phonetic": "Roman → Hindi",
-    "inscript": "InScript keys",
     "voice": "Speak to type",
     "voiceOnlyTrial": "Level 1 only",
     "tryHere": "Practice pad",
@@ -311,7 +310,6 @@
     "partDone": "✓ Cleared",
     "partIncomplete": "To do",
     "keyboardPhonetic": "Roman → Hindi",
-    "keyboardInscript": "InScript",
     "keyboardDevice": "Device keyboard",
     "typeMode": "Type",
     "speak": "Speak",
@@ -331,7 +329,7 @@
     "offline": "Offline. Keep writing; your work saves as soon as you reconnect.",
     "numbersLocked": "Numbers stay exactly as they are.",
     "xlitHint": "Type in Roman · Space = first suggestion · Esc = keep as typed",
-    "xlitUnavailable": "Suggestions are unavailable. Switch to InScript or your Hindi keyboard.",
+    "xlitUnavailable": "Suggestions are unavailable. Switch to your device's Hindi keyboard.",
     "otherWindow": "This mission is open in another window.",
     "saved": "Saved",
     "saving": "Saving…",
@@ -555,12 +553,12 @@
   },
   "varchaspati": {
     "kicker": "Level 5 · Phase 2 preview",
-    "heading": "Varchaspati",
+    "heading": "PhD Shodharthi",
     "tagline": "The doctorate of translation: one complex ~300-page CAG report, start to finish.",
     "teaser": "Ready for the summit?",
-    "teaserBody": "Cleared every level? Varchaspati is the ultimate test: a full ~300-page report with tables, charts, annexures and everything in between.",
-    "notYet": "Varchaspati opens in Phase 2. Keep sharpening your edge in the other levels.",
-    "frameworkHeading": "How Varchaspati will be judged (proposed)",
+    "teaserBody": "Cleared every level? PhD Shodharthi is the ultimate test: a full ~300-page report with tables, charts, annexures and everything in between.",
+    "notYet": "PhD Shodharthi opens in Phase 2. Keep sharpening your edge in the other levels.",
+    "frameworkHeading": "How PhD Shodharthi will be judged (proposed)",
     "framework": [
       {
         "name": "Translation accuracy",
@@ -766,7 +764,7 @@
         "desc": "Master complete pages with charts and figures."
       },
       "varchaspati": {
-        "name": "Varchaspati",
+        "name": "PhD Shodharthi",
         "desc": "The ultimate achievement. Opens in Phase 2."
       }
     },

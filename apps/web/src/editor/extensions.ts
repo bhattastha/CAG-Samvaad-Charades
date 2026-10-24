@@ -72,7 +72,11 @@ export function guardPlugin(get: () => GuardOpts) {
   });
 }
 
+/** One glossary term of a field: the Hindi spellings to underline in the player's text (approved first, then known avoid-forms). */
+export interface GlossForm { pair: string; en: string; forms: { text: string; kind: "ok" | "avoid" }[] }
+
 export interface DecoOpts {
+  gloss: GlossForm[];
   watch: string[];
   showLatin: boolean;
   sentenceTicks: boolean;
@@ -80,6 +84,30 @@ export interface DecoOpts {
 }
 
 const DEVA_WORD_CHAR = /[ऀ-ॿ]/;
+const INFLECTIONS = ["ाओं", "ियों", "ियाँ", "ियां", "ों", "ें"];
+
+/** Non-overlapping occurrences of the glossary Hindi forms in one text block, longest form first. */
+function glossMatches(text: string, gloss: GlossForm[]) {
+  const flat = gloss.flatMap((g) => g.forms.filter((f) => f.text).map((f) => ({ g, ...f })));
+  flat.sort((a, b) => b.text.length - a.text.length);
+  const taken = new Uint8Array(text.length);
+  const out: { start: number; end: number; g: GlossForm; text: string; kind: "ok" | "avoid" }[] = [];
+  for (const f of flat) {
+    for (let i = text.indexOf(f.text); i >= 0; i = text.indexOf(f.text, i + 1)) {
+      const end = i + f.text.length;
+      const prev = text[i - 1];
+      const next = text[end];
+      if (prev && DEVA_WORD_CHAR.test(prev)) continue; // inside a longer word
+      if (next && DEVA_WORD_CHAR.test(next) && !INFLECTIONS.some((x) => text.startsWith(x, end))) continue;
+      let free = true;
+      for (let k = i; k < end; k++) if (taken[k]) { free = false; break; }
+      if (!free) continue;
+      taken.fill(1, i, end);
+      out.push({ start: i, end, g: f.g, text: f.text, kind: f.kind });
+    }
+  }
+  return out;
+}
 
 /** Highlights: current Roman word, watch words (avoid forms / slips), Latin words, finished-sentence ticks. */
 export function decorationsPlugin(get: () => DecoOpts) {
@@ -102,11 +130,22 @@ export function decorationsPlugin(get: () => DecoOpts) {
             } else { text += "￼"; map.push(start); }
           });
           const at = (i: number) => (i < map.length ? map[i] : (map[map.length - 1] ?? pos + 1) + 1);
+          const glossed: [number, number][] = [];
+          if (o.gloss.length) {
+            for (const m of glossMatches(text, o.gloss)) {
+              glossed.push([m.start, m.end]);
+              decos.push(Decoration.inline(at(m.start), at(m.end), {
+                class: `hc-gloss ${m.kind === "avoid" ? "hc-gloss-bad" : "hc-gloss-ok"}`,
+                "data-gpair": m.g.pair, "data-pair": m.g.pair, "data-gform": m.text, "data-gkind": m.kind,
+              }));
+            }
+          }
           if (watchRe) {
             for (const m of text.matchAll(watchRe)) {
               // whole-word-ish: don't flag inside a longer Devanagari word start
               const prev = text[m.index! - 1];
               if (prev && DEVA_WORD_CHAR.test(prev) && !/\s/.test(prev)) continue;
+              if (glossed.some(([a, b]) => m.index! < b && m.index! + m[0].length > a)) continue; // the glossary underline owns it
               decos.push(Decoration.inline(at(m.index!), at(m.index! + m[0].length), { class: "hc-watch", "data-watch": m[0] }));
             }
           }
@@ -186,12 +225,15 @@ export function toDoc(text: string, locked: string[]) {
   };
 }
 
+/** Plain text of the document: one line per text block (paragraph, heading, list item); chips give their number. */
 export function fromDoc(doc: PMNode): string {
   const out: string[] = [];
-  doc.forEach((para) => {
+  doc.descendants((node) => {
+    if (!node.isTextblock) return true;
     let s = "";
-    para.forEach((c) => { s += c.isText ? c.text : c.type.name === "lockedToken" ? c.attrs.value : ""; });
+    node.forEach((c) => { s += c.isText ? c.text : c.type.name === "lockedToken" ? c.attrs.value : ""; });
     out.push(s);
+    return false;
   });
   return out.join("\n");
 }

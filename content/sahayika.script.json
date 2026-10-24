@@ -1936,7 +1936,7 @@
       "moment": "all_titles_won",
       "when": "All four titles won (used instead of the line above)",
       "spoken": true,
-      "en": "All four titles earned. You are now an Anuvad Visheshagya, with your credits saved for Hindi Pakhwada. Varchaspati, Level 5, opens in Phase 2.",
+      "en": "All four titles earned. You are now an Anuvad Visheshagya, with your credits saved for Hindi Pakhwada. PhD Shodharthi (Level 5, title Anuvad Varchaspati) opens in Phase 2.",
       "hi": "चारों उपाधियाँ अर्जित। अब आप अनुवाद विशेषज्ञ हैं, और आपके क्रेडिट हिंदी पखवाड़ा के लिए सहेज लिए गए हैं। पाँचवाँ राउंड, वाचस्पति, दूसरे चरण में खुलेगा।"
     },
     {
@@ -1967,7 +1967,7 @@
       "Why play: it counts toward appraisal, builds official-language translation skill, and earns credits for the Hindi Pakhwada contest, plus a title per level and a certificate.",
       "Registration asks for name, mobile number, email, office (from a list) and office address. The email is the player's unique ID; all credits are saved against it. Registering earns 2 credits.",
       "Four playable levels: Trial (20 min, a 300-word passage from an executive summary or conclusion), Primary (1 hr, a 10-page report bundle), Secondary (1.5 hr, 20 pages with tables and notes) and Professional (2 hr, 30 pages with charts and figures). Titles: Anuvad Pathik, Anuvad Nipun, Anuvad Vidvaan, Anuvad Visheshagya.",
-      "A fifth level, Varchaspati (about 300 pages), is planned for Phase 2 and is not yet playable.",
+      "A fifth level, PhD Shodharthi (about 300 pages, title Anuvad Varchaspati), is planned for Phase 2 and is not yet playable.",
       "All levels are open, but the Trial is recommended first as a warm-up.",
       "Credits: registration 2, Trial 3, Primary 5, Secondary 15, Professional 25. That is 50 in all.",
       "Each level can be played 3 times (3 chances, called मौका). The best of the three scores counts; a lower later score never reduces credits.",
@@ -1975,7 +1975,7 @@
       "To earn a level's title, the best score must be at least 33 out of 100. Below 33 the player still earns credits by the formula, but no title.",
       "The score out of 100 comes from five measures: translation quality, time taken, completion (sentences in the Trial, paragraphs later), glossary terms used, and sentence construction. Proposed weights: translation 30, completion 20, sentence construction 20, glossary 20, time 10.",
       "Time marks: full time marks for finishing within half the time limit, then they taper to 60% of the time marks at the limit.",
-      "Ways to type Hindi: Roman typing with BHASHINI suggestions (type in Roman letters, pick a suggestion or press space for the first one), the on-screen InScript keyboard, or the device's own Hindi keyboard. Voice typing works only in the Trial.",
+      "Ways to type Hindi: Roman typing with BHASHINI suggestions (type in Roman letters, pick a suggestion or press space for the first one), or the device's own Hindi keyboard. Voice typing works only in the Trial.",
       "During a mission the screen is locked: full screen, no copy, cut or paste, no right-click. Leaving the page triggers a warning, the clock keeps running, and the number of departures appears on the report card.",
       "Numbers, years and rupee amounts are locked and never change; only the words are translated.",
       "The glossary (शब्दावली) button opens CAG's standard Hindi terms. Search in English or Hindi, place the cursor in the translation and tap जोड़ें to insert the term. Glossary words in the draft are underlined as hints.",
@@ -2029,7 +2029,7 @@
       },
       {
         "q": "How many rounds are there?",
-        "en": "Four playable levels: Trial, Primary, Secondary and Professional, each tougher than the last. Varchaspati, Level 5, opens in Phase 2.",
+        "en": "Four playable levels: Trial, Primary, Secondary and Professional, each tougher than the last. PhD Shodharthi (Level 5, title Anuvad Varchaspati) opens in Phase 2.",
         "hi": "चार राउंड: परख, प्राथमिक, माध्यमिक और वृत्तिक, हर राउंड पिछले से अधिक चुनौतीपूर्ण। पाँचवाँ राउंड, वाचस्पति, दूसरे चरण में खुलेगा।"
       },
       {
@@ -2064,7 +2064,7 @@
       },
       {
         "q": "How do I type in Hindi?",
-        "en": "Type in Roman letters and press space: 'vibhag' becomes विभाग. You can also use the on-screen InScript keyboard or your device's Hindi keyboard.",
+        "en": "Type in Roman letters and press space: 'vibhag' becomes विभाग. You can also use your device's Hindi keyboard.",
         "hi": "रोमन में लिखिए और स्पेस दबाइए: ‘vibhag’ से ‘विभाग’ बन जाएगा। स्क्रीन पर इनस्क्रिप्ट कीबोर्ड या अपने डिवाइस का हिंदी कीबोर्ड भी इस्तेमाल कर सकते हैं।"
       },
       {

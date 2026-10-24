@@ -1,8 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import cagLogo from "@assets/brand/cag-logo.png";
-import bhashiniLogo from "@assets/brand/bhashini-logo.png";
 import { useConfig, useProgress } from "../lib/queries";
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api";
@@ -148,7 +146,7 @@ function ProfileMenu({ name, office }: { name: string; office?: string }) {
 }
 
 /** Global header (§7): CAG left, brand, BHASHINI right; after sign-in the portal nav, HUD and profile menu. */
-export function Header({ compact = false, hud = true }: { compact?: boolean; hud?: boolean }) {
+export function Header({ compact = false, hud = true, wide = false }: { compact?: boolean; hud?: boolean; wide?: boolean }) {
   const { data } = useProgress();
   const openSettings = useSettingsOpen((s) => s.set);
   const { pathname } = useLocation();
@@ -156,15 +154,20 @@ export function Header({ compact = false, hud = true }: { compact?: boolean; hud
   const signedIn = !!data?.registered;
   const navItems: [string, string, string][] = [["/journey", t("nav.levels"), "route"], ["/leaderboard", t("nav.leaderboard"), "trophy"], ["/profile", t("nav.profile"), "user"]];
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200">
+    <header className="sticky top-0 z-30 bg-white border-b border-slate-200">
       <div className="h-[3px] bg-gradient-to-r from-primary via-gold to-navy-600" aria-hidden />
-      <div className={`mx-auto max-w-7xl px-3 sm:px-6 flex items-center gap-2 sm:gap-4 ${compact ? "h-14" : "h-16"}`}>
-        <img src={cagLogo} alt="CAG" className={`${compact ? "h-8" : "h-10"} w-auto rounded border border-slate-100 bg-white p-0.5`} />
-        <Link to={signedIn ? "/journey" : "/"} className="leading-tight min-w-0 flex-1 md:flex-none">
-          <div className={`${compact ? "text-base sm:text-lg" : "text-lg sm:text-xl"} font-extrabold whitespace-nowrap tracking-tight`}>
-            <BrandName split />
-          </div>
-          <div className="en text-[10px] tracking-[0.28em] text-muted">{t("common.brandLine")}</div>
+      <div className={`mx-auto ${wide ? "max-w-[2000px] px-3 sm:px-5" : "max-w-7xl px-3 sm:px-6"} flex items-center gap-2 sm:gap-4 ${compact ? "h-[60px]" : "h-[72px]"}`}>
+        {/* official marks together, exactly as on the landing page (white plate, original colours) */}
+        <Link to={signedIn ? "/journey" : "/"} className="flex items-center gap-3 min-w-0 flex-1 md:flex-none" aria-label={t("common.gameName")}>
+          <span className={`flex items-center gap-2 sm:gap-3 rounded-xl bg-white ring-1 ring-slate-200 shadow-sm ${compact ? "px-2 py-1" : "px-2.5 py-1.5"}`}>
+            <img src="/landing/cag-logo.png" alt="Comptroller and Auditor General of India" className={`${compact ? "h-10" : "h-12"} w-auto`} width={195} height={240} />
+            <span className="w-px self-stretch bg-slate-200" aria-hidden />
+            <img src="/landing/bhashini-logo.png" alt="Digital India BHASHINI" className={`${compact ? "h-7" : "h-9"} w-auto`} width={330} height={160} />
+          </span>
+          <span className="leading-tight min-w-0 hidden sm:block">
+            <span className={`block ${compact ? "text-base" : "text-lg sm:text-xl"} font-extrabold whitespace-nowrap tracking-tight`}><BrandName split /></span>
+            <span className="block en text-[10px] tracking-[0.24em] text-muted">{t("common.brandLine")}</span>
+          </span>
         </Link>
         {signedIn && !compact && (
           <nav className="hidden md:flex items-center gap-1 flex-1 justify-center" aria-label={t("nav.main")}>
@@ -197,7 +200,6 @@ export function Header({ compact = false, hud = true }: { compact?: boolean; hud
               <Icon name="settings" size={18} />
             </button>
           )}
-          <img src={bhashiniLogo} alt="BHASHINI" className={`${compact ? "h-8" : "h-10"} w-auto rounded border border-slate-100 bg-white p-0.5 hidden sm:block`} />
         </div>
       </div>
     </header>
