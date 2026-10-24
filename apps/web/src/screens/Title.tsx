@@ -52,9 +52,8 @@ function SahayakSpeech() {
   const playing = st.line?.id === line.id && st.status === "playing";
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 180, damping: 18, delay: 0.9 }}
-      className="relative w-[175px] sm:w-[260px] rounded-2xl bg-white/95 p-3 sm:p-4 shadow-2xl shadow-black/30 text-[#0F2D5B]" role="note">
-      <span className="absolute -right-2 top-10 w-5 h-5 rotate-45 bg-white/95 hidden lg:block" aria-hidden />
-      <span className="absolute -left-2 top-8 w-4 h-4 rotate-45 bg-white/95 lg:hidden" aria-hidden />
+      className="relative w-[158px] min-[400px]:w-[170px] sm:w-[260px] rounded-2xl bg-white/95 p-3 sm:p-4 shadow-2xl shadow-black/30 text-[#0F2D5B]" role="note">
+            <span className="absolute -left-2 top-9 w-4 h-4 rotate-45 bg-white/95" aria-hidden />
       <p className="text-[18px] sm:text-[22px] font-extrabold leading-tight whitespace-pre-line">
         {t("landing.greeting").split(/(Sahayak\.?)/).map((part, i) => part.startsWith("Sahayak") ? <span key={i} className="text-[#E8590C]">{part}</span> : <span key={i}>{part.replace("! ", "!\n")}</span>)}
       </p>
@@ -102,7 +101,7 @@ function Particles() {
 /** Decorative only: the English → Indian-language idea as two glowing tiles (not interface copy). */
 function GlyphTiles() {
   return (
-    <div className="absolute right-0 top-[6%] hidden xl:flex flex-col items-center gap-2 pointer-events-none" aria-hidden>
+    <div className="absolute right-0 top-[44%] hidden xl:flex flex-col items-center gap-2 pointer-events-none" aria-hidden>
       <motion.span className="lp-glyph grid place-items-center w-16 h-16 rounded-2xl text-white text-4xl font-extrabold en"
         style={{ background: "linear-gradient(145deg,#3B6FD8,#16357A)", boxShadow: "0 0 0 1px rgba(255,255,255,.35), 0 16px 40px rgba(30,76,163,.55)" }}
         animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>A</motion.span>
@@ -181,18 +180,20 @@ export function Title() {
             </motion.button>
           </div>
 
-          {/* Sahayak */}
-          <div className="relative flex items-end justify-center lg:justify-end gap-2 min-h-[260px] sm:min-h-[400px] lg:min-h-[470px]">
+          {/* Sahayak: waist-up, centre stage, speech panel beside the head (as the approved reference) */}
+          <div className="relative flex items-end justify-start lg:justify-start gap-1 sm:gap-3 min-h-[250px] sm:min-h-[380px] lg:min-h-[min(62vh,570px)]">
             <GlyphTiles />
-            <div className="relative order-2 lg:order-none self-start mt-6 lg:mt-0 lg:absolute lg:left-[0%] xl:left-[4%] lg:top-[8%] z-10"><SahayakSpeech /></div>
-            <motion.img src={`${A}/sahayak.webp`} alt="Sahayak, the game companion, welcoming you" width={720} height={1086}
-              initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, ease: [0.2, 0.8, 0.2, 1], delay: 0.35 }}
-              className="relative order-1 lg:order-none h-[250px] sm:h-[400px] lg:h-[min(54vh,520px)] w-auto lg:mr-[16%] xl:mr-[18%] drop-shadow-[0_30px_40px_rgba(0,0,0,.45)] lp-breathe" />
+            <motion.div className="relative z-[1] shrink-0 lg:-ml-[12%] xl:-ml-[8%]"
+              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1], delay: 0.3 }}>
+              <img src={`${A}/sahayak-half.webp`} alt="Sahayak, the game companion, welcoming you" width={820} height={877}
+                className="h-[200px] min-[400px]:h-[220px] sm:h-[380px] lg:h-[min(62vh,570px)] w-auto drop-shadow-[0_24px_40px_rgba(0,0,0,.5)] lp-breathe" />
+            </motion.div>
+            <div className="relative z-10 self-start mt-4 lg:mt-0 lg:absolute lg:left-[54%] xl:left-[52%] lg:top-[2%]"><SahayakSpeech /></div>
           </div>
         </div>
 
         {/* journey */}
-        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 pb-6 lg:-mt-36 pointer-events-none [&_button]:pointer-events-auto">
+        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 pb-6 lp-journey pointer-events-none [&_button]:pointer-events-auto">
           {cfg && <JourneyPath cfg={cfg} states={states} onStage={openStage} />}
         </div>
       </section>

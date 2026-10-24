@@ -93,5 +93,15 @@ html, body { overflow-x: clip; }
 .lp-glyph { text-shadow: 0 0 18px rgba(255,255,255,.45); }
 .lp-cta::after { content: ""; position: absolute; inset: -6px; border-radius: 9999px; box-shadow: 0 0 0 0 rgba(255,154,60,.45); animation: lp-halo 2.8s ease-out infinite; pointer-events: none; }
 @keyframes lp-halo { 0% { box-shadow: 0 0 0 0 rgba(255,154,60,.45); } 70%,100% { box-shadow: 0 0 0 16px rgba(255,154,60,0); } }
-@media (prefers-reduced-motion: reduce) { .lp-pulse, .lp-particle, .lp-breathe, .lp-cta::after { animation: none !important; } .lp-particle { display: none; } }
-.hc-reduce-motion .lp-pulse, .hc-reduce-motion .lp-particle, .hc-reduce-motion .lp-breathe, .hc-reduce-motion .lp-cta::after { animation: none !important; }
+.lp-float { display: inline-block; animation: lp-float 4.2s ease-in-out infinite; }
+@keyframes lp-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.lp-beacon { opacity: 0; animation: lp-beacon 6.6s ease-out infinite; border: 2px solid rgba(255,247,214,.75); box-shadow: 0 0 30px 10px var(--beacon), inset 0 0 18px var(--beacon); }
+@keyframes lp-beacon { 0% { opacity: 0; transform: translate(-50%,-50%) scale(.7); } 6% { opacity: 1; } 22% { opacity: 0; transform: translate(-50%,-50%) scale(1.25); } 100% { opacity: 0; transform: translate(-50%,-50%) scale(1.25); } }
+.lp-flow { animation: lp-flow 2.4s linear infinite; }
+@keyframes lp-flow { to { stroke-dashoffset: -72; } }
+@media (prefers-reduced-motion: reduce) { .lp-pulse, .lp-particle, .lp-breathe, .lp-cta::after, .lp-float, .lp-beacon, .lp-flow { animation: none !important; } .lp-particle, .lp-sparks, .lp-beacon { display: none; } }
+.hc-reduce-motion .lp-pulse, .hc-reduce-motion .lp-particle, .hc-reduce-motion .lp-breathe, .hc-reduce-motion .lp-cta::after, .hc-reduce-motion .lp-float, .hc-reduce-motion .lp-beacon, .hc-reduce-motion .lp-flow { animation: none !important; }
+.hc-reduce-motion .lp-sparks, .hc-reduce-motion .lp-beacon { display: none; }
+/* the journey tucks under the hero on tall screens and steps down on short laptops, so it never crosses the CTA */
+@media (min-width: 1024px) { .lp-journey { margin-top: -10rem; } }
+@media (min-width: 1024px) and (max-height: 800px) { .lp-journey { margin-top: -4.5rem; } }

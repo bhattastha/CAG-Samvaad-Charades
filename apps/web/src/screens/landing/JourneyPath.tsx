@@ -100,6 +100,15 @@ export function JourneyPath({ cfg, states, onStage }: { cfg: PublicConfig; state
             initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.8, ease: [0.4, 0, 0.2, 1], delay: 0.5 }} />
           {/* a light pulse travelling the path */}
           <path d={PATH} fill="none" stroke="#FFF7D6" strokeWidth="3" strokeLinecap="round" strokeDasharray="40 1400" className="lp-pulse" />
+          {/* sparks travelling the journey */}
+          <g className="lp-sparks">
+            {[0, 2.2, 4.4].map((d) => (
+              <circle key={d} r="4" fill="#FFF3C4" style={{ filter: "drop-shadow(0 0 6px #FFC14D)" }}>
+                <animateMotion dur="6.6s" begin={`${d}s`} repeatCount="indefinite" path={PATH} rotate="auto" />
+                <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="6.6s" begin={`${d}s`} repeatCount="indefinite" />
+              </circle>
+            ))}
+          </g>
         </svg>
         {rounds.map((r, i) => {
           const st = states[r.key];
@@ -113,7 +122,9 @@ export function JourneyPath({ cfg, states, onStage }: { cfg: PublicConfig; state
                 className="relative flex flex-col items-center gap-1.5 text-center outline-none group focus-visible:[&_.lp-ring]:opacity-100">
                 {hover === r.key && <StageTip k={r.key} state={st} title={r.titleEn ?? ""} />}
                 <span className="lp-ring absolute -inset-2 rounded-full ring-2 ring-[#F3D58A] opacity-0 transition" aria-hidden />
-                <span className="relative">
+                <span className="relative lp-float" style={{ animationDelay: `${i * -0.7}s` }}>
+                  {/* beacon: lights each milestone in turn, in step with the sparks */}
+                  {st !== "locked" && <span className="lp-beacon absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ width: (i === 4 ? 96 : 84) + 28, height: (i === 4 ? 96 : 84) + 28, animationDelay: `${i * 1.32}s`, ["--beacon" as string]: STAGE[r.key]?.glow ?? "rgba(250,204,21,.6)" }} aria-hidden />}
                   <Emblem k={r.key} state={st} size={i === 4 ? 96 : 84} />
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#071A33] border-2 border-[#F3D58A] grid place-items-center text-[15px] font-extrabold text-white shadow-lg">{i + 1}</span>
                   {st === "completed" && <span className="absolute -top-1 -right-1 w-7 h-7 rounded-full bg-emerald-500 border-2 border-white grid place-items-center text-white lp-pop"><Icon name="check" size={15} stroke={3} /></span>}
@@ -130,7 +141,8 @@ export function JourneyPath({ cfg, states, onStage }: { cfg: PublicConfig; state
       {/* phone: vertical trail */}
       <ol className="lg:hidden relative pl-2 max-w-xl mx-auto" aria-label={t("landing.journeyLabel")}>
         <svg className="absolute left-[34px] top-6 bottom-6 w-6 h-[calc(100%-3rem)]" viewBox="0 0 24 100" preserveAspectRatio="none" aria-hidden>
-          <path d="M12 0 C 22 12, 2 25, 12 37 S 22 62, 12 75 S 2 92, 12 100" fill="none" stroke="#F59E0B" strokeWidth="2.5" vectorEffect="non-scaling-stroke" strokeOpacity=".9" />
+          <path d="M12 0 C 22 12, 2 25, 12 37 S 22 62, 12 75 S 2 92, 12 100" fill="none" stroke="#F59E0B" strokeWidth="2.5" vectorEffect="non-scaling-stroke" strokeOpacity=".55" />
+          <path d="M12 0 C 22 12, 2 25, 12 37 S 22 62, 12 75 S 2 92, 12 100" fill="none" stroke="#FFE7A3" strokeWidth="3" vectorEffect="non-scaling-stroke" strokeDasharray="10 26" className="lp-flow" />
         </svg>
         {rounds.map((r, i) => {
           const st = states[r.key];
@@ -138,7 +150,9 @@ export function JourneyPath({ cfg, states, onStage }: { cfg: PublicConfig; state
             <motion.li key={r.key} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}>
               <button type="button" onClick={() => press(r.key)} aria-label={label(r.key, i)} data-state={st}
                 className="relative w-full flex items-center gap-4 py-3 text-left">
-                <span className="relative shrink-0"><Emblem k={r.key} state={st} size={60} />
+                <span className="relative shrink-0 lp-float" style={{ animationDelay: `${i * -0.7}s` }}>
+                  {st !== "locked" && <span className="lp-beacon absolute left-1/2 top-[46%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ width: 80, height: 80, animationDelay: `${i * 1.32}s`, ["--beacon" as string]: STAGE[r.key]?.glow ?? "rgba(250,204,21,.6)" }} aria-hidden />}
+                  <Emblem k={r.key} state={st} size={60} />
                   <span className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-[#071A33] border-2 border-[#F3D58A] grid place-items-center text-[12px] font-extrabold text-white">{i + 1}</span></span>
                 <span className="flex-1 min-w-0">
                   <span className="block text-[17px] font-bold text-white">{t(`landing.stages.${r.key}.name`)}</span>
