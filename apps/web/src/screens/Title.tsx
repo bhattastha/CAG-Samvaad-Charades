@@ -194,7 +194,7 @@ export function Title() {
 
         {/* journey */}
         <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-8 pb-6 lp-journey pointer-events-none [&_button]:pointer-events-auto">
-          {cfg && <JourneyPath cfg={cfg} states={states} onStage={openStage} />}
+          {cfg && <JourneyPath cfg={cfg} states={states} next={signedIn ? data?.summary?.nextRound ?? null : "trial"} onStage={openStage} />}
         </div>
       </section>
 

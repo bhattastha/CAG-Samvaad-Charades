@@ -751,23 +751,23 @@
     "stages": {
       "trial": {
         "name": "Trial",
-        "desc": "A short introductory translation challenge."
+        "desc": "A short warm-up translation challenge."
       },
       "primary": {
         "name": "Primary",
-        "desc": "Build confidence through a guided translation challenge."
+        "desc": "Build confidence with a guided report challenge."
       },
       "secondary": {
         "name": "Secondary",
-        "desc": "Take on a more engaging document translation challenge."
+        "desc": "Take on richer pages with tables and notes."
       },
       "pro": {
         "name": "Professional",
-        "desc": "Advance your skills with a richer document translation experience."
+        "desc": "Master complete pages with charts and figures."
       },
       "varchaspati": {
         "name": "Varchaspati",
-        "desc": "The ultimate achievement milestone."
+        "desc": "The ultimate achievement. Opens in Phase 2."
       }
     },
     "features": [
@@ -792,6 +792,11 @@
         "body": "Get assistance from Sahayak."
       }
     ],
-    "footer": "Comptroller and Auditor General of India · Digital India BHASHINI"
+    "footer": "Comptroller and Auditor General of India · Digital India BHASHINI",
+    "play": "Play",
+    "replay": "Play again",
+    "preview": "Preview",
+    "startHere": "Start here",
+    "youAreHere": "You are here"
   }
 }
