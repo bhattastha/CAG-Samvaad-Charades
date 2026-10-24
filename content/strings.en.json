@@ -204,7 +204,7 @@
     "points": [
       "Built for officers of the Indian Audit & Accounts Department.",
       "What you gain: appraisal benefit, real translation practice and Hindi Pakhwada credits.",
-      "Credits: Joining 2 · Trial 3 · Primary 5 · Secondary 15 · Pro 25 = 50",
+      "Credits: Joining 2 · Trial 3 · Primary 5 · Secondary 15 · Professional 25 = 50",
       "From Level 2, BHASHINI supplies a machine draft. Find its errors and fix them.",
       "In the Trial (Level 1), you translate everything yourself.",
       "Unsure of a term? Open the Glossary.",
@@ -242,7 +242,7 @@
   },
   "journey": {
     "heading": "Choose your level",
-    "headingEn": "Warm up with the Trial, then take on Primary, Secondary and Pro.",
+    "headingEn": "Warm up with the Trial, then take on Primary, Secondary and Professional.",
     "youAreHere": "You are here",
     "locked": "Locked",
     "lockedHint": "Score {n}+ in the Trial to unlock",
@@ -262,7 +262,7 @@
     "trialFirst": "Start here: the Trial is your entry ticket. Score {n}+ to unlock every other level.",
     "trialRetry": "Close. Score {n}+ in the Trial to open the other levels. {left} chances left.",
     "trialLockedOut": "All Trial chances are used. Contact the game manager to continue.",
-    "unlockedAll": "Trial cleared. Primary, Secondary and Pro are open; play them in any order.",
+    "unlockedAll": "Trial cleared. Primary, Secondary and Professional are open; play them in any order.",
     "comingSoon": "Coming soon",
     "phase2": "Phase 2",
     "preview": "Preview",
@@ -277,7 +277,7 @@
     "voiceOk": "Voice typing allowed",
     "typingOnly": "Typing only",
     "openFirst": "Start with the Trial, a 300-word warm-up that sets your pace. Every level is open; play in any order.",
-    "openPlayed": "Warm-up done. Primary, Secondary and Pro are all open; each keeps its own three chances and best score."
+    "openPlayed": "Warm-up done. Primary, Secondary and Professional are all open; each keeps its own three chances and best score."
   },
   "preRound": {
     "heading": "Mission briefing",
@@ -610,7 +610,7 @@
     ],
     "format": [
       "~300 pages, played across several saved sessions",
-      "Everything from Primary, Secondary and Pro, plus long-range consistency",
+      "Everything from Primary, Secondary and Professional, plus long-range consistency",
       "BHASHINI draft for the whole report; you check and fix it"
     ],
     "corpusHeading": "Proposed corpus (~300 pages)",
@@ -727,5 +727,71 @@
         "body": "Reached the All-India top ten."
       }
     }
+  },
+  "landing": {
+    "tagline": "Translate. Learn. Play.",
+    "support": "A Translation Challenge for CAG Officers.",
+    "cta": "Start Playing",
+    "ctaContinue": "Continue Playing",
+    "signIn": "Sign in",
+    "soundOn": "Sahayak voice on",
+    "soundOff": "Sahayak voice off",
+    "greeting": "Hi! I'm Sahayak.",
+    "speech": "Let's turn audit reports into a fun learning journey together!",
+    "listen": "Hear Sahayak",
+    "journeyLabel": "Your journey",
+    "stageLabel": "Stage {n}",
+    "states": {
+      "available": "Ready to play",
+      "completed": "Title earned",
+      "locked": "Locked",
+      "upcoming": "Coming soon",
+      "played": "In progress"
+    },
+    "stages": {
+      "trial": {
+        "name": "Trial",
+        "desc": "A short introductory translation challenge."
+      },
+      "primary": {
+        "name": "Primary",
+        "desc": "Build confidence through a guided translation challenge."
+      },
+      "secondary": {
+        "name": "Secondary",
+        "desc": "Take on a more engaging document translation challenge."
+      },
+      "pro": {
+        "name": "Professional",
+        "desc": "Advance your skills with a richer document translation experience."
+      },
+      "varchaspati": {
+        "name": "Varchaspati",
+        "desc": "The ultimate achievement milestone."
+      }
+    },
+    "features": [
+      {
+        "icon": "files",
+        "title": "Real Audit Pages",
+        "body": "Practice with authentic CAG reports."
+      },
+      {
+        "icon": "chart",
+        "title": "Build Your Skills",
+        "body": "Improve your translation abilities through play."
+      },
+      {
+        "icon": "trophy",
+        "title": "Win Titles & Credits",
+        "body": "Unlock achievements as you progress."
+      },
+      {
+        "icon": "chat",
+        "title": "Guided Experience",
+        "body": "Get assistance from Sahayak."
+      }
+    ],
+    "footer": "Comptroller and Auditor General of India · Digital India BHASHINI"
   }
 }

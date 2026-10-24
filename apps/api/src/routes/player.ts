@@ -102,7 +102,8 @@ export async function playerRoutes(app: FastifyInstance, db: Db) {
 
   // ---------- me ----------
   app.get("/me/progress", async (req, reply) => {
-    if (!req.session?.email) return reply.code(401).send({ error: "not_signed_in" });
+    // a visitor on the landing page is a normal state, not an error (no 401 noise in the console)
+    if (!req.session?.email) return { registered: false, role: null };
     if (!req.session.pid) return { registered: false, email: req.session.email, role: req.session.role ?? null };
     const { player, attempts, summary } = await summaryFor(db, req.session.pid);
     if (!player) return reply.code(401).send({ error: "not_registered" });

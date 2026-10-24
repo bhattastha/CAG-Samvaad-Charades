@@ -6,7 +6,7 @@ import { Card, ConfirmDanger, Drawer, Empty, Kpi, PageHeader, Pill, ago, btn, fm
 import { LEVEL_COLORS, Meter } from "./charts";
 
 const LEVELS = [
-  { key: "trial", label: "Trial" }, { key: "primary", label: "Primary" }, { key: "secondary", label: "Secondary" }, { key: "pro", label: "Pro" },
+  { key: "trial", label: "Trial" }, { key: "primary", label: "Primary" }, { key: "secondary", label: "Secondary" }, { key: "pro", label: "Professional" },
 ];
 type Sort = "lastActive" | "credits" | "name" | "registered";
 

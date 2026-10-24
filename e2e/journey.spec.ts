@@ -22,11 +22,16 @@ test("new player: landing → player card → training → rules → map → Tri
   });
   const email = `e2e.${Date.now()}@cag.gov.in`;
   await page.goto("/");
-  await expect(page.getByRole("button", { name: /Join the challenge/ }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /Start Playing/ }).first()).toBeVisible();
   await expect(page.getByText("Samvaad").first()).toBeVisible();
+  // official marks together in the header; the five milestones on the journey
+  await expect(page.getByAltText("Comptroller and Auditor General of India")).toBeVisible();
+  await expect(page.getByAltText("Digital India BHASHINI")).toBeVisible();
+  await expect(page.locator("[data-state]:visible")).toHaveCount(5);
+  await expect(page.locator('[data-state="upcoming"]:visible')).toHaveCount(1);
   await expect(page.getByRole("switch", { name: "Sahayak voice guide" })).toHaveAttribute("aria-checked", "false");
   await shot(page, "01_title");
-  await page.getByRole("button", { name: /Join the challenge/ }).first().click();
+  await page.getByRole("button", { name: /Start Playing/ }).first().click();
 
   await expect(page).toHaveURL(/register/);
   await page.locator("#name").fill("Ramesh Kumar");

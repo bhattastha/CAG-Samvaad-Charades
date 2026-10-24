@@ -13,6 +13,7 @@ const P: Record<string, string> = {
   play: "M8 5.5v13l10.5-6.5z",
   pause: "M8 5v14M16 5v14",
   stop: "M7 7h10v10H7z",
+  mute: "M11 5L6 9H3v6h3l5 4zM16 9.5l5 5M21 9.5l-5 5",
   volume: "M11 5L6 9H3v6h3l5 4zM15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13",
   sparkle: "M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z",
   trophy: "M8 4h8v5a4 4 0 01-8 0zM8 6H4.5a3 3 0 003 4M16 6h3.5a3 3 0 01-3 4M12 13v4M8.5 20.5h7M9.5 17h5v3.5h-5z",

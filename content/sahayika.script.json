@@ -1966,10 +1966,10 @@
       "Players translate real pages from CAG audit reports and correct BHASHINI's machine draft against CAG's standard glossary.",
       "Why play: it counts toward appraisal, builds official-language translation skill, and earns credits for the Hindi Pakhwada contest, plus a title per level and a certificate.",
       "Registration asks for name, mobile number, email, office (from a list) and office address. The email is the player's unique ID; all credits are saved against it. Registering earns 2 credits.",
-      "Four playable levels: Trial (20 min, a 300-word passage from an executive summary or conclusion), Primary (1 hr, a 10-page report bundle), Secondary (1.5 hr, 20 pages with tables and notes) and Pro (2 hr, 30 pages with charts and figures). Titles: Anuvad Pathik, Anuvad Nipun, Anuvad Vidvaan, Anuvad Visheshagya.",
+      "Four playable levels: Trial (20 min, a 300-word passage from an executive summary or conclusion), Primary (1 hr, a 10-page report bundle), Secondary (1.5 hr, 20 pages with tables and notes) and Professional (2 hr, 30 pages with charts and figures). Titles: Anuvad Pathik, Anuvad Nipun, Anuvad Vidvaan, Anuvad Visheshagya.",
       "A fifth level, Varchaspati (about 300 pages), is planned for Phase 2 and is not yet playable.",
       "All levels are open, but the Trial is recommended first as a warm-up.",
-      "Credits: registration 2, Trial 3, Primary 5, Secondary 15, Pro 25. That is 50 in all.",
+      "Credits: registration 2, Trial 3, Primary 5, Secondary 15, Professional 25. That is 50 in all.",
       "Each level can be played 3 times (3 chances, called मौका). The best of the three scores counts; a lower later score never reduces credits.",
       "Level credits = best score / 100 × the level's credit cap, to one decimal. Example: 80 in Primary gives 80/100 × 5 = 4 credits.",
       "To earn a level's title, the best score must be at least 33 out of 100. Below 33 the player still earns credits by the formula, but no title.",
@@ -2029,7 +2029,7 @@
       },
       {
         "q": "How many rounds are there?",
-        "en": "Four playable levels: Trial, Primary, Secondary and Pro, each tougher than the last. Varchaspati, Level 5, opens in Phase 2.",
+        "en": "Four playable levels: Trial, Primary, Secondary and Professional, each tougher than the last. Varchaspati, Level 5, opens in Phase 2.",
         "hi": "चार राउंड: परख, प्राथमिक, माध्यमिक और वृत्तिक, हर राउंड पिछले से अधिक चुनौतीपूर्ण। पाँचवाँ राउंड, वाचस्पति, दूसरे चरण में खुलेगा।"
       },
       {
