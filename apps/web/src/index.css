@@ -121,7 +121,7 @@ html, body { overflow-x: clip; }
 .ob-bg::before, .ob-bg::after { content: ""; position: absolute; pointer-events: none; z-index: 0; width: 46vw; height: 34vw; max-width: 720px; max-height: 520px; filter: blur(.2px); }
 .ob-bg::before { left: -12vw; top: 90px; background: radial-gradient(closest-side, rgba(241,90,36,.16), rgba(241,90,36,0) 70%), radial-gradient(closest-side at 30% 70%, rgba(255,255,255,0), rgba(255,255,255,0)); transform: rotate(-12deg); }
 .ob-bg::after { right: -14vw; bottom: 40px; background: radial-gradient(closest-side, rgba(21,128,61,.14), rgba(21,128,61,0) 70%); transform: rotate(10deg); }
-.ob-bg > * { position: relative; z-index: 1; }
+.ob-bg > :not(header) { position: relative; z-index: 1; }
 .ob-swoosh { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 .ob-swoosh svg { position: absolute; width: 60%; height: auto; }
 .ob-input { padding-left: 2.75rem; }
@@ -171,7 +171,7 @@ html, body { overflow-x: clip; }
 .rules-room { position: relative; min-height: 100vh; overflow-x: clip; background: radial-gradient(120% 90% at 85% 0%, #1D4E89 0%, #0B2342 48%, #071A33 100%); }
 .rules-room::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 32px 32px; mask-image: linear-gradient(180deg, #000 30%, transparent 95%); }
 .rules-room::after { content: ""; position: absolute; left: 50%; top: -120px; width: 900px; height: 520px; transform: translateX(-50%); pointer-events: none; background: radial-gradient(closest-side, rgba(214,166,66,.22), transparent 70%); }
-.rules-room > * { position: relative; z-index: 1; }
+.rules-room > :not(header) { position: relative; z-index: 1; }
 .mission-card { position: relative; border-radius: 16px; padding: 1.25rem 1.25rem 1rem; color: #fff; background: linear-gradient(160deg, rgba(255,255,255,.1), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.18); box-shadow: 0 -10px 24px -12px rgba(214,166,66,.45) inset, 0 14px 30px rgba(0,0,0,.3); transition: border-color .25s, box-shadow .25s; }
 .mission-card::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; border-radius: 16px 16px 0 0; background: linear-gradient(90deg, #F15A24, #D6A642, transparent); }
 .mission-card:hover { border-color: rgba(214,166,66,.6); }
