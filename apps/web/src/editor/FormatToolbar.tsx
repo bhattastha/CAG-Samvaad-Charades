@@ -45,14 +45,20 @@ export function FormatToolbar({ editor, disabled, children }: { editor: Editor |
 
   return (
     <div role="toolbar" aria-label={t("round.toolbar.label")} className="flex items-center gap-0.5 overflow-x-auto min-w-0" onMouseDown={(e) => { if ((e.target as HTMLElement).tagName !== "SELECT") e.preventDefault(); }}>
+      <select aria-label={t("round.toolbar.style")} title={t("round.toolbar.style")} disabled={off || !block}
+        value={is("heading", { level: 1 }) ? "1" : is("heading", { level: 2 }) ? "2" : is("heading", { level: 3 }) ? "3" : "p"}
+        onChange={(e) => { const v = e.target.value; run((c) => (v === "p" ? c.setParagraph() : c.setHeading({ level: Number(v) }))); }}
+        className="en h-8 w-[10.5rem] shrink-0 rounded-md border border-slate-300 bg-white px-2 text-[13px] font-semibold text-navy disabled:opacity-35 disabled:cursor-not-allowed">
+        <option value="p">{t("round.toolbar.styleDefault")}</option>
+        <option value="1">{t("round.toolbar.h1")}</option>
+        <option value="2">{t("round.toolbar.h2")}</option>
+        <option value="3">{t("round.toolbar.h3")}</option>
+      </select>
+      {sep("s0")}
       {btn("b", t("round.toolbar.bold"), is("bold"), () => run((c) => c.toggleBold()), <span className="font-extrabold en">B</span>)}
       {btn("i", t("round.toolbar.italic"), is("italic"), () => run((c) => c.toggleItalic()), <span className="italic font-semibold en">I</span>)}
       {btn("u", t("round.toolbar.underline"), is("underline"), () => run((c) => c.toggleUnderline()), <span className="underline font-semibold en">U</span>)}
       {sep("s1")}
-      {btn("h1", t("round.toolbar.h1"), is("heading", { level: 1 }), () => run((c) => c.toggleHeading({ level: 1 })), <span className="font-bold en text-[13px]">H1</span>, !block)}
-      {btn("h2", t("round.toolbar.h2"), is("heading", { level: 2 }), () => run((c) => c.toggleHeading({ level: 2 })), <span className="font-bold en text-[13px]">H2</span>, !block)}
-      {btn("p", t("round.toolbar.normal"), block && is("paragraph"), () => run((c) => c.setParagraph()), <span className="en text-[13px] font-semibold">¶</span>, !block)}
-      {sep("s2")}
       {btn("ul", t("round.toolbar.bullets"), is("bulletList"), () => run((c) => c.toggleBulletList()), <Glyph d={G.bullets} />, !block)}
       {btn("ol", t("round.toolbar.numbers"), is("orderedList"), () => run((c) => c.toggleOrderedList()), <Glyph d={G.numbers} />, !block)}
       {sep("s3")}

@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api";
 
+/** Set by the workbench "Full Screen" toggle just before the player deliberately leaves fullscreen, so that is not counted as leaving. */
+export const fullscreenExit = { until: 0 };
+
 export type LeaveKind = "left_tab" | "left_fullscreen" | "left_blur";
 
 /**
@@ -37,7 +40,7 @@ export function useFairPlay(attemptId: string | null, active: boolean, onBlocked
     const vis = () => (document.visibilityState === "hidden" ? depart("left_tab") : back());
     const blur = () => { if (window.matchMedia("(pointer: fine)").matches) depart("left_blur"); };
     const focus = () => back();
-    const fs = () => { if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) { depart("left_fullscreen"); setTimeout(back, 50); } };
+    const fs = () => { if (Date.now() < fullscreenExit.until) return; if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) { depart("left_fullscreen"); setTimeout(back, 50); } };
     const stop = (e: Event) => { e.preventDefault(); blocked.current(); };
     const key = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && ["c", "v", "x", "a"].includes(e.key.toLowerCase()) && !(e.target as HTMLElement)?.closest?.("[data-allow-select]")) {

@@ -50,7 +50,7 @@ export const TextAlign = Extension.create({
 export const richExtensions = (singleLine: boolean) => [
   StarterKit.configure({
     blockquote: false, codeBlock: false, code: false, strike: false, horizontalRule: false, hardBreak: false, dropcursor: false, gapcursor: false,
-    heading: singleLine ? false : { levels: [1, 2] },
+    heading: singleLine ? false : { levels: [1, 2, 3] },
     bulletList: singleLine ? false : undefined,
     orderedList: singleLine ? false : undefined,
     listItem: singleLine ? false : undefined,

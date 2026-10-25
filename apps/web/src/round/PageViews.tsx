@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useId, useRef, useState } from "react";
 import type { Answers, ChartLayout, ClientField, ClientPart, FigureLayout, TableLayout } from "@hc/shared";
 import { Icon } from "../components/Icon";
 import { t } from "../lib/strings";
@@ -271,12 +271,25 @@ export function FieldEditor({ p, f, d, compact = false, singleLine = false }: { 
   );
 }
 
+/** "Mark as done": a hollow circle that fills green with a drawn check and a tiny +1 when the segment is finished. */
 export function TickButton({ done, disabled, onClick }: { done: boolean; disabled: boolean; onClick(): void }) {
+  const [fx, setFx] = useState(0);
+  const prev = useRef(done);
+  const id = useId();
+  useEffect(() => { if (done && !prev.current) setFx((n) => n + 1); prev.current = done; }, [done]);
+  const help = done ? t("round.doneHelp") : t("round.tickHelp");
   return (
-    <button type="button" onClick={onClick} disabled={disabled} aria-pressed={done}
-      className={`shrink-0 inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-[12.5px] font-bold border transition ${done ? "bg-success text-white border-success animate-pop" : "bg-white text-success border-success/40 hover:bg-success-soft"}`}>
-      <Icon name="check" size={14} stroke={2.4} />{done ? t("round.partDone") : t("round.tick")}
-    </button>
+    <span className="relative inline-flex">
+      <button type="button" onClick={onClick} disabled={disabled} aria-pressed={done} aria-describedby={id} title={help}
+        className={`hc-tick ${done ? "is-done" : ""}`}>
+        <span className="hc-tick-circle" aria-hidden>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round"><path className="hc-tick-path" d="M5 12.5l4.5 4.5L19 7" /></svg>
+        </span>
+        <span>{done ? t("round.partDone") : t("round.tick")}</span>
+      </button>
+      <span id={id} className="sr-only">{help}</span>
+      {fx > 0 && done && <span key={fx} className="hc-plus1" aria-hidden>{t("round.plus1")}</span>}
+    </span>
   );
 }
 

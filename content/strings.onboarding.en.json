@@ -31,7 +31,8 @@
       "bankedNow": "{n} banked on registration",
       "ofMax": "of {max}",
       "guide": "Complete your registration to earn your first {n} credits and start your journey towards becoming an {title}!",
-      "guideRole": "Your game guide"
+      "guideRole": "Your game guide",
+      "heroNote": "Banked the moment you register. Win the rest, level by level."
     },
     "train": {
       "kicker": "Training ground",
@@ -130,13 +131,13 @@
           "glossary": "Approved terminology",
           "voice": "Available in Trial Round"
         },
-        "romanBody": "Type Hindi words using English letters. BHASHINI converts them into Hindi script as you type.",
+        "romanBody": "Don't have a Hindi keyboard? No problem. Type Hindi words in English letters and BHASHINI turns them into Hindi script as you go.",
         "romanSteps": [
           "Type mera",
           "Pick a suggestion with Space or 1–4",
           "Keep typing"
         ],
-        "romanPlaceholder": "Type mera here",
+        "romanPlaceholder": "Type sarkar here, then press Space",
         "glossaryHeading": "Glossary – Shabd Udyan",
         "glossaryBody": "Find approved Hindi equivalents of commonly used administrative and audit terminology to maintain consistency throughout your translation.",
         "glossarySearch": "Search a term, for example audit",
@@ -162,7 +163,23 @@
         "rightHeading": "Pick the tool that suits you",
         "rightRoman": "Fast and works on every device. The default way to write Hindi in a mission.",
         "rightGlossary": "Use it any time you are unsure of a term. It is the same list the scorer uses.",
-        "rightVoice": "Hands-free drafting for the Trial. From Level 2 you type every word."
+        "rightVoice": "Hands-free drafting for the Trial. From Level 2 you type every word.",
+        "xlit": {
+          "stage": [
+            "You type in English letters",
+            "BHASHINI suggests Hindi words",
+            "Press Space to accept, or tap a suggestion"
+          ],
+          "illustration": "Illustration of how it works",
+          "pause": "Pause animation",
+          "play": "Play animation",
+          "beat": "Show step {n}",
+          "spaceKey": "Space"
+        },
+        "tryHeading": "Now you try",
+        "tryPrompt": "Type {word} and press Space.",
+        "trySuccess": "Nice. That's how you'll write every translation.",
+        "tryLive": "Live suggestions from BHASHINI"
       },
       "coach": {
         "dialogue": "Hello! I'm Sahayak, your guide throughout the challenge. I'm here to help you navigate missions, understand terminology and make the most of your translation toolkit.",
@@ -260,9 +277,22 @@
       "ladderNote": "Phase 2 · Coming soon",
       "fairPlay": "Copy-paste is disabled during a mission. Leaving the page is counted on your report card.",
       "agree": "I have understood the game instructions and agree to proceed.",
-      "agreeHint": "Tick the box to continue.",
+      "agreeHint": "Accept the mission to unlock the challenge.",
       "enter": "Enter the Challenge",
-      "backToTraining": "Back to Training"
+      "backToTraining": "Back to Training",
+      "briefKicker": "Mission briefing",
+      "gotIt": "Got it",
+      "gotItDone": "Briefed",
+      "briefed": "{n} of {total} cards reviewed",
+      "meterTitle": "Score meter",
+      "meterPass": "{pass} to earn the title",
+      "meterMax": "{max} points",
+      "holdLabel": "Press and hold to accept the mission",
+      "holdKeys": "On a keyboard? Press Space or Enter.",
+      "accepted": "Mission accepted",
+      "acceptedSub": "The challenge is unlocked.",
+      "locked": "Locked until you accept",
+      "meterPassWord": "to earn the title"
     },
     "pre": {
       "heading": "Your First Mission Awaits!",

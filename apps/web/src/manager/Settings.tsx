@@ -101,7 +101,7 @@ export function Settings() {
                 { k: "trial-pass-unlocks-all", t: "Trial first", d: `Trial is mandatory. A best Trial score of at least the qualifying score unlocks Primary, Secondary and Pro, each playable independently. Recommended for the contest.` },
                 { k: "all-open", t: "All levels open", d: "Every playable level is open from the start (Trial is still suggested first). Use for demos and review builds." },
               ].map((o) => (
-                <label key={o.k} className={`flex cursor-pointer gap-3 rounded-md border p-3 ${unlock === o.k ? "border-[#0B2545] bg-[#F3F6FB]" : "border-slate-200"}`}>
+                <label key={o.k} className={`flex cursor-pointer gap-3 rounded-md border p-3 ${unlock === o.k ? "border-[#0B2342] bg-[#F3F6FB]" : "border-slate-200"}`}>
                   <input type="radio" name="unlock" checked={unlock === o.k} onChange={() => setUnlock(o.k as any)} className="mt-1" />
                   <span><b className="text-sm text-slate-900">{o.t}</b><span className="block text-xs text-slate-600">{o.d}</span></span>
                 </label>
@@ -119,7 +119,7 @@ export function Settings() {
               {WEIGHTS.map((m, i) => (
                 <div key={m.key} className="grid grid-cols-[11rem_1fr_5rem] items-center gap-3 text-sm">
                   <label htmlFor={`w-${m.key}`}><span className="flex items-center gap-1.5 font-semibold text-slate-800"><span className="h-2.5 w-2.5 rounded-sm" style={{ background: PALETTE[i] }} aria-hidden />{m.label}</span><span className="block text-[11px] text-slate-500">{m.help}</span></label>
-                  <input id={`w-${m.key}`} type="range" min={0} max={100} disabled={ro} value={w[m.key] ?? 0} onChange={(ev) => setW({ ...w, [m.key]: Number(ev.target.value) })} className="accent-[#0B2545]" />
+                  <input id={`w-${m.key}`} type="range" min={0} max={100} disabled={ro} value={w[m.key] ?? 0} onChange={(ev) => setW({ ...w, [m.key]: Number(ev.target.value) })} className="accent-[#0B2342]" />
                   {num(w[m.key] ?? 0, (n) => setW({ ...w, [m.key]: n }), { min: 0, max: 100, label: `${m.label} weight`, w: "w-full" })}
                 </div>
               ))}

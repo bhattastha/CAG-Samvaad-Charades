@@ -6,7 +6,7 @@ import { useState, type ReactNode } from "react";
  * aria-label plus a visually hidden data table for screen readers.
  */
 export const PALETTE = ["#1F5FA8", "#E69F00", "#009E73", "#CC79A7", "#56B4E9", "#D55E00", "#7A5E1C"];
-export const LEVEL_COLORS: Record<string, string> = { trial: "#1F5FA8", primary: "#E69F00", secondary: "#009E73", pro: "#CC79A7", varchaspati: "#7A5E1C" };
+export const LEVEL_COLORS: Record<string, string> = { trial: "#C77B30", primary: "#8A97A8", secondary: "#D6A642", pro: "#2B5FB8", varchaspati: "#7C3AED" };
 
 const AXIS = "#94A3B8";
 const GRID = "#E2E8F0";
@@ -251,7 +251,7 @@ export function Funnel({ steps, label }: { steps: { step: string; n: number }[];
             <li key={s.step} className="grid grid-cols-[10rem_1fr_6rem] items-center gap-2 text-xs">
               <span className="truncate text-slate-700">{s.step}</span>
               <svg viewBox="0 0 100 12" preserveAspectRatio="none" className="h-5 w-full" aria-hidden>
-                <rect x={(100 - w) / 2} y="0" width={w} height="12" fill={i === 0 ? "#0B2545" : PALETTE[0]} opacity={1 - i * 0.09} rx="1"><title>{`${s.step}: ${s.n}${conv !== null ? ` (${conv}% of previous step)` : ""}`}</title></rect>
+                <rect x={(100 - w) / 2} y="0" width={w} height="12" fill={i === 0 ? "#0B2342" : PALETTE[0]} opacity={1 - i * 0.09} rx="1"><title>{`${s.step}: ${s.n}${conv !== null ? ` (${conv}% of previous step)` : ""}`}</title></rect>
               </svg>
               <span className="text-right tabular-nums"><b className="text-slate-900">{s.n}</b>{conv !== null && <span className="ml-1 text-slate-500">{conv}%</span>}</span>
             </li>

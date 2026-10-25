@@ -7,7 +7,7 @@ import { useConfig, type Progress } from "../lib/queries";
 import { sfx } from "../lib/sfx";
 import { t, tList } from "../lib/strings";
 import type { Line } from "../lib/voice";
-import { Avatar, Coin, Header, Page } from "../components/Layout";
+import { Coin, Header, Page } from "../components/Layout";
 import { Icon } from "../components/Icon";
 import { SahayakGuide } from "../components/Sahayika";
 import { ObBackdrop, RewardsJourney, finalTitle } from "../components/Onboarding";
@@ -75,46 +75,6 @@ function Steps({ at }: { at: number }) {
         </li>
       ))}
     </ol>
-  );
-}
-
-/** Live player card: fills in as the officer types, so registering feels like creating a game character. */
-function PlayerCard({ name, office, verified }: { name: string; office: string; verified: boolean }) {
-  const { data: cfg } = useConfig();
-  const tiles: [React.ReactNode, string, string, string][] = [
-    [<span key="c" className="inline-flex items-center gap-1">+<CountUp to={cfg?.registration?.credits ?? 2} /></span>, t("ob.reg.creditsWord"), t("ob.reg.tileCredits"), "coin"],
-    [<span key="t">0/{cfg?.rounds.length ?? 5}</span>, t("ob.reg.titlesWord"), t("ob.reg.tileTitles"), "award"],
-    [<span key="m"><CountUp to={cfg?.maxCredits ?? 50} /></span>, t("ob.reg.creditsWord"), t("ob.reg.tileTotal"), "trophy"],
-  ];
-  return (
-    <div className="card p-5 relative overflow-hidden" data-testid="player-card">
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-gold to-transparent" aria-hidden />
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg font-extrabold text-navy">{t("ob.reg.cardHeading")}</h2>
-        <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted">{verified ? t("registration.cardVerifying") : t("registration.cardDraft")}</span>
-      </div>
-      <div className="mt-3 flex items-center gap-4">
-        <Avatar name={name || "?"} size={64} />
-        <div className="min-w-0">
-          <div className="text-xl font-extrabold text-navy truncate">{name.trim() || t("ob.reg.cardName")}</div>
-          <div className="text-sm text-muted truncate">{office || t("ob.reg.cardOffice")}</div>
-          <div className="mt-1.5 inline-flex items-center gap-1.5 rounded bg-primary-soft border border-primary-ring/60 px-2 py-0.5 text-[11px] font-bold uppercase tracking-[0.14em] text-primary-strong">
-            <Icon name="shield" size={12} /> {t("ob.reg.rank")}
-          </div>
-        </div>
-      </div>
-      <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-        {tiles.map(([v, unit, k, ic], i) => (
-          <motion.div key={k} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.08 }}
-            className={`rounded-ui border py-2.5 px-1 ${i === 0 ? "bg-gold-soft border-gold-light" : "bg-navy-50 border-slate-200"}`}>
-            <Icon name={ic as any} size={16} className={i === 0 ? "mx-auto text-gold-deep" : "mx-auto text-navy-600"} />
-            <div className="text-2xl font-extrabold tnum text-navy leading-tight">{v}</div>
-            <div className="text-[11px] font-semibold text-navy">{unit}</div>
-            <div className="text-[10px] uppercase tracking-[0.12em] text-muted">{k}</div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
   );
 }
 
@@ -323,9 +283,8 @@ export function Register() {
             <p className="mt-5 pt-4 border-t border-slate-100 text-sm text-muted flex items-start gap-2"><Icon name="shield" size={16} className="mt-0.5 text-success shrink-0" /> {t("registration.privacyNote")}</p>
           </motion.form>
 
-          <div className="space-y-4">
-            <PlayerCard name={f.name} office={office ? `${office.city}, ${office.state}` : ""} verified={step === "otp"} />
-            {cfg && <RewardsJourney cfg={cfg} />}
+          <div className="space-y-4 lg:sticky lg:top-24">
+            {cfg && <RewardsJourney cfg={cfg} hero />}
             <SahayakGuide lines={[guideLine]} subtitle={t("ob.reg.guideRole")} />
           </div>
         </div>

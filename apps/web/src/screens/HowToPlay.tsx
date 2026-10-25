@@ -11,7 +11,7 @@ import { t, tList } from "../lib/strings";
 import { Coin, Header, Page, PageTitle } from "../components/Layout";
 import { SahayakGuide, VoiceControl } from "../components/Sahayika";
 import { CountUp, GameButton, Medal } from "../components/Juice";
-import { ObBackdrop, ladderOf } from "../components/Onboarding";
+import { ObBackdrop, TranslitExplainer, ladderOf } from "../components/Onboarding";
 import { TranslationEditor, type EditorHandle } from "../editor/TranslationEditor";
 import { VoiceTyping } from "../editor/voice";
 import { Icon } from "../components/Icon";
@@ -160,16 +160,31 @@ const TOOL_ICON: Record<Tool, string> = { roman: "type", glossary: "book", voice
 function RomanDemo() {
   const [text, setText] = useState("");
   const push = useToasts((s) => s.push);
-  const steps = tList("ob.train.toolkit.romanSteps");
+  const done = /[\u0900-\u097F]/.test(text);
+  const wasDone = useRef(false);
+  useEffect(() => { if (done && !wasDone.current) sfx("success"); wasDone.current = done; }, [done]);
   return (
     <>
       <p className="text-[1rem] text-ink/85">{t("ob.train.toolkit.romanBody")}</p>
-      <ol className="mt-3 flex flex-wrap gap-2">
-        {steps.map((s, i) => <li key={s} className="chip-plain text-[13px]"><span className="w-5 h-5 rounded bg-navy text-white grid place-items-center text-[11px] font-bold tnum">{i + 1}</span>{s}</li>)}
-      </ol>
-      <div className="mt-3 rounded-ui border border-slate-300 bg-white p-3 min-h-[230px] focus-within:border-navy-600 focus-within:ring-4 focus-within:ring-blue-100 transition" translate="no">
-        <TranslationEditor value={text} onChange={setText} modeOverride="roman" ariaLabel={t("ob.train.toolkit.romanPlaceholder")} placeholder={t("ob.train.toolkit.romanPlaceholder")}
-          onBlocked={() => { push(t("round.copyPasteToast"), "warn"); sfx("error"); }} onXlitAccept={() => sfx("pop")} />
+      <div className="mt-3"><TranslitExplainer /></div>
+      <div className="mt-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h3 className="text-lg font-extrabold text-navy flex items-center gap-2"><Icon name="keyboard" size={18} className="text-primary-strong" />{t("ob.train.toolkit.tryHeading")}</h3>
+          <span className="text-[12px] font-semibold text-muted">{t("ob.train.toolkit.tryLive")}</span>
+        </div>
+        <p className="text-[0.98rem] text-ink/85 mt-0.5">{t("ob.train.toolkit.tryPrompt", { word: "sarkar" })}</p>
+        <div className={`mt-2 rounded-ui border-2 bg-white p-3 min-h-[120px] transition ${done ? "border-success ring-4 ring-green-100" : "border-slate-300 focus-within:border-navy-600 focus-within:ring-4 focus-within:ring-blue-100"}`} translate="no">
+          <TranslationEditor value={text} onChange={setText} modeOverride="roman" ariaLabel={t("ob.train.toolkit.romanPlaceholder")} placeholder={t("ob.train.toolkit.romanPlaceholder")}
+            onBlocked={() => { push(t("round.copyPasteToast"), "warn"); sfx("error"); }} onXlitAccept={() => sfx("pop")} />
+        </div>
+        <AnimatePresence>
+          {done && (
+            <motion.div role="status" initial={{ opacity: 0, y: -6, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0 }}
+              className="mt-2 inline-flex items-center gap-2 rounded-ui bg-green-50 border border-green-300 px-3 py-1.5 text-[0.98rem] font-bold text-green-800">
+              <span className="w-5 h-5 rounded-full bg-success text-white grid place-items-center"><Icon name="check" size={13} stroke={3} /></span>{t("ob.train.toolkit.trySuccess")}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

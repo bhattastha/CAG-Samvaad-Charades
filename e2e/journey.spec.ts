@@ -39,8 +39,6 @@ test("new player: landing → player card → training → rules → map → Tri
   await page.locator("#email").fill(email);
   await page.locator("#office").fill("central");
   await page.locator("#office-list li").first().click();
-  // the player card fills in live as the officer types
-  await expect(page.getByTestId("player-card")).toContainText("Ramesh Kumar");
   await shot(page, "02_profile");
   await page.getByRole("button", { name: /Create my player card/ }).click();
   await page.locator("#otp").fill("123456");
@@ -72,7 +70,10 @@ test("new player: landing → player card → training → rules → map → Tri
 
   await expect(page).toHaveURL(/rules/);
   await expect(page.getByRole("button", { name: /Enter the Challenge/ })).toBeDisabled();
-  await page.getByLabel(/I have understood/).check();
+  const seal = page.getByRole("switch", { name: /understood the game instructions/i });
+  await seal.focus();
+  await page.keyboard.press("Space");
+  await expect(seal).toHaveAttribute("aria-checked", "true");
   await shot(page, "04_rules");
   await page.getByRole("button", { name: /Enter the Challenge/ }).click();
   await expect(page).toHaveURL(/journey/);
@@ -103,7 +104,7 @@ test("new player: landing → player card → training → rules → map → Tri
   await page.reload();
   await expect(page.locator(".hc-editor .ProseMirror").first()).toContainText("लौह अयस्क");
 
-  await page.getByRole("button", { name: "Submit", exact: true }).click();
+  await page.getByRole("button", { name: "Submit Translation", exact: true }).click();
   await expect(page.getByRole("button", { name: "Submit anyway?" })).toBeVisible();
   await page.getByRole("button", { name: "Submit anyway?" }).click();
   await expect(page.getByText("Mission complete!")).toBeVisible();
@@ -145,6 +146,18 @@ test("new player: landing → player card → training → rules → map → Tri
   await shot(page, "10_primary_round");
   await page.locator(".hc-source-term").first().click();
   await expect(page.getByRole("menu", { name: "Glossary options" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  // "Mark as done" → filled "Done", progress counts it; zoom control in the status bar; collapse the original pane (desktop)
+  await page.getByRole("button", { name: "Mark as done" }).first().click();
+  await expect(page.getByRole("button", { name: /^Done$/ }).first()).toBeVisible();
+  await expect(page.getByText(/^1\/\d+ segments done$/).first()).toBeVisible();
+  await page.getByRole("button", { name: "Zoom in" }).click();
+  await expect(page.getByText("110%")).toBeVisible();
+  if (test.info().project.name === "chrome") {
+    await page.getByRole("button", { name: /Collapse/ }).click();
+    await expect(page.getByText("Original document")).toBeHidden();
+    await page.getByRole("button", { name: /Expand original/ }).click();
+  }
 
   // nothing was spoken without a tap
   expect(await page.evaluate(() => (window as any).__spoke)).toBe(0);

@@ -18,7 +18,7 @@ import type { Editor } from "@tiptap/react";
 import { GlossaryDrawer } from "../editor/GlossaryDrawer";
 import { VoiceTyping } from "../editor/voice";
 import { useAttempt, type SourceTerm as SourceTermT } from "../round/useAttempt";
-import { useFairPlay } from "../round/useFairPlay";
+import { fullscreenExit, useFairPlay } from "../round/useFairPlay";
 import { fk, glossFormsFor, pairKey, SourcePanel, type DraftProps, type FieldKey } from "../round/PageViews";
 import { SegmentRows } from "../round/Workbench";
 import { GlossMenu, PairStyle, type GlossMenuState } from "../round/GlossMenu";
@@ -122,7 +122,7 @@ export function Round() {
   useEffect(() => {
     if (prevDone.current !== null && prog.done > prevDone.current && active) {
       const anchor = document.querySelector("[data-hud-progress]")?.getBoundingClientRect() ?? null;
-      floatText(view?.roundKey === "trial" ? t("round.sentenceDone") : t("round.partCleared"), anchor, "good");
+      if (view?.roundKey === "trial") floatText(t("round.sentenceDone"), anchor, "good"); // main rounds show the +1 on the segment itself
       sfx(prog.done >= prog.total ? "fanfare" : "success");
       if (prog.done >= prog.total) { setBurst((b) => b + 1); floatText(t("round.allCleared"), null, "gold"); }
     }
@@ -183,7 +183,7 @@ export function Round() {
   const [menu, setMenu] = useState<GlossMenuState | null>(null);
   const [hoverPair, setHoverPair] = useState<string | null>(null);
   const hudRef = useRef<HTMLDivElement>(null);
-  const [hudH, setHudH] = useState(56);
+  const [hudH, setHudH] = useState(150);
   useLayoutEffect(() => {
     const el = hudRef.current;
     if (!el) return;
@@ -196,6 +196,20 @@ export function Round() {
   const [glossQuery, setGlossQuery] = useState("");
   const [chatOpen, setChatOpen] = useState(false);
   const [mobilePane, setMobilePane] = useState<"src" | "dst">("dst");
+  const [collapsed, setCollapsed] = useState(false);
+  const [zoom, setZoomState] = useState(() => { try { const z = Number(localStorage.getItem("hc.wb.zoom")); return z >= 80 && z <= 140 ? z : 100; } catch { return 100; } });
+  const setZoom = (z: number) => { const v = Math.max(80, Math.min(140, z)); setZoomState(v); try { localStorage.setItem("hc.wb.zoom", String(v)); } catch { /* ignore */ } };
+  const fsSupported = typeof document !== "undefined" && !!(document.documentElement.requestFullscreen || (document.documentElement as any).webkitRequestFullscreen);
+  const [isFs, setIsFs] = useState(() => typeof document !== "undefined" && !!document.fullscreenElement);
+  useEffect(() => {
+    const on = () => setIsFs(!!document.fullscreenElement);
+    document.addEventListener("fullscreenchange", on);
+    return () => document.removeEventListener("fullscreenchange", on);
+  }, []);
+  const toggleFullscreen = async () => {
+    if (document.fullscreenElement) { fullscreenExit.until = Date.now() + 3000; try { await document.exitFullscreen(); } catch { /* ignore */ } }
+    else await enterFullscreen();
+  };
   const watchWords = view?.page.watchWords ?? [];
   // multi-page report bundles (10/20/30 pages): one printed page at a time in both panels
   const pageNos = useMemo(() => [...new Set((view?.page.parts ?? []).map((p) => p.pageNo).filter((n): n is number => typeof n === "number"))].sort((a, b) => a - b), [view]);
@@ -204,6 +218,11 @@ export function Round() {
   const visibleParts = useMemo(() => (pageNos.length > 1 ? (view?.page.parts ?? []).filter((p) => (p.pageNo ?? pageNos[0]) === curPage) : view?.page.parts ?? []), [view, pageNos, curPage]);
   const pageDone = (n: number) => (view?.page.parts ?? []).filter((p) => p.pageNo === n && p.editable && p.tickGroup).every((p) => answers[p.id]?.done);
   const watchTexts = useMemo(() => watchWords.map((w) => w.text), [watchWords]);
+  // words / characters of the Hindi on the focused page (status bar)
+  const counts = useMemo(() => {
+    const text = visibleParts.filter((p) => p.editable).flatMap((p) => p.fields.filter((f) => !f.numeric).map((f) => answers[p.id]?.fields[f.key] ?? "")).join("\n");
+    return { words: text.split(/\s+/).filter(Boolean).length, chars: text.replace(/\s/g, "").length };
+  }, [visibleParts, answers]);
 
   // ---------- voice (परख only) ----------
   const voice = useRef<VoiceTyping | null>(null);
@@ -289,56 +308,97 @@ export function Round() {
   const trialTerms = view.page.sourceTerms.passage?.t;
   const stickTop = `calc(63px + ${hudH}px)`;
 
+  const zoomStyle = { zoom: zoom / 100 } as React.CSSProperties;
+  const titleCls = "text-[12px] font-extrabold uppercase tracking-[0.14em] text-navy whitespace-nowrap";
+  const collapseBtn = (
+    <button type="button" onClick={() => setCollapsed(true)} title={t("round.collapseTip")}
+      className="ml-auto hidden lg:inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 h-7 text-[12px] font-bold normal-case tracking-normal text-navy hover:bg-slate-50">
+      <Icon name="chevronLeft" size={14} />{t("round.collapse")}
+    </button>
+  );
+  const expandBtn = collapsed && (
+    <button type="button" onClick={() => setCollapsed(false)}
+      className="hidden lg:inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 h-7 text-[12px] font-bold normal-case tracking-normal text-navy hover:bg-slate-50">
+      <Icon name="chevronRight" size={14} />{t("round.expand")}
+    </button>
+  );
+    const titles = (
+    <div className={`bg-slate-100 border-b border-slate-300/80 px-3 sm:px-5 grid ${isTrial ? (collapsed ? "lg:grid-cols-1" : "lg:grid-cols-2 lg:gap-x-6") : collapsed ? "md:grid-cols-1" : "md:grid-cols-2 md:gap-x-6"}`}>
+      {isTrial && (
+        <div className="lg:hidden py-1.5">
+          <div className="grid grid-cols-2 rounded-ui bg-white border border-slate-200 p-1 text-[14px] font-semibold">
+            {(["src", "dst"] as const).map((k) => (
+              <button key={k} onClick={() => setMobilePane(k)} className={`rounded-md py-1.5 ${mobilePane === k ? "bg-navy text-white" : "text-muted"}`}>
+                {k === "src" ? t("round.originalDoc") : t("round.translatedDoc")}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+      <div className={`${collapsed ? "hidden" : isTrial ? "hidden lg:flex" : "hidden md:flex"} items-center gap-2 h-9 min-w-0`}>
+        <Icon name="file" size={14} className="text-navy-600" /><span className={titleCls}>{t("round.originalDoc")}</span>
+        <span className="en text-[12px] text-muted font-semibold">· {t("round.sourceLabelEn")}</span>
+        {collapseBtn}
+      </div>
+      <div className={`${isTrial ? "hidden lg:flex" : "flex"} items-center gap-2 h-9 min-w-0`}>
+        {expandBtn}
+        <Icon name="edit" size={14} className="text-navy-600" /><span className={titleCls}>{t("round.translatedDoc")}</span>
+        {!isTrial && <span className="text-[12px] text-muted font-semibold truncate">· {t("round.draftLabel")}</span>}
+      </div>
+    </div>
+  );
+  const statusBar = (
+    <div className="hc-statusbar fixed bottom-0 inset-x-0 z-40 h-9 px-2 sm:px-4 flex items-center gap-3 text-[12.5px] text-navy" role="group" aria-label={t("round.status.label")}>
+      <PageControl pageNos={pageNos.length ? pageNos : [1]} idx={pageNos.length ? pageIdx : 0} onChange={(i) => { setPageIdx(i); sfx("whoosh"); }} done={pageDone} />
+      <span className="tnum text-muted truncate whitespace-nowrap">{t("round.status.words", { n: counts.words })}<span className="max-sm:hidden">, {t("round.status.chars", { m: counts.chars })}</span></span>
+      <div className="ml-auto inline-flex items-center gap-0.5" role="group" aria-label={t("round.status.zoom")}>
+        <span className="hidden sm:inline text-muted mr-1 font-semibold">{t("round.status.zoom")}</span>
+        <button type="button" className="hc-zoom-btn" onClick={() => setZoom(zoom - 10)} disabled={zoom <= 80} aria-label={t("round.status.zoomOut")} title={t("round.status.zoomOut")}>–</button>
+        <span className="min-w-[3rem] text-center font-bold tnum" aria-live="polite">{t("round.status.zoomValue", { n: zoom })}</span>
+        <button type="button" className="hc-zoom-btn" onClick={() => setZoom(zoom + 10)} disabled={zoom >= 140} aria-label={t("round.status.zoomIn")} title={t("round.status.zoomIn")}>+</button>
+      </div>
+    </div>
+  );
+  const trialH = "lg:h-[calc(100vh-var(--stick)-2.25rem)]";
+
   return (
     <div className="min-h-screen flex flex-col" style={{ ["--stick" as any]: stickTop }}>
       <Header compact wide />
       <div className="sr-only" aria-live="assertive">{srNote}</div>
       <PairStyle keys={[hoverPair, menu?.pair]} />
 
-      {/* HUD (non-diegetic) + last-minute edge glow (meta) */}
+      {/* workbench bar + ribbon + pane titles: one sticky stack (non-diegetic) */}
       <div ref={hudRef} data-hud-progress className="sticky top-[63px] z-20">
         <Hud round={round} chanceNo={view.chanceNo} maxChances={cfg.maxChancesPerRound} remaining={remaining} limit={limitS}
           warn5={cfg.fairPlay.warnAtMinutesLeft * 60} warn1={cfg.fairPlay.warnAtMinutesLeftSecond * 60}
           progress={prog.done} total={prog.total} isTrial={isTrial} creditCap={view.creditCap} save={at.save} sample={view.page.sample}
-          onAsk={() => setChatOpen(true)} onSubmit={() => { sfx("tap"); pressSubmit(); }} submitting={submitting} confirming={confirming} partsLeft={partsLeft} readOnly={readOnly} />
+          onAsk={() => setChatOpen(true)} onSubmit={() => { sfx("tap"); pressSubmit(); }} submitting={submitting} confirming={confirming} partsLeft={partsLeft} readOnly={readOnly}
+          onBack={async () => { await at.flush(); nav("/journey"); }} fullscreen={fsSupported ? isFs : null} onFullscreen={toggleFullscreen} />
+        <div className="hc-ribbon px-2 sm:px-4 flex items-center gap-2 min-h-[2.75rem]">
+          <span className="hc-tab max-sm:hidden" aria-hidden>{t("round.toolbar.tab")}</span>
+          <div className="flex-1 min-w-0 flex items-center gap-2 py-1">{toolbar}</div>
+          {mic}
+          {readOnly && <span className="chip-plain text-xs">{t("round.readOnly")}</span>}
+        </div>
+        {titles}
       </div>
       {active && remaining > 0 && remaining <= cfg.fairPlay.warnAtMinutesLeftSecond * 60 && (
         <div className="pointer-events-none fixed inset-0 z-[35] animate-pulse" style={{ boxShadow: "inset 0 0 120px 20px rgba(180,35,24,.35)" }} aria-hidden />
       )}
       <Burst fire={burst} count={36} spread={300} />
-      {/* phone: switch panels (Passage round) */}
-      <div className={`lg:hidden w-full px-2 mt-2 ${isTrial ? "" : "hidden"}`}>
-        <div className="grid grid-cols-2 rounded-ui bg-slate-100 p-1 text-[15px] font-semibold">
-          {(["src", "dst"] as const).map((k) => (
-            <button key={k} onClick={() => setMobilePane(k)} className={`rounded-md py-2 ${mobilePane === k ? "bg-white shadow text-navy" : "text-muted"}`}>
-              {k === "src" ? t("round.sourceLabel") : t("round.yourTranslation")}
-            </button>
-          ))}
-        </div>
-      </div>
 
       {isTrial ? (
-      <main className="w-full flex-1 px-2 sm:px-3 py-2 grid lg:grid-cols-2 gap-3 pb-16" onMouseOver={overPair} onMouseLeave={() => setHoverPair(null)}>
-        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] lg:h-[calc(100vh-var(--stick)-1rem)] ${mobilePane === "src" ? "" : "hidden lg:flex"}`} aria-label={t("round.sourceLabel")}>
-          <div className="px-4 py-2 min-h-[3rem] border-b border-slate-200 bg-slate-50 rounded-t-card flex items-center gap-2">
-            <span className="font-bold inline-flex items-center gap-1.5"><Icon name="file" size={16} />{t("round.sourceLabel")}</span><span className="text-sm text-muted">{t("round.sourceLabelEn")}</span>
-            <span className="ml-auto text-xs text-navy-600 hidden sm:inline">{t("round.glossaryHint")}</span>
-          </div>
-          <div className="p-4 sm:p-5 overflow-y-auto flex-1">
+      <main className={`hc-canvas w-full flex-1 px-3 sm:px-5 py-3 grid ${collapsed ? "lg:grid-cols-1" : "lg:grid-cols-2"} gap-6 pb-12 lg:pb-0 lg:py-4 lg:grid-rows-[minmax(0,1fr)] lg:overflow-hidden ${trialH}`} data-canvas onMouseOver={overPair} onMouseLeave={() => setHoverPair(null)}>
+        <section translate="no" className={`notranslate lg:overflow-y-auto lg:pb-4 min-h-0 ${collapsed ? "lg:hidden" : "lg:block"} ${mobilePane === "src" ? "" : "hidden"}`} aria-label={t("round.originalDoc")}>
+          <div className="hc-paper px-5 md:px-8 py-6 md:py-8 min-h-[50vh]" style={zoomStyle}>
             <SourcePanel parts={visibleParts} terms={view.page.sourceTerms} focusedPart={focusedPart} sentenceIndex={isTrial ? sentenceIdx : null}
               onPartClick={(pid) => { setFocusedPart(pid); const f = view.page.parts.find((p) => p.id === pid)?.fields.find((x) => !x.numeric); if (f) editors.current.get(fk(pid, f.key))?.focus(); }}
               onTerm={onTermPick} />
           </div>
         </section>
 
-        <section translate="no" className={`notranslate card flex flex-col min-h-[50vh] lg:h-[calc(100vh-var(--stick)-1rem)] ${mobilePane === "dst" ? "" : "hidden lg:flex"}`} aria-label={t("round.yourTranslation")}>
-          <div className="px-3 py-2 min-h-[3rem] border-b border-slate-200 bg-navy-50 rounded-t-card flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span className="font-bold inline-flex items-center gap-1.5 shrink-0"><Icon name="edit" size={16} />{t("round.yourTranslation")}</span>
-            <div className="flex-1 min-w-[15rem] flex justify-end">{toolbar}</div>
-            {mic}
-            {readOnly && <span className="chip-plain text-xs">{t("round.readOnly")}</span>}
-          </div>
-          <div className="p-4 sm:p-5 overflow-y-auto flex-1">
+        <section translate="no" className={`notranslate lg:overflow-y-auto lg:pb-4 min-h-0 lg:block ${mobilePane === "dst" ? "" : "hidden"}`} aria-label={t("round.translatedDoc")}>
+          <div className="hc-paper px-5 md:px-8 py-6 md:py-8 min-h-[50vh]" style={zoomStyle}>
             <TranslationEditor
               ref={(h) => register(fk("passage", "t"), h)}
               value={answers.passage?.fields.t ?? ""}
@@ -351,7 +411,7 @@ export function Round() {
               readOnly={readOnly}
               sentenceTicks
               showLatin
-              ariaLabel={t("round.yourTranslation")}
+              ariaLabel={t("round.translatedDoc")}
               placeholder={t("round.xlitHint")}
               onFocus={(ed) => onFocus("passage", "t", ed)}
               onBlocked={onBlocked}
@@ -363,19 +423,11 @@ export function Round() {
         </section>
       </main>
       ) : (
-        <main className="w-full flex-1 px-2 sm:px-3 py-2 pb-16" onMouseOver={overPair} onMouseLeave={() => setHoverPair(null)}>
-          <section className="card" aria-label={t("round.workbench")}>
-            <div className="sticky z-10 grid md:grid-cols-2 bg-slate-50 border-b border-slate-200 rounded-t-card text-[12px] font-bold uppercase tracking-[0.12em] text-muted" style={{ top: "var(--stick)" }}>
-              <div className="hidden md:flex px-4 py-2 min-h-[3rem] items-center gap-2 border-r border-slate-200"><Icon name="file" size={14} />{t("round.sourceLabel")} <span className="normal-case tracking-normal font-semibold">· {t("round.sourceLabelEn")}</span></div>
-              <div className="px-3 py-2 min-h-[3rem] flex flex-wrap items-center gap-x-3 gap-y-1 bg-navy-50/60 min-w-0">
-                <span className="flex items-center gap-1.5 shrink-0 whitespace-nowrap"><Icon name="edit" size={14} />{t("round.draftLabel")}</span>
-                <div className="flex-1 min-w-[15rem] flex xl:justify-end normal-case tracking-normal">{toolbar}</div>
-                {readOnly && <span className="chip-plain normal-case tracking-normal">{t("round.readOnly")}</span>}
-              </div>
-            </div>
+        <main className="hc-canvas w-full flex-1 px-3 sm:px-5 py-3 pb-14" data-canvas onMouseOver={overPair} onMouseLeave={() => setHoverPair(null)} aria-label={t("round.workbench")}>
+          <div style={zoomStyle}>
             <SegmentRows parts={visibleParts} allParts={view.page.parts} terms={view.page.sourceTerms} onTerm={onTermPick} focusedPart={focusedPart}
-              onSelect={(pid) => setFocusedPart(pid)} d={draftProps} />
-          </section>
+              onSelect={(pid) => setFocusedPart(pid)} d={draftProps} collapsed={collapsed} />
+          </div>
         </main>
       )}
 
@@ -388,8 +440,8 @@ export function Round() {
           }} />
       )}
 
-      {pageNos.length > 1 && <PageControl pageNos={pageNos} idx={pageIdx} onChange={(i) => { setPageIdx(i); sfx("whoosh"); }} done={pageDone} />}
-      {slim && <div className="fixed bottom-3 right-3 z-40 w-[min(34rem,calc(100vw-1.5rem))]"><SahayikaLine line={slim} autoSpeak={false} clamp onClose={() => setSlim(null)} /></div>}
+      {statusBar}
+      {slim && <div className="fixed bottom-12 right-3 z-40 w-[min(34rem,calc(100vw-1.5rem))]"><SahayikaLine line={slim} autoSpeak={false} clamp onClose={() => setSlim(null)} /></div>}
 
       <GlossaryDrawer open={glossOpen} onClose={() => setGlossOpen(false)} onInsert={insertGlossary} initial={glossQuery} />
       <ChatPanel open={chatOpen} onClose={() => setChatOpen(false)} attemptId={view.id} quick={cfg.sahayika.quickQuestions}

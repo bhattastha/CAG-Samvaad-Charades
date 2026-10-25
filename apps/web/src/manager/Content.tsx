@@ -35,11 +35,11 @@ export function Library() {
       <PageHeader title="Content library" subtitle="CAG reports and the level bundles built from them. Players get Union reports plus their office state's reports."
         actions={isManager && <button className={btn.primary} onClick={() => nav("/manager/content/new")}>+ Add a report</button>} />
       <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-5">
-        <Kpi label="Reports" value={data.length} />
-        <Kpi label="Bundles" value={all.length} />
-        <Kpi label="Published" value={all.filter((b) => b.status === "published").length} accent="#009E73" />
-        <Kpi label="Drafts" value={all.filter((b) => b.status === "draft").length} accent="#E69F00" />
-        <Kpi label="Parts verified" value={`${all.reduce((n, b) => n + b.verified, 0)} / ${all.reduce((n, b) => n + b.parts, 0)}`} />
+        <Kpi index={0} accent="#2B5FB8" icon={<path d="M6 3h9l4 4v14H6zM14 3v5h5" />} label="Reports" value={data.length} />
+        <Kpi index={1} accent="#7C3AED" icon={<path d="M4 4h6v16H4zM14 4h6v16h-6z" />} label="Bundles" value={all.length} />
+        <Kpi label="Published" value={all.filter((b) => b.status === "published").length} accent="#16A34A" icon={<path d="M5 12l5 5 9-10" />} />
+        <Kpi label="Drafts" value={all.filter((b) => b.status === "draft").length} accent="#D6A642" icon={<path d="M4 20h4L19 9l-4-4L4 16z" />} />
+        <Kpi index={4} accent="#F15A24" icon={<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />} label="Parts verified" value={`${all.reduce((n, b) => n + b.verified, 0)} / ${all.reduce((n, b) => n + b.parts, 0)}`} />
       </div>
       <div className="mb-4 flex flex-wrap gap-2">
         <select className={select} value={level} onChange={(e) => setLevel(e.target.value)} aria-label="Filter by level"><option value="">All levels</option>{levels.map((l) => <option key={l.key} value={l.key}>{l.nameEn}</option>)}</select>
@@ -86,7 +86,7 @@ function ReportCard({ r, levels, filter }: { r: any; levels: any[]; filter(b: an
             return (
               <tr key={b.id} className={`${tr} cursor-pointer`} onClick={() => nav(`/manager/content/${b.id}`)}>
                 <td className={td}><span className="mr-1.5 inline-block h-2.5 w-2.5 rounded-sm align-middle" style={{ background: LEVEL_COLORS[b.round_key] }} aria-hidden />{levelName(levels, b.round_key)}</td>
-                <td className={td}><Link to={`/manager/content/${b.id}`} className="font-semibold text-[#13315C] hover:underline" onClick={(e) => e.stopPropagation()}>{b.label}</Link>
+                <td className={td}><Link to={`/manager/content/${b.id}`} className="font-semibold text-[#24558A] hover:underline" onClick={(e) => e.stopPropagation()}>{b.label}</Link>
                   <div className="text-xs text-slate-500">{b.id} · printed p. {b.printed_page_no ?? "—"} {b.sample && <Pill tone="amber">sample</Pill>} {b.scope !== "union" && <Pill tone="navy">{b.scope}</Pill>}</div></td>
                 <td className={`${td} tabular-nums`}>{b.report_pages}</td>
                 <td className={`${td} w-36`}><div className={`tabular-nums text-xs ${b.verified < b.parts ? "text-red-700" : "text-emerald-700"}`}>{b.verified} / {b.parts} ({Math.round(pctV)}%)</div><Meter label="Verified" value={pctV} color={pctV === 100 ? "#009E73" : "#E69F00"} /></td>
@@ -174,7 +174,7 @@ export function AddReport() {
       <PageHeader title="Add a report" subtitle="Build a level bundle from a CAG report pair. After creating the draft you verify the Hindi reference, generate the BHASHINI draft, mark planted slips, choose glossary terms, preview and publish." />
       <ol className="mb-5 flex flex-wrap gap-2 text-xs">
         {["Source & bundle details", "Segment & review parts", "Verify reference (editor)", "Draft, slips, terms", "Preview & publish"].map((s, i) => (
-          <li key={s} className={`rounded-full border px-3 py-1 font-semibold ${i + 1 === step ? "border-[#0B2545] bg-[#0B2545] text-white" : i + 1 < step ? "border-emerald-200 bg-emerald-50 text-emerald-800" : "border-slate-200 bg-white text-slate-500"}`}>{i + 1}. {s}</li>
+          <li key={s} className={`rounded-full border px-3 py-1 font-semibold ${i + 1 === step ? "border-[#0B2342] bg-[#0B2342] text-white" : i + 1 < step ? "border-emerald-200 bg-emerald-50 text-emerald-800" : "border-slate-200 bg-white text-slate-500"}`}>{i + 1}. {s}</li>
         ))}
       </ol>
       <div className="space-y-5">
@@ -315,7 +315,7 @@ export function BundleEditor() {
         <div className="space-y-3">
           {bundlePages.length > 1 && (
             <div className="flex flex-wrap items-center gap-1 text-xs"><span className="mr-1 text-slate-500">Report page:</span>
-              {[0, ...bundlePages].map((n) => <button key={n} className={`rounded border px-2 py-0.5 ${pageFilter === n ? "border-[#0B2545] bg-[#0B2545] text-white" : "border-slate-300 bg-white"}`} onClick={() => setPageFilter(n)}>{n === 0 ? "All" : n}</button>)}
+              {[0, ...bundlePages].map((n) => <button key={n} className={`rounded border px-2 py-0.5 ${pageFilter === n ? "border-[#0B2342] bg-[#0B2342] text-white" : "border-slate-300 bg-white"}`} onClick={() => setPageFilter(n)}>{n === 0 ? "All" : n}</button>)}
             </div>
           )}
           {pg.parts.map((p, pi) => (!pageFilter || p.pageNo === pageFilter) && (
@@ -338,7 +338,7 @@ export function BundleEditor() {
                     {!f.numeric && <div><div className="mb-0.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500">BHASHINI draft (with planted slips)</div><textarea lang="hi" className={`${input} text-[15px]`} disabled={ro} rows={f.en.length > 120 ? 4 : 2} value={f.draft ?? ""} onChange={(e) => setField(pi, fi, { draft: e.target.value })} /></div>}
                     {!f.numeric && <div className="flex flex-wrap items-center gap-1.5 text-xs lg:col-span-3">
                       <span className="text-slate-500">Locked numbers:</span>
-                      {f.locked.map((tk) => <button key={tk} disabled={ro} className="rounded border border-[#C7D3E6] bg-[#F3F6FB] px-1.5 py-0.5 font-mono text-[#0B2545]" title="Click to remove" onClick={() => setField(pi, fi, { locked: f.locked.filter((x) => x !== tk) })}>{tk} ✕</button>)}
+                      {f.locked.map((tk) => <button key={tk} disabled={ro} className="rounded border border-[#C7D3E6] bg-[#F3F6FB] px-1.5 py-0.5 font-mono text-[#0B2342]" title="Click to remove" onClick={() => setField(pi, fi, { locked: f.locked.filter((x) => x !== tk) })}>{tk} ✕</button>)}
                       {!ro && <button className={btn.link} onClick={() => setField(pi, fi, { locked: [...new Set(numberTokens(f.en))] })}>auto-detect</button>}
                       {!ro && <button className={btn.link} onClick={() => { const v = prompt("Add locked token"); if (v) setField(pi, fi, { locked: [...f.locked, v] }); }}>+ add</button>}
                       {f.locked.filter((tk) => f.hiReference && !f.hiReference.includes(tk)).length > 0 && <span className="font-semibold text-red-700">⚠ missing in reference: {f.locked.filter((tk) => !f.hiReference.includes(tk)).join(", ")}</span>}

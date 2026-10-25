@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { Card, Empty, Kpi, PageHeader, Pill, Segmented, GOLD, NAVY, SAFFRON, ago, fmt, fmtDay, th, td, tr } from "./ui";
+import { Card, CountUp, Empty, Kpi, PageHeader, Pill, Segmented, GOLD, NAVY, SAFFRON, ago, fmt, fmtDay, th, td, tr } from "./ui";
 import { Donut, Funnel, GroupedBars, HBars, Histogram, LEVEL_COLORS, LineTrend, PALETTE, StackedBars } from "./charts";
 
 type Range = "7d" | "30d" | "all";
@@ -46,12 +46,12 @@ function Body({ d, feed }: { d: any; feed: any[] }) {
         </div>
       )}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
-        <Kpi label="Registered players" value={k.playersRegistered} sub={`+${k.newPlayers} in range`} />
-        <Kpi label="Active today" value={k.activeToday} sub={`${k.active7d} in last 7 days`} accent={SAFFRON} />
-        <Kpi label="Attempts started" value={k.attemptsStarted} sub={`${k.attemptsInProgress} in progress now`} />
-        <Kpi label="Completion rate" value={fmt(k.completionRate, "%")} sub={`${k.attemptsSubmitted} submitted · ${k.attemptsAutoSubmitted} timed out`} accent={PALETTE[2]} />
-        <Kpi label="Trial pass rate" value={fmt(k.trialPassRate, "%")} sub={`qualifying score ${d.trialQualifyingScore}`} accent={GOLD} />
-        <Kpi label="Credits awarded" value={k.creditsAwarded} sub={`avg ${fmt(k.avgCreditsPerPlayer)} / ${k.maxCredits} · ${k.titlesEarned} titles`} accent={GOLD} />
+        <Kpi index={0} label="Registered players" value={k.playersRegistered} sub={`+${k.newPlayers} in range`} accent={LEVEL_COLORS.pro} icon={<path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 10a7 7 0 0 1 14 0zm15-10a3 3 0 1 0 0-6M22 21a6 6 0 0 0-4-5.6" />} />
+        <Kpi index={1} label="Active today" value={k.activeToday} sub={`${k.active7d} in last 7 days`} accent={SAFFRON} icon={<path d="M13 2 4 14h7l-1 8 9-12h-7z" />} />
+        <Kpi index={2} label="Attempts started" value={k.attemptsStarted} sub={`${k.attemptsInProgress} in progress now`} accent={LEVEL_COLORS.varchaspati} icon={<path d="M8 5v14l11-7z" />} />
+        <Kpi index={3} label="Completion rate" value={k.completionRate === null || k.completionRate === undefined ? null : <><CountUp value={k.completionRate} />%</>} sub={`${k.attemptsSubmitted} submitted · ${k.attemptsAutoSubmitted} timed out`} accent="#16A34A" icon={<path d="M5 12l5 5 9-10" />} />
+        <Kpi index={4} label="Trial pass rate" value={k.trialPassRate === null || k.trialPassRate === undefined ? null : <><CountUp value={k.trialPassRate} />%</>} sub={`qualifying score ${d.trialQualifyingScore}`} accent={LEVEL_COLORS.trial} icon={<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" />} />
+        <Kpi index={5} label="Credits awarded" value={k.creditsAwarded} sub={`avg ${fmt(k.avgCreditsPerPlayer)} / ${k.maxCredits} · ${k.titlesEarned} titles`} accent={GOLD} icon={<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4" />} />
       </div>
 
       <div className="grid gap-5 xl:grid-cols-3">
@@ -129,7 +129,7 @@ function Body({ d, feed }: { d: any; feed: any[] }) {
           {d.fairPlay.watchlist.length ? (
             <table className="w-full text-sm"><thead className="bg-slate-50"><tr><th className={th}>Player</th><th className={th}>Leaves</th><th className={th}>Paste</th></tr></thead>
               <tbody>{d.fairPlay.watchlist.map((w: any) => (
-                <tr key={w.playerId} className={tr}><td className={td}><Link className="font-semibold text-[#13315C] hover:underline" to={`/manager/players?open=${w.playerId}`}>{w.name}</Link><div className="text-xs text-slate-500">{w.email}</div></td>
+                <tr key={w.playerId} className={tr}><td className={td}><Link className="font-semibold text-[#24558A] hover:underline" to={`/manager/players?open=${w.playerId}`}>{w.name}</Link><div className="text-xs text-slate-500">{w.email}</div></td>
                   <td className={`${td} tabular-nums`}>{w.leaves}</td><td className={`${td} tabular-nums`}>{w.pasteBlocks}</td></tr>
               ))}</tbody></table>
           ) : <div className="p-4"><Empty>No fair-play signals in range.</Empty></div>}
@@ -166,7 +166,7 @@ function Body({ d, feed }: { d: any; feed: any[] }) {
           <div className="max-h-80 overflow-y-auto">
             <table className="w-full text-sm"><thead className="sticky top-0 bg-slate-50"><tr><th className={th}>Bundle</th><th className={th}>Level</th><th className={th}>Status</th><th className={th}>Used</th><th className={th}>Avg score</th></tr></thead>
               <tbody>{d.content.map((c: any) => (
-                <tr key={c.id} className={tr}><td className={td}><Link to={`/manager/content/${c.id}`} className="font-semibold text-[#13315C] hover:underline">{c.label}</Link>{c.sample && <span className="ml-2"><Pill tone="amber">sample</Pill></span>}</td>
+                <tr key={c.id} className={tr}><td className={td}><Link to={`/manager/content/${c.id}`} className="font-semibold text-[#24558A] hover:underline">{c.label}</Link>{c.sample && <span className="ml-2"><Pill tone="amber">sample</Pill></span>}</td>
                   <td className={td}>{d.levels.find((l: any) => l.key === c.roundKey)?.name ?? c.roundKey}</td><td className={td}><Pill tone={c.status === "published" ? "green" : c.status === "retired" ? "slate" : "amber"}>{c.status}</Pill></td>
                   <td className={`${td} tabular-nums`}>{c.timesUsed}</td><td className={`${td} tabular-nums`}>{fmt(c.avgScore)}</td></tr>
               ))}</tbody></table>
@@ -179,7 +179,7 @@ function Body({ d, feed }: { d: any; feed: any[] }) {
               <div>Blocked answers <b className={`block text-xl ${d.chat.blocked ? "text-red-700" : "text-slate-900"}`}>{d.chat.blocked}</b></div>
             </div>
             {d.chat.bySource.length ? <HBars label="Chat answers by source" color={PALETTE[0]} rows={d.chat.bySource.map((s: any) => ({ label: s.source, value: s.n }))} /> : <Empty>No chat yet.</Empty>}
-            <Link to="/manager/sahayak" className="mt-3 inline-block text-xs font-semibold text-[#13315C] underline">Review chat log</Link>
+            <Link to="/manager/sahayak" className="mt-3 inline-block text-xs font-semibold text-[#24558A] underline">Review chat log</Link>
           </Card>
           <Card title="BHASHINI services">
             <ul className="space-y-1.5 text-sm">{d.services.map((s: any) => (

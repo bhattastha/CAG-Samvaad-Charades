@@ -27,13 +27,54 @@
       "justify": "Justify",
       "undo": "Undo",
       "redo": "Redo",
-      "pick": "Click a segment to format it"
+      "pick": "Click a segment to format it",
+      "h3": "Heading 3",
+      "style": "Paragraph style",
+      "styleDefault": "Default paragraph",
+      "tab": "Home"
     },
     "pageControl": {
       "label": "Page navigation",
       "jump": "Jump to a page",
-      "pageOf": "{n} / {total}"
+      "pageOf": "Page {n} of {total}"
     },
-    "copyPasteLocked": "Copy-paste is locked in every round"
+    "copyPasteLocked": "Copy-paste is locked in every round",
+    "originalDoc": "Original document",
+    "translatedDoc": "Translated document",
+    "collapse": "Collapse",
+    "expand": "Expand original",
+    "collapseTip": "Hide the original so your translation gets the full width",
+    "sourceLabel": "Original document",
+    "yourTranslation": "Translated document",
+    "inProgress": "In progress",
+    "chip": "Chance {n}/{max}",
+    "back": "Back to the map (your clock keeps running)",
+    "fullScreen": "Full Screen",
+    "exitFullScreen": "Exit Full Screen",
+    "submit": "Submit Translation",
+    "askSahayak": "Ask Sahayak",
+    "paragraphsDone": "{done}/{total} segments done",
+    "tick": "Mark as done",
+    "partDone": "Done",
+    "untick": "Reopen",
+    "tickHelp": "Mark this segment as done when you are happy with the translation. Done segments count towards completion.",
+    "doneHelp": "Done. Click to reopen this segment and keep editing.",
+    "tickHint": "Tick each segment when you are happy with it. Completion counts towards your score.",
+    "hintDismiss": "Got it",
+    "partCleared": "Segment done",
+    "allCleared": "All segments done. Review, then submit.",
+    "status": {
+      "label": "Document status",
+      "words": "{n} words",
+      "chars": "{m} characters",
+      "zoom": "Zoom",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "zoomValue": "{n}%"
+    },
+    "plus1": "+1",
+    "page": "Page {n} of {total}",
+    "creditsShort": "Up to {n}",
+    "submitShort": "Submit"
   }
 }

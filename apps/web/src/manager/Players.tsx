@@ -39,10 +39,10 @@ export function Players() {
       <PageHeader title="Players" subtitle="Every registered officer with computed progress. Click a row for attempt history and reset options."
         actions={<a className={btn.ghost} href="/api/admin/exports/credits">Export credits (xlsx)</a>} />
       <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Kpi label="Players" value={data.length} />
-        <Kpi label="Not started" value={data.filter((p) => p.attempts === 0).length} />
-        <Kpi label="Passed Trial" value={passed} />
-        <Kpi label="In a round now" value={data.filter((p) => p.inProgress).length} />
+        <Kpi index={0} label="Players" value={data.length} accent="#2B5FB8" icon={<path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 10a7 7 0 0 1 14 0z" />} />
+        <Kpi index={1} accent="#8A97A8" icon={<path d="M12 7v5l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z" />} label="Not started" value={data.filter((p) => p.attempts === 0).length} />
+        <Kpi index={2} accent="#16A34A" icon={<path d="M5 12l5 5 9-10" />} label="Passed Trial" value={passed} />
+        <Kpi index={3} accent="#F15A24" icon={<path d="M8 5v14l11-7z" />} label="In a round now" value={data.filter((p) => p.inProgress).length} />
       </div>
       <Card pad={false}>
         <div className="flex flex-wrap items-center gap-2 border-b border-slate-100 p-3">
@@ -73,7 +73,7 @@ export function Players() {
                     const r = p.rounds.find((x: any) => x.key === l.key);
                     return <td key={l.key} className={`${td} tabular-nums`}>{r?.chancesUsed ? <><b className={r.titleEarned ? "text-emerald-700" : "text-slate-900"}>{r.best ?? "…"}</b><div className="text-[11px] text-slate-500">{r.chancesUsed} used{r.titleEarned && " · title"}</div></> : <span className="text-slate-300">—</span>}</td>;
                   })}
-                  <td className={`${td} w-28`}><div className="font-semibold tabular-nums">{p.totalCredits}<span className="text-xs font-normal text-slate-400"> / 50</span></div><Meter label="Credits" value={(p.totalCredits / 50) * 100} color="#C49B3D" /></td>
+                  <td className={`${td} w-28`}><div className="font-semibold tabular-nums">{p.totalCredits}<span className="text-xs font-normal text-slate-400"> / 50</span></div><Meter label="Credits" value={(p.totalCredits / 50) * 100} color="#D6A642" /></td>
                   <td className={td}>{p.inProgress && <Pill tone="navy">● playing</Pill>} {p.leaves + p.pasteBlocks > 0 && <Pill tone="amber" title="left page · paste blocked">⚑ {p.leaves}·{p.pasteBlocks}</Pill>}</td>
                   <td className={`${td} whitespace-nowrap text-xs text-slate-600`} title={new Date(p.lastActiveAt).toLocaleString()}>{ago(p.lastActiveAt)}</td>
                 </tr>

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { t } from "../lib/strings";
 import { Icon } from "../components/Icon";
 
-/** The only thing on the bottom edge: a slim "‹ 3 / 10 ›" control with a small grid popover to jump to a page. */
+/** Page control for the workbench status bar: "‹ Page 3 of 10 ›" with a small grid popover (opens upward) to jump to a page. */
 export function PageControl({ pageNos, idx, onChange, done }: { pageNos: number[]; idx: number; onChange(i: number): void; done(n: number): boolean }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -14,12 +14,12 @@ export function PageControl({ pageNos, idx, onChange, done }: { pageNos: number[
     document.addEventListener("keydown", key);
     return () => { document.removeEventListener("mousedown", down); document.removeEventListener("keydown", key); };
   }, [open]);
-  const go = (i: number) => { if (i < 0 || i >= pageNos.length) return; onChange(i); window.scrollTo({ top: 0 }); };
-  const arrow = "w-7 h-7 rounded-full grid place-items-center text-navy hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent";
+  const go = (i: number) => { if (i < 0 || i >= pageNos.length) return; onChange(i); window.scrollTo({ top: 0 }); document.querySelector("[data-canvas]")?.scrollTo?.({ top: 0 }); };
+  const arrow = "w-6 h-6 rounded-full grid place-items-center text-navy hover:bg-slate-100 disabled:opacity-30 disabled:hover:bg-transparent";
   return (
-    <div ref={ref} className="fixed bottom-3 left-3 z-40" role="navigation" aria-label={t("round.pageControl.label")}>
+    <div ref={ref} className="relative shrink-0 whitespace-nowrap" role="navigation" aria-label={t("round.pageControl.label")}>
       {open && (
-        <div className="absolute bottom-11 left-0 w-[min(17rem,calc(100vw-1.5rem))] rounded-lg bg-white border border-slate-200 shadow-pop p-2.5 animate-pop">
+        <div className="absolute bottom-9 left-0 w-[min(17rem,calc(100vw-1.5rem))] rounded-lg bg-white border border-slate-200 shadow-pop p-2.5 animate-pop">
           <div className="kicker mb-1.5">{t("round.pageControl.jump")}</div>
           <div className="grid grid-cols-6 gap-1 max-h-48 overflow-y-auto">
             {pageNos.map((n, i) => (
@@ -31,10 +31,10 @@ export function PageControl({ pageNos, idx, onChange, done }: { pageNos: number[
           </div>
         </div>
       )}
-      <div className="inline-flex items-center rounded-full bg-white/95 backdrop-blur border border-slate-200 shadow-card px-1 py-0.5">
+      <div className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-0.5">
         <button className={arrow} disabled={idx === 0} onClick={() => go(idx - 1)} aria-label={t("round.prevPage")}><Icon name="chevronLeft" size={16} /></button>
         <button onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-haspopup="dialog" aria-label={t("round.pageNav", { n: idx + 1, total: pageNos.length })}
-          className="px-2 h-7 text-[13px] font-bold tnum text-navy rounded-full hover:bg-slate-100">{t("round.pageControl.pageOf", { n: idx + 1, total: pageNos.length })}</button>
+          className="px-2 h-6 text-[12.5px] font-bold tnum text-navy rounded-full hover:bg-slate-100">{t("round.pageControl.pageOf", { n: idx + 1, total: pageNos.length })}</button>
         <button className={arrow} disabled={idx === pageNos.length - 1} onClick={() => go(idx + 1)} aria-label={t("round.nextPage")}><Icon name="chevronRight" size={16} /></button>
       </div>
     </div>

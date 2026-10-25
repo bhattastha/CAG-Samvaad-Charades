@@ -55,14 +55,14 @@ function TranslationPlugin() {
   return null;
 }
 
-/** Scenes slide and dissolve instead of cutting (game feel); Sahayika stops when the scene changes. */
+/** Scenes slide and dissolve instead of cutting (game feel); Sahayika stops when the scene changes. No CSS filter here: a leftover filter becomes the containing block of every `position: fixed` element (status bar, chat, overlays). */
 function Scenes() {
   const location = useLocation();
   useEffect(() => { stopVoice(); }, [location.pathname]);
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div key={location.pathname.startsWith("/manager") ? "/manager" : location.pathname}
-        initial={{ opacity: 0, y: 18, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
+        initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
         transition={{ duration: 0.32, ease: [0.2, 0.8, 0.2, 1] }} className="relative z-[1] min-h-screen">
         <Routes location={location}>
           <Route path="/" element={<Title />} />

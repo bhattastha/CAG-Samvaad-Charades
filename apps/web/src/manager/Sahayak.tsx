@@ -26,7 +26,7 @@ function Lines() {
     <Card pad={false}>
       <div className="flex flex-wrap items-center gap-2 border-b border-slate-100 p-3">
         <div className="flex flex-wrap gap-1">{sections.map((s) => (
-          <button key={s} onClick={() => setSec(s)} className={`rounded-md border px-2.5 py-1 text-xs font-semibold ${s === sec ? "border-[#0B2545] bg-[#0B2545] text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"}`}>{s} <span className="opacity-70">{lines.filter((l) => l.section === s).length}</span></button>
+          <button key={s} onClick={() => setSec(s)} className={`rounded-md border px-2.5 py-1 text-xs font-semibold ${s === sec ? "border-[#0B2342] bg-[#0B2342] text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"}`}>{s} <span className="opacity-70">{lines.filter((l) => l.section === s).length}</span></button>
         ))}</div>
         <input className={`${input} ml-auto max-w-xs`} placeholder="Search lines" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search lines" />
         {isManager && <button className={btn.navy} onClick={async () => { try { const r = await api<any>("/admin/sahayika/audio", { body: {} }); setMsg(`Audio: ${r.ok} generated, ${r.failed} failed.`); } catch (e) { setMsg((e as ApiError).code === "tts_not_configured" ? "BHASHINI TTS key is not configured on the server." : (e as ApiError).code); } }}>Regenerate audio (BHASHINI TTS)</button>}
@@ -63,7 +63,7 @@ function ChatLog() {
   const rows = chat.filter((c) => !only || c.blocked);
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-3"><Kpi label="Questions (latest 300)" value={chat.length} /><Kpi label="Blocked answers" value={chat.filter((c) => c.blocked).length} warn={chat.some((c) => c.blocked)} /><Kpi label="Players" value={new Set(chat.map((c) => c.player_id)).size} /></div>
+      <div className="grid grid-cols-3 gap-3"><Kpi accent="#2B5FB8" icon={<path d="M4 5h16v11H8l-4 4z" />} label="Questions (latest 300)" value={chat.length} /><Kpi accent="#F15A24" icon={<path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM5.6 5.6l12.8 12.8" />} label="Blocked answers" value={chat.filter((c) => c.blocked).length} warn={chat.some((c) => c.blocked)} /><Kpi accent="#7C3AED" icon={<path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm-7 10a7 7 0 0 1 14 0z" />} label="Players" value={new Set(chat.map((c) => c.player_id)).size} /></div>
       <Card pad={false}>
         <div className="flex items-center gap-3 border-b border-slate-100 p-3"><label className="flex items-center gap-1.5 text-sm"><input type="checkbox" checked={only} onChange={(e) => setOnly(e.target.checked)} /> Blocked only</label></div>
         {rows.length === 0 ? <div className="p-4"><Empty>No chat yet.</Empty></div> : (
