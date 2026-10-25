@@ -14,3 +14,4 @@ playwright-report
 scripts/content/work/img/
 scripts/content/work/*/fig_*.png
 scripts/content/work/*/en_*.json
+.pnpm-store

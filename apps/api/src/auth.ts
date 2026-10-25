@@ -22,9 +22,23 @@ export const normEmail = (e: string) => e.trim().toLowerCase();
 const allowedDomains = (process.env.ALLOWED_EMAIL_DOMAINS ?? "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
 export const emailAllowed = (e: string) => !allowedDomains.length || allowedDomains.some((d) => e.endsWith("@" + d));
 
-/** Pluggable OTP sender: SMTP when configured; in development the code is logged and is always 123456. */
+const EMAIL_PROXY = "https://integrations.emergentagent.com/api/v1/email/send";
+const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+const hasMailer = () => !!(env.SMTP_URL || env.EMERGENT_EMAIL_KEY);
+
+/** Pluggable OTP sender: SMTP or Emergent managed email when configured; in development the code is logged and is always 123456. */
 async function sendOtp(email: string, code: string) {
-  if (env.SMTP_URL) {
+  if (env.EMERGENT_EMAIL_KEY) {
+    const brand = config().brand.name;
+    const body = str("email.otpBody").replace("{brand}", brand).replace("{code}", code).replace("{minutes}", String(config().auth.otpTtlMinutes));
+    const html = `<table role="presentation" width="100%"><tr><td style="padding:24px;font-family:Arial,sans-serif;color:#0B2342"><p style="font-size:16px">${esc(body)}</p><p style="font-size:12px;color:#888">Sent by ${esc(brand)}. If you did not request this code, ignore this email.</p></td></tr></table>`;
+    const res = await fetch(EMAIL_PROXY, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Email-Key": env.EMERGENT_EMAIL_KEY },
+      body: JSON.stringify({ to: [email], subject: str("email.otpSubject").replace("{brand}", brand), html, from_name: env.EMAIL_FROM_NAME || brand }),
+    });
+    if (!res.ok) throw new Error(`OTP email failed: ${res.status}`);
+  } else if (env.SMTP_URL) {
     const { createTransport } = await import("nodemailer");
     await createTransport(env.SMTP_URL).sendMail({
       from: env.OTP_FROM,
@@ -35,7 +49,7 @@ async function sendOtp(email: string, code: string) {
   } else if (env.isDev) {
     console.log(`[otp] ${email} → ${code} (development)`);
   } else {
-    throw new Error("No OTP sender configured (set SMTP_URL)");
+    throw new Error("No OTP sender configured (set SMTP_URL or EMERGENT_EMAIL_KEY)");
   }
 }
 
@@ -45,7 +59,7 @@ export async function requestOtp(db: Db, email: string): Promise<{ ok: true; dev
   const inWindow = row && now.getTime() - new Date(row.window_start).getTime() < 3600_000;
   if (row && inWindow && row.sent_count >= OTP_PER_HOUR) return { ok: false, status: 429, error: "otp_rate" };
   const len = config().auth.otpLength;
-  const code = env.isDev && !env.SMTP_URL ? DEV_CODE : String(randomInt(0, 10 ** len)).padStart(len, "0");
+  const code = env.isDev && !hasMailer() ? DEV_CODE : String(randomInt(0, 10 ** len)).padStart(len, "0");
   const expires = new Date(now.getTime() + config().auth.otpTtlMinutes * 60_000);
   await db.query(
     `INSERT INTO otp_challenges (email, code_hash, expires_at, tries, sent_count, window_start) VALUES ($1,$2,$3,0,1,now())
@@ -55,7 +69,7 @@ export async function requestOtp(db: Db, email: string): Promise<{ ok: true; dev
     [email, hash(email, code), expires, !!inWindow],
   );
   await sendOtp(email, code);
-  return { ok: true, ...(env.isDev && !env.SMTP_URL ? { devCode: DEV_CODE } : {}) };
+  return { ok: true, ...(env.isDev && !hasMailer() ? { devCode: DEV_CODE } : {}) };
 }
 
 export async function verifyOtp(db: Db, email: string, code: string): Promise<boolean> {

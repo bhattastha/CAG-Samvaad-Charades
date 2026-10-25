@@ -1,0 +1,11 @@
+# Samvaad Charades — hosting task (25 Oct 2026)
+Task: host existing pnpm monorepo (Fastify 5 API + React/Vite web, PostgreSQL) without rebuilding. Demo 27 Oct 2026.
+User choices: Emergent managed email for OTP; publish seeded Report 38 sample pages (pending: publish gate needs verification); ADMIN_EMAILS=game_admin@cag.gov.in; BHASHINI key not rotated (use current); glossary CSV must drive workbench menus (already in seed/glossary.json, all 11,686 records present).
+## Done
+- Install, web build, tests: shared 21/21; api 27/27 (needed --hookTimeout=120000 in this pod; default 10s hook times out).
+- Preview hosting: /app/frontend/package.json start -> scripts/emergent/start.sh (local PostgreSQL 15, data /app/.data/postgres; API NODE_ENV=production on :3000 serving web+/api). /app/backend/server.py = pass-through proxy for /api (HTTP+WS) to :3000.
+- OTP sender: Emergent managed email added in apps/api/src/auth.ts + env.ts (EMERGENT_EMAIL_KEY, EMAIL_FROM_NAME); SMTP path unchanged.
+## Blockers / pending decisions
+- Emergent native production deploy supports Python/Next.js backends + MongoDB only; no Postgres, ephemeral disk.
+- Publishing requires every part verified; no manager inbox access for agent.
+- DHRUVA_API_KEY / DHRUVA_TTS_SERVICE_ID not yet entered in secrets.
