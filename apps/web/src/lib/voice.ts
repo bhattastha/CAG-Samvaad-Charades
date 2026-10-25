@@ -6,7 +6,7 @@ export interface Line { id: string; en: string; hi: string; spoken?: boolean }
 /**
  * Sahayika's voice, fully under the player's control: play, pause, resume, stop.
  * Nothing plays automatically unless the player chose "auto" in settings (default: tap to listen).
- * Sources: pre-generated BHASHINI audio → live BHASHINI TTS → browser speechSynthesis (en-IN, female).
+ * Sources: pre-generated BHASHINI audio → live BHASHINI TTS → browser speechSynthesis (en-IN, male).
  */
 type Status = "idle" | "loading" | "playing" | "paused";
 interface VoiceState { status: Status; line: Line | null }
@@ -19,9 +19,13 @@ const set = (s: Partial<VoiceState>) => useVoice.setState(s);
 
 function pickVoice(): SpeechSynthesisVoice | undefined {
   const vs = window.speechSynthesis?.getVoices() ?? [];
-  return vs.find((v) => v.lang === "en-IN" && /female|veena|heera|neerja|isha|raveena|swara/i.test(v.name))
+  // Sahayak is a male guide: prefer a male English voice (Indian English first), then any English voice
+  const male = /\bmale\b|rishi|ravi|hemant|prabhat|aaron|daniel|alex|fred|oliver|arthur|google uk english male/i;
+  const notMale = /female/i;
+  return vs.find((v) => v.lang === "en-IN" && male.test(v.name) && !notMale.test(v.name))
+    ?? vs.find((v) => v.lang.startsWith("en") && male.test(v.name) && !notMale.test(v.name))
     ?? vs.find((v) => v.lang === "en-IN")
-    ?? vs.find((v) => v.lang.startsWith("en") && /female|samantha|karen|moira|tessa|zira|susan|serena/i.test(v.name));
+    ?? vs.find((v) => v.lang.startsWith("en"));
 }
 
 function speakSynth(line: Line) {

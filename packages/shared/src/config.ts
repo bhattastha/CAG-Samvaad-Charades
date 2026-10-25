@@ -86,7 +86,7 @@ export const GameConfigSchema = z
     }).default({}),
     bhashiniServices: z.object({
       translation: z.string(), translationProvider: z.enum(["anuvaad", "dhruva"]).default("anuvaad"), asrHindi: z.string(), ttsEnglish: z.string(), ttsGender: z.enum(["female", "male"]), transliteration: z.string(),
-    }).default({ translationProvider: "anuvaad", translation: "ai4bharat/indictrans-v2-all-gpu--t4", asrHindi: "ai4bharat/conformer-hi-gpu--t4", ttsEnglish: "bhashini/bodhan/indic-tts", ttsGender: "female", transliteration: "ai4bharat/indicxlit--cpu-fsv2" }),
+    }).default({ translationProvider: "anuvaad", translation: "ai4bharat/indictrans-v2-all-gpu--t4", asrHindi: "ai4bharat/conformer-hi-gpu--t4", ttsEnglish: "bhashini/bodhan/indic-tts", ttsGender: "male", transliteration: "ai4bharat/indicxlit--cpu-fsv2" }),
     transliteration: z.object({
       endpoint: z.string().url(),
       serviceId: z.string(),

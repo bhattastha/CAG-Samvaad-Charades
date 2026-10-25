@@ -185,7 +185,7 @@
     "translation": "ai4bharat/indictrans-v2-all-gpu--t4",
     "asrHindi": "ai4bharat/conformer-hi-gpu--t4",
     "ttsEnglish": "bhashini/bodhan/indic-tts",
-    "ttsGender": "female",
+    "ttsGender": "male",
     "transliteration": "ai4bharat/indicxlit--cpu-fsv2"
   },
   "brand": {
