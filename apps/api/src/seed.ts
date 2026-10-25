@@ -203,9 +203,22 @@ export async function seedAll(db: Db, log = console.log) {
 
   for (const email of env.ADMIN_EMAILS)
     await db.query("INSERT INTO admin_users (email, role) VALUES ($1,'manager') ON CONFLICT (email) DO NOTHING", [email]);
+
+  // SEED_PUBLISH_SAMPLES=1 (owner's instruction, 25 Oct 2026): on a brand-new database, publish the seeded Report 38 samples once
+  if (process.env.SEED_PUBLISH_SAMPLES === "1" && !(await db.one("SELECT 1 FROM audit_logs WHERE action='page.publish' LIMIT 1"))) {
+    const ids = (await db.query<{ id: string }>("SELECT id FROM pages WHERE sample AND status='draft'")).map((r) => r.id);
+    if (ids.length) {
+      await db.query("UPDATE page_parts SET reference_verified=true WHERE page_id = ANY($1::text[]) AND editable", [ids]);
+      await db.query("UPDATE pages SET status='published', version=version+1 WHERE id = ANY($1::text[])", [ids]);
+      for (const id of ids)
+        await db.query("INSERT INTO audit_logs (actor, action, target, meta) VALUES ('seed (owner request)', 'page.publish', $1, $2)",
+          [id, JSON.stringify({ note: "Seeded Report 38 sample published at owner request; Hindi references NOT manager-verified" })]);
+      log(`published samples: ${ids.length}`);
+    }
+  }
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && !process.env.HC_ROOT && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const db = await openDb();
   await seedAll(db);
   await db.close();

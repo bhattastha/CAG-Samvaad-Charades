@@ -2,7 +2,8 @@ import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-export const ROOT = resolve(here, "../../..");
+// HC_ROOT: where config/, content/ and seed/ live when the API runs as a single bundle (Emergent hosting)
+export const ROOT = process.env.HC_ROOT ?? resolve(here, "../../..");
 
 const e = process.env;
 export const env = {

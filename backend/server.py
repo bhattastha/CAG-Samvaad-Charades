@@ -1,16 +1,94 @@
 # Hosting shim only: forwards /api (HTTP + websockets) to the Fastify API on 127.0.0.1:3000, unchanged.
+# On Emergent's published hosting (no monorepo checkout) it also starts the bundled API from ./hc with the bundled Node runtime.
 import asyncio
+import fcntl
+import logging
+import os
+import socket
+import subprocess
+from urllib.parse import urlparse
 
 import httpx
 import websockets
 from fastapi import FastAPI, Request, WebSocket
-from starlette.responses import StreamingResponse
+from starlette.responses import JSONResponse, StreamingResponse
 
 UPSTREAM = "127.0.0.1:3000"
 HOP = {"host", "connection", "keep-alive", "transfer-encoding", "upgrade", "te", "trailer", "proxy-authorization", "proxy-connection"}
+HERE = os.path.dirname(os.path.abspath(__file__))
+HC = os.path.join(HERE, "hc")
+log = logging.getLogger("hc-shim")
+
+
+def _open(host: str, port: int) -> bool:
+    try:
+        with socket.create_connection((host, port), timeout=1.5):
+            return True
+    except OSError:
+        return False
+
+
+def _dotenv() -> dict:
+    out = {}
+    p = os.path.join(HERE, ".env")
+    if os.path.exists(p):
+        for line in open(p, encoding="utf-8"):
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                out[k.strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
+def _start_bundled_api():
+    """Published mode only: preview runs the API from the monorepo via supervisor (scripts/emergent/start.sh)."""
+    if os.path.isdir("/app/apps/api/node_modules") or not os.path.exists(os.path.join(HC, "api.mjs")):
+        return
+    lock = open("/tmp/hc-api.lock", "w")
+    try:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        return  # another worker owns the API process
+    if _open("127.0.0.1", 3000):
+        return
+    import nodejs_wheel
+    node = os.path.join(os.path.dirname(nodejs_wheel.__file__), "bin", "node")
+    env = {**_dotenv(), **os.environ}
+    db = urlparse(env.get("DATABASE_URL", ""))
+    if not env.get("DATABASE_URL") or (db.hostname in ("127.0.0.1", "localhost") and not _open(db.hostname, db.port or 5432)):
+        data = os.path.join(HERE, ".data", "pglite")
+        os.makedirs(data, exist_ok=True)
+        env["DATABASE_URL"] = f"pglite:{data}"
+        log.warning("DATABASE_URL is not reachable: using embedded PGlite at %s. Data will NOT survive a redeploy or pod restart. Set DATABASE_URL to an external PostgreSQL.", data)
+    env.update({"HC_ROOT": HC, "HOST": "127.0.0.1", "PORT": "3000", "WEB_DIST": os.path.join(HC, "no-web"), "SEED_PUBLISH_SAMPLES": env.get("SEED_PUBLISH_SAMPLES", "1")})
+    app.state.api_proc = subprocess.Popen([node, os.path.join(HC, "api.mjs")], cwd=HC, env=env)
+    app.state.api_lock = lock
+
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 client = httpx.AsyncClient(base_url=f"http://{UPSTREAM}", timeout=httpx.Timeout(120.0, connect=10.0))
+
+
+@app.on_event("startup")
+async def _startup():
+    _start_bundled_api()
+
+
+@app.on_event("shutdown")
+async def _shutdown():
+    proc = getattr(app.state, "api_proc", None)
+    if proc and proc.poll() is None:
+        proc.terminate()
+
+
+@app.get("/api/health")
+async def health():
+    try:
+        r = await client.get("/api/health", timeout=5.0)
+        return JSONResponse(r.json(), status_code=r.status_code)
+    except (httpx.HTTPError, ValueError):
+        # the API is still seeding on first boot; the shim itself is healthy
+        return JSONResponse({"ok": True, "api": "starting"}, status_code=200)
 
 
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"])

@@ -15,3 +15,7 @@ scripts/content/work/img/
 scripts/content/work/*/fig_*.png
 scripts/content/work/*/en_*.json
 .pnpm-store
+
+# Emergent publish package (scripts/emergent/package.sh): vendored runtime deps must be committed
+!backend/hc/vendor/**/dist
+!backend/hc/vendor/**/dist/**

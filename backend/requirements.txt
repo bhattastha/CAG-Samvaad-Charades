@@ -1,0 +1,5 @@
+fastapi==0.110.1
+uvicorn==0.25.0
+httpx==0.28.1
+websockets==16.0
+nodejs-wheel-binaries==22.20.0

@@ -1,0 +1,1191 @@
+{
+ "page_id": "r38-primary-bundle",
+ "round": "primary",
+ "status": "draft",
+ "reference_status": "transcribed_from_hindi_pdf_images_needs_manager_verification",
+ "draft_status": "anuvaad_pipeline",
+ "label": "Report 38/2025 · 10 pages",
+ "source": {
+  "report": "Report No. 38 of 2025 (Performance Audit – Commercial), Performance of Blast Furnaces in SAIL",
+  "selection": "Executive Summary (pp. vi–x), Chapter II (pp. 7–8), Chapter VI (pp. 57–59)",
+  "english_pdf_pages": [
+   12,
+   13,
+   14,
+   15,
+   16,
+   27,
+   28,
+   85,
+   86,
+   87
+  ],
+  "printed_pages": [
+   "vi",
+   "vii",
+   "viii",
+   "ix",
+   "x",
+   "7",
+   "8",
+   "57",
+   "58",
+   "59"
+  ],
+  "printed_page": "vi",
+  "sector_hidden_from_player": "commercial",
+  "scope": "union"
+ },
+ "parts": [
+  {
+   "part_id": "p12_01",
+   "type": "header",
+   "page_no": 1,
+   "tick_group": "g1",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p12_02",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g2",
+   "en": "hot metal is sent to the Steel Melting Shop for crude steel production, which is cast into billets, blooms, or slabs. These are either sold as semi-finished products or rolled into finished goods. Performance of the Blast Furnace is critical to the entire steelmaking process. A summary of significant audit findings and recommendations is given below:",
+   "hi_reference": "तप्त धातु को क्रुड स्टील के उत्पादन के लिए स्टील मेल्टिंग शॉप में भेजा जाता है, जहां से बिलेट, ब्लूम या स्लैब बनाये जाते हैं। इन्हें या तो अर्द्ध-तैयार उत्पाद के रूप में बेचा जाता है या तैयार माल के रूप में बेचा जाता है। ब्लास्ट फर्नेस का निष्पादन सम्पूर्ण इस्पात निर्माण प्रक्रिया के लिए महत्वपूर्ण है। महत्वपूर्ण लेखापरीक्षा निष्कर्षों और अनुशंसाओं का सारांश नीचे दिया गया है:",
+   "bhashini_draft": "गर्म धातु को कच्चे इस्पात के उत्पादन के लिए इस्पात पिघलने की दुकान में भेजा जाता है, जिसे बिलेट, फूल या स्लैब में डाला जाता है। इन्हें या तो अर्ध-तैयार उत्पादों के रूप में बेचा जाता है या तैयार में रोल किया जाता है। ब्लास्ट फर्नेस का प्रदर्शन पूरी स्टील बनाने की प्रक्रिया के लिए महत्वपूर्ण है। महत्वपूर्ण लेखापरीक्षा निष्कर्षों और सिफारिशों का सारांश नीचे दिया गया हैः"
+  },
+  {
+   "part_id": "p12_03",
+   "type": "heading",
+   "page_no": 1,
+   "tick_group": "g3",
+   "en": "Assessment, Availability and Consumption of Raw Materials, Fuel & Services",
+   "hi_reference": "कच्चे माल, ईंधन और सेवाओं का आकलन, उपलब्धता और खपत",
+   "bhashini_draft": "कच्चे ईंधन और सेवाओं का आकलन, उपलब्धता और खपत"
+  },
+  {
+   "part_id": "p12_04",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g4",
+   "en": "All the five integrated Steel Plants of SAIL had planned their annual requirement of major raw material adequately except Coal Dust Injection (CDI). The availability of iron ore lump ranged between 83 per cent to 115 per cent while that of sinter ranged between 84 per cent to 102 per cent of the planned quantity. The coke availability ranged between 90 per cent to 132 per cent whereas CDI coal ranged from 54 per cent to 83 per cent.",
+   "hi_reference": "सेल के सभी पांच एकीकृत इस्पात संयंत्रों ने कोल डस्ट इंजेक्शन (सीडीआई) को छोड़कर प्रमुख कच्चे माल की अपनी वार्षिक आवश्यकता की पर्याप्त रूप से योजना बना ली थी। लौह अयस्क की उपलब्धता नियोजित मात्रा के 83 प्रतिशत से 115 प्रतिशत के बीच थी, जबकि सिंटर की उपलब्धता नियोजित मात्रा के 84 प्रतिशत से 102 प्रतिशत के बीच थी। कोक की उपलब्धता 90 प्रतिशत से 132 प्रतिशत के बीच थी, जबकि सीडीआई कोयले की उपलब्धता 54 प्रतिशत से 83 प्रतिशत के बीच थी।",
+   "bhashini_draft": "सेल के सभी पाँच एकीकृत इस्पात संयंत्रों ने कोयला धूल इंजेक्शन (सी. डी. आई.) को छोड़कर प्रमुख कच्चे की अपनी वार्षिक आवश्यकता की योजना बनाई थी। लौह अयस्क गांठ की उपलब्धता 83 per cent से 115 per cent के बीच थी जबकि सिंटर की उपलब्धता नियोजित मात्रा के 84 per cent से 102 per cent के बीच थी। कोक की उपलब्धता 90 per cent से 132 per cent के बीच थी जबकि सी. डी. आई. कोयला 54 per cent से 83 per cent तक था।"
+  },
+  {
+   "part_id": "p12_05",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g5",
+   "en": "The consumption of iron ore lump more than the norm was mainly due to variation in the Fe content in iron ore. Inconsistent use of pellets also contributed to the excess consumption of iron ore lump. Usage of 10 per cent pellets in blast furnace input charge can reduce coke rate by 1.5 to two per cent, improve productivity by three to four per cent, and save ₹268 crore annually for SAIL. The National Steel Policy (2017) also emphasized on optimal use of low grade iron ore to produce pellets. However, during 2017-2024, SAIL plants often relied on excess sinter due to limited availability of iron ore lump or pellets and with declining ore quality.",
+   "hi_reference": "मानक से अधिक लौह अयस्क की खपत मुख्य रूप से लौह अयस्क में लौह सामग्री में भिन्नता के कारण थी। पेलेट्स के असंगत उपयोग ने भी लौह अयस्क के अत्यधिक उपभोग में योगदान दिया। ब्लास्ट फर्नेस इनपुट आवेश में 10 प्रतिशत पेलेट्स के उपयोग से कोक दर में 1.5 से दो प्रतिशत की कमी आ सकती है, उत्पादकता में तीन से चार प्रतिशत की वृद्धि हो सकती है, तथा सेल को प्रतिवर्ष ₹268 करोड़ की बचत हो सकती है। राष्ट्रीय इस्पात नीति (2017) में भी पेलेट्स के उत्पादन के लिए निम्न श्रेणी के लौह अयस्क के इष्टतम उपयोग पर जोर दिया गया। हालाँकि, 2017-2024 के दौरान, सेल संयंत्र अक्सर लौह अयस्क लम्प या पेलेट्स की सीमित उपलब्धता और अयस्क की गुणवत्ता में गिरावट के कारण अतिरिक्त सिंटर पर निर्भर रहे।",
+   "bhashini_draft": "मानक से अधिक लौह अयस्क गांठ की खपत मुख्य रूप से लौह अयस्क में एफ. ई. सामग्री में भिन्नता के कारण थी। छर्रों के लगातार उपयोग ने भी लौह अयस्क की गांठ की अतिरिक्त खपत में योगदान दिया। ब्लास्ट फर्नेस इनपुट चार्ज में 10 per cent छर्रों का उपयोग कोक दर को 1.5 से घटाकर दो प्रतिशत कर सकता है, उत्पादकता में तीन से चार प्रतिशत तक सुधार कर सकता है और सेल के लिए सालाना ₹268 करोड़ की बचत कर सकता है। राष्ट्रीय इस्पात नीति (2017) ने छर्रों के उत्पादन के लिए निम्न श्रेणी के लौह अयस्क के इष्टतम उपयोग पर भी जोर दिया। हालांकि, 2017-2024 के दौरान, सेल संयंत्र अक्सर लौह अयस्क गांठ या छर्रों की सीमित उपलब्धता और अयस्क की गुणवत्ता में गिरावट के कारण अतिरिक्त सिंटर पर निर्भर थे।"
+  },
+  {
+   "part_id": "p12_06",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g6",
+   "en": "Sinter (53-54 per cent Fe) enhances blast furnace efficiency by improving furnace permeability, reducibility, hot metal quality, and reducing coke rate. However, during 2017-2024, its consumption in all SAIL plants intermittently exceeded the norms, mainly due to non-availability of iron ore lump/pellets and declining Fe content in ore fines, leading to excess reliance on sinter and adversely impacted cost of production.",
+   "hi_reference": "सिंटर (53-54 प्रतिशत लौह) भट्ठी की पारगम्यता, न्यूनीकरणीयता, गर्म धातु की गुणवत्ता में सुधार और कोक दर को कम करके ब्लास्ट फर्नेस की दक्षता को बढ़ाता है। हालाँकि, 2017-2024 के दौरान, सभी सेल संयंत्रों में इसकी खपत रुक-रुक कर मानदंडों से अधिक रही, जिसका मुख्य कारण लौह अयस्क लम्प/पेलेट्स की अनुपलब्धता और अयस्क चूर्ण में लौह की मात्रा में गिरावट थी, जिसके कारण सिंटर पर अत्यधिक निर्भरता हो गई जिसने उत्पादन लागत में बढ़ोतरी की।",
+   "bhashini_draft": "सिंटर (53-54 per cent फे) भट्टी पारगम्यता, रिड्यूसिबिलिटी, गर्म धातु की गुणवत्ता में सुधार और कोक दर को कम करके ब्लास्ट फर्नेस दक्षता को बढ़ाता है। हालांकि, 2017-2024 के दौरान, सभी सेल संयंत्रों में इसकी खपत रुक-रुक कर मानदंडों को पार कर गई, मुख्य रूप से लौह अयस्क गांठ/छर्रों की अनुपलब्धता और अयस्क महीन में एफई सामग्री में गिरावट के कारण, जिससे सिंटर पर अधिक निर्भरता हुई और उत्पादन की लागत पर प्रतिकूल प्रभाव पड़ा।"
+  },
+  {
+   "part_id": "p12_07",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g7",
+   "en": "Except at Bhilai Steel Plant (during 2022-23) and Durgapur Steel Plant (during 2023-24), CDI coal consumption during 2017-2024 was below targets at all the Steel Plants of SAIL. SAIL Plants consumed 2.945 million tonnes more coke and 2.235 million tonnes lesser CDI coal than norms, resulting in potential extra expenditure of ₹6,259.25 crore.",
+   "hi_reference": "भिलाई इस्पात संयंत्र (2022-23 के दौरान) और दुर्गापुर इस्पात संयंत्र (2023-24 के दौरान) को छोड़कर, 2017-2024 के दौरान सीडीआई कोयला खपत, सेल के सभी इस्पात संयंत्रों में लक्ष्य से कम थी। सेल संयंत्रों ने मानक से 2.945 मिलियन टन अधिक कोक तथा 2.235 मिलियन टन कम सीडीआई कोयले की खपत की, जिसके परिणामस्वरूप ₹6,259.25 करोड़ का संभावित अतिरिक्त व्यय हुआ।",
+   "bhashini_draft": "भिलाई इस्पात संयंत्र (2022-23 के दौरान) और दुर्गापुर इस्पात संयंत्र (2023-24 के दौरान) को छोड़कर, सेल के सभी इस्पात संयंत्रों में सी. डी. आई. कोयले की खपत लक्ष्य से कम थी। सेल संयंत्रों ने मानदंडों की तुलना में दस लाख टन अधिक कोक और दस लाख टन कम सी. डी. आई. कोयले की खपत की, जिसके परिणामस्वरूप ₹6,259.25 करोड़ का संभावित अतिरिक्त खर्च हुआ।"
+  },
+  {
+   "part_id": "p12_08",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g8",
+   "en": "Power is also an important element of cost in steelmaking, but the specific power consumption could not be achieved by SAIL Plants in most of the years during 2017-24 due to non-achievement of targeted production of hot metal. Excess consumption of power than the norm in the steel plants led to potential avoidable expenditure of ₹310.48 crore during 2017-24.",
+   "hi_reference": "इस्पात निर्माण में बिजली भी लागत का एक महत्वपूर्ण तत्व है, लेकिन तप्त धातु के लक्षित उत्पादन की उपलब्धि न होने के कारण 2017-24 के दौरान अधिकांश वर्षों में सेल संयंत्रों द्वारा विशिष्ट बिजली की खपत हासिल नहीं की जा सकी। इस्पात संयंत्रों में मानक से अधिक बिजली की खपत के कारण 2017-24 के दौरान ₹310.48 करोड़ का संभावित परिहार्य व्यय हुआ।",
+   "bhashini_draft": "इस्पात निर्माण में बिजली भी लागत का एक महत्वपूर्ण तत्व है, लेकिन गर्म धातु के लक्षित उत्पादन में कमी के कारण अधिकांश वर्षों में सेल संयंत्रों द्वारा विशिष्ट बिजली की खपत हासिल नहीं की जा सकी। इस्पात संयंत्रों में मानक से अधिक बिजली की खपत के कारण 2017-24 के दौरान ₹310.48 करोड़ का संभावित परिहार्य व्यय हुआ।"
+  },
+  {
+   "part_id": "p12_09",
+   "type": "body",
+   "page_no": 1,
+   "tick_group": "g9",
+   "en": "At Bokaro Steel Plant the actual use of refractories (2-2.34 kg/thm) during 2018-2024 exceeded norms (1.75-1.98 kg/thm). Rourkela Steel Plant met the norms in 2018-2021 but exceeded them in 2017-18 and 2021-24. No norms were set at Bhilai, Durgapur, and IISCO plants.",
+   "hi_reference": "बोकारो इस्पात संयंत्र में 2018-2024 के दौरान रीफ्रेक्ट्री (2-2.34 किग्रा/टीएचएम) का वास्तविक उपयोग मानदंडों (1.75-1.98 किग्रा/टीएचएम) से अधिक रहा। राउरकेला इस्पात संयंत्र ने 2018-2021 में मानदंडों को पूरा किया, लेकिन 2017-18 और 2021-24 में उनसे अधिक उपयोग किया। भिलाई, दुर्गापुर और इस्को इस्पात संयंत्रों में कोई मानदंड निर्धारित नहीं किए गए थे।",
+   "bhashini_draft": "बोकारो स्टील प्लांट में 2.34 के दौरान अपवर्तकों का वास्तविक उपयोग (2-2018-2024 किलोग्राम/thm) मानदंडों (1.75-1.98 किलोग्राम/thm) को पार कर गया। राउरकेला इस्पात संयंत्र ने 2018-2021 में मानदंडों को पूरा किया लेकिन 2017-18 और 2021-24 में उन्हें पार कर गया। भिलाई, दुर्गापुर और आई. आई. एस. सी. ओ. संयंत्रों में कोई मानदंड निर्धारित नहीं किए गए थे।"
+  },
+  {
+   "part_id": "p12_10",
+   "type": "page_number",
+   "page_no": 1,
+   "tick_group": null,
+   "en": "vi",
+   "editable": false,
+   "bhashini_draft": "वीआई"
+  },
+  {
+   "part_id": "p13_01",
+   "type": "header",
+   "page_no": 2,
+   "tick_group": "g10",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p13_02",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g11",
+   "en": "Recommendation 1: To achieve the norms fixed in the Annual Business Perspective for consumption of raw materials, fuel and services, the Company may expedite the setting up of Beneficiation Plants, Silica Reduction Plants and Pellet Plants and may also adopt better operational practices. (Para 3.2 to 3.7)",
+   "hi_reference": "अनुशंसा 1: कच्चे माल, ईंधन एवं सेवाओं की खपत के लिए वार्षिक व्यावसायिक परिप्रेक्ष्य में निर्धारित प्रतिमानकों को प्राप्त करने के लिए, कंपनी बेनिफिसियेसन संयंत्र, सिलिका रिडक्शन प्लांट एवं पेलेट प्लांट की स्थापना में तेजी लाए एवं बेहतर प्रचालन प्रक्रियाओं को भी अपनाएं। (पैरा 3.2 से 3.7)",
+   "bhashini_draft": "अनुशंसा 1: कच्चे ईंधन और सेवाओं की खपत के लिए वार्षिक व्यापार परिप्रेक्ष्य में निर्धारित मानदंडों को प्राप्त करने के लिए, कंपनी लाभप्रद संयंत्रों, सिलिका रिडक्शन संयंत्रों और पेलेट संयंत्रों की स्थापना में तेजी ला सकती है और बेहतर परिचालन प्रथाओं को भी अपना सकती है। (पैरा 3.2 से 3.7)"
+  },
+  {
+   "part_id": "p13_03",
+   "type": "heading",
+   "page_no": 2,
+   "tick_group": "g12",
+   "en": "Operational Performance of Blast Furnaces",
+   "hi_reference": "ब्लास्ट फर्नेस का परिचालन निष्पादन",
+   "bhashini_draft": "विस्फोट भट्टियों का परिचालन प्रदर्शन"
+  },
+  {
+   "part_id": "p13_04",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g13",
+   "en": "SAIL’s hot metal capacity was 23.07 mtpa (March 2024). Against the planned production of 140.88 million tonne as per Annual Business Perspective and 130.96 million tonne as per MoU (with Ministry of Steel), actual production was only 126.15 million tonne during 2017-2024.",
+   "hi_reference": "सेल की तप्त धातु क्षमता 23.07 एमटीपीए (मार्च 2024) थी। वार्षिक व्यावसायिक परिप्रेक्ष्य के अनुसार 140.88 मिलियन टन और इस्पात मंत्रालय के साथ समझौता ज्ञापन के अनुसार 130.96 मिलियन टन के नियोजित उत्पादन के मुकाबले, 2017-2024 के दौरान वास्तविक उत्पादन केवल 126.15 मिलियन टन था।",
+   "bhashini_draft": "सेल की गर्म धातु क्षमता 23.07 एम. टी. पी. ए. (मार्च 2024) थी। वार्षिक व्यापार परिप्रेक्ष्य के अनुसार 130.96मिलियन टन और समझौता ज्ञापन (इस्पात मंत्रालय के साथ) के अनुसार 126.15मिलियन टन के नियोजित उत्पादन के मुकाबले, वास्तविक उत्पादन 2017-2024 के दौरान केवल 2017-2024मिलियन टन था।"
+  },
+  {
+   "part_id": "p13_05",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g14",
+   "en": "Blast Furnace productivity, measured as hot metal produced per cubic meter of blast furnace working volume per day (tonnes/m³/day), is fixed annually in the Annual Business Perspective based on operating conditions. During 2017-2024, actual production against Annual Business Perspective targets ranged from 81 per cent (Bhilai) to 97 per cent (Durgapur). Performance against MoU targets was better, ranging from 89 per cent (Bhilai) to 105 per cent (Durgapur).",
+   "hi_reference": "ब्लास्ट फर्नेस उत्पादकता, जिसे प्रतिदिन ब्लास्ट फर्नेस कार्यशील आयतन के प्रति घन मीटर उत्पादित गर्म धातु (टन/एम³/दिन) के रूप में मापा जाता है, परिचालन स्थितियों के आधार पर वार्षिक व्यावसायिक परिप्रेक्ष्य में प्रतिवर्ष तय की जाती है। 2017-2024 के दौरान, वार्षिक व्यावसायिक परिप्रेक्ष्य लक्ष्यों के मुकाबले वास्तविक उत्पादन 81 प्रतिशत (भिलाई) से 97 प्रतिशत (दुर्गापुर) तक रहा। समझौता ज्ञापन लक्ष्यों के प्रति प्रदर्शन बेहतर रहा, जो 89 प्रतिशत (भिलाई) से लेकर 105 प्रतिशत (दुर्गापुर) तक था।",
+   "bhashini_draft": "ब्लास्ट फर्नेस उत्पादकता, जिसे प्रति दिन (टन/एम 3/दिन) काम करने वाली मात्रा में ब्लास्ट फर्नेस के प्रति घन मीटर उत्पादित गर्म धातु के रूप में मापा जाता है, संचालन स्थितियों के आधार पर वार्षिक व्यापार परिप्रेक्ष्य में सालाना तय की जाती है। 2017-2024 के दौरान, वार्षिक व्यापार परिप्रेक्ष्य लक्ष्यों के खिलाफ वास्तविक उत्पादन 81 per cent (भिलाई) से 97 per cent (दुर्गापुर) तक था। समझौता ज्ञापन लक्ष्यों के खिलाफ प्रदर्शन बेहतर था, जो 89 per cent (भिलाई) से 105 per cent (दुर्गापुर) तक था।"
+  },
+  {
+   "part_id": "p13_06",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g15",
+   "en": "SAIL lacked a structured policy for capital repairs, causing delays and unclear repair criteria. For example, capital repair of BF#4 at Bokaro, due in 2015-16, was deferred to 2019-20 due to delay in BF#1 repairs, resulting in lower productivity.",
+   "hi_reference": "सेल के पास पूंजीगत मरम्मत के लिए कोई संरचित नीति नहीं थी, जिसके कारण विलंब हुआ तथा मरम्मत के मापदंड अस्पष्ट रहे। उदाहरण के लिए, बोकारो में बीएफ#4 की पूंजीगत मरम्मत, जो 2015-16 में होनी थी, बीएफ#1 की मरम्मत में विलंब के कारण 2019-20 तक स्थगित कर दी गई, जिसके परिणामस्वरूप उत्पादकता कम हो गई।",
+   "bhashini_draft": "सेल के पास पूंजीगत मरम्मत के लिए एक संरचित नीति का अभाव था, जिससे देरी और अस्पष्ट मरम्मत मानदंड पैदा हुए। उदाहरण के लिए, बोकारो में BF#4 की पूंजीगत मरम्मत, 2015-16 में देय, BF#1 मरम्मत में देरी के कारण 2019-20 तक स्थगित कर दी गई थी, जिसके परिणामस्वरूप उत्पादकता कम हो गई थी।"
+  },
+  {
+   "part_id": "p13_07",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g16",
+   "en": "During 2017-2024, blast furnace capital repairs took 1,72,892 hours, including 76,883 excess hours. Of these, 39,904 hours were for unplanned repairs at Bokaro and Rourkela, while 36,979 hours exceeded planned schedules. Major delays occurred at Bhilai (20,926 hrs), Bokaro (13,965 hrs), and Rourkela (1,152 hrs).",
+   "hi_reference": "2017-2024 के दौरान, ब्लास्ट फर्नेस की पूंजीगत मरम्मत में 1,72,892 घंटे लगे, जिसमें 76,883 अतिरिक्त घंटे शामिल हैं। इनमें से 39,904 घंटे बोकारो और राउरकेला में अनियोजित मरम्मत के लिए थे, जबकि 36,979 घंटे नियोजित कार्यक्रम से अधिक थे। भिलाई (20,926 घंटे), बोकारो (13,965 घंटे) और राउरकेला (1,152 घंटे) में अधिक देरी हुई।",
+   "bhashini_draft": "2017-2024 के दौरान, ब्लास्ट फर्नेस कैपिटल की मरम्मत में 1,72,892 घंटे लगे, जिसमें 76,883 अतिरिक्त घंटे भी शामिल थे। इनमें से 39,904 घंटे बोकारो और राउरकेला में अनियोजित मरम्मत के लिए थे, जबकि 36,979 घंटे नियोजित समय से अधिक थे। भिलाई (20,926 घंटे), बोकारो (13,965 घंटे) और राउरकेला (1,152 घंटे) में बड़ी देरी हुई।"
+  },
+  {
+   "part_id": "p13_08",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g17",
+   "en": "Recommendation 2: The Company may prepare a structured policy for capital repair of blast furnaces and timely completion of capital repairs to ensure synchronized planned shutdowns of blast furnaces to avoid deferment of capital repairs and maximize the efficient operations of blast furnaces. (Para 4.4.1)",
+   "hi_reference": "अनुशंसा 2: कंपनी ब्लास्ट फर्नेस हेतु पूंजीगत मरम्मत एवम उसे समय पर पूरा करने के लिए एक संरचित नीति तैयार करे, ताकि पूंजीगत मरम्मत को स्थगित करने से बचने और ब्लास्ट फर्नेस के कुशल परिचालन को अधिकतम करने के लिए ब्लास्ट फर्नेस के समंवित नियोजित शटडाउन को सुनिश्चित किया जा सके। (पैरा 4.4.1)",
+   "bhashini_draft": "अनुशंसा 2: कंपनी विस्फोट भट्टियों की पूंजीगत मरम्मत और पूंजीगत मरम्मत के समय पर पूरा करने के लिए एक संरचित नीति तैयार कर सकती है ताकि विस्फोट भट्टियों के समक्रमित नियोजित बंद को सुनिश्चित किया जा सके ताकि पूंजीगत मरम्मत के स्थगन से बचा जा सके और विस्फोट भट्टियों के कुशल संचालन को अधिकतम किया जा सके। (पैरा 4.4. 1)"
+  },
+  {
+   "part_id": "p13_09",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g18",
+   "en": "High unplanned shutdown hours were mainly attributable to the shortage of raw materials, poor off take of hot metal by Steel Melting Shops, technical (electrical/mechanical/ operational/ instrumentation failures) and other miscellaneous issues and resulted in lesser hours for hot metal production.",
+   "hi_reference": "उच्च अनियोजित शटडाउन का समय मुख्य रूप से कच्चे माल की कमी, स्टील मेल्टिंग शॉप्स द्वारा तप्त धातु की खराब निकासी, तकनीकी (विद्युतीय/यांत्रिकी/परिचालन/यंत्र विन्यास विफलताएं) और अन्य विविध मुद्दों के कारण थे, जिसके परिणामस्वरूप तप्त धातु उत्पादन के लिए कम समय उपलब्ध हुआ।",
+   "bhashini_draft": "उच्च अनियोजित बंद के घंटे मुख्य रूप से कच्चे की कमी, स्टील पिघलने वाली दुकानों द्वारा गर्म धातु के खराब अधिग्रहण, तकनीकी (विद्युत/यांत्रिक/परिचालन/उपकरण विफलताओं) और अन्य विविध मुद्दों के कारण थे और इसके परिणामस्वरूप गर्म धातु उत्पादन के लिए कम घंटे थे।"
+  },
+  {
+   "part_id": "p13_10",
+   "type": "body",
+   "page_no": 2,
+   "tick_group": "g19",
+   "en": "Recommendation 3: The Company may minimise the unplanned shutdown hours by ensuring better availability of blast furnace through periodical repair & maintenance, ensuring availability of raw materials and addressing the off take issues downstream. (Para 4.4.2)",
+   "hi_reference": "अनुशंसा 3: कंपनी समय-समय पर मरम्मत एवं रखरखाव के माध्यम से ब्लास्ट फर्नेस की बेहतर उपलब्धता सुनिश्चित करके, कच्चे माल की उपलब्धता सुनिश्चित करके एवं डाउनस्ट्रीम में ऑफ टेक मुद्दों का समाधान करके अनियोजित शटडाउन घंटों को न्युनतम करे। (पैरा 4.4.2)",
+   "bhashini_draft": "अनुशंसा 3: कंपनी आवधिक मरम्मत और रखरखाव के माध्यम से ब्लास्ट फर्नेस की बेहतर उपलब्धता सुनिश्चित करके, कच्चे की उपलब्धता सुनिश्चित करके और डाउनस्ट्रीम में टेक ऑफ के मुद्दों को संबोधित करके अनियोजित बंद के घंटों को कम कर सकती है। (पैरा 4.4. 2)"
+  },
+  {
+   "part_id": "p13_11",
+   "type": "page_number",
+   "page_no": 2,
+   "tick_group": null,
+   "en": "vii",
+   "editable": false,
+   "bhashini_draft": "vii"
+  },
+  {
+   "part_id": "p14_01",
+   "type": "header",
+   "page_no": 3,
+   "tick_group": "g20",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p14_02",
+   "type": "heading",
+   "page_no": 3,
+   "tick_group": "g21",
+   "en": "Non-achievement of techno-economic parameters",
+   "hi_reference": "तकनीकी-आर्थिक लक्ष्यों की प्राप्ति न होना",
+   "bhashini_draft": "तकनीकी-आर्थिक मापदंडों की गैर-प्राप्ति"
+  },
+  {
+   "part_id": "p14_03",
+   "type": "body",
+   "page_no": 3,
+   "tick_group": "g22",
+   "en": "Hot Blast Temperature (900-1250°C) is fed into blast furnaces through tuyeres, raising temperatures to about 1650°C. Higher temperatures increases productivity and decreases the consumption of coke, while a 100°C decrease in hot blast temperature increases coke consumption by 2-3 per cent, raising hot metal costs. Neither the new blast furnaces at Bhilai (BF#8), Burnpur (BF#5) and Rourkela (BF#5) nor the old blast furnaces of SAIL could completely achieve the desired hot blast temperature during 2017-2024.",
+   "hi_reference": "गर्म विस्फोट तापमान (900-1250 डिग्री सेल्सियस) को ट्यूयर्स के माध्यम से विस्फोट भट्टी में डाला जाता है, जिससे तापमान लगभग 1650 डिग्री सेल्सियस तक बढ़ जाता है। उच्च तापमान से उत्पादकता बढ़ती है और कोक की खपत कम होती है, जबकि गर्म विस्फोट तापमान में 100°C की कमी से कोक की खपत 2-3 प्रतिशत बढ़ जाती है, जिससे तप्त धातु की लागत बढ़ जाती है। न ही भिलाई (बीएफ#8), बर्नपुर (बीएफ#5) और राउरकेला (बीएफ#5) में स्थित नए ब्लास्ट फर्नेस और न ही सेल के पुराने ब्लास्ट फर्नेस 2017-2024 के दौरान वांछित गर्म विस्फोट तापमान पूर्ण रूप से प्राप्त कर सके।",
+   "bhashini_draft": "गर्म विस्फोट तापमान (900-1250 डिग्री सेल्सियस) को ट्यूयर के माध्यम से विस्फोट भट्टियों में डाला जाता है, जिससे तापमान लगभग 1650 डिग्री सेल्सियस तक बढ़ जाता है। उच्च तापमान उत्पादकता को बढ़ाता है और कोक की खपत को कम करता है, जबकि गर्म विस्फोट तापमान में 100 डिग्री सेल्सियस की कमी से कोक की खपत 2-3 per cent बढ़ जाती है, जिससे गर्म धातु की लागत बढ़ जाती है। भिलाई (बी. एफ. #8), बर्नपुर (बी. एफ. #5) और राउरकेला (बी. एफ. #5) में न तो नई विस्फोट भट्टियां और न ही सेल की पुरानी विस्फोट भट्टियां 2017-2024 के दौरान वांछित गर्म विस्फोट तापमान को पूरी तरह से प्राप्त कर सकीं।"
+  },
+  {
+   "part_id": "p14_04",
+   "type": "body",
+   "page_no": 3,
+   "tick_group": "g23",
+   "en": "All SAIL plants, except Bhilai, had fixed oxygen enrichment norms (2.5-6 per cent) based on furnace capacity and age. However, targets were not achieved due to constraints like low oxygen plant capacity (Bokaro), limited enrichment facility (Durgapur), underperformance in production (Rourkela), and design/temperature issues in new furnaces (Bhilai & IISCO). The non-achievement of the desired level of oxygen enrichment during 2017-2024, while the Steel Plants of SAIL could not achieve the envisaged production targets as per Annual Business Perspective, indicates that the hot metal production could have been improved through better oxygen enrichment.",
+   "hi_reference": "भिलाई को छोड़कर सभी सेल संयंत्रों में भट्ठी की क्षमता और आयु के आधार पर ऑक्सीजन संवर्धन मानदंड (2.5-6 प्रतिशत) तय थे। हालांकि, कम ऑक्सीजन संयंत्र क्षमता (बोकारो), सीमित संवर्धन सुविधा (दुर्गापुर), उत्पादन में कम प्रदर्शन (राउरकेला), और नई भट्टियों (भिलाई और आईआईएससीओ) में डिजाइन/तापमान के मामलों जैसी बाधाओं के कारण लक्ष्य हासिल नहीं किए जा सके। वर्ष 2017-2024 के दौरान ऑक्सीजन संवर्धन के वांछित स्तर की प्राप्ति न होना, जबकि सेल के इस्पात संयंत्र वार्षिक व्यावसायिक परिप्रेक्ष्य के अनुसार परिकल्पित उत्पादन लक्ष्यों को प्राप्त नहीं कर सके, यह दर्शाता है कि बेहतर ऑक्सीजन संवर्धन के माध्यम से तप्त धातु उत्पादन में सुधार किया जा सकता था।",
+   "bhashini_draft": "भिलाई को छोड़कर सेल के सभी संयंत्रों में भट्टी की क्षमता और उम्र के आधार पर ऑक्सीजन संवर्धन मानदंड (2.5-6 per cent) तय किए गए थे। हालांकि, कम ऑक्सीजन संयंत्र क्षमता (बोकारो), सीमित संवर्धन सुविधा (दुर्गापुर), उत्पादन में कम प्रदर्शन (राउरकेला) और नई भट्टियों (भिलाई और आईआईएससीओ) में डिजाइन/तापमान के मुद्दों जैसी बाधाओं के कारण लक्ष्य हासिल नहीं किए जा सके। 2017-2024 के दौरान ऑक्सीजन संवर्धन के वांछित स्तर की गैर-प्राप्ति, जबकि सेल के इस्पात संयंत्र वार्षिक व्यापार परिप्रेक्ष्य के अनुसार परिकल्पित उत्पादन लक्ष्यों को प्राप्त नहीं कर सके, यह इंगित करता है कि बेहतर ऑक्सीजन संवर्धन के माध्यम से गर्म धातु उत्पादन में सुधार किया जा सकता था।"
+  },
+  {
+   "part_id": "p14_05",
+   "type": "body",
+   "page_no": 3,
+   "tick_group": "g24",
+   "en": "Blast pressure and Blast volume are critical techno-economic parameters of a blast furnace. Low blast pressure between 0.81 and 2.80 Kg/cm² was noted against the desired level between 1.65 and 3.00 Kg/cm² in old blast furnaces. Audit noted that blast volume was between 71 and 231 (10³ Nm³/hr) against the desired level of 120 and 240 (10³ Nm³/hr) in old furnaces and between 176 and 356 (10³ Nm³/hr) against the desired level of 306 and 330 (10³ Nm³/hr) in the new furnaces.",
+   "hi_reference": "ब्लास्ट प्रेशर और ब्लास्ट वॉल्यूम ब्लास्ट फर्नेस के महत्वपूर्ण तकनीकी-आर्थिक पैरामीटर हैं। पुरानी ब्लास्ट फर्नेस में वांछित स्तर 1.65 और 3.00 किलोग्राम/सेमी² के मुकाबले 0.81 और 2.80 किलोग्राम/सेमी² के बीच कम ब्लास्ट दबाव देखा गया। लेखापरीक्षा में पाया गया कि विस्फोट की मात्रा पुरानी भट्टियों में 120 और 240 (10³ एनएम³/घंटा) के वांछित स्तर के मुकाबले 71 और 231 (10³ एनएम³/घंटा) के मध्य थी और नई भट्ठियों में 306 और 330 (10³ एनएम³/घंटा) के वांछित स्तर के मुकाबले 176 और 356 (10³ एनएम³/घंटा) के बीच थी।",
+   "bhashini_draft": "विस्फोट का दबाव और विस्फोट की मात्रा एक विस्फोट भट्टी के महत्वपूर्ण तकनीकी-आर्थिक मापदंड हैं। पुरानी विस्फोट भट्टियों में 0.81 और 2.80 कि. ग्रा./से. मी. 2 के बीच कम विस्फोट दबाव 1.65 और 3.00 कि. ग्रा./से. मी. 2 के बीच वांछित स्तर के मुकाबले नोट किया गया था। लेखापरीक्षा ने नोट किया कि विस्फोट की मात्रा पुरानी भट्टियों में 120 और 240 (10 3 एनएम 3/घंटा) के वांछित स्तर के मुकाबले 71 और 231 (10 3 एनएम 3/घंटा) के बीच और नई भट्टियों में 306 और 330 (10 3 एनएम 3/घंटा) के वांछित स्तर के मुकाबले 176 और 356 (10 3 एनएम 3/घंटा) के बीच थी।"
+  },
+  {
+   "part_id": "p14_06",
+   "type": "body",
+   "page_no": 3,
+   "tick_group": "g25",
+   "en": "Recommendation 4: The Company may fix norms for all techno-economic parameters for all blast furnaces at the steel plants. Efforts may be made to adhere to the desired parameters to achieve desired level of hot metal production and Blast Furnace productivity. (Para 4.5)",
+   "hi_reference": "अनुशंसा 4: कंपनी इस्पात संयंत्रों में सभी ब्लास्ट फर्नेस के लिए सभी तकनीकी-आर्थिक मानदंडों के मानदंड निर्धारित करे। तप्त धातु उत्पादन एवम् ब्लास्ट फर्नेस उत्पादकता के वांछित स्तर को प्राप्त करने के लिए वांछित मानदंडों का पालन करने का प्रयास किया जाए। (पैरा 4.5)",
+   "bhashini_draft": "अनुशंसा 4: कंपनी इस्पात संयंत्रों में सभी विस्फोट भट्टियों के लिए सभी तकनीकी-आर्थिक मानकों के लिए मानदंड तय कर सकती है। गर्म धातु उत्पादन और ब्लास्ट फर्नेस उत्पादकता के वांछित स्तर को प्राप्त करने के लिए वांछित मापदंडों का पालन करने के प्रयास किए जा सकते हैं। (पैरा 4.5)"
+  },
+  {
+   "part_id": "p14_07",
+   "type": "heading",
+   "page_no": 3,
+   "tick_group": "g26",
+   "en": "Capacity imbalance in steel making process",
+   "hi_reference": "इस्पात निर्माण प्रक्रिया में क्षमता असंतुलन",
+   "bhashini_draft": "इस्पात निर्माण प्रक्रिया में क्षमता असंतुलन"
+  },
+  {
+   "part_id": "p14_08",
+   "type": "body",
+   "page_no": 3,
+   "tick_group": "g27",
+   "en": "Capacity imbalance in Blast Furnace operations occurs when the installed or upgraded capacity of the Blast furnace is not commensurate with the supporting upstream facilities such as Coke ovens, Sinter plants and Steel Melting Shops in the downstream. The upstream facilities of Raw Material Handling Plant, Coke oven batteries and Sinter Plant were commensurate to meet the requirements of the Blast Furnaces in all the Steel plants. However, in the downstream, capacity of the Steel melting shops could not meet the capacity of the Blast furnace at Bokaro and Rourkela Steel Plants.",
+   "hi_reference": "ब्लास्ट फर्नेस परिचालन में क्षमता असंतुलन तब होता है जब ब्लास्ट फर्नेस की स्थापित या उन्नत क्षमता, डाउनस्ट्रीम में कोक ओवन, सिंटर संयंत्र और स्टील मेल्टिंग शॉप जैसी सहायक अपस्ट्रीम सुविधाओं के अनुरूप नहीं होती है। कच्चा माल हैंडलिंग प्लांट, कोक ओवन बैटरी और सिंटर प्लांट की अपस्ट्रीम सुविधाएं सभी इस्पात संयंत्रों में ब्लास्ट फर्नेस की आवश्यकताओं को पूरा करने के लिए पर्याप्त थीं। हालाँकि, डाउनस्ट्रीम में, स्टील मेल्टिंग शॉप्स की क्षमता बोकारो और राउरकेला स्टील प्लांट की ब्लास्ट फर्नेस की क्षमता से मेल नहीं खा सकी।",
+   "bhashini_draft": "ब्लास्ट फर्नेस प्रचालन में क्षमता असंतुलन तब होता है जब ब्लास्ट फर्नेस की स्थापित या उन्नत क्षमता सहायक ऊपर की ओर की सुविधाओं जैसे कि कोक ओवन, सिंटर संयंत्र और नीचे की ओर स्टील पिघलने वाली दुकानों के अनुरूप नहीं होती है। कच्चा संभालने वाले संयंत्र, कोक ओवन बैटरियों और सिंटर संयंत्र की अपस्ट्रीम सुविधाएं सभी इस्पात संयंत्रों में ब्लास्ट फर्नेस की आवश्यकताओं को पूरा करने के लिए अनुरूप थीं। हालांकि, डाउनस्ट्रीम में, स्टील पिघलने वाली दुकानों की क्षमता बोकारो और राउरकेला स्टील प्लांट में ब्लास्ट फर्नेस की क्षमता को पूरा नहीं कर सकी।"
+  },
+  {
+   "part_id": "p14_09",
+   "type": "body",
+   "page_no": 3,
+   "tick_group": "g28",
+   "en": "The planned upgradation of Casters #1 and #2 at Rourkela (2008) to raise crude steel capacity to 4.2 MTPA was not implemented. Against the recommendation to install a new caster (2012-13) to achieve 3.7 MTPA, Stage-I approval for the 4th Slab Caster came only in 2019. The project was awarded in 2022 at a revised cost of ₹922.31 crore, for completion by July 2025 after a delay of over six years. Meanwhile, a 0.6 MTPA capacity gap persisted, causing potential annual savings loss of ₹633.78 crore.",
+   "hi_reference": "क्रुड स्टील की क्षमता को 4.2 एमटीपीए तक बढ़ाने के लिए राउरकेला (2008) में कैस्टर #1 और #2 के नियोजित उन्नयन को कार्यान्वित नहीं किया गया। 3.7 एमटीपीए प्राप्त करने के लिए एक नया कास्टर स्थापित करने की अनुशंसा (2012-13) के विपरीत, चौथे स्लैब कास्टर के लिए चरण-I अनुमोदन 2019 में आया। छः वर्षों से अधिक के विलंब के बाद, इस परियोजना को 2022 में ₹922.31 करोड़ की संशोधित लागत पर जुलाई 2025 तक पूरा करने हेतु सौंपा गया। इस बीच, 0.6 एमटीपीए क्षमता का अंतर बना रहा, जिससे ₹633.78 करोड़ की संभावित वार्षिक बचत हानि हुई।",
+   "bhashini_draft": "कच्चे इस्पात की क्षमता को एम. टी. पी. ए. तक बढ़ाने के लिए राउरकेला (2008) में कैस्टर्स #1 और #2 का नियोजित उन्नयन लागू नहीं किया गया था। 3.7 एम. टी. पी. ए. प्राप्त करने के लिए एक नया ढक्कन (2012-13) स्थापित करने की सिफारिश के खिलाफ, 4 वें स्लैब ढक्कन के लिए चरण-I अनुमोदन केवल 2019 में आया। यह परियोजना 2022 में ₹922.31 करोड़ की संशोधित लागत पर प्रदान की गई थी, जिसे छह साल से अधिक की देरी के बाद जुलाई 2025 तक पूरा किया जाना था। इस बीच, एक 0.6 एम. टी. पी. ए. क्षमता अंतर बना रहा, जिससे ₹633.78 करोड़ की संभावित वार्षिक बचत का नुकसान हुआ।"
+  },
+  {
+   "part_id": "p14_10",
+   "type": "page_number",
+   "page_no": 3,
+   "tick_group": null,
+   "en": "viii",
+   "editable": false,
+   "bhashini_draft": "viii"
+  },
+  {
+   "part_id": "p15_01",
+   "type": "header",
+   "page_no": 4,
+   "tick_group": "g29",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p15_02",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g30",
+   "en": "To achieve 5.77 MTPA hot metal, Bokaro needed a new 360 m² sinter plant (3.7 MTPA), approved in 2011 awarded at a cost of ₹653.85 crore for completion by 2017. The project could not progress due to failure of contractor, weak follow-up, and litigation. The progress was minimal despite ₹361.79 crore been spent. Costs later escalated to ₹2,224.18 crore, and no order was placed (January 2025) for balance work, delaying envisaged annual savings of ₹248.16 crore.",
+   "hi_reference": "5.77 एमटीपीए तप्त धातु प्राप्त करने के लिए, बोकारो को एक नए 360 वर्ग मीटर सिंटर संयंत्र (3.7 एमटीपीए) की आवश्यकता थी, जिसे 2011 में स्वीकृत कर ₹653.85 करोड़ की लागत से 2017 तक पूरा करने के लिए अनुबंध दिया गया। संविदाकार की विफलता, कमजोर अनुवर्ती कार्रवाई और मुकदमेबाजी के कारण परियोजना आगे नहीं बढ़ सकी। ₹361.79 करोड़ खर्च होने के बावजूद प्रगति न्यूनतम रही। बाद में लागत बढ़कर ₹2,224.18 करोड़ हो गई तथा शेष कार्य के लिए कोई आदेश नहीं दिया गया (जनवरी 2025), जिससे ₹248.16 करोड़ के अनुमानित वार्षिक बचत में विलंब हुआ।",
+   "bhashini_draft": "5.77 एम. टी. पी. ए. गर्म धातु प्राप्त करने के लिए, बोकारो को एक नए 360 एम. 2 सिंटर संयंत्र (3.7 एम. टी. पी. ए.) की आवश्यकता थी, जिसे 2017 द्वारा पूरा करने के लिए ₹653.85 करोड़ की लागत से 2011 में अनुमोदित किया गया था। ठेकेदार की विफलता, कमजोर अनुवर्ती कार्रवाई और मुकदमेबाजी के कारण परियोजना आगे नहीं बढ़ सकी। ₹361.79 करोड़ खर्च किए जाने के बावजूद प्रगति न्यूनतम थी। बाद में लागत बढ़कर ₹2,224.18 करोड़ हो गई, और शेष कार्य के लिए कोई आदेश (जनवरी 2025) नहीं दिया गया, जिससे ₹248.16 करोड़ की अनुमानित वार्षिक बचत में देरी हुई।"
+  },
+  {
+   "part_id": "p15_03",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g31",
+   "en": "To replace obsolete ingot casting, SAIL approved (2013) modernization of Steel Melting Shop-I, Bokaro to produce 1.305 mtpa continuous casting slabs, with expected annual gross margin of ₹291 crore. The project, due in November 2017, was delayed by 40 months in contract finalization and further by lapses in environmental clearance. In the absence of slab caster, liquid steel continued through ingot route from May 2019 to April 2021, resulting in avoidable extra expenditure of ₹418.18 crore.",
+   "hi_reference": "अप्रचलित इंगोट कास्टिंग को बदलने के लिए, सेल ने स्टील मेल्टिंग शॉप-I, बोकारो के आधुनिकीकरण को स्वीकृति दी (2013), जिससे 1.305 एमटीपीए सतत कास्टिंग स्लैब का उत्पादन के साथ ₹291 करोड़ की वार्षिक ग्रोस मार्जिन होने की उम्मीद है। नवंबर 2017 में पूरी होने वाली इस परियोजना में अनुबंध को अंतिम रूप देने में 40 महीने का विलंब हुआ तथा पर्यावरणीय स्वीकृति में चूक के कारण इसमें और भी विलंब हुआ। स्लैब कास्टर की अनुपस्थिति में, मई 2019 से अप्रैल 2021 तक तरल स्टील का उत्पादन इंगोट मार्ग से जारी रहा, जिसके परिणामस्वरूप ₹418.18 करोड़ का परिहार्य अतिरिक्त व्यय हुआ।",
+   "bhashini_draft": "अप्रचलित इनगॉट कास्टिंग को बदलने के लिए, सेल ने ₹291 करोड़ के अनुमानित वार्षिक सकल मार्जिन के साथ स्टील मेल्टिंग शॉप-I, बोकारो के आधुनिकीकरण को मंजूरी (2013) दी। नवंबर 2017 में होने वाली इस परियोजना में अनुबंध को अंतिम रूप देने में 40 महीने की देरी हुई थी और पर्यावरण मंजूरी में खामियों के कारण इसमें देरी हुई थी। स्लैब कैस्टर के अभाव में, मई 2019 से अप्रैल 2021 तक तरल इस्पात सिल्ल मार्ग के माध्यम से जारी रहा, जिसके परिणामस्वरूप ₹418.18 करोड़ का अतिरिक्त खर्च टाला जा सका।"
+  },
+  {
+   "part_id": "p15_04",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g32",
+   "en": "Recommendation 5: The Company may assess the imbalance in upstream facilities like sinter plant and downstream facilities like Steel Melting Shop and ensure timely completion of its capital projects to achieve optimum utilisation of its steel making capacity. (Para 5.2.1)",
+   "hi_reference": "अनुशंसा 5: कंपनी सिंटर संयंत्र जैसी अपस्ट्रीम सुविधाओं एवं इस्पात मेल्टिंग शॉप जैसी डाउनस्ट्रीम सुविधाओं में असंतुलन का आकलन करे एवं अपनी इस्पात निर्माण क्षमता का इष्टतम उपयोग प्राप्त करने के लिए अपनी पूंजीगत परियोजनाओं को समय पर पूरा करना सुनिश्चित करे। (पैरा 5.2.1)",
+   "bhashini_draft": "अनुशंसा 5: कंपनी सिंटर संयंत्र और स्टील मेल्टिंग शॉप जैसी डाउनस्ट्रीम सुविधाओं जैसी अपस्ट्रीम सुविधाओं में असंतुलन का आकलन कर सकती है और अपनी इस्पात निर्माण क्षमता का इष्टतम उपयोग प्राप्त करने के लिए अपनी पूंजी परियोजनाओं को समय पर पूरा करना सुनिश्चित कर सकती है। (पैरा 5.2. 1)"
+  },
+  {
+   "part_id": "p15_05",
+   "type": "heading",
+   "page_no": 4,
+   "tick_group": "g33",
+   "en": "Production of pig iron",
+   "hi_reference": "पिग आयरन का उत्पादन",
+   "bhashini_draft": "पिग आयरन का उत्पादन"
+  },
+  {
+   "part_id": "p15_06",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g34",
+   "en": "The average yield percentage of pig iron in the Steel Plants of SAIL ranged between 86 to 92 per cent during the period 2017-2024. Bhilai, Durgapur and Bokaro had fixed the yield percentages for the Pig casting machine. In the absence of assessment of the actual pig iron generated, the operational efficiency of the pig casting machines could not be assessed by Audit.",
+   "hi_reference": "सेल के इस्पात संयंत्रों में पिग आयरन का औसत उत्पादन प्रतिशत 2017-2024 की अवधि के दौरान 86 से 92 प्रतिशत के बीच रहा। भिलाई, दुर्गापुर और बोकारो ने पिग कास्टिंग मशीन के लिए यील्ड प्रतिशत तय कर दिया था। उत्पादित वास्तविक पिग आयरन के मूल्यांकन के अभाव में, पिग कास्टिंग मशीनों की परिचालन दक्षता का मूल्यांकन लेखापरीक्षा द्वारा नहीं किया जा सका।",
+   "bhashini_draft": "सेल के इस्पात संयंत्रों में पिग आयरन की औसत उपज प्रतिशत 2017-2024 की अवधि के दौरान 86 से 92 per cent के बीच थी। भिलाई, दुर्गापुर और बोकारो ने सुअर ढोने वाली मशीन के लिए उपज प्रतिशत तय किया था। उत्पन्न वास्तविक पिग आयरन के मूल्यांकन के अभाव में, पिग कास्टिंग मशीनों की परिचालन दक्षता का मूल्यांकन लेखापरीक्षा द्वारा नहीं किया जा सका।"
+  },
+  {
+   "part_id": "p15_07",
+   "type": "heading",
+   "page_no": 4,
+   "tick_group": "g35",
+   "en": "Dumping of hot metal at sand pit in Bhilai and IISCO Steel Plant",
+   "hi_reference": "भिलाई और इस्को इस्पात संयंत्र में सैंड पिट में तप्त धातु का सन्निक्षेपण",
+   "bhashini_draft": "भिलाई और आई. आई. एस. सी. ओ. इस्पात संयंत्र में रेत के गड्ढे में गर्म धातु का डंपिंग"
+  },
+  {
+   "part_id": "p15_08",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g36",
+   "en": "Between 2017-2024, Bhilai and IISCO Steel Plants dumped 0.039 million tonne and 0.111 million tonne of hot metal, respectively, into sand pits due to lack of storage facility and limitations of pig casting machines. The metal was recovered only as scrap, causing a loss of ₹51.29 crore (Bhilai Steel Plant ₹35.90 crore; IISCO Steel Plant ₹15.39 crore).",
+   "hi_reference": "2017-2024 के बीच, भिलाई और इस्को इस्पात संयंत्र ने भंडारण सुविधा की कमी और पिग कास्टिंग मशीनों की सीमाओं के कारण क्रमशः 0.039 मिलियन टन और 0.111 मिलियन टन तप्त धातु को रेत के गड्ढों में फेंक दिया। धातु केवल स्क्रैप के रूप में बरामद की गई, जिससे ₹51.29 करोड़ (भिलाई इस्पात संयंत्र ₹35.90 करोड़; इस्को इस्पात संयंत्र ₹15.39 करोड़) का नुकसान हुआ।",
+   "bhashini_draft": "भिलाई और आई. आई. एस. सी. ओ. इस्पात संयंत्रों ने भंडारण सुविधा की कमी और सुअर ढोने वाली मशीनों की सीमाओं के कारण क्रमशः 3 मिलियन टन और 2 मिलियन टन गर्म धातु को रेत के गड्ढों में फेंक दिया। धातु को केवल कबाड़ के रूप में बरामद किया गया था, जिससे ₹51.29 करोड़ का नुकसान हुआ (भिलाई स्टील प्लांट ₹35.90 करोड़; आई. आई. एस. सी. ओ. इस्पात संयंत्र ₹15.39 करोड़)।"
+  },
+  {
+   "part_id": "p15_09",
+   "type": "heading",
+   "page_no": 4,
+   "tick_group": "g37",
+   "en": "Generation of Blast Furnace Slag and its disposal",
+   "hi_reference": "ब्लास्ट फर्नेस स्लैग का उत्पादन और उसका निपटान",
+   "bhashini_draft": "ब्लास्ट फर्नेस स्लैग का उत्पादन और इसका निपटान"
+  },
+  {
+   "part_id": "p15_10",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g38",
+   "en": "From 2017-18 to 2023-24, SAIL’s five integrated plants generated 51.33 million tonne of slag, of which 44.15 million tonne was granulated, 1.37 million tonne was sold, and 5.81 million tonne was dumped in dry pits.",
+   "hi_reference": "2017-18 से 2023-24 तक, सेल के पांच एकीकृत संयंत्रों ने 51.33 मिलियन टन स्लैग उत्पन्न किया, जिसमें से 44.15 मिलियन टन दानेदार था, 1.37 मिलियन टन बेचा गया, और 5.81 मिलियन टन सूखे गड्ढों में सन्निक्षेपित किया गया।",
+   "bhashini_draft": "2017-18 से 2023-24 तक, सेल के पांच एकीकृत संयंत्रों ने 51.33 मिलियन टन स्लैग का उत्पादन किया, जिसमें से 44.15 मिलियन टन दानेदार था, 1.37 मिलियन टन बेचा गया था, और 5.81 मिलियन टन सूखे गड्ढों में फेंक दिया गया था।"
+  },
+  {
+   "part_id": "p15_11",
+   "type": "body",
+   "page_no": 4,
+   "tick_group": "g39",
+   "en": "Recommendation 6: The Company may ensure that 100 per cent granulation of slag as mandated by the CPCB guidelines is achieved by installation and modernization of slag granulation facilities. The diversion of slag to dry pits may be minimized to achieve the gainful utilization of blast furnace slag to safeguard the environment and also optimize revenue potential. (Para 5.2.2 and 5.3)",
+   "hi_reference": "अनुशंसा 6: कंपनी यह सुनिश्चित करे कि सीपीसीबी दिशानिर्देशों के अनुसार स्लैग का 100 प्रतिशत ग्रैनुलेशन, स्लैग ग्रैनुलेशन सुविधाओं की स्थापना एवं आधुनिकीकरण द्वारा प्राप्त किया जाए। पर्यावरण की सुरक्षा एवं संभावित राजस्व को अधिकतम करने के लिए ब्लास्ट फर्नेस स्लैग के लाभकारी उपयोग को प्राप्त करने हेतु स्लैग को ड्राई पिट में छोड़ने को कम किया जाए। (पैरा 5.2.2 और 5.3)",
+   "bhashini_draft": "अनुशंसा 6: कंपनी यह सुनिश्चित कर सकती है कि सी. पी. सी. बी. दिशानिर्देशों द्वारा अनिवार्य स्लैग का 100 प्रतिशत ग्रेन्युलेशन स्लैग ग्रेन्युलेशन सुविधाओं की स्थापना और आधुनिकीकरण द्वारा प्राप्त किया जाए। पर्यावरण की रक्षा करने और राजस्व क्षमता को अनुकूलित करने के लिए ब्लास्ट फर्नेस स्लैग के लाभकारी उपयोग को प्राप्त करने के लिए स्लैग को सूखे गड्ढों की ओर मोड़ना कम किया जा सकता है। (पैरा 5.2. 2 और 5.3)"
+  },
+  {
+   "part_id": "p15_12",
+   "type": "page_number",
+   "page_no": 4,
+   "tick_group": null,
+   "en": "ix",
+   "editable": false,
+   "bhashini_draft": "आईएक्स"
+  },
+  {
+   "part_id": "p16_01",
+   "type": "header",
+   "page_no": 5,
+   "tick_group": "g40",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p16_02",
+   "type": "heading",
+   "page_no": 5,
+   "tick_group": "g41",
+   "en": "Safety and Environment Issues",
+   "hi_reference": "सुरक्षा और पर्यावरण संबंधी मुद्दे",
+   "bhashini_draft": "सुरक्षा और पर्यावरण के मुद्दे"
+  },
+  {
+   "part_id": "p16_03",
+   "type": "body",
+   "page_no": 5,
+   "tick_group": "g42",
+   "en": "Corporate Safety Policy of SAIL stipulates safety audit to assess compliance to safety standards, mitigating plans, develop improvement plan and accountabilities for completion and follow up on timeline and recommendations. Bhilai, Rourkela, and Durgapur plants had implemented all the recommendations while Bokaro complied with 30 out of 40 recommendations and IISCO complied with 83 out of 84 recommendations, leaving key issues like conducting test of Pressure Relieve Valves of pressure vessels, fluorescent signs in cable galleries, non-working of Fire detection alarm etc. non-complied.",
+   "hi_reference": "सेल की निगमित सुरक्षा नीति में सुरक्षा मानकों के अनुपालन का आकलन करने, शमन योजनाओं, सुधार योजना और पूरा करने के लिए जवाबदेही विकसित करने और समय-सीमा और अनुशंसाओं का पालन करने के लिए सुरक्षा लेखापरीक्षा का प्रावधान है। भिलाई, राउरकेला और दुर्गापुर संयंत्रों ने सभी अनुशंसाओं को लागू किया था, जबकि बोकारो ने 40 में से 30 अनुशंसाओं का अनुपालन किया था और इसको ने 84 में से 83 अनुशंसाओं का अनुपालन किया था, जिससे दबाव वाहिकाओं के दबाव राहत वाल्वों का परीक्षण करने, केबल गैलरी में फ्लोरोसेंट संकेत, अग्नि संसूचन अलार्म का काम न करना आदि जैसे प्रमुख मुद्दों का अनुपालन नहीं किया गया।",
+   "bhashini_draft": "सेल की निगमित सुरक्षा नीति सुरक्षा मानकों के अनुपालन का आकलन करने, योजनाओं को कम करने, सुधार योजना और पूर्णता के लिए जवाबदेही विकसित करने और समय और सिफारिशों पर अनुवर्ती कार्रवाई करने के लिए सुरक्षा लेखापरीक्षा निर्धारित करती है। भिलाई, राउरकेला और दुर्गापुर संयंत्रों ने सभी सिफारिशों को लागू किया था, जबकि बोकारो ने 40 सिफारिशों में से 30 का पालन किया और आई. आई. एस. सी. ओ. ने 84 सिफारिशों में से 83 का पालन किया, जिससे दबाव वाहिकाओं के दबाव राहत वाल्वों का परीक्षण, केबल दीर्घाओं में फ्लोरोसेंट संकेत, आग का पता लगाने वाले अलार्म का काम न करना आदि जैसे प्रमुख मुद्दों का पालन नहीं किया गया।"
+  },
+  {
+   "part_id": "p16_04",
+   "type": "body",
+   "page_no": 5,
+   "tick_group": "g43",
+   "en": "Recommendation 7: Management may ensure periodical conduct of Safety Audits and continuous monitoring and follow up of the compliance to the recommendations of such audits. Effective implementation of Standard Operating Procedures in line with the Statutory provisions would ensure a safe working environment. (Para 6.1)",
+   "hi_reference": "अनुशंसा 7: प्रबंधन समय-समय पर सुरक्षा लेखापरीक्षा सुनिश्चित करे एवम् ऐसे लेखापरीक्षा की अनुशंसाओं के अनुपालन की निरंतर निगरानी एवम अनुवर्ती कार्रवाई करे। वैधानिक प्रावधानों के अनुरूप मानक संचालन प्रक्रियाओं के प्रभावी कार्यान्वयन से सुरक्षित कार्य वातावरण सुनिश्चित होगा। (पैरा 6.1)",
+   "bhashini_draft": "अनुशंसा 7: प्रबंधन समय-समय पर सुरक्षा लेखापरीक्षा का संचालन और निरंतर निगरानी सुनिश्चित कर सकता है और ऐसे लेखापरीक्षा की सिफारिशों का पालन कर सकता है। वैधानिक प्रावधानों के अनुरूप मानक संचालन प्रक्रियाओं के प्रभावी कार्यान्वयन से एक सुरक्षित कार्य वातावरण सुनिश्चित होगा। (पैरा 6.1)"
+  },
+  {
+   "part_id": "p16_05",
+   "type": "body",
+   "page_no": 5,
+   "tick_group": "g44",
+   "en": "At IISCO Steel Plant, effluent levels from the Blast Furnace cast house de-fuming system exceeded norms during 2017-21 but met limits in 2021-24. However, stack discharges remained above limits during 2017-2024 and West Bengal Pollution Control Board (WBPCB) also reporting high emissions at tapping and ladle loading points and fugitive emissions from BF#5. For these violations, WBPCB imposed a ₹3.85 lakh penalty and required a ₹20 lakh bank guarantee. WBPCB again noted very high fugitive emission from the stacks attached to blast furnace Cast House I & II during inspection made in February 2023.",
+   "hi_reference": "इस्को इस्पात संयंत्र में, ब्लास्ट फर्नेस कास्ट हाउस डी-फ्यूमिंग सिस्टम से निकलने वाले अपशिष्ट का स्तर 2017-21 के दौरान मानदंडों से अधिक था, लेकिन 2021-24 में तय सीमा तक पहुंच गया। हालांकि, 2017-2024 के दौरान चिमनी से निस्सरण सीमा से ऊपर रहा और पश्चिम बंगाल प्रदूषण नियंत्रण बोर्ड (डब्ल्यूबीपीसीबी) ने भी टैपिंग और लेडल लोडिंग पॉइंट पर उच्च उत्सर्जन और बीएफ#5 से होने वाले उत्सर्जन की रिपोर्ट दी। इन उल्लंघनों के लिए, पश्चिम बंगाल प्रदूषण नियंत्रण बोर्ड ने ₹3.85 लाख का जुर्माना लगाया और ₹20 लाख की बैंक गारंटी की आवश्यकता बताई। पश्चिम बंगाल प्रदूषण नियंत्रण बोर्ड ने फरवरी 2023 में किए गए निरीक्षण के दौरान ब्लास्ट फर्नेस कास्ट हाउस I और II से जुड़े स्टैक से बहुत अधिक आशुलोपी उत्सर्जन का फिर से उल्लेख किया।",
+   "bhashini_draft": "आई. आई. एस. सी. ओ. स्टील प्लांट में, ब्लास्ट फर्नेस कास्ट हाउस डी-फ्यूमिंग सिस्टम से अपशिष्ट स्तर 2017-21 के दौरान मानदंडों को पार कर गया लेकिन 2021-24 में सीमा को पूरा किया। हालांकि, 2017-2024 के दौरान ढेर निर्वहन सीमा से ऊपर रहा और पश्चिम बंगाल प्रदूषण नियंत्रण बोर्ड (डब्ल्यू. बी. पी. सी. बी.) ने भी दोहन और लेडल लोडिंग बिंदुओं पर उच्च उत्सर्जन और बी. एफ. #5 से भगोड़े उत्सर्जन की सूचना दी। इन उल्लंघनों के लिए, डब्ल्यू. बी. पी. सी. बी. ने ₹3.85 लाख का जुर्माना लगाया और ₹20 लाख बैंक गारंटी की आवश्यकता थी। डब्ल्यू. बी. पी. सी. बी. ने फरवरी 2023 में किए गए निरीक्षण के दौरान ब्लास्ट फर्नेस कास्ट हाउस I और II से जुड़े ढेर से बहुत अधिक भगोड़े उत्सर्जन का फिर से उल्लेख किया।"
+  },
+  {
+   "part_id": "p16_06",
+   "type": "body",
+   "page_no": 5,
+   "tick_group": "g45",
+   "en": "Coal consumption exceeded norms in all SAIL plants (except Bokaro in 2021-22 and Durgapur in 2021-22 & 2023-24), increasing the costs as well as emissions. Bhilai, Bokaro, Rourkela and IISCO Steel used or sold the entire solid waste. However, Durgapur Steel Plant could use only 45 per cent of BF sludge during 2017-24.",
+   "hi_reference": "सभी सेल संयंत्रों (2021-22 में बोकारो और 2021-22 एवं 2023-24 में दुर्गापुर को छोड़कर) में कोयले की खपत मानदंडों से अधिक हो गई, जिससे लागत के साथ-साथ उत्सर्जन भी बढ़ गया। भिलाई, बोकारो, राउरकेला और इस्को इस्पात संयंत्रों ने संपूर्ण ठोस अपशिष्ट का उपयोग किया या उसे बेच दिया। हालाँकि, दुर्गापुर इस्पात संयंत्र 2017-24 के दौरान केवल 45 प्रतिशत बीएफ स्लज का उपयोग कर सका।",
+   "bhashini_draft": "सेल के सभी संयंत्रों में कोयले की खपत मानदंडों को पार कर गई (बोकारो में 2021-22 और दुर्गापुर में 2021-22 और 2023-24 को छोड़कर), जिससे लागत के साथ-साथ उत्सर्जन भी बढ़ गया। भिलाई, बोकारो, राउरकेला और आई. आई. एस. सी. ओ. स्टील ने पूरे ठोस कचरे का उपयोग या बिक्री की। हालांकि, दुर्गापुर इस्पात संयंत्र 2017-24 के दौरान केवल 45 प्रतिशत बी. एफ. कीचड़ का उपयोग कर सका।"
+  },
+  {
+   "part_id": "p16_07",
+   "type": "body",
+   "page_no": 5,
+   "tick_group": "g46",
+   "en": "Recommendation 8: The Company may put efforts to reduce the coke consumption through better operational and project management measures and thereby maintain the CO₂ emissions within the norms. Management may also ensure that the solid waste generated in the Blast Furnace are disposed as per the terms of the consent to operate. (Para 6.2)",
+   "hi_reference": "अनुशंसा 8: कंपनी बेहतर परिचालन एवं परियोजना प्रबंधन उपायों के माध्यम से कोक की खपत को कम करने के प्रयास करे एवं इस प्रकार CO₂ उत्सर्जन को मानदंडों के भीतर बनाए रख सकती है। प्रबंधन यह भी सुनिश्चित करे कि ब्लास्ट फर्नेस में उत्पन्न ठोस अपशिष्ट का निपटान संचालन सहमति की शर्तों के अनुसार किया जाए। (पैरा 6.2)",
+   "bhashini_draft": "अनुशंसा 8: कंपनी बेहतर परिचालन और परियोजना प्रबंधन उपायों के माध्यम से कोक की खपत को कम करने के प्रयास कर सकती है और इस तरह मानदंडों के भीतर कार्बन डाइऑक्साइड उत्सर्जन को बनाए रख सकती है। प्रबंधन यह भी सुनिश्चित कर सकता है कि ब्लास्ट फर्नेस में उत्पन्न ठोस कचरे का संचालन करने की सहमति की शर्तों के अनुसार निपटान किया जाए। (पैरा 6.2)"
+  },
+  {
+   "part_id": "p16_08",
+   "type": "page_number",
+   "page_no": 5,
+   "tick_group": null,
+   "en": "x",
+   "editable": false
+  },
+  {
+   "part_id": "p27_01",
+   "type": "header",
+   "page_no": 6,
+   "tick_group": "g47",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p27_02",
+   "type": "heading",
+   "page_no": 6,
+   "tick_group": "g48",
+   "en": "CHAPTER II Audit Approach",
+   "hi_reference": "अध्याय II लेखापरीक्षा दृष्टिकोण",
+   "bhashini_draft": "अध्याय II लेखापरीक्षा दृष्टिकोण"
+  },
+  {
+   "part_id": "p27_03",
+   "type": "heading",
+   "page_no": 6,
+   "tick_group": "g49",
+   "en": "2.1 Audit Objectives",
+   "hi_reference": "2.1 लेखापरीक्षा उद्देश्य",
+   "bhashini_draft": "2.1 लेखापरीक्षा उद्देश्य"
+  },
+  {
+   "part_id": "p27_04",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g50",
+   "en": "The audit objectives were to assess whether:",
+   "hi_reference": "लेखापरीक्षा का उद्देश्य यह आकलन करना था कि क्या:",
+   "bhashini_draft": "लेखापरीक्षा के उद्देश्यों का आकलन करना था कि क्याः"
+  },
+  {
+   "part_id": "p27_05",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g51",
+   "en": "Requirement of raw materials was assessed adequately; raw materials were available in desired quantity and used as per desired proportion and whether Coke rate¹⁶, Coal Dust Injection rate¹⁷, other operating indices and consumption of services were within the norms/plan;",
+   "hi_reference": "कच्चे माल की आवश्यकता का पर्याप्त आकलन किया गया था; कच्चा माल वांछित मात्रा में उपलब्ध था एवं उसका उपयोग निर्धारित अनुपात के अनुसार किया गया था; तथा कोक दर¹⁶, कोल डस्ट इंजेक्शन दर¹⁷, अन्य परिचालन सूचकांकों एवं सेवाओं की खपत निर्धारित मानकों/योजनाओं के भीतर थी।",
+   "bhashini_draft": "कच्चे की आवश्यकता का पर्याप्त मूल्यांकन किया गया था; कच्चा वांछित मात्रा में उपलब्ध था और वांछित अनुपात के अनुसार उपयोग किया गया था और क्या कोक दर 1,6, कोयला धूल इंजेक्शन दर 1,7, अन्य परिचालन सूचकांक और सेवाओं की खपत मानदंडों/योजना के भीतर थी;"
+  },
+  {
+   "part_id": "p27_06",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g52",
+   "en": "Blast Furnaces were operated economically, efficiently and effectively as per the Annual Production Plan/Perspective;",
+   "hi_reference": "ब्लास्ट फर्नेस को वार्षिक उत्पादन योजना/परिप्रेक्ष्य के अनुसार मितव्ययतापूर्वक, कुशलतापूर्वक एवं प्रभावी ढंग से संचालित किया गया;",
+   "bhashini_draft": "ब्लास्ट फर्नेस को वार्षिक उत्पादन योजना/परिप्रेक्ष्य के अनुसार आर्थिक, कुशलता और प्रभावी ढंग से संचालित किया गया था"
+  },
+  {
+   "part_id": "p27_07",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g53",
+   "en": "Capital repairs, preventive repairs & maintenance of blast furnaces were carried out as per schedule and techno-economic parameters were achieved;",
+   "hi_reference": "पूंजीगत मरम्मत, निवारक मरम्मत एवं ब्लास्ट फर्नेस का अनुरक्षण निर्धारित समय के अनुसार किया गया एवं तकनीकी-आर्थिक मापदंडों को प्राप्त किया गया;",
+   "bhashini_draft": "विस्फोट भट्टियों की पूंजीगत मरम्मत, निवारक मरम्मत और रखरखाव निर्धारित समय के अनुसार किया गया और तकनीकी-आर्थिक मानकों को प्राप्त किया गया"
+  },
+  {
+   "part_id": "p27_08",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g54",
+   "en": "Projects relating to upstream and downstream facilities of blast furnace were planned judiciously and carried out economically and efficiently. Blast Furnaces were operated with adherence to the safety and environmental laws.",
+   "hi_reference": "ब्लास्ट फर्नेस की अपस्ट्रीम और डाउनस्ट्रीम सुविधाओं से संबंधित परियोजनाओं की योजना विवेकपूर्ण ढंग से बनाई गई तथा उन्हें किफायती और कुशलतापूर्वक पूरा किया गया। ब्लास्ट फर्नेस का परिचालन सुरक्षा एवं पर्यावरण कानूनों का पालन करते हुए किया गया।",
+   "bhashini_draft": "ब्लास्ट फर्नेस के अपस्ट्रीम और डाउनस्ट्रीम सुविधाओं से संबंधित परियोजनाओं की योजना विवेकपूर्ण तरीके से बनाई गई थी और उन्हें आर्थिक और कुशलता से पूरा किया गया था। ब्लास्ट फर्नेस सुरक्षा और पर्यावरण कानूनों के पालन के साथ संचालित किए गए थे।"
+  },
+  {
+   "part_id": "p27_09",
+   "type": "heading",
+   "page_no": 6,
+   "tick_group": "g55",
+   "en": "2.2 Audit criteria",
+   "hi_reference": "2.2 लेखापरीक्षा मानदंड",
+   "bhashini_draft": "2.2 लेखापरीक्षा मानदंड"
+  },
+  {
+   "part_id": "p27_10",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g56",
+   "en": "The audit criteria were derived from:",
+   "hi_reference": "लेखापरीक्षा मानदंड निम्नलिखित से प्राप्त किए गए:",
+   "bhashini_draft": "लेखापरीक्षा मानदंड निम्नलिखित से प्राप्त किए गए थेः"
+  },
+  {
+   "part_id": "p27_11",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g57",
+   "en": "Annual Business Plan/Perspective,",
+   "hi_reference": "वार्षिक व्यावसायिक योजना/परिप्रेक्ष्य,",
+   "bhashini_draft": "वार्षिक व्यवसाय योजना/परिप्रेक्ष्य,"
+  },
+  {
+   "part_id": "p27_12",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g58",
+   "en": "Production reports, MIS data and Operational Statistics",
+   "hi_reference": "उत्पादन प्रतिवेदन, एमआईएस आंकड़े एवं परिचालन सांख्यिकी",
+   "bhashini_draft": "उत्पादन रिपोर्ट, एम. आई. एस. डेटा और परिचालन सांख्यिकी"
+  },
+  {
+   "part_id": "p27_13",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g59",
+   "en": "Agenda and minutes of the SAIL Board meetings, Annual Reports of SAIL and Ministry of Steel",
+   "hi_reference": "सेल बोर्ड की बैठकों की कार्यसूची एवं कार्यवृत्त, तथा सेल एवं इस्पात मंत्रालय की वार्षिक रिपोर्ट",
+   "bhashini_draft": "सेल बोर्ड की बैठकों का एजेंडा और कार्यवृत्त, सेल और इस्पात मंत्रालय की वार्षिक रिपोर्ट"
+  },
+  {
+   "part_id": "p27_14",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g60",
+   "en": "Environmental laws/ Pollution control norms relating to iron making,",
+   "hi_reference": "लौह निर्माण से संबंधित पर्यावरण कानून/प्रदूषण नियंत्रण मानदंड,",
+   "bhashini_draft": "लोहा बनाने से संबंधित पर्यावरण कानून/प्रदूषण नियंत्रण मानदंड,"
+  },
+  {
+   "part_id": "p27_15",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g61",
+   "en": "Quality report of input raw material (Coke, Iron Ore, etc.)",
+   "hi_reference": "इनपुट कच्चे माल (कोक, लौह अयस्क, आदि) की गुणवत्ता रिपोर्ट",
+   "bhashini_draft": "इनपुट कच्चे (कोक, लौह अयस्क, आदि) की गुणवत्ता रिपोर्ट"
+  },
+  {
+   "part_id": "p27_16",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g62",
+   "en": "Norms and actuals for techno-economic parameters, consumption of raw materials and services in blast furnace",
+   "hi_reference": "तकनीकी-आर्थिक मापदंड, ब्लास्ट फर्नेस में कच्चे माल एवं सेवाओं की खपत से संबंधित निर्धारित मानक एवं वास्तविक आंकड़े",
+   "bhashini_draft": "तकनीकी-आर्थिक मापदंडों, कच्चे की खपत और ब्लास्ट फर्नेस में सेवाओं के लिए मानक और वास्तविक नियम"
+  },
+  {
+   "part_id": "p27_17",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g63",
+   "en": "Schedule of capital repair, preventive repair & maintenance and Contract for up-gradation and Capital repairs of blast furnace and",
+   "hi_reference": "पूंजीगत मरम्मत, निवारक मरम्मत एवं अनुरक्षण की सूची एवं ब्लास्ट फर्नेस के उन्नयन एवं पूंजीगत मरम्मत के लिए अनुबंध तथा",
+   "bhashini_draft": "पूंजीगत मरम्मत, निवारक मरम्मत और रखरखाव की अनुसूची और विस्फोट भट्टी के उन्नयन और पूंजीगत मरम्मत के लिए अनुबंध और"
+  },
+  {
+   "part_id": "p27_18",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g64",
+   "en": "Safety Audit reports on blast furnace operations",
+   "hi_reference": "ब्लास्ट फर्नेस परिचालन से संबंधित सुरक्षा लेखापरीक्षा प्रतिवेदन",
+   "bhashini_draft": "ब्लास्ट फर्नेस संचालन पर सुरक्षा लेखापरीक्षा रिपोर्ट"
+  },
+  {
+   "part_id": "p27_19",
+   "type": "heading",
+   "page_no": 6,
+   "tick_group": "g65",
+   "en": "2.3 Scope of Audit",
+   "hi_reference": "2.3 लेखापरीक्षा विषय क्षेत्र",
+   "bhashini_draft": "2.3 लेखापरीक्षा का दायरा"
+  },
+  {
+   "part_id": "p27_20",
+   "type": "body",
+   "page_no": 6,
+   "tick_group": "g66",
+   "en": "Audit analysed the performance of all the working Blast Furnaces (18 Blast Furnaces) during the period from 2017-18 to 2023-24 including Blast Furnace 3 of Bokaro Steel Plant and Blast Furnace 6 of Bhilai Steel Plant till those were put under capital repair from 30 September 2022 and 20 August 2023 respectively. Audit examined records",
+   "hi_reference": "लेखापरीक्षा में वर्ष 2017-18 से 2023-24 की अवधि के दौरान बोकारो इस्पात संयंत्र के ब्लास्ट फर्नेस संख्या 3 एवं भिलाई इस्पात संयंत्र के ब्लास्ट फर्नेस संख्या 6 सहित सभी संचालित ब्लास्ट फर्नेस (18 ब्लास्ट फर्नेस) के निष्पादन का विश्लेषण किया गया, जब तक कि उन्हें क्रमशः 30 सितंबर 2022 एवं 20 अगस्त 2023 को पूंजीगत मरम्मत हेतु बंद नहीं किया गया।",
+   "bhashini_draft": "लेखापरीक्षा ने बोकारो स्टील प्लांट के ब्लास्ट फर्नेस 3 और भिलाई स्टील प्लांट के ब्लास्ट फर्नेस 6 सहित 2017-18 से 2023-24 की अवधि के दौरान सभी काम करने वाले ब्लास्ट फर्नेस (18 ब्लास्ट फर्नेस) के प्रदर्शन का विश्लेषण किया, जब तक कि उन्हें क्रमशः 30 सितंबर 2022 और 20 अगस्त 2023 से पूंजीगत मरम्मत के तहत नहीं रखा गया। लेखापरीक्षा अभिलेखों की जांच की गई"
+  },
+  {
+   "part_id": "p27_21",
+   "type": "footnote",
+   "page_no": 6,
+   "tick_group": "g67",
+   "en": "16 Quantity of coke consumed to produce one tonne of hot metal. Coke rate is measured in Kg/thm.",
+   "hi_reference": "16 एक टन गर्म धातु के उत्पादन के लिए खपत कोक की मात्रा। कोक दर को किग्रा/टीएचएम में मापा जाता है।",
+   "bhashini_draft": "16 एक टन गर्म धातु के उत्पादन के लिए खपत होने वाले कोक की मात्रा। कोक की दर को किलोग्राम/टी. एच. एम. में मापा जाता है।"
+  },
+  {
+   "part_id": "p27_22",
+   "type": "footnote",
+   "page_no": 6,
+   "tick_group": "g68",
+   "en": "17 Coal Dust Injection rate is the quantity of Coal Dust injected to produce one tonne of hot metal. It is measured in Kg/thm.",
+   "hi_reference": "17 कोल डस्ट इंजेक्शन दर वह मात्रा है जितनी कोल डस्ट एक टन तप्त धातु के उत्पादन के लिए डाली जाती है। इसे किलोग्राम प्रति टन तप्त धातु (किग्रा/टीएचएम) में मापा जाता है।",
+   "bhashini_draft": "17 कोयला धूल इंजेक्शन दर एक टन गर्म धातु का उत्पादन करने के लिए कोयले की धूल की मात्रा है। इसे किलोग्राम/टी. एच. एम. में मापा जाता है।"
+  },
+  {
+   "part_id": "p27_23",
+   "type": "page_number",
+   "page_no": 6,
+   "tick_group": null,
+   "en": "7",
+   "editable": false
+  },
+  {
+   "part_id": "p28_01",
+   "type": "header",
+   "page_no": 7,
+   "tick_group": "g69",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p28_02",
+   "type": "body",
+   "page_no": 7,
+   "tick_group": "g70",
+   "en": "relating to assessment of requirement, availability and consumption of raw material, production performance, up-gradation, capital repairs and preventive repair & maintenance of blast furnaces, operating indices, adherence to the safety & environmental laws. Audit examined electronic and paper records pertaining to all the integrated Steel plants and VISP, Bhadravati for a period from 2017-18 to 2023-24.",
+   "hi_reference": "लेखापरीक्षा में कच्चे माल की आवश्यकता, उपलब्धता एवं खपत के आकलन, उत्पादन निष्पादन, उन्नयन, पूंजीगत मरम्मत एवं ब्लास्ट फर्नेस की निवारक मरम्मत एवं अनुरक्षण, परिचालन सूचकांक, सुरक्षा एवं पर्यावरण कानूनों के पालन से संबंधित अभिलेखों की जाँच की गई। लेखापरीक्षा में 2017-18 से 2023-24 तक की अवधि के लिए सभी एकीकृत इस्पात संयंत्रों एवं वीआईएसपी, भद्रावती से संबंधित इलेक्ट्रॉनिक एवं कागजी अभिलेखों की जाँच की गई।",
+   "bhashini_draft": "कच्चे की आवश्यकता, उपलब्धता और खपत के मूल्यांकन, उत्पादन प्रदर्शन, उन्नयन, पूंजी मरम्मत और विस्फोट भट्टियों की निवारक मरम्मत और रखरखाव, संचालन सूचकांकों, सुरक्षा और पर्यावरण कानूनों के पालन से संबंधित। लेखापरीक्षा ने 2017-18 से 2023-24 तक की अवधि के लिए सभी एकीकृत इस्पात संयंत्रों और वी. आई. एस. पी., भद्रावती से संबंधित इलेक्ट्रॉनिक और कागजी रिकॉर्ड की जांच की।"
+  },
+  {
+   "part_id": "p28_03",
+   "type": "heading",
+   "page_no": 7,
+   "tick_group": "g71",
+   "en": "2.4 Audit Methodology",
+   "hi_reference": "2.4 लेखापरीक्षा पद्धति",
+   "bhashini_draft": "2.4 लेखापरीक्षा पद्धति"
+  },
+  {
+   "part_id": "p28_04",
+   "type": "body",
+   "page_no": 7,
+   "tick_group": "g72",
+   "en": "An entry conference was held with the Management and Ministry of Steel on 5 November 2022. Draft Performance Audit report was issued to SAIL Management on 15 September 2023. Exit meeting was held on 4 October 2023 with the Management. Draft Performance Audit report was issued to the Ministry of Steel on 26 April 2024. Replies of Management (November 2023) and Ministry (July 2024) have been duly incorporated in the report. The report was updated till March 2024 and issued to the Ministry of Steel on 22 November 2024. Exit conference with the Ministry was held on 13 February 2025. Response of Ministry after exit conference was received on 17 February 2025 and 7 April 2025, which has been duly incorporated in the report.",
+   "hi_reference": "5 नवंबर 2022 को प्रबंधन एवं इस्पात मंत्रालय के साथ एक इंट्री कांफ्रेंस आयोजित किया गया। 15 सितंबर 2023 को सेल प्रबंधन को मसौदा निष्पादन लेखापरीक्षा रिपोर्ट जारी की गई। प्रबंधन के साथ 4 अक्टूबर 2023 को एग्जिट मीटिंग आयोजित किया गया। 26 अप्रैल 2024 को मसौदा निष्पादन लेखापरीक्षा रिपोर्ट इस्पात मंत्रालय को निर्गत की गई। रिपोर्ट को मार्च 2024 तक अद्यतन किया गया एवं 22 नवंबर 2024 को इस्पात मंत्रालय को निर्गत की गई। प्रबंधन (नवम्बर 2023) और मंत्रालय (जुलाई 2024) के उत्तरो को रिपोर्ट में विधिवत सम्मिलित किया गया है। 13 फरवरी 2025 को मंत्रालय के साथ एग्जिट कॉनफेरेंस आयोजित किया गया। एग्जिट कॉनफेरेंस के पश्चात् मंत्रालय की प्रतिक्रिया क्रमशः 17 फ़रवरी 2025 एवं 7 अप्रैल 2025 को प्राप्त हुई, जिसे प्रतिवेदन में विधिवत सम्मिलित किया गया है।",
+   "bhashini_draft": "5 नवंबर 2022 को प्रबंधन और इस्पात मंत्रालय के साथ एक प्रवेश सम्मेलन आयोजित किया गया था। 15 सितंबर 2023 को सेल प्रबंधन को प्रदर्शन लेखापरीक्षा रिपोर्ट का मसौदा जारी किया गया था। प्रबंधन के साथ 4 अक्टूबर 2023 को निकास बैठक आयोजित की गई थी। प्रदर्शन लेखापरीक्षा रिपोर्ट का मसौदा इस्पात मंत्रालय को 26 अप्रैल 2024 को जारी किया गया था। प्रबंधन के जवाब (नवंबर 2023) और मंत्रालय (जुलाई 2024) को रिपोर्ट में विधिवत शामिल किया गया है। रिपोर्ट मार्च 2024 तक अद्यतन की गई थी और 22 नवंबर 2024 को इस्पात मंत्रालय को जारी की गई थी। मंत्रालय के साथ निकास सम्मेलन 13 फरवरी 2025 को आयोजित किया गया था। प्रस्थान सम्मेलन के बाद मंत्रालय की प्रतिक्रिया 17 फरवरी 2025 और 7 अप्रैल 2025 को प्राप्त हुई थी, जिसे रिपोर्ट में विधिवत शामिल किया गया है।"
+  },
+  {
+   "part_id": "p28_05",
+   "type": "heading",
+   "page_no": 7,
+   "tick_group": "g73",
+   "en": "2.5 Acknowledgement",
+   "hi_reference": "2.5 आभार",
+   "bhashini_draft": "2.5 स्वीकृति"
+  },
+  {
+   "part_id": "p28_06",
+   "type": "body",
+   "page_no": 7,
+   "tick_group": "g74",
+   "en": "Audit acknowledges the co-operation extended by the Management of the Company and the officials of Ministry of Steel in facilitating the conduct of this Performance Audit.",
+   "hi_reference": "लेखापरीक्षा इस निष्पादन लेखापरीक्षा के संचालन को सुविधाजनक बनाने में कंपनी के प्रबंधन एवं इस्पात मंत्रालय के अधिकारियों द्वारा दिए गए सहयोग के लिए आभार व्यक्त करती है।",
+   "bhashini_draft": "लेखापरीक्षा इस प्रदर्शन लेखापरीक्षा के संचालन को सुविधाजनक बनाने में कंपनी के प्रबंधन और इस्पात मंत्रालय के अधिकारियों द्वारा दिए गए सहयोग को स्वीकार करती है।"
+  },
+  {
+   "part_id": "p28_07",
+   "type": "page_number",
+   "page_no": 7,
+   "tick_group": null,
+   "en": "8",
+   "editable": false
+  },
+  {
+   "part_id": "p85_01",
+   "type": "header",
+   "page_no": 8,
+   "tick_group": "g75",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p85_02",
+   "type": "body",
+   "page_no": 8,
+   "tick_group": "g76",
+   "en": "the output dust load, thereby leading to reduced emission. Ministry added (February 2025) that emission level in blast furnace in 2024-25 was within the norm.",
+   "hi_reference": "आउटपुट डस्ट लोड कम हुआ है, जिससे उत्सर्जन में कमी आई है। मंत्रालय ने आगे बताया (फरवरी 2025) कि 2024-25 में ब्लास्ट फर्नेस में उत्सर्जन स्तर मानक के भीतर था।",
+   "bhashini_draft": "उत्पादन धूल का भार, जिससे उत्सर्जन में कमी आती है। मंत्रालय ने जोड़ा (फरवरी 2025) कि 2024-25 में ब्लास्ट फर्नेस में उत्सर्जन स्तर मानक के भीतर था।"
+  },
+  {
+   "part_id": "p85_03",
+   "type": "body",
+   "page_no": 8,
+   "tick_group": "g77",
+   "en": "The replies may be viewed in the light of the fact that non-compliance of environmental norms in operation of Blast Furnace at IISCO Steel Plant were noted (June 2022 and February 2023). Stack emission in Cast house I continued to be high and was 34.33 mg/Nm³, Cast house II was 33.42 mg/Nm³ and Stock house was 36.92 mg/Nm³ against the norm of 30 mg/Nm³ during the year 2024-25.",
+   "hi_reference": "उत्तर को इस परिप्रेक्ष्य में देखा जा सकता है कि इस्को स्टील प्लांट में ब्लास्ट फर्नेस के संचालन में पर्यावरणीय मानदंडों का पालन न किए जाने की बात सामने आई है (जून 2022 एवं फरवरी 2023)। कास्ट हाउस-I में अपशिष्ट उत्सर्जन उच्च बना रहा एवं वर्ष 2024-25 के दौरान 30 एमजी/एनएम³ के मानक के मुकाबले 34.33 एमजी/एनएम³, कास्ट हाउस II में 33.42 एमजी/एनएम³ एवं स्टॉक हाउस में 36.92 एमजी/एनएम³ था।",
+   "bhashini_draft": "जवाबों को इस तथ्य के आलोक में देखा जा सकता है कि आई. आई. एस. सी. ओ. इस्पात संयंत्र में ब्लास्ट फर्नेस के संचालन में पर्यावरणीय मानदंडों का गैर-अनुपालन नोट किया गया था (जून 2022 और फरवरी 2023)। कास्ट हाउस I में ढेर उत्सर्जन उच्च बना रहा और 34.33 mg/Nm3 था, कास्ट हाउस II 33.42 mg/Nm3 था और स्टॉक हाउस 36.92 mg/Nm3 था जबकि वर्ष 2024-25 के दौरान 30 mg/Nm3 का मानक था।"
+  },
+  {
+   "part_id": "p85_04",
+   "type": "heading",
+   "page_no": 8,
+   "tick_group": "g78",
+   "en": "6.2.2 Excess emission of Carbon Dioxide gas",
+   "hi_reference": "6.2.2 कार्बन डाइऑक्साइड गैस का अत्यधिक उत्सर्जन",
+   "bhashini_draft": "6.2. 2 कार्बन डाइऑक्साइड गैस का अत्यधिक उत्सर्जन"
+  },
+  {
+   "part_id": "p85_05",
+   "type": "body",
+   "page_no": 8,
+   "tick_group": "g79",
+   "en": "Coke is one of the major constituents in hot metal production. Management fixed norms/target for consumption of coal per tonne of hot metal in Annual Business Perspective not only to ensure economy in production cost but also emit less Carbon Dioxide (CO₂) into the environment.",
+   "hi_reference": "कोक, तप्त धातु उत्पादन में प्रमुख घटकों में से एक है। प्रबंधन ने वार्षिक व्यावसायिक परिप्रेक्ष्य में प्रति टन तप्त धातु के लिए कोयले की खपत के मानदंड/लक्ष्य निर्धारित किए हैं ताकि न केवल उत्पादन लागत में मितव्ययिता सुनिश्चित हो, बल्कि पर्यावरण में कार्बन डाइऑक्साइड (CO₂) का उत्सर्जन भी कम हो।",
+   "bhashini_draft": "गर्म धातु उत्पादन में कोक प्रमुख घटकों में से एक है। प्रबंधन ने न केवल उत्पादन लागत में अर्थव्यवस्था सुनिश्चित करने के लिए बल्कि पर्यावरण में कम कार्बन डाइऑक्साइड (सी. ओ. 2) का उत्सर्जन करने के लिए वार्षिक व्यापार परिप्रेक्ष्य में प्रति टन गर्म धातु के लिए कोयले की खपत के लिए मानक/लक्ष्य निर्धारित किए।"
+  },
+  {
+   "part_id": "p85_06",
+   "type": "body",
+   "page_no": 8,
+   "tick_group": "g80",
+   "en": "Audit noted that the consumption of coal was more than norm in all the steel plants (except Bokaro during 2021-22 and Durgapur in 2021-22 & 2023-24). Further, burning of coal also generates harmful CO₂ gas (approx. 2.53 tonnes of CO₂ gas is generated on burning of one tonne of Coking Coal). Since CO₂ gas is not used in production process, it is released to environment. There was excess consumption of 5.52 million tonne⁶⁴ of coal as compared to the coal to hot metal ratio norm (stipulated in the Annual Business Perspective) which resulted in generation of 13.97 million tonne (5.52 million tonne x 2.53) of CO₂ gas during 2017-24⁶⁵. The CO₂ gas was released to environment causing environmental hazard.",
+   "hi_reference": "लेखापरीक्षा में पाया गया कि सभी इस्पात संयंत्रों में कोयले की खपत मानक से अधिक थी (2021-22 के दौरान बोकारो एवं 2021-22 एवं 2023-24 में दुर्गापुर को छोड़कर)। इसके अलावा, कोयले के जलने से हानिकारक कार्बन डाइऑक्साइड गैस (CO₂) भी उत्पन्न होती है (एक टन कोकिंग कोल के जलने पर लगभग 2.53 टन कार्बन डाइऑक्साइड गैस (CO₂) उत्पन्न होती है)। चूंकि उत्पादन प्रक्रिया में कार्बन डाइऑक्साइड गैस (CO₂) का उपयोग नहीं किया जाता है, इसलिए इसे पर्यावरण में छोड़ दिया जाता है। कोयले से गर्म धातु अनुपात मानदंड (वार्षिक व्यावसायिक परिप्रेक्ष्य में निर्धारित) की तुलना में 5.52 मिलियन टन⁶⁴ कोयले की अधिक खपत हुई, जिसके परिणामस्वरूप वर्ष 2017-24⁶⁵ के दौरान 13.97 मिलियन टन (5.52 मिलियन टन x 2.53) CO₂ गैस का उत्पादन हुआ। कार्बन डाइऑक्साइड गैस (CO₂) गैस पर्यावरण में छोड़ी गई जिससे पर्यावरणीय खतरा पैदा हुआ।",
+   "bhashini_draft": "लेखापरीक्षा ने नोट किया कि सभी इस्पात संयंत्रों में कोयले की खपत मानक से अधिक थी (2021-22 के दौरान बोकारो और 2021-22 और 2023-24 में दुर्गापुर को छोड़कर)। इसके अलावा, कोयले को जलाने से हानिकारक CO2 गैस भी उत्पन्न होती है (लगभग एक टन कोकिंग कोयले को जलाने पर टन CO2 गैस उत्पन्न होती है)। चूंकि उत्पादन प्रक्रिया में कार्बन डाइऑक्साइड गैस का उपयोग नहीं किया जाता है, इसलिए इसे पर्यावरण में छोड़ दिया जाता है। कोयले और गर्म धातु अनुपात मानक (वार्षिक व्यापार परिप्रेक्ष्य में निर्धारित) की तुलना में कोयले की खपत 5 लाख टन 64 टन अधिक थी, जिसके परिणामस्वरूप 3 लाख टन के दौरान 4 लाख टन कार्बन डाइऑक्साइड गैस का उत्पादन हुआ। कार्बन डाइऑक्साइड गैस को पर्यावरण के लिए छोड़ दिया गया था जिससे पर्यावरण को खतरा था।"
+  },
+  {
+   "part_id": "p85_07",
+   "type": "body",
+   "page_no": 8,
+   "tick_group": "g81",
+   "en": "Management/Ministry replied (November 2023/ July 2024 & February 2025) that major reasons for excess emission were frequent off blast/low blast, inconsistent hot metal evacuation, high gangue content in raw material, delay in commissioning of the new blast furnaces with their peripheral facilities. Various steps like capital repair of stoves, increase of Coal Dust Injection rate, reduce coke rate, charging of pellet, installation of pellet Plant, overhauling cast house and stock house ESP systems etc had been initiated or were in pipeline for reducing the CO₂ emission. During the Exit conference (February 2025), Management assured that action plan had been prepared in all units to reduce the emission of CO₂ gas and same was being monitored regularly.",
+   "hi_reference": "प्रबंधन/ मंत्रालय ने उत्तर दिया (नवंबर 2023/ जुलाई 2024 एवं फरवरी 2025) कि अत्यधिक उत्सर्जन के प्रमुख कारण बार-बार ऑफ ब्लास्ट /लो ब्लास्ट, असंगत हॉट मेटल निकासी, कच्चे माल में अशुद्धता की उच्च मात्रा, नई ब्लास्ट फर्नेस एवं उनकी परिधीय सुविधाओं के चालू होने में देरी थे। स्टोव की प्रमुख मरम्मत, कोल डस्ट इंजेक्शन दर में वृद्धि, कोक दर में कमी, पेलेट चार्जिंग, पेलेट प्लांट की स्थापना, कास्ट हाउस एवं स्टॉक हाउस ईएसपी सिस्टम की मरम्मत जैसे कई कदम उठाए गए। CO₂ उत्सर्जन को कम करने के लिए कई उपाय शुरू किए जा चुके हैं या प्रक्रिया में हैं। एग्जिट कॉनफेरेंस (फरवरी 2025) के दौरान, प्रबंधन ने आश्वासन दिया कि CO₂ गैस के उत्सर्जन को कम करने के लिए सभी इकाइयों में कार्य योजना तैयार कर ली गई है एवं इसकी नियमित निगरानी की जा रही है।",
+   "bhashini_draft": "प्रबंधन/मंत्रालय ने जवाब दिया (नवंबर 2023/जुलाई 2024 और फरवरी 2025) कि अतिरिक्त उत्सर्जन के प्रमुख कारण बार-बार विस्फोट/कम विस्फोट, असंगत गर्म धातु निकासी, कच्चे में उच्च गैंग्यू सामग्री, नई विस्फोट भट्टियों को उनकी परिधीय सुविधाओं के साथ चालू करने में देरी थी। कार्बन डाइऑक्साइड के उत्सर्जन को कम करने के लिए चूल्हे की पूंजीगत मरम्मत, कोयले की धूल के इंजेक्शन की दर में वृद्धि, कोक की दर को कम करना, पेलेट चार्ज करना, पेलेट संयंत्र की स्थापना, कास्ट हाउस और स्टॉक हाउस ईएसपी सिस्टम आदि जैसे विभिन्न कदम शुरू किए गए थे या पाइपलाइन में थे। निकास सम्मेलन (फरवरी 2025) के दौरान प्रबंधन ने आश्वासन दिया कि कार्बन डाइऑक्साइड गैस के उत्सर्जन को कम करने के लिए सभी इकाइयों में कार्य योजना तैयार की गई है और इसकी नियमित रूप से निगरानी की जा रही है।"
+  },
+  {
+   "part_id": "p85_08",
+   "type": "footnote",
+   "page_no": 8,
+   "tick_group": "g82",
+   "en": "64 Bokaro Steel Plant-0.62 million tonne, Bhilai Steel Plant-2.50 million tonne, Durgapur Steel Plant-0.45 million tonne, Rourkela Steel Plant- 1.34 million tonne and ISP, Burnpur- 0.61 million tonne.",
+   "hi_reference": "64 बोकारो स्टील प्लांट-0.62 मिलियन टन, भिलाई स्टील प्लांट-2.50 मिलियन टन, दुर्गापुर स्टील प्लांट-0.45 मिलियन टन, राउरकेला स्टील प्लांट-1.34 मिलियन टन और आईएसपी, बर्नपुर - 0.61 मिलियन टन।",
+   "bhashini_draft": "64 बोकारो इस्पात संयंत्र-3 करोड़ टन, भिलाई इस्पात संयंत्र-5 करोड़ टन, दुर्गापुर इस्पात संयंत्र-4 करोड़ टन, राउरकेला इस्पात संयंत्र-1 करोड़ टन और आई. एस. पी. बर्नपुर-2 करोड़ टन।"
+  },
+  {
+   "part_id": "p85_09",
+   "type": "footnote",
+   "page_no": 8,
+   "tick_group": "g83",
+   "en": "65 As per the information furnished by Management approximately 2.53 tonne of CO₂ is emitted on consumption of one tonne of coking coal in Blast Furnaces during making of steel.",
+   "hi_reference": "65 प्रबंधन द्वारा दी गई जानकारी के अनुसार, इस्पात निर्माण के दौरान ब्लास्ट फर्नेस में एक टन कोकिंग कोल की खपत पर लगभग 2.53 टन कार्बन डाईऑक्साइड गैस (CO2) उत्सर्जित होती है।",
+   "bhashini_draft": "65 प्रबंधन द्वारा दी गई जानकारी के अनुसार इस्पात बनाने के दौरान ब्लास्ट फर्नेस में एक टन कोकिंग कोयले की खपत पर लगभग 2.53 टन कार्बन डाइऑक्साइड उत्सर्जित होता है।"
+  },
+  {
+   "part_id": "p85_10",
+   "type": "page_number",
+   "page_no": 8,
+   "tick_group": null,
+   "en": "57",
+   "editable": false
+  },
+  {
+   "part_id": "p86_01",
+   "type": "header",
+   "page_no": 9,
+   "tick_group": "g84",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p86_02",
+   "type": "body",
+   "page_no": 9,
+   "tick_group": "g85",
+   "en": "The reply may be viewed in the light of the fact that the constraints mentioned could have been mitigated through better operational and project management measures. Through consistent efforts Management could control the frequent offblast/low blast (as discussed in para 4.4.2) and by setting up ore beneficiation facilities the gangue content in raw material could be reduced. Despite taking various steps, consumption of coal and consequently that of coke was beyond the norms at the steel plants (as discussed in Para 3.6).",
+   "hi_reference": "उत्तर को इस तथ्य परिप्रेक्ष्य में देखा जा सकता है कि उल्लिखित बाधाओं को बेहतर परिचालन एवं परियोजना प्रबंधन उपायों के माध्यम से कम किया जा सकता था। निरंतर प्रयासों से प्रबंधन बार-बार होने वाले ऑफ ब्लास्ट/लो ब्लास्ट (जैसा कि पैरा 4.4.2 में चर्चा की गई है) को नियंत्रित कर सका एवं अयस्क लाभकारी सुविधाओं की स्थापना करके कच्चे माल में अशुद्धता की मात्रा को कम किया जा सका। विभिन्न कदम उठाने के बावजूद, इस्पात संयंत्रों में कोयले एवं परिणामस्वरूप कोक की खपत मानकों से अधिक थी (जैसा कि पैरा 3.6 में चर्चा की गई है)",
+   "bhashini_draft": "जवाब को इस तथ्य के आलोक में देखा जा सकता है कि उल्लिखित बाधाओं को बेहतर परिचालन और परियोजना प्रबंधन उपायों के माध्यम से कम किया जा सकता था। लगातार प्रयासों के माध्यम से प्रबंधन बार-बार होने वाले विस्फोट/कम विस्फोट को नियंत्रित कर सकता है (जैसा कि पैरा 4.4. 2 में चर्चा की गई है) और अयस्क लाभकारी सुविधाओं की स्थापना करके कच्चे में गैंग्यू सामग्री को कम किया जा सकता है। विभिन्न कदम उठाने के बावजूद, कोयले की खपत और परिणामस्वरूप कोक की खपत इस्पात संयंत्रों में मानदंडों से परे थी (जैसा कि पैरा 3.6 में चर्चा की गई है)।"
+  },
+  {
+   "part_id": "p86_03",
+   "type": "heading",
+   "page_no": 9,
+   "tick_group": "g86",
+   "en": "6.2.3 Management of solid waste generated in Blast Furnace",
+   "hi_reference": "6.2.3 ब्लास्ट फर्नेस में उत्पन्न ठोस अपशिष्ट का प्रबंधन",
+   "bhashini_draft": "6.2. 3 ब्लास्ट फर्नेस में उत्पन्न ठोस अपशिष्ट का प्रबंधन"
+  },
+  {
+   "part_id": "p86_04",
+   "type": "body",
+   "page_no": 9,
+   "tick_group": "g87",
+   "en": "As per Consent to Operate issued by Pollution Control Boards, solid waste (Blast furnace sludge, Pig Casting Machine sludge and blast furnace flue dust) should be disposed off in environmentally safe manner. These waste materials are either used in the Sinter plant or sold.",
+   "hi_reference": "प्रदूषण नियंत्रण बोर्ड द्वारा जारी संचालन सहमति के अनुसार, ठोस अपशिष्ट (ब्लास्ट फर्नेस स्लज, पिग कास्टिंग मशीन स्लज एवं ब्लास्ट फर्नेस फ्लू डस्ट) का निपटान पर्यावरण की दृष्टि से सुरक्षित तरीके से किया जाना चाहिए। इन अपशिष्ट पदार्थों का या तो सिंटर प्लांट में उपयोग किया जाता है या उन्हें बेच दिया जाता है।",
+   "bhashini_draft": "प्रदूषण नियंत्रण बोर्ड द्वारा जारी संचालन की सहमति के अनुसार, ठोस अपशिष्ट (ब्लास्ट फर्नेस स्लज, पिग कास्टिंग मशीन स्लज और ब्लास्ट फर्नेस फ्लू डस्ट) को पर्यावरण की दृष्टि से सुरक्षित तरीके से निपटाया जाना चाहिए। इन अपशिष्ट पदार्थों का उपयोग या तो सिंटर संयंत्र में किया जाता है या बेचा जाता है।"
+  },
+  {
+   "part_id": "p86_05",
+   "type": "body",
+   "page_no": 9,
+   "tick_group": "g88",
+   "en": "Audit noted that Bhilai, Bokaro, Rourkela and IISCO Steel Plant used or sold the entire solid waste (BF sludge, Pig Casting Machine sludge and BF flue dust) generated during 2017-24. Durgapur Steel Plant used entire quantity of blast furnace flue dust till 2021-22 but used 98 per cent of blast furnace flue dust during 2022-24. The plant used only 45 per cent of blast furnace sludge during 2017-24. The dumping of solid waste occupies a large area of land and causes environmental hazards to the soil and water.",
+   "hi_reference": "लेखापरीक्षा में पाया गया कि भिलाई, बोकारो, राउरकेला एवं इस्को स्टील प्लांट ने 2017-24 के दौरान उत्पन्न संपूर्ण ठोस अपशिष्ट (बीएफ स्लज, पिग कास्टिंग मशीन स्लज एवं बीएफ फ्लू डस्ट) का उपयोग किया या उसे बेच दिया। दुर्गापुर स्टील प्लांट ने 2021-22 तक ब्लास्ट फर्नेस फ्लू डस्ट की पूरी मात्रा का उपयोग किया, लेकिन 2022-24 में 98 प्रतिशत का उपयोग किया। संयंत्र ने 2017-24 के दौरान केवल 45 प्रतिशत ब्लास्ट फर्नेस स्लज का उपयोग किया। ठोस अपशिष्ट का डंपिंग भूमि के एक बड़े क्षेत्र पर कब्जा कर लेता है एवं मिट्टी एवं पानी के लिए पर्यावरणीय खतरा पैदा करता है।",
+   "bhashini_draft": "लेखापरीक्षा ने नोट किया कि भिलाई, बोकारो, राउरकेला और आई. आई. एस. सी. ओ. इस्पात संयंत्र ने 2017-24 के दौरान उत्पन्न पूरे ठोस अपशिष्ट (बी. एफ. कीचड़, सुअर कास्टिंग मशीन कीचड़ और बी. एफ. फ्लू धूल) का उपयोग या बिक्री की। दुर्गापुर स्टील प्लांट ने 2021-22 तक ब्लास्ट फर्नेस फ्ल्यू डस्ट की पूरी मात्रा का उपयोग किया, लेकिन 2022-24 के दौरान ब्लास्ट फर्नेस फ्ल्यू डस्ट का 98 प्रतिशत उपयोग किया। संयंत्र ने 2017-24 के दौरान केवल 45 per cent ब्लास्ट फर्नेस कीचड़ का उपयोग किया। ठोस अपशिष्ट का डंपिंग भूमि के एक बड़े क्षेत्र पर कब्जा कर लेता है और मिट्टी और पानी के लिए पर्यावरणीय खतरे का कारण बनता है।"
+  },
+  {
+   "part_id": "p86_06",
+   "type": "body",
+   "page_no": 9,
+   "tick_group": "g89",
+   "en": "Management/Ministry replied (November 2023/ July 2024 & February 2025) that proposal to install Micro Pelletisation Plant was under consideration in Durgapur Steel Plant, where such dried blast furnace sludge along with other solid waste could be used for making micro pellet for use in sinter making.",
+   "hi_reference": "प्रबंधन/मंत्रालय ने उत्तर दिया (नवंबर 2023/जुलाई 2024 एवं फरवरी 2025) कि दुर्गापुर स्टील प्लांट में माइक्रो पेलेटाइजेशन प्लांट स्थापित करने का प्रस्ताव विचाराधीन था, जहां अन्य ठोस अपशिष्ट के साथ सूखे ब्लास्ट फर्नेस कीचड़ का उपयोग सिंटर बनाने हेतु माइक्रो पेलेट बनाने के लिए किया जा सकता है।",
+   "bhashini_draft": "प्रबंधन/मंत्रालय ने जवाब दिया (नवंबर 2023/जुलाई 2024 और फरवरी 2025) कि दुर्गापुर स्टील प्लांट में माइक्रो पेलेटाइजेशन प्लांट स्थापित करने का प्रस्ताव विचाराधीन है, जहां ऐसे सूखे ब्लास्ट फर्नेस कीचड़ के साथ-साथ अन्य ठोस कचरे का उपयोग सिंटर बनाने में उपयोग के लिए माइक्रो पेलेट बनाने के लिए किया जा सकता है।"
+  },
+  {
+   "part_id": "p86_07",
+   "type": "body",
+   "page_no": 9,
+   "tick_group": "g90",
+   "en": "Reply of the Management may be viewed in the light of the fact that while the other Steel Plants successfully used or sold the entire solid waste, Durgapur Steel Plant had stock of 55 per cent of blast furnace sludge yet to be disposed (March 2024).",
+   "hi_reference": "प्रबंधन के उत्तर को इस तथ्य के परिप्रेक्ष्य में देखा जा सकता है कि जहां अन्य इस्पात संयंत्रों ने संपूर्ण ठोस अपशिष्ट का सफलतापूर्वक उपयोग किया या उसे बेच दिया, वहीं दुर्गापुर इस्पात संयंत्र के पास 55 प्रतिशत ब्लास्ट फर्नेस स्लज का भण्डार (स्टॉक) अभी भी निपटाया जाना है (मार्च 2024)।",
+   "bhashini_draft": "प्रबंधन के जवाब को इस तथ्य के आलोक में देखा जा सकता है कि जबकि अन्य इस्पात संयंत्रों ने पूरे ठोस कचरे का सफलतापूर्वक उपयोग या बिक्री की, दुर्गापुर इस्पात संयंत्र के पास अभी भी 55 प्रतिशत ब्लास्ट फर्नेस कीचड़ का भंडार था जिसका निपटान किया जाना बाकी था (मार्च 2024)।"
+  },
+  {
+   "part_id": "p86_08",
+   "type": "headnote",
+   "page_no": 9,
+   "tick_group": "g91",
+   "en": "Recommendation 8: The Company may put efforts to reduce the coke consumption through better operational and project management measures and thereby maintain the CO₂ emissions within the norms. Management may also ensure that the solid waste generated in the Blast Furnace are disposed as per the terms of the consent to operate.",
+   "hi_reference": "अनुशंसा 8: कंपनी बेहतर परिचालन एवं परियोजना प्रबंधन उपायों के माध्यम से कोक की खपत को कम करने के प्रयास करे एवं इस प्रकार CO₂ उत्सर्जन को मानदंडों के भीतर बनाए रख सकती है। प्रबंधन यह भी सुनिश्चित करे कि ब्लास्ट फर्नेस में उत्पन्न ठोस अपशिष्ट का निपटान संचालन सहमति की शर्तों के अनुसार किया जाए।",
+   "bhashini_draft": "अनुशंसा 8: कंपनी बेहतर परिचालन और परियोजना प्रबंधन उपायों के माध्यम से कोक की खपत को कम करने के प्रयास कर सकती है और इस तरह मानदंडों के भीतर कार्बन डाइऑक्साइड उत्सर्जन को बनाए रख सकती है। प्रबंधन यह भी सुनिश्चित कर सकता है कि ब्लास्ट फर्नेस में उत्पन्न ठोस कचरे का संचालन करने की सहमति की शर्तों के अनुसार निपटान किया जाए।"
+  },
+  {
+   "part_id": "p86_09",
+   "type": "heading",
+   "page_no": 9,
+   "tick_group": "g92",
+   "en": "Summing up:",
+   "hi_reference": "सारांश:",
+   "bhashini_draft": "सारांशः"
+  },
+  {
+   "part_id": "p86_10",
+   "type": "body",
+   "page_no": 9,
+   "tick_group": "g93",
+   "en": "SAIL Safety Organisation conducted safety audits of blast furnaces of all integrated steel plants. All the recommendations of SAIL Safety Organisation were complied by the integrated steel plants except Bokaro and IISCO Steel Plant. Such non-compliance affected the safety of operations in Steel Plants. Audit noted that violation of the",
+   "hi_reference": "सेल सुरक्षा संगठन ने सभी एकीकृत इस्पात संयंत्रों की ब्लास्ट फर्नेस का सुरक्षा लेखापरीक्षा किया। बोकारो एवं इस्को इस्पात संयंत्र को छोड़कर सभी एकीकृत इस्पात संयंत्रों ने सेल सुरक्षा संगठन की सभी अनुशंसाओं का पालन किया। इस तरह के गैर-अनुपालन से इस्पात संयंत्रों में परिचालन की सुरक्षा प्रभावित हुई। लेखापरीक्षा में पाया गया कि",
+   "bhashini_draft": "सेल सुरक्षा संगठन ने सभी एकीकृत इस्पात संयंत्रों की विस्फोट भट्टियों का सुरक्षा लेखापरीक्षा किया। बोकारो और आई. आई. एस. सी. ओ. इस्पात संयंत्र को छोड़कर एकीकृत इस्पात संयंत्रों ने सेल सुरक्षा संगठन की सभी सिफारिशों का पालन किया। इस तरह के गैर-अनुपालन ने इस्पात संयंत्रों में संचालन की सुरक्षा को प्रभावित किया। लेखापरीक्षा ने उल्लेख किया कि उल्लंघन"
+  },
+  {
+   "part_id": "p86_11",
+   "type": "page_number",
+   "page_no": 9,
+   "tick_group": null,
+   "en": "58",
+   "editable": false
+  },
+  {
+   "part_id": "p87_01",
+   "type": "header",
+   "page_no": 10,
+   "tick_group": "g94",
+   "en": "Report No. 38 of 2025",
+   "hi_reference": "2025 की प्रतिवेदन संख्या 38",
+   "bhashini_draft": "2025 की रिपोर्ट संख्या 38"
+  },
+  {
+   "part_id": "p87_02",
+   "type": "body",
+   "page_no": 10,
+   "tick_group": "g95",
+   "en": "provisions of the Factories Act, 1948 and the State Factories Rules, 1958 led to a fatal accident and loss of life at Durgapur Steel plant. High fugitive emission from the stacks attached to blast furnace Cast House I & II of IISCO Steel Plant was also noted. There was excess consumption of coal more than the norm which resulted in excess generation of 13.97 million tonne of CO₂ gas during 2017-24. The CO₂ gas was released to the environment causing environmental hazard. While Bhilai, Bokaro, Rourkela and IISCO Steel plants used or sold the entire solid waste, Durgapur Steel Plant could use only 45 per cent of blast furnace sludge during 2017-24.",
+   "hi_reference": "कारखाना अधिनियम, 1948 एवं राज्य कारखाना नियम, 1958 के प्रावधानों के उल्लंघन के कारण दुर्गापुर इस्पात संयंत्र में एक घातक दुर्घटना हुई एवं कई लोगों की जान चली गई। इस्को इस्पात संयंत्र के ब्लास्ट फर्नेस कास्ट हाउस I एवं II से जुड़े स्टैक से उच्च फ्यूजिटिव उत्सर्जन भी देखा गया। 2017-24 के दौरान मानक से अधिक कोयले की खपत हुई जिसके परिणामस्वरूप 13.97 मिलियन टन कार्बन डाइऑक्साइड गैस (CO₂) का अतिरिक्त उत्पादन हुआ। यह कार्बन डाइऑक्साइड गैस (CO₂) पर्यावरण में छोड़ी गई जिससे पर्यावरणीय खतरा पैदा हुआ। भिलाई, बोकारो, राउरकेला एवं इस्को स्टील प्लांट ने पूरे ठोस अपशिष्ट का उपयोग किया या बेचा, जबकि दुर्गापुर स्टील प्लांट 2017-24 के दौरान केवल 45 प्रतिशत ब्लास्ट फर्नेस स्लज का उपयोग कर सका।",
+   "bhashini_draft": "कारखाना अधिनियम, 1948 और राज्य कारखाना नियम, 1958 के प्रावधानों के कारण दुर्गापुर इस्पात संयंत्र में एक घातक दुर्घटना हुई और जानमाल का नुकसान हुआ। आई. आई. एस. सी. ओ. इस्पात संयंत्र के ब्लास्ट फर्नेस कास्ट हाउस I और II से जुड़े ढेरों से उच्च भगोड़ा उत्सर्जन का भी उल्लेख किया गया। मानक से अधिक कोयले की अधिक खपत हुई जिसके परिणामस्वरूप 13.97 के दौरान 2017-24 मिलियन टन CO2 गैस का अधिक उत्पादन हुआ। कार्बन डाइऑक्साइड गैस को पर्यावरण में छोड़ दिया गया था जिससे पर्यावरण को खतरा था। जबकि भिलाई, बोकारो, राउरकेला और आई. आई. एस. सी. ओ. इस्पात संयंत्रों ने पूरे ठोस कचरे का उपयोग या बिक्री की, दुर्गापुर इस्पात संयंत्र 2017-24 के दौरान केवल 45 प्रतिशत ब्लास्ट फर्नेस कीचड़ का उपयोग कर सका।"
+  },
+  {
+   "part_id": "p87_03",
+   "type": "body",
+   "page_no": 10,
+   "tick_group": "g96",
+   "en": "(Anand Mohan Bajaj) Deputy Comptroller and Auditor General (Commercial & Report Central) and Chairman, Audit Board",
+   "hi_reference": "(आनंद मोहन बजाज) उप नियंत्रक एवं महालेखापरीक्षक (वाणिज्यिक और रिपोर्ट केन्द्रीय) एवं अध्यक्ष, लेखापरीक्षा बोर्ड",
+   "bhashini_draft": "(आनंद मोहन बजाज) उप नियंत्रक और महालेखा परीक्षक (वाणिज्यिक और रिपोर्ट केंद्रीय) और अध्यक्ष, लेखापरीक्षा बोर्ड"
+  },
+  {
+   "part_id": "p87_04",
+   "type": "body",
+   "page_no": 10,
+   "tick_group": "g97",
+   "en": "New Delhi Dated: 12 December 2025",
+   "hi_reference": "नई दिल्ली दिनांक: 12 दिसम्बर 2025",
+   "bhashini_draft": "नई दिल्ली दिनांकः 12 दिसंबर 2025"
+  },
+  {
+   "part_id": "p87_05",
+   "type": "heading",
+   "page_no": 10,
+   "tick_group": "g98",
+   "en": "Countersigned",
+   "hi_reference": "प्रतिहस्ताक्षरित",
+   "bhashini_draft": "प्रतिवाद किया"
+  },
+  {
+   "part_id": "p87_06",
+   "type": "body",
+   "page_no": 10,
+   "tick_group": "g99",
+   "en": "(K. Sanjay Murthy) Comptroller and Auditor General of India",
+   "hi_reference": "(के. संजय मूर्ति) भारत के नियंत्रक एवं महालेखापरीक्षक",
+   "bhashini_draft": "(K. संजय मूर्ति) भारत के नियंत्रक और महालेखा परीक्षक"
+  },
+  {
+   "part_id": "p87_07",
+   "type": "body",
+   "page_no": 10,
+   "tick_group": "g100",
+   "en": "New Delhi Dated: 15 December 2025",
+   "hi_reference": "नई दिल्ली दिनांक: 15 दिसम्बर 2025",
+   "bhashini_draft": "नई दिल्ली दिनांकः 15 दिसंबर 2025"
+  },
+  {
+   "part_id": "p87_08",
+   "type": "page_number",
+   "page_no": 10,
+   "tick_group": null,
+   "en": "59",
+   "editable": false
+  }
+ ],
+ "planted_slips": [
+  {
+   "part_id": "p13_07",
+   "kind": "transliteration",
+   "wrong_text": "कैपिटल",
+   "en_term": "capital",
+   "fix_hint": "पूंजी"
+  }
+ ],
+ "glossary_terms": [
+  {
+   "english_term": "plant",
+   "hindi_term": "संयंत्र",
+   "accepted_variants": [
+    "पौधा",
+    "रोपना"
+   ],
+   "avoid_forms": []
+  },
+  {
+   "english_term": "consumption",
+   "hindi_term": "उपभोग",
+   "accepted_variants": [
+    "खपत"
+   ],
+   "avoid_forms": [
+    "कंजम्पशन"
+   ]
+  },
+  {
+   "english_term": "audit",
+   "hindi_term": "लेखापरीक्षा",
+   "accepted_variants": [
+    "लेखापरीक्षा करना",
+    "संपरीक्षा"
+   ],
+   "avoid_forms": [
+    "ऑडिट"
+   ]
+  },
+  {
+   "english_term": "management",
+   "hindi_term": "प्रबंधन",
+   "accepted_variants": [
+    "प्रबंध"
+   ],
+   "avoid_forms": [
+    "मैनेजमेंट"
+   ]
+  },
+  {
+   "english_term": "production",
+   "hindi_term": "उत्पादन",
+   "accepted_variants": [
+    "निर्माण"
+   ],
+   "avoid_forms": [
+    "प्रोडक्शन"
+   ]
+  },
+  {
+   "english_term": "capital",
+   "hindi_term": "पूंजी",
+   "accepted_variants": [
+    "पूँजी",
+    "मूलधन",
+    "राजधानी"
+   ],
+   "avoid_forms": [
+    "कैपिटल"
+   ]
+  },
+  {
+   "english_term": "Iron Ore",
+   "hindi_term": "लौह अयस्क",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "आइरन ओर"
+   ]
+  },
+  {
+   "english_term": "capacity",
+   "hindi_term": "क्षमता",
+   "accepted_variants": [
+    "हैसियत",
+    "धारिता",
+    "सामर्थ्य"
+   ],
+   "avoid_forms": [
+    "कैपेसिटी"
+   ]
+  },
+  {
+   "english_term": "recommendation",
+   "hindi_term": "अनुशंसा",
+   "accepted_variants": [
+    "सिफारिश"
+   ],
+   "avoid_forms": [
+    "रिकमेंडेशन"
+   ]
+  },
+  {
+   "english_term": "Repairs",
+   "hindi_term": "मरम्मत",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "रिपेयर"
+   ]
+  },
+  {
+   "english_term": "raw material",
+   "hindi_term": "कच्चा माल",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "राव मटीरियल"
+   ]
+  },
+  {
+   "english_term": "performance",
+   "hindi_term": "निष्पादन",
+   "accepted_variants": [
+    "पालन",
+    "प्रदर्शन"
+   ],
+   "avoid_forms": [
+    "परफॉर्मेंस"
+   ]
+  },
+  {
+   "english_term": "availability",
+   "hindi_term": "उपलब्धता",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "अवेलेबिलिटी"
+   ]
+  },
+  {
+   "english_term": "environment",
+   "hindi_term": "पर्यावरण",
+   "accepted_variants": [
+    "वातावरण"
+   ],
+   "avoid_forms": [
+    "एनवायरनमेंट"
+   ]
+  },
+  {
+   "english_term": "project",
+   "hindi_term": "परियोजना",
+   "accepted_variants": [
+    "प्रक्षेपित करना"
+   ],
+   "avoid_forms": [
+    "प्रोजेक्ट"
+   ]
+  },
+  {
+   "english_term": "Integrated",
+   "hindi_term": "एकीकृत",
+   "accepted_variants": [],
+   "avoid_forms": [
+    "इंटीग्रेटेड"
+   ]
+  }
+ ]
+}

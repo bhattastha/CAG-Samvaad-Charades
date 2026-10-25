@@ -1,9 +1,9 @@
 {
   "name": "samvaad-preview-launcher",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "start": "bash ../scripts/emergent/start.sh",
-    "build": "cd .. && corepack pnpm --filter @hc/web build"
-  },
-  "packageManager": "yarn@1.22.22"
+    "build": "node build.js"
+  }
 }
