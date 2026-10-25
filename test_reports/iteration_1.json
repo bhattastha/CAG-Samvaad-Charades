@@ -1,0 +1,44 @@
+{
+  "summary": "E2E test of Samvaad Charades (Fastify API + React/Vite dist) via public URL. All requested fixes verified working: admin email switch (bhattastha.dibd@gmail.com is manager, game_admin@cag.gov.in is not), profile dropdown renders above body on How-to-Play/Rules (desktop + mobile, all 6 items on top via elementFromPoint), header sticky on Rules, no 'no_pages' on Trial/Primary (Primary loads 10-page bundle with BHASHINI draft), office autofill on registration (Guwahati + Delhi), inline glossary underlines on English source (80-91 terms) and Hindi editor text with menus showing Approved/Also accepted/Avoid options, toolbar Bold, submit -> report card 29/100 +0.9 credits, RBAC 403 for player on /api/admin/*, manager console (overview, content library 5 published bundles, Sahayak script editor). Dev code 123456 rejected. TWO blocking environment issues found: (1) OTP email cannot be sent to ANY @cag.gov.in address - Emergent email proxy returns 422 'undeliverable_recipient: domain cag.gov.in has rejected every email... placeholder or parked domain', API returns 500 server_error and UI shows 'Something went wrong. Try again.' - real CAG officers cannot sign in/register. (2) At test start the whole site was BLANK: dist was rebuilt (09:32) after Fastify started (09:31); @fastify/static is registered with wildcard:false so new hashed assets were not routed and the notFound handler served index.html for /assets/*.js (MIME text/html). I restarted `frontend` supervisor which fixed it.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "POST /api/auth/otp/request", "issue": "Returns 500 {error:server_error} for every @cag.gov.in email. Root cause: Emergent email proxy (integrations.emergentagent.com/api/v1/email/send) responds 422 code=undeliverable_recipient: 'The domain cag.gov.in has rejected every email sent to it'. Primary player domain cannot receive OTP -> registration/sign-in impossible for real users (gmail works).", "priority": "CRITICAL"},
+      {"endpoint": "GET /assets/* (Fastify static)", "issue": "@fastify/static registered with wildcard:false in apps/api/src/app.ts: files built after server start are not served; notFound handler returns index.html (text/html) for missing JS/CSS -> blank white page. Happened in this env after `pnpm build` without API restart.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/auth/otp/request", "issue": "sendOtp failure is thrown as generic Error -> 500 server_error; also the otp_challenges row (new hash, sent_count++) is written before send fails. Should map to e.g. 502 {error:'otp_send_failed'} with a specific UI message and not consume rate-limit quota."},
+      {"endpoint": "GET /api/offices?q=Delhi", "issue": "First result is 'DG/PD of Audit (Power), New Delhi at Bhopal (Branch Office)' whose address is Bhopal - users typing Delhi and taking first option get a Bhopal address. Consider ranking city/state match above name match."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Registration / sign-in with @cag.gov.in email", "issue": "Create my player card -> 'Something went wrong. Try again.' under email field (backend 500, see critical). Generic message gives user no hint.", "affected_selectors": ["#email", "form button[type=submit]"]}
+    ],
+    "design_issues": [
+      {"screen": "Report card header (1920px)", "issues": ["Top nav 'My profile' wraps onto two lines on /report/:id"]},
+      {"screen": "Workbench HUD", "issues": ["'LEVEL 1 · REVIEW BUILD' / 'LEVEL 2 · REVIEW BUILD' label visible to players (pages are sample=true)", "Source glossary underlines very dense incl. common words (other, time, High, poor, rest, actual) - optional stop-list"]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_samvaad_api.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "CRITICAL: OTP email to @cag.gov.in is rejected by the Emergent email proxy (422 undeliverable_recipient). Configure a real SMTP_URL (NIC/CAG relay) or another provider for cag.gov.in recipients, or contact Emergent support; verify with a real cag.gov.in inbox.",
+    "Handle OTP send failures gracefully: return 502 otp_send_failed (not 500), show specific UI message, don't increment sent_count on failure.",
+    "Fix static serving: use @fastify/static wildcard:true (or always restart API after build) and return 404 (not index.html) for missing /assets/* files.",
+    "Update /app/memory/test_credentials.md - it still says manager is game_admin@cag.gov.in; should be bhattastha.dibd@gmail.com and mention test-otp.sh.",
+    "Optional: hide 'REVIEW BUILD' label from players; fix 'My profile' nav wrap on report page; improve office search ranking."
+  ],
+  "critical_code_review_comments": [
+    "apps/api/src/auth.ts sendOtp: thrown Error bubbles to 500; DB upsert before send means failed sends burn rate-limit quota.",
+    "apps/api/src/app.ts: statics wildcard:false + catch-all index.html fallback masks missing assets as HTML.",
+    "choosePage falls back to least-used page when player exhausted pages, so 1 bundle for Primary/Secondary/Pro won't cause no_pages on retries (verified by code)."
+  ],
+  "updated_files": ["/app/backend/tests/test_samvaad_api.py"],
+  "success_rate": {"backend": "85% (11/13; both failures = same cag.gov.in OTP send root cause)", "frontend": "95% (all requested flows pass when OTP request is bypassed; real OTP request for cag.gov.in fails)"},
+  "test_credentials": "/app/memory/test_credentials.md is STALE (lists game_admin@cag.gov.in). Used: player qa.tester1@cag.gov.in code 482913, manager bhattastha.dibd@gmail.com code 739154 via /app/scripts/emergent/test-otp.sh. For UI tests I planted the code and intercepted /api/auth/otp/request in Playwright (because real request 500s for cag.gov.in and would overwrite the planted hash).",
+  "seed_data_creation": "Registered player qa.tester1@cag.gov.in (QA Tester One, office from Delhi search). It has 1 submitted Trial attempt (29/100) and 1 ACTIVE Primary attempt (will auto-submit on timeout) - appears on leaderboard/analytics; delete if unwanted. Backend test player qa.backend1@cag.gov.in is auto-deleted by test teardown.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Player session cookie is hc_session (JWT, 12h). Fast login: plant code with test-otp.sh then POST /api/auth/otp/verify (skip /otp/request for cag.gov.in since it 500s and overwrites hash). Browser: inject hc_session cookie. Selectors: [data-testid=start] landing, [data-testid=profile-menu], #name #mobile #email #office [role=option] (use dispatch_event('mousedown')) #address #otp, .hc-source-term (English glossary), .ProseMirror .hc-gloss (Hindi), [role=menu]; 'Start Mission' button on /play/:key; 'Submit Translation' then 'Submit anyway?' confirm. If site renders blank, check that dist assets are served as JS (restart frontend supervisor after build).",
+  "rca of the issue": "Blank page: dist rebuilt at 09:32 after Fastify start 09:31; @fastify/static wildcard:false registers routes only for files present at boot; new index-HBI6wb1I.js hit setNotFoundHandler -> index.html -> MIME error. Mitigated by `sudo supervisorctl restart frontend`. OTP: curl to email proxy with EMERGENT_EMAIL_KEY for qa.dot3@cag.gov.in returns {error:'Undeliverable recipient', code:'undeliverable_recipient', message:'The domain cag.gov.in has rejected every email sent to it...'}; earlier in the session a cag.gov.in request succeeded, then all began failing (proxy-side domain block)."
+}

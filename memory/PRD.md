@@ -9,3 +9,11 @@ User choices: Emergent managed email for OTP; publish seeded Report 38 sample pa
 - Emergent native production deploy supports Python/Next.js backends + MongoDB only; no Postgres, ephemeral disk.
 - Publishing requires every part verified; no manager inbox access for agent.
 - DHRUVA_API_KEY / DHRUVA_TTS_SERVICE_ID not yet entered in secrets.
+## 25 Oct 2026 — iteration 2
+- ADMIN_EMAILS -> bhattastha.dibd@gmail.com; old game_admin@cag.gov.in admin row removed.
+- Published all 5 seeded Report 38 pages (Trial x2, Primary 10pp, Secondary 20pp, Pro 30pp) at owner request: parts marked verified, audit_logs entries "hosting-agent (owner request)" note references NOT manager-verified. 6 fields (pro 4, secondary 2) have no BHASHINI draft.
+- Fixed profile dropdown hidden under body: index.css `.ob-bg/.rules-room > :not(header)`; nav no-wrap.
+- Glossary: all 11,686 CSV records already in seed/glossary.json (11,389 terms in DB); inline menus verified.
+- Office -> address autofill verified.
+- BLOCKER: Emergent email proxy now rejects @cag.gov.in (422 undeliverable_recipient). Needs CAG/NIC SMTP_URL.
+- Ops: after rebuilding web dist, restart `frontend` supervisor (static routes registered at boot).

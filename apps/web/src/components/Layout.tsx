@@ -175,7 +175,7 @@ export function Header({ compact = false, hud = true, wide = false }: { compact?
               const on = pathname === to || (to === "/journey" && pathname.startsWith("/play"));
               return (
                 <Link key={to} to={to} aria-current={on ? "page" : undefined}
-                  className={`relative inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-[15px] font-semibold transition ${on ? "text-navy bg-navy-50" : "text-muted hover:text-navy hover:bg-slate-50"}`}>
+                  className={`relative inline-flex items-center gap-1.5 whitespace-nowrap px-3 py-2 rounded-md text-[15px] font-semibold transition ${on ? "text-navy bg-navy-50" : "text-muted hover:text-navy hover:bg-slate-50"}`}>
                   <Icon name={icon} size={16} />{label}
                   {/* plain element on purpose: a shared-layout (layoutId) underline registers with the scene's exit
                       presence and, when a loading header unmounts early, leaves the old scene stuck at opacity 0 */}
