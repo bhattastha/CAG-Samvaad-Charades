@@ -45,7 +45,7 @@ export function cleanSuggestions(target: unknown, cap: number): string[] {
 }
 
 export async function transliterate(word: string, signal?: AbortSignal): Promise<{ suggestions: string[]; fallback?: string }> {
-  const w = word.toLowerCase();
+  const w = `${config().transliteration.serviceId}|${word.toLowerCase()}`;
   const hit = cacheGet(w);
   if (hit) return { suggestions: hit };
   const x = config().transliteration;
@@ -54,7 +54,9 @@ export async function transliterate(word: string, signal?: AbortSignal): Promise
       pipelineTasks: [{
         taskType: "transliteration",
         config: {
-          language: { sourceLanguage: x.sourceLanguage, targetLanguage: x.targetLanguage, targetLanguageScriptCode: x.targetLanguageScriptCode },
+          language: config().bhashiniServices.transliterationProvider === "anuvaad"
+            ? { sourceLanguage: x.sourceLanguage, targetLanguage: x.targetLanguage, targetLanguageScriptCode: x.targetLanguageScriptCode }
+            : { sourceLanguage: x.sourceLanguage, targetLanguage: x.targetLanguage },
           serviceId: x.serviceId,
           isSentence: x.isSentence,
           numSuggestions: x.numSuggestions,

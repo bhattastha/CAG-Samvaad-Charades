@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { seedToPage, type SeedPage } from "@hc/shared";
@@ -61,20 +61,51 @@ export function splitVariants(en: string, others: string[], threshold = 0.7) {
   return { accepted, avoid };
 }
 
-export async function importGlossaryCsv(db: Db, csv: string) {
-  let n = 0;
+/** Anuvaad export ("Source term", "Target term 1", "Other target terms" split by |) or the legacy columns. */
+export function glossaryRowsFromCsv(csv: string) {
+  const clean = (v: string) => v.normalize("NFC").replace(/\s*[-–]\s*$/, "").replace(/\s+/g, " ").trim();
+  const byKey = new Map<string, { en: string; hi: string; others: string[]; sector: string | null }>();
   for (const r of parseCsv(csv)) {
-    const en = r.english_term, hi = r.hindi_term;
+    if (r.Status && r.Status.toUpperCase() !== "APPROVED") continue;
+    const en = clean(r["Source term"] ?? r.english_term ?? ""), hi = clean(r["Target term 1"] ?? r.hindi_term ?? "");
     if (!en || !hi) continue;
-    const { accepted, avoid } = splitVariants(en, (r.accepted_variants ?? "").split(/[;|,]/));
-    await db.query(
-      `INSERT INTO glossary_terms (id, en, en_norm, hi, accepted_variants, avoid_forms, flags) VALUES ($1,$2,$3,$4,$5,$6,'{}')
-       ON CONFLICT (en_norm) DO UPDATE SET hi=$4, accepted_variants=$5, avoid_forms=$6`,
-      [`g-${enNorm(en)}`, en, enNorm(en), hi, accepted, avoid],
-    );
-    n++;
+    const others = (r["Other target terms"] ?? r.accepted_variants ?? "").split(r["Other target terms"] !== undefined ? /\|/ : /[;|,]/).map(clean).filter(Boolean);
+    const sector = clean(r.Sector ?? r.sector ?? "") || null;
+    // a sector entry shares its English with the general one, so its key carries the sector (as in the seed)
+    const k = enNorm(en) + (sector ? `#${sector.toLowerCase()}` : "");
+    const cur = byKey.get(k);
+    if (!cur) byKey.set(k, { en, hi, others, sector });
+    else for (const o of [hi, ...others]) if (o !== cur.hi && !cur.others.includes(o)) cur.others.push(o);
   }
-  return n;
+  return [...byKey.entries()].map(([k, v]) => ({ k, en: v.en, hi: v.hi, sector: v.sector, accepted: [...new Set(v.others.filter((o) => o !== v.hi))] }));
+}
+
+/** Every CSV alternative is an accepted option (owner's decision, 25 Oct 2026); "replace" makes the file the whole glossary. */
+export async function importGlossaryCsv(db: Db, csv: string, mode: "merge" | "replace" = "merge") {
+  const rows = glossaryRowsFromCsv(csv);
+  if (!rows.length) return { rows: 0, removed: 0, inserted: 0 };
+  let removed = 0;
+  await db.tx(async (q) => {
+    if (mode === "replace") {
+      const keep = rows.map((r) => r.k);
+      const del = await q.query<{ id: string }>("DELETE FROM glossary_terms WHERE NOT (en_norm = ANY($1::text[])) RETURNING id", [keep]);
+      removed = del.length;
+    }
+    for (let i = 0; i < rows.length; i += 500) {
+      const chunk = rows.slice(i, i + 500);
+      const vals: unknown[] = [];
+      const ph = chunk.map((r, j) => {
+        const flags = similarity(skeletonHi(r.hi), skeletonEn(r.en)) >= 0.7 ? ["primary_looks_transliterated"] : [];
+        vals.push(`g-${r.k}`, r.en, r.k, r.hi, r.accepted, [], flags, r.sector);
+        const b = j * 8;
+        return `($${b + 1},$${b + 2},$${b + 3},$${b + 4},$${b + 5},$${b + 6},$${b + 7},$${b + 8})`;
+      });
+      await q.query(
+        `INSERT INTO glossary_terms (id, en, en_norm, hi, accepted_variants, avoid_forms, flags, sector) VALUES ${ph.join(",")}
+         ON CONFLICT (en_norm) DO UPDATE SET en=EXCLUDED.en, hi=EXCLUDED.hi, accepted_variants=EXCLUDED.accepted_variants, avoid_forms=EXCLUDED.avoid_forms, flags=EXCLUDED.flags, sector=EXCLUDED.sector`, vals);
+    }
+  });
+  return { rows: rows.length, removed, inserted: rows.length };
 }
 
 const composeAddress = (city: string, state: string, pin: string) => `${city}, ${state}${pin ? ` – ${pin}` : ""}`;
@@ -110,7 +141,12 @@ export async function seedAll(db: Db, log = console.log) {
   }
   log(`offices: ${offices.length}`);
 
-  const gl = readJson("seed/glossary.json") as any[];
+  const officialCsv = resolve(ROOT, "seed/glossary.anuvaad.csv");
+  if (existsSync(officialCsv) && !(await db.one<{ n: number }>("SELECT count(*)::int AS n FROM glossary_terms"))?.n) {
+    const r = await importGlossaryCsv(db, readFileSync(officialCsv, "utf8"), "replace");
+    log(`glossary (official CSV): ${r.rows}`);
+  }
+  const gl = existsSync(officialCsv) ? [] : (readJson("seed/glossary.json") as any[]);
   // a sector-specific entry shares its English with the general one (Anuvaad: "sector widens, never narrows"),
   // so its unique key carries the sector
   const keyOf = (g: any) => enNorm(g.english_term) + (g.sector ? `#${String(g.sector).toLowerCase()}` : "");

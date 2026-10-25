@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { roundOf } from "@hc/shared";
 import { z } from "zod";
 import { readSession, requirePlayer } from "../auth.js";
-import { asrFile, isConfigured, tts } from "../bhashini/client.js";
+import { asrFile, isConfigured, tts, ttsKey } from "../bhashini/client.js";
 import { rateOk, transliterate, WORD } from "../bhashini/xlit.js";
 import { config, line, strings } from "../content.js";
 import type { Db } from "../db.js";
@@ -77,7 +77,7 @@ export async function serviceRoutes(app: FastifyInstance, db: Db) {
     if (!req.session?.email) return reply.code(401).send({ error: "not_signed_in" });
     const { text } = parse(z.object({ text: z.string().min(1).max(400) }), req.body);
     if (!isConfigured("tts")) return reply.code(503).send({ error: "tts_unavailable" });
-    const k = createHash("sha1").update(text).digest("hex");
+    const k = createHash("sha1").update(`${ttsKey()}|${text}`).digest("hex");
     try {
       let buf = ttsCache.get(k);
       if (!buf) {

@@ -12,14 +12,28 @@ export function Glossary() {
   const { data = [], isFetching } = useQuery({ queryKey: ["agl", q, flagged], queryFn: () => api<any[]>(`/admin/glossary?q=${encodeURIComponent(q)}&flagged=${flagged ? 1 : 0}`) });
   const [edit, setEdit] = useState<any | null>(null);
   const [csv, setCsv] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [replace, setReplace] = useState(true);
+  const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
+  const { data: stats } = useQuery({ queryKey: ["agl-stats"], queryFn: () => api<{ terms: number; variants: number; lastImport: any }>("/admin/glossary/stats") });
+  const runImport = async () => {
+    if (replace && !window.confirm("Replace the whole glossary with this file? Terms that are not in the file will be removed (manager overrides on kept terms stay).")) return;
+    setBusy(true);
+    try {
+      const r = await api<any>("/admin/glossary/import", { body: { csv, mode: replace ? "replace" : "merge" } });
+      setMsg(`Imported ${r.rows.toLocaleString("en-IN")} terms${r.mode === "replace" ? `, removed ${r.removed.toLocaleString("en-IN")} not in the file` : ""}. Players see them on their next page load.`);
+      setCsv(""); setFileName("");
+      qc.invalidateQueries({ queryKey: ["agl"] }); qc.invalidateQueries({ queryKey: ["agl-stats"] });
+    } catch (e) { setMsg((e as ApiError).body?.message ?? (e as ApiError).code); } finally { setBusy(false); }
+  };
   const toggleOverride = useMutation({
     mutationFn: (g: any) => api(`/admin/glossary/${g.id}`, { method: "PUT", body: { hi: g.hi, variants: g.accepted_variants, avoid: g.avoid_forms, override: { ...g.override, active: !(g.override.active !== false) } } }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["agl"] }),
   });
   return (
     <div>
-      <PageHeader title="Glossary" subtitle="CAG standard glossary (≈ 11,400 entries) with accepted variants, avoid-forms and manager overrides (D3). Shows up to 100 matches." />
+      <PageHeader title="Glossary" subtitle={<>CAG standard glossary{stats ? <> · <b data-testid="glossary-total">{stats.terms.toLocaleString("en-IN")}</b> terms, {stats.variants.toLocaleString("en-IN")} alternative forms</> : ""}{stats?.lastImport ? ` · last import ${new Date(stats.lastImport.at).toLocaleString("en-IN")} by ${stats.lastImport.actor}` : ""}. Search shows up to 100 matches.</>} />
       <div className="grid gap-5 xl:grid-cols-[1fr_22rem]">
         <Card pad={false}>
           <div className="flex flex-wrap items-center gap-3 border-b border-slate-100 p-3">
@@ -50,13 +64,14 @@ export function Glossary() {
           </div>
         </Card>
         {isManager && (
-          <Card title="Import terms" subtitle="CSV columns: english_term, hindi_term, accepted_variants (separated by ;), category. Variants that look like transliterations of the English move to avoid-forms automatically.">
-            <textarea className={`${input} font-mono text-xs`} rows={8} value={csv} onChange={(e) => setCsv(e.target.value)} placeholder="english_term,hindi_term,accepted_variants,category" />
+          <Card title="Import glossary" subtitle="Upload the Anuvaad glossary export (Source term, Target term 1, Other target terms, Sector, Status). Target term 1 is the approved Hindi; every other target term is offered to players as an accepted option. The older english_term, hindi_term, accepted_variants format also works.">
+            <textarea data-testid="glossary-import-text" className={`${input} font-mono text-xs`} rows={6} value={csv.length > 20000 ? `${csv.slice(0, 2000)}\n… (${csv.split("\n").length.toLocaleString("en-IN")} lines loaded from ${fileName || "file"})` : csv} readOnly={csv.length > 20000} onChange={(e) => setCsv(e.target.value)} placeholder="Source term,Target term 1,Other target terms,Sector,Status" />
+            <label className="mt-2 flex items-start gap-2 text-sm"><input data-testid="glossary-import-replace" type="checkbox" className="mt-1" checked={replace} onChange={(e) => setReplace(e.target.checked)} /> <span><b>Replace the whole glossary</b> with this file (official list). Untick to add new terms and update matching ones only.</span></label>
             <div className="mt-2 flex items-center gap-2">
-              <label className={`${btn.ghost} cursor-pointer`}>Choose file<input type="file" accept=".csv,text/csv" className="sr-only" onChange={async (e) => { const f = e.target.files?.[0]; if (f) setCsv(await f.text()); }} /></label>
-              <button className={btn.navy} disabled={!csv.trim()} onClick={async () => { try { const r = await api<any>("/admin/glossary/import", { body: { csv } }); setMsg(`Imported ${r.rows} rows.`); setCsv(""); qc.invalidateQueries({ queryKey: ["agl"] }); } catch (e) { setMsg((e as ApiError).code); } }}>Import</button>
+              <label className={`${btn.ghost} cursor-pointer`}>Choose file<input data-testid="glossary-import-file" type="file" accept=".csv,text/csv" className="sr-only" onChange={async (e) => { const f = e.target.files?.[0]; if (f) { setCsv(await f.text()); setFileName(f.name); } e.target.value = ""; }} /></label>
+              <button data-testid="glossary-import-btn" className={btn.navy} disabled={!csv.trim() || busy} onClick={runImport}>{busy ? "Importing…" : "Import"}</button>
             </div>
-            {msg && <div className="mt-2"><Notice>{msg}</Notice></div>}
+            {msg && <div className="mt-2" data-testid="glossary-import-msg"><Notice>{msg}</Notice></div>}
           </Card>
         )}
       </div>

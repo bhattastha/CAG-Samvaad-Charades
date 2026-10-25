@@ -31,10 +31,11 @@ function keyFor(task: Task): string {
     case "asr": return env.DHRUVA_ASR_KEY;
     case "tts": return env.DHRUVA_TTS_KEY;
     case "llm": return env.DHRUVA_LLM_KEY;
-    case "transliteration": return env.ANUVAAD_XLIT_AUTH;
+    case "transliteration": return anuvaadXlit() ? env.ANUVAAD_XLIT_AUTH : env.DHRUVA_NMT_KEY;
   }
 }
-const keyOptional = (task: Task) => task === "transliteration" || (task === "translation" && anuvaadDrafts());
+const anuvaadXlit = () => svc().transliterationProvider === "anuvaad";
+const keyOptional = (task: Task) => (task === "transliteration" && anuvaadXlit()) || (task === "translation" && anuvaadDrafts());
 export const isConfigured = (task: Task) => (keyOptional(task) ? true : !!keyFor(task));
 
 export async function callService<T = any>(task: Task, url: string, body: unknown, opts: { timeoutMs?: number; signal?: AbortSignal } = {}): Promise<T> {
@@ -123,11 +124,12 @@ export async function translateBatch(items: { text: string; locked: string[] }[]
   return out;
 }
 
-// ---------- TTS (Sahayika, English, female) ----------
+// ---------- TTS (Sahayak; service, voice and language from the console) ----------
 
+export const ttsKey = () => `${svc().ttsEnglish}|${svc().ttsGender}|${svc().ttsLanguage}|${svc().ttsSamplingRate}`;
 export async function tts(text: string): Promise<Buffer> {
   const res = await callService<any>("tts", PIPELINE, {
-    pipelineTasks: [{ taskType: "tts", config: { language: { sourceLanguage: "en" }, serviceId: env.DHRUVA_TTS_SERVICE_ID || svc().ttsEnglish, gender: svc().ttsGender, samplingRate: 22050 } }],
+    pipelineTasks: [{ taskType: "tts", config: { language: { sourceLanguage: svc().ttsLanguage }, serviceId: svc().ttsEnglish, gender: svc().ttsGender, samplingRate: svc().ttsSamplingRate } }],
     inputData: { input: [{ source: text }] },
   });
   const b64: string | undefined = res?.pipelineResponse?.[0]?.audio?.[0]?.audioContent;

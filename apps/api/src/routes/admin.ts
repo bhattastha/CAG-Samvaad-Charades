@@ -1,11 +1,12 @@
-import { existsSync, mkdirSync, unlinkSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, unlinkSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { parseGameConfig, RoundKey, seedToPage, summarise, type PageData, type SeedPage } from "@hc/shared";
 import { z } from "zod";
 import { requireAdmin } from "../auth.js";
-import { health, isConfigured, translateBatch, tts } from "../bhashini/client.js";
-import { allLines, applySettings, baseConfig, config, loadLines, loadOverrides } from "../content.js";
+import { health, isConfigured, llm, translateBatch, tts } from "../bhashini/client.js";
+import { transliterate } from "../bhashini/xlit.js";
+import { allLines, applySettings, baseConfig, config, loadLines, loadOverrides, servicesOf } from "../content.js";
 import type { Db } from "../db.js";
 import { ROOT } from "../env.js";
 import { loadGlossary, loadPage, savePage } from "../pages.js";
@@ -224,12 +225,19 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
   app.post("/admin/glossary/import", async (req, reply) => {
     const who = manager(req, reply);
     if (!who) return;
-    const { csv } = parse(z.object({ csv: z.string().max(5_000_000) }), req.body);
+    const { csv, mode } = parse(z.object({ csv: z.string().max(8_000_000), mode: z.enum(["merge", "replace"]).default("merge") }), req.body);
     const { importGlossaryCsv } = await import("../seed.js");
-    const n = await importGlossaryCsv(db, csv);
+    const r = await importGlossaryCsv(db, csv, mode);
+    if (!r.rows) return reply.code(400).send({ error: "no_rows", message: "No usable rows. Expected Anuvaad export columns (Source term, Target term 1, Other target terms) or english_term, hindi_term, accepted_variants." });
     await loadGlossary(db);
-    await audit(db, who, "glossary.import", "csv", { rows: n });
-    return { ok: true, rows: n };
+    await audit(db, who, "glossary.import", "csv", { ...r, mode });
+    return { ok: true, ...r, mode };
+  });
+  app.get("/admin/glossary/stats", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    const r = await db.one<{ n: number; variants: number }>("SELECT count(*)::int AS n, coalesce(sum(cardinality(accepted_variants)),0)::int AS variants FROM glossary_terms");
+    const last = await db.one<{ at: string; actor: string; meta: any }>("SELECT at, actor, meta FROM audit_logs WHERE action='glossary.import' ORDER BY at DESC LIMIT 1");
+    return { terms: r?.n ?? 0, variants: r?.variants ?? 0, lastImport: last ?? null };
   });
 
   // ---------- offices ----------
@@ -300,8 +308,9 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     const dir = resolve(ROOT, ".data/audio");
     mkdirSync(dir, { recursive: true });
     let ok = 0, failed = 0;
-    for (const l of allLines().filter((x) => x.spoken && !/\{\w+\}/.test(x.en))) {
-      try { writeFileSync(resolve(dir, `${l.id}.wav`), await tts(l.en)); ok++; } catch { failed++; }
+    const hi = config().bhashiniServices.ttsLanguage === "hi";
+    for (const l of allLines().filter((x) => x.spoken && !/\{\w+\}/.test(hi ? x.hi : x.en))) {
+      try { writeFileSync(resolve(dir, `${l.id}.wav`), await tts(hi ? l.hi : l.en)); ok++; } catch { failed++; }
     }
     await audit(db, who, "sahayika.audio", "all", { ok, failed });
     return { ok, failed };
@@ -388,6 +397,53 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     await loadOverrides(db);
     await audit(db, who, "config.settings", "settings", body);
     return { ok: true, effective: config() };
+  });
+
+  // ---------- BHASHINI services (service IDs and models, editable) ----------
+  const svcId = z.string().trim().min(3).max(160).regex(/^[A-Za-z0-9_./:-]+$/, "Service IDs use letters, digits and - _ . / : only");
+  const ServicesBody = z.object({
+    translationProvider: z.enum(["anuvaad", "dhruva"]), translation: svcId,
+    transliterationProvider: z.enum(["anuvaad", "dhruva"]), transliteration: svcId, transliterationSuggestions: z.number().int().min(1).max(8),
+    tts: svcId, ttsGender: z.enum(["female", "male"]), ttsLanguage: z.enum(["en", "hi"]), ttsSamplingRate: z.number().int().min(8000).max(48000),
+    asrHindi: svcId, llm: svcId,
+  });
+  app.get("/admin/config/services", async (req, reply) => {
+    if (!viewer(req, reply)) return;
+    const row = await db.one<{ by: string; at: string }>("SELECT by, at FROM config_overrides WHERE key='services'");
+    return { current: servicesOf(config()), defaults: servicesOf(applySettings(baseConfig, [])), updatedBy: row?.by ?? null, updatedAt: row?.at ?? null, health: health() };
+  });
+  app.put("/admin/config/services", async (req, reply) => {
+    const who = manager(req, reply);
+    if (!who) return;
+    const body = parse(ServicesBody, req.body);
+    const rows = await db.query<{ key: string; value: any }>("SELECT key, value FROM config_overrides WHERE key<>'services'");
+    try { applySettings(baseConfig, [...rows, { key: "services", value: body }]); } catch (e: any) { return reply.code(400).send({ error: "invalid", message: e.message }); }
+    const before = servicesOf(config());
+    await db.query("INSERT INTO config_overrides (key, value, by) VALUES ('services', $1, $2) ON CONFLICT (key) DO UPDATE SET value=$1, by=$2, at=now()", [JSON.stringify(body), who]);
+    await loadOverrides(db);
+    // a different voice makes the saved Sahayak recordings stale; players fall back to live TTS until regenerated
+    const voiceChanged = before.tts !== body.tts || before.ttsGender !== body.ttsGender || before.ttsLanguage !== body.ttsLanguage || before.ttsSamplingRate !== body.ttsSamplingRate;
+    const dir = resolve(ROOT, ".data/audio");
+    if (voiceChanged && existsSync(dir)) for (const f of readdirSync(dir)) if (f.endsWith(".wav")) unlinkSync(resolve(dir, f));
+    await audit(db, who, "config.services", "services", { before, after: body });
+    return { ok: true, current: servicesOf(config()), voiceChanged };
+  });
+  /** Runs one small live call against the saved services so a manager can check an ID before players hit it. */
+  app.post("/admin/config/services/test", async (req, reply) => {
+    if (!manager(req, reply)) return;
+    const { task } = parse(z.object({ task: z.enum(["translation", "transliteration", "tts", "llm"]) }), req.body);
+    const t0 = Date.now();
+    try {
+      let sample = "";
+      if (task === "translation") sample = (await translateBatch([{ text: "The audit observed irregularities in procurement.", locked: [] }]))[0]?.text ?? "";
+      if (task === "transliteration") { const r = await transliterate("lekha"); if (!r.suggestions.length) throw new Error("No suggestions returned. Check the Dhruva key and the service ID."); sample = r.suggestions.join(", "); }
+      if (task === "tts") { const b = await tts(config().bhashiniServices.ttsLanguage === "hi" ? "नमस्ते, मैं सहायक हूँ।" : "Hello, I am Sahayak."); sample = `${Math.round(b.length / 1024)} KB of audio`; return { ok: true, ms: Date.now() - t0, sample, audio: b.toString("base64") }; }
+      if (task === "llm") sample = await llm("Reply in one short sentence.", "Say hello to a CAG officer.");
+      if (!sample) throw new Error("empty response");
+      return { ok: true, ms: Date.now() - t0, sample };
+    } catch (e: any) {
+      return reply.code(422).send({ ok: false, ms: Date.now() - t0, error: "service_failed", message: String(e?.message ?? e).slice(0, 300) });
+    }
   });
 
   app.get("/admin/config/history", async (req, reply) => {

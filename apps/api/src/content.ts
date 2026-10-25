@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { parseGameConfig, type GameConfig } from "@hc/shared";
-import { ROOT } from "./env.js";
+import { env, ROOT } from "./env.js";
 import type { Db } from "./db.js";
 
 const readJson = (p: string) => JSON.parse(readFileSync(resolve(ROOT, p), "utf8"));
@@ -33,6 +33,24 @@ export async function loadOverrides(db: Db) {
   effective = applySettings(baseConfig, rows);
 }
 
+/** BHASHINI service IDs and models, edited in the console ("services" override). */
+export interface ServicesOverride {
+  translationProvider: "anuvaad" | "dhruva"; translation: string;
+  transliterationProvider: "anuvaad" | "dhruva"; transliteration: string; transliterationSuggestions: number;
+  tts: string; ttsGender: "female" | "male"; ttsLanguage: "en" | "hi"; ttsSamplingRate: number;
+  asrHindi: string; llm: string;
+}
+export const ENDPOINTS = { dhruva: "https://dhruva-api.bhashini.gov.in/services/inference/pipeline", anuvaad: "https://anuvaad-backend.bhashini.co.in/v1/pipeline" };
+export function servicesOf(c: GameConfig): ServicesOverride {
+  const b = c.bhashiniServices;
+  return {
+    translationProvider: b.translationProvider, translation: b.translation,
+    transliterationProvider: b.transliterationProvider, transliteration: c.transliteration.serviceId, transliterationSuggestions: c.transliteration.numSuggestions,
+    tts: b.ttsEnglish, ttsGender: b.ttsGender, ttsLanguage: b.ttsLanguage, ttsSamplingRate: b.ttsSamplingRate,
+    asrHindi: b.asrHindi, llm: c.sahayika.llmServiceId,
+  };
+}
+
 /** Admin-console overrides on top of the file: credit caps (legacy key) and the full "settings" block. */
 export interface SettingsOverride {
   rounds?: Record<string, { timeLimitMinutes?: number; creditCap?: number; pages?: number }>;
@@ -47,7 +65,16 @@ export interface SettingsOverride {
 export function applySettings(base: GameConfig, rows: { key: string; value: any }[]): GameConfig {
   const caps = rows.find((r) => r.key === "creditCaps")?.value as Record<string, number> | undefined;
   const st = rows.find((r) => r.key === "settings")?.value as SettingsOverride | undefined;
+  const sv = rows.find((r) => r.key === "services")?.value as ServicesOverride | undefined;
   const next = structuredClone(base);
+  if (env.DHRUVA_TTS_SERVICE_ID) next.bhashiniServices.ttsEnglish = env.DHRUVA_TTS_SERVICE_ID;
+  if (sv) {
+    next.bhashiniServices = { ...next.bhashiniServices, translationProvider: sv.translationProvider, translation: sv.translation, transliterationProvider: sv.transliterationProvider,
+      transliteration: sv.transliteration, ttsEnglish: sv.tts, ttsGender: sv.ttsGender, ttsLanguage: sv.ttsLanguage, ttsSamplingRate: sv.ttsSamplingRate, asrHindi: sv.asrHindi };
+    next.transliteration = { ...next.transliteration, serviceId: sv.transliteration, numSuggestions: sv.transliterationSuggestions };
+    next.sahayika.llmServiceId = sv.llm;
+  }
+  next.transliteration.endpoint = ENDPOINTS[next.bhashiniServices.transliterationProvider];
   if (caps) next.rounds = next.rounds.map((r) => ({ ...r, creditCap: caps[r.key] ?? r.creditCap }));
   if (st?.rounds) next.rounds = next.rounds.map((r) => ({ ...r, ...(st.rounds![r.key] ?? {}) }));
   if (typeof st?.trialQualifyingScore === "number") next.levels.trialQualifyingScore = st.trialQualifyingScore;

@@ -155,7 +155,7 @@
   },
   "transliteration": {
     "enabledIn": "translation editor only",
-    "endpoint": "https://anuvaad-backend.bhashini.co.in/v1/pipeline",
+    "endpoint": "https://dhruva-api.bhashini.gov.in/services/inference/pipeline",
     "serviceId": "ai4bharat/indicxlit--cpu-fsv2",
     "sourceLanguage": "en",
     "targetLanguage": "hi",
@@ -180,7 +180,10 @@
   },
   "bhashiniServices": {
     "_comment": "Service IDs from BHASHINI's model list (23 Oct 2026).",
-    "translationProvider": "anuvaad",
+    "translationProvider": "dhruva",
+    "transliterationProvider": "dhruva",
+    "ttsLanguage": "en",
+    "ttsSamplingRate": 22050,
     "_translationProvider": "anuvaad = CAG Anuvaad document pipeline (anuvaad-backend.bhashini.co.in, optional ANUVAAD_XLIT_AUTH); dhruva = Dhruva inference API with DHRUVA_NMT_KEY",
     "translation": "ai4bharat/indictrans-v2-all-gpu--t4",
     "asrHindi": "ai4bharat/conformer-hi-gpu--t4",

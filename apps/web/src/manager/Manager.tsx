@@ -10,6 +10,7 @@ import { Glossary, Offices } from "./Reference";
 import { Sahayak } from "./Sahayak";
 import { Results } from "./Results";
 import { Settings } from "./Settings";
+import { Services } from "./Services";
 import { Audit } from "./Audit";
 
 // Staff-facing admin portal (§8): desktop-first, left navigation + top bar, CAG Anuvaad visual language.
@@ -28,6 +29,7 @@ const NAV: { group: string; items: { to: string; label: string; icon: ReactNode;
   ] },
   { group: "Administration", items: [
     { to: "/manager/settings", label: "Evaluation & settings", icon: <path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0M14 4v4M8 10v4M16 16v4" /> },
+    { to: "/manager/services", label: "BHASHINI services", icon: <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" /> },
     { to: "/manager/audit", label: "Audit log", icon: <path d="M9 3h6l1 2h3v16H5V5h3zM9 12l2 2 4-4" /> },
   ] },
 ];
@@ -189,6 +191,7 @@ export default function Manager() {
             <Route path="sahayika" element={<Navigate to="/manager/sahayak" replace />} />
             <Route path="results" element={<Results />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="services" element={<Services />} />
             <Route path="audit" element={<Audit />} />
             <Route path="*" element={<Navigate to="/manager" replace />} />
           </Routes>
