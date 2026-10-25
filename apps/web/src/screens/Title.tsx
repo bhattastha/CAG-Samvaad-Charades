@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { useConfig, useProgress } from "../lib/queries";
+import { scriptLine, useConfig, useLines, useProgress } from "../lib/queries";
 import { sfx } from "../lib/sfx";
 import { usePrefs } from "../lib/store";
 import { t, tList } from "../lib/strings";
@@ -48,7 +48,9 @@ function LandingHeader({ signedIn }: { signedIn: boolean }) {
 /** Sahayak's speech panel, with a play control and a live waveform while the voice plays. */
 function SahayakSpeech() {
   const st = useVoice();
-  const line: Line = useMemo(() => ({ id: "landing.welcome", en: `${t("landing.greeting")} ${t("landing.speech")}`, hi: "", spoken: true }), []);
+  const { data: lines } = useLines("landing");
+  const body = scriptLine(lines, "landing.screen.welcome", t("landing.speech")); // edited in the manager console
+  const line: Line = useMemo(() => ({ id: "landing.welcome", en: `${t("landing.greeting")} ${body.en}`, hi: "", spoken: true }), [body.en]);
   const playing = st.line?.id === line.id && st.status === "playing";
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ type: "spring", stiffness: 180, damping: 18, delay: 0.9 }}
@@ -69,7 +71,7 @@ function SahayakSpeech() {
         </span>
         <span className="sr-only">{t("landing.listen")}</span>
       </button>
-      <p className="mt-2 text-[13px] sm:text-[15px] leading-snug text-[#1F3B66]">{t("landing.speech")}</p>
+      <p className="mt-2 text-[13px] sm:text-[15px] leading-snug text-[#1F3B66]">{body.en}</p>
     </motion.div>
   );
 }

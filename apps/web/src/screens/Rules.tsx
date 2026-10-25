@@ -1,13 +1,14 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useConfig } from "../lib/queries";
+import { lineById, useConfig, useLines } from "../lib/queries";
 import { sfx } from "../lib/sfx";
 import { t, tList } from "../lib/strings";
 import { Header, Page } from "../components/Layout";
 import { GameButton, Medal } from "../components/Juice";
 import { AcceptBurst, MissionSeal, ladderOf } from "../components/Onboarding";
 import { Icon } from "../components/Icon";
+import { SahayikaLine } from "../components/Sahayika";
 
 interface RuleCard { icon: string; title: string; points: string[] }
 
@@ -37,6 +38,7 @@ export function Rules() {
   const [seen, setSeen] = useState<Record<number, boolean>>({});
   const [fire, setFire] = useState(0);
   const labelId = useId();
+  const { data: scriptLines } = useLines("before_game");
   const cards = tList<RuleCard>("ob.rules.cards");
   const ladder = ladderOf(cfg);
   const vars = { max: cfg?.scoreOutOf ?? 100, pass: cfg?.titlePassMark ?? 33 };
@@ -58,6 +60,12 @@ export function Rules() {
             {t("ob.rules.briefed", { n: nSeen, total: cards.length })}
           </div>
         </motion.div>
+
+        {/* Sahayak's briefing comes from the script, so edits in the manager console show up here */}
+        <div className="mb-5 grid gap-2 lg:grid-cols-2">
+          <SahayikaLine line={lineById(scriptLines, "before_game.screen.rules_open")} tone="blue" />
+          <SahayikaLine line={lineById(scriptLines, "before_game.screen.rules_credits")} tone="blue" autoSpeak={false} />
+        </div>
 
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-5" style={{ perspective: 1200 }}>
           {cards.map((c, i) => {

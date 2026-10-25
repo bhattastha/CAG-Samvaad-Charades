@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import type { PublicConfig } from "@hc/shared";
 import { api } from "../lib/api";
-import { useConfig } from "../lib/queries";
+import { useConfig, scriptLine, useLines, useProgress } from "../lib/queries";
 import { sfx } from "../lib/sfx";
 import { useToasts } from "../lib/store";
 import { t, tList } from "../lib/strings";
@@ -297,6 +297,8 @@ function ToolkitStep({ tool, setTool }: { tool: Tool; setTool(x: Tool): void }) 
 // ---------------------------------------------------------------- step 4: coach
 
 function CoachStep() {
+  const { data: scriptLines } = useLines("before_game");
+  const returning = !!useProgress().data?.summary?.rounds.some((r) => r.chancesUsed > 0);
   const [q, setQ] = useState("");
   const [busy, setBusy] = useState(false);
   const [answer, setAnswer] = useState<Spoken | null>(null);
@@ -311,7 +313,7 @@ function CoachStep() {
   };
   return (
     <>
-      <SahayakGuide bob lines={[spoken(t("ob.train.coach.dialogue"))]} />
+      <SahayakGuide bob lines={[scriptLine(scriptLines, returning ? "before_game.screen.how_to_play_returning" : "before_game.screen.how_to_play_new", t("ob.train.coach.dialogue"))]} />
       <p className="mt-3 flex items-center gap-2 text-[14px] font-semibold text-navy"><Icon name="shield" size={16} className="text-success" />{t("ob.train.coach.never")}</p>
       <div className="mt-4 rounded-card border border-slate-200 bg-white p-4">
         <div className="kicker mb-2">{t("ob.train.coach.askHeading")}</div>

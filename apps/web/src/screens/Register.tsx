@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { api, ApiError } from "../lib/api";
-import { useConfig, type Progress } from "../lib/queries";
+import { scriptLine, useConfig, useLines, type Progress } from "../lib/queries";
 import { sfx } from "../lib/sfx";
 import { t, tList } from "../lib/strings";
 import type { Line } from "../lib/voice";
@@ -108,6 +108,7 @@ export function Register() {
   const [params] = useSearchParams();
   const [returning, setReturning] = useState(params.get("returning") === "1");
   const { data: cfg } = useConfig();
+  const { data: scriptLines } = useLines("before_game");
   const [doneLine, setDoneLine] = useState<Line | null>(null);
   const otpRef = useRef<HTMLInputElement>(null);
 
@@ -168,7 +169,9 @@ export function Register() {
   const hidden = returning ? "hidden" : "";
 
   const credits = cfg?.registration?.credits ?? 2;
-  const guideLine: Line = { id: "faq", en: t("ob.reg.guide", { n: credits, title: finalTitle(cfg) || "champion" }), hi: "" };
+  // Sahayak's lines come from the script (editable in the manager console); the strings are only a fallback
+  const guideLine: Line = scriptLine(scriptLines, "before_game.screen.registration_open", t("ob.reg.guide", { n: credits, title: finalTitle(cfg) || "champion" }));
+  const doneGuide: Line = doneLine ?? scriptLine(scriptLines, "before_game.screen.registration_done", t("registration.doneGuide", { n: credits }));
 
   if (step === "done") {
     return (
@@ -187,7 +190,7 @@ export function Register() {
               <h2 className="mt-1 text-3xl font-extrabold text-navy tracking-tight">{t("registration.unlocked")}</h2>
               <p className="mt-1 text-muted">{t("registration.unlockedSub")}</p>
               <div className="mt-4 text-5xl font-extrabold text-gold-deep tnum">+<CountUp to={credits} /> <span className="text-2xl">{t("common.credits")}</span></div>
-              <div className="mt-5 text-left"><SahayakGuide lines={[{ id: "faq", en: t("registration.doneGuide", { n: credits }), hi: "" }]} /></div>
+              <div className="mt-5 text-left"><SahayakGuide lines={[doneGuide]} /></div>
               <GameButton className="mt-6 w-full" sound="whoosh" onClick={() => nav("/how-to-play")}>{t("registration.toTraining")} <Icon name="arrowRight" size={18} /></GameButton>
             </motion.div>
           </div>

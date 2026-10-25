@@ -157,3 +157,28 @@ describe("content library and settings", () => {
     await call("PUT", "/api/admin/config/settings", mgr, { unlockRule: base.levels.unlockRule });
   });
 });
+
+describe("Sahayak script edits reach the player side", () => {
+  it("a console edit is served to players straight away, and a stale voice file is removed", async () => {
+    const id = "landing.screen.welcome"; // shown on the landing page to visitors
+    const before = await call("GET", "/api/sahayika/lines?section=landing", "");
+    expect(before.json.some((l: any) => l.id === id)).toBe(true);
+    // a pre-generated voice file for this line (as "Regenerate audio" would leave)
+    const { mkdirSync, writeFileSync, existsSync } = await import("node:fs");
+    const { resolve } = await import("node:path");
+    const { ROOT } = await import("../src/env.js");
+    mkdirSync(resolve(ROOT, ".data/audio"), { recursive: true });
+    const wav = resolve(ROOT, ".data/audio", `${id}.wav`);
+    writeFileSync(wav, Buffer.from("RIFF"));
+    expect((await call("GET", `/api/sahayika/audio/${id}`, "")).status).toBe(200);
+
+    const edit = await call("PUT", `/api/admin/sahayika/lines/${id}`, mgr, { en: "Edited by the manager.", hi: "प्रबंधक द्वारा संपादित।" });
+    expect(edit.status).toBe(200);
+    const after = await call("GET", "/api/sahayika/lines?section=landing", "");
+    expect(after.json.find((l: any) => l.id === id).en).toBe("Edited by the manager.");
+    expect(existsSync(wav)).toBe(false);
+    expect((await call("GET", `/api/sahayika/audio/${id}`, "")).status).toBe(404); // client falls back to live TTS for the new text
+    // a viewer cannot edit
+    expect((await call("PUT", `/api/admin/sahayika/lines/${id}`, viewer, { en: "x", hi: "y" })).status).toBe(403);
+  });
+});

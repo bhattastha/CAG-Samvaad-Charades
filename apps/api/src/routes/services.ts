@@ -70,7 +70,7 @@ export async function serviceRoutes(app: FastifyInstance, db: Db) {
     const { lineId } = parse(z.object({ lineId: z.string().regex(/^[a-z_.0-9]+$/) }), req.params);
     const f = resolve(AUDIO_DIR, `${lineId}.wav`);
     if (!line(lineId) || !existsSync(f)) return reply.code(404).send({ error: "no_audio" });
-    return reply.type("audio/wav").header("Cache-Control", "public, max-age=86400").send(readFileSync(f));
+    return reply.type("audio/wav").header("Cache-Control", "no-cache").send(readFileSync(f));
   });
 
   app.post("/sahayika/tts", async (req, reply) => {

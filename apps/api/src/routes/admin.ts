@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, unlinkSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { parseGameConfig, RoundKey, seedToPage, summarise, type PageData, type SeedPage } from "@hc/shared";
@@ -285,6 +285,10 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
       [id, l.section, l.part, l.moment, l.spoken, b.en, b.hi, who],
     );
     await loadLines(db);
+    // the pre-generated voice file still speaks the OLD text: drop it so the new text is voiced (live TTS) until
+    // "Regenerate audio" runs again
+    const wav = resolve(ROOT, ".data/audio", `${id}.wav`);
+    if (existsSync(wav)) unlinkSync(wav);
     await audit(db, who, "sahayika.line", id, b);
     return { ok: true };
   });

@@ -20,14 +20,24 @@
   ],
   "lines": [
     {
+      "id": "landing.screen.welcome",
+      "section": "landing",
+      "part": "screen",
+      "moment": "welcome",
+      "when": "Landing page opens",
+      "spoken": true,
+      "en": "Let's turn audit reports into a fun learning journey together!",
+      "hi": "आइए ऑडिट प्रतिवेदनों को मिलकर एक रोचक सीखने की यात्रा बनाएँ!"
+    },
+    {
       "id": "before_game.screen.registration_open",
       "section": "before_game",
       "part": "screen",
       "moment": "registration_open",
       "when": "Registration screen opens",
       "spoken": true,
-      "en": "Welcome to Samvaad Charades. Register once, and every credit you earn stays linked to your email.",
-      "hi": "संवाद शराड्स में आपका स्वागत है। एक बार पंजीकरण कीजिए, आपके अर्जित सभी क्रेडिट आपकी ईमेल से जुड़े रहेंगे।"
+      "en": "Complete your registration to earn your first 2 credits and start your journey towards becoming an Anuvad Varchaspati!",
+      "hi": "अपना पंजीकरण पूरा कीजिए, पहले 2 क्रेडिट अर्जित कीजिए और अनुवाद वर्चस्पति बनने की यात्रा शुरू कीजिए!"
     },
     {
       "id": "before_game.screen.registration_done",
@@ -46,8 +56,8 @@
       "moment": "how_to_play_new",
       "when": "How-to-play screen opens (new player)",
       "spoken": true,
-      "en": "I'm Sahayak, your guide on every mission. Try the controls here, then head into the Trial.",
-      "hi": "मैं सहायक हूँ, हर मिशन में आपका मार्गदर्शक। यहाँ लिखने के तरीके आज़माइए, फिर परख राउंड की ओर बढ़िए।"
+      "en": "Hello! I'm Sahayak, your guide throughout the challenge. I'm here to help you navigate missions, understand terminology and make the most of your translation toolkit.",
+      "hi": "नमस्ते! मैं सहायक हूँ, इस चुनौती में आपका मार्गदर्शक। मिशन समझने, शब्दावली जानने और अनुवाद टूलकिट का पूरा लाभ उठाने में मैं आपकी सहायता करूँगा।"
     },
     {
       "id": "before_game.screen.how_to_play_returning",
