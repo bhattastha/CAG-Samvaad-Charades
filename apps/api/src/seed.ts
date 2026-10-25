@@ -63,13 +63,17 @@ export function splitVariants(en: string, others: string[], threshold = 0.7) {
 
 /** Anuvaad export ("Source term", "Target term 1", "Other target terms" split by |) or the legacy columns. */
 export function glossaryRowsFromCsv(csv: string) {
-  const clean = (v: string) => v.normalize("NFC").replace(/\s*[-–]\s*$/, "").replace(/\s+/g, " ").trim();
+  const clean = (v: string) => v.normalize("NFC").replace(/^\s*[-–]\s*/, "").replace(/\s*[-–]\s*$/, "").replace(/\s+/g, " ").trim();
   const byKey = new Map<string, { en: string; hi: string; others: string[]; sector: string | null }>();
   for (const r of parseCsv(csv)) {
     if (r.Status && r.Status.toUpperCase() !== "APPROVED") continue;
-    const en = clean(r["Source term"] ?? r.english_term ?? ""), hi = clean(r["Target term 1"] ?? r.hindi_term ?? "");
+    const en = clean(r["Source term"] ?? r.english_term ?? "");
+    const listed = (r["Other target terms"] ?? r.accepted_variants ?? "").split(r["Other target terms"] !== undefined ? /\|/ : /[;|,]/).map(clean).filter(Boolean);
+    // a blank or "-" Target term 1 promotes the first other target term to approved
+    let hi = clean(r["Target term 1"] ?? r.hindi_term ?? "");
+    const others = hi ? listed : listed.slice(1);
+    if (!hi) hi = listed[0] ?? "";
     if (!en || !hi) continue;
-    const others = (r["Other target terms"] ?? r.accepted_variants ?? "").split(r["Other target terms"] !== undefined ? /\|/ : /[;|,]/).map(clean).filter(Boolean);
     const sector = clean(r.Sector ?? r.sector ?? "") || null;
     // a sector entry shares its English with the general one, so its key carries the sector (as in the seed)
     const k = enNorm(en) + (sector ? `#${sector.toLowerCase()}` : "");

@@ -12,12 +12,13 @@ export function Glossary() {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(200);
   useEffect(() => setPage(1), [q, flagged, size]);
-  const { data: res, isFetching } = useQuery({
+  const { data: res, isFetching, isPlaceholderData } = useQuery({
     queryKey: ["agl", q, flagged, page, size], placeholderData: keepPreviousData,
     queryFn: () => api<{ items: any[]; total: number }>(`/admin/glossary?q=${encodeURIComponent(q)}&flagged=${flagged ? 1 : 0}&page=${page}&size=${size}`),
   });
   const data = res?.items ?? [];
   const total = res?.total ?? 0;
+  const shownPage = (res as any)?.page ?? page;
   const pages = Math.max(1, Math.ceil(total / size));
   const [edit, setEdit] = useState<any | null>(null);
   const [csv, setCsv] = useState("");
@@ -49,17 +50,17 @@ export function Glossary() {
       <div className="grid gap-5 xl:grid-cols-[1fr_22rem]">
         <Card pad={false}>
           <div className="flex flex-wrap items-center gap-3 border-b border-slate-100 p-3">
-            <input className={`${input} max-w-md`} placeholder="Search English or Hindi" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search glossary" />
-            <label className="flex items-center gap-1.5 whitespace-nowrap text-sm"><input type="checkbox" checked={flagged} onChange={(e) => setFlagged(e.target.checked)} /> Flagged / overrides queue</label>
+            <input data-testid="glossary-search" className={`${input} max-w-md`} placeholder="Search English or Hindi" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search glossary" />
+            <label className="flex items-center gap-1.5 whitespace-nowrap text-sm"><input data-testid="glossary-flagged" type="checkbox" checked={flagged} onChange={(e) => setFlagged(e.target.checked)} /> Flagged / overrides queue</label>
             <span data-testid="glossary-range" className="ml-auto text-xs text-slate-500">{isFetching ? "Loading…" : total ? `${((page - 1) * size + 1).toLocaleString("en-IN")}–${Math.min(page * size, total).toLocaleString("en-IN")} of ${total.toLocaleString("en-IN")}` : "0 terms"}</span>
           </div>
           <Pager page={page} pages={pages} size={size} setPage={setPage} setSize={setSize} />
-          <div className="max-h-[70vh] overflow-y-auto">
+          <div className={`max-h-[70vh] overflow-y-auto transition-opacity ${isPlaceholderData ? "opacity-50" : ""}`}>
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-slate-50"><tr><th className={th}>#</th><th className={th}>English</th><th className={th}>Hindi</th><th className={th}>Accepted</th><th className={th}>Avoid</th><th className={th}>Flags / override</th><th className={th} /></tr></thead>
               <tbody>{data.map((g, i) => (
                 <tr key={g.id} className={tr} data-testid="glossary-row">
-                  <td className={`${td} text-xs tabular-nums text-slate-400`}>{((page - 1) * size + i + 1).toLocaleString("en-IN")}</td>
+                  <td className={`${td} text-xs tabular-nums text-slate-400`}>{((shownPage - 1) * size + i + 1).toLocaleString("en-IN")}</td>
                   <td className={`${td} font-semibold`}>{g.en}{g.sector && <div className="text-[11px] font-normal text-slate-500">{g.sector}</div>}</td>
                   <td className={td} lang="hi">{g.override && g.override.active !== false ? <><s className="text-slate-400">{g.hi}</s> → <b>{g.override.hi}</b></> : g.hi}</td>
                   <td className={`${td} text-xs`} lang="hi">{g.accepted_variants.join(", ")}</td>
@@ -97,16 +98,19 @@ export function Glossary() {
 
 function Pager({ page, pages, size, setPage, setSize, bottom }: { page: number; pages: number; size: number; setPage(n: number): void; setSize(n: number): void; bottom?: boolean }) {
   const id = bottom ? "glossary-pager-bottom" : "glossary-pager";
+  const [draft, setDraft] = useState(String(page));
+  useEffect(() => setDraft(String(page)), [page]);
+  const commit = () => { const n = Math.min(pages, Math.max(1, Math.round(Number(draft)) || 1)); setDraft(String(n)); if (n !== page) setPage(n); };
   return (
     <div data-testid={id} className={`flex flex-wrap items-center gap-2 px-3 py-2 text-sm ${bottom ? "border-t" : "border-b"} border-slate-100`}>
       <button data-testid={`${id}-first`} className={btn.ghost} disabled={page <= 1} onClick={() => setPage(1)}>« First</button>
       <button data-testid={`${id}-prev`} className={btn.ghost} disabled={page <= 1} onClick={() => setPage(page - 1)}>‹ Prev</button>
-      <span className="px-1">Page <input data-testid={`${id}-input`} type="number" min={1} max={pages} className={`${input} inline-block w-20 py-1`} value={page}
-        onChange={(e) => { const n = Number(e.target.value); if (n >= 1 && n <= pages) setPage(n); }} /> of {pages.toLocaleString("en-IN")}</span>
+      <span className="inline-flex items-center gap-1.5 whitespace-nowrap px-1">Page <input data-testid={`${id}-input`} inputMode="numeric" aria-label="Page number" className="w-16 rounded-md border border-slate-300 px-2 py-1 text-center text-sm"
+        value={draft} onChange={(e) => setDraft(e.target.value.replace(/\D/g, ""))} onBlur={commit} onKeyDown={(e) => { if (e.key === "Enter") commit(); }} /> of {pages.toLocaleString("en-IN")}</span>
       <button data-testid={`${id}-next`} className={btn.ghost} disabled={page >= pages} onClick={() => setPage(page + 1)}>Next ›</button>
       <button data-testid={`${id}-last`} className={btn.ghost} disabled={page >= pages} onClick={() => setPage(pages)}>Last »</button>
-      {!bottom && <label className="ml-auto flex items-center gap-1.5 text-xs text-slate-500">Rows per page
-        <select data-testid="glossary-page-size" className={`${input} w-auto py-1`} value={size} onChange={(e) => setSize(Number(e.target.value))}>{[100, 200, 500].map((n) => <option key={n} value={n}>{n}</option>)}</select></label>}
+      {!bottom && <label className="ml-auto inline-flex items-center gap-1.5 whitespace-nowrap text-xs text-slate-500">Rows per page
+        <select data-testid="glossary-page-size" className="rounded-md border border-slate-300 px-2 py-1 text-sm" value={size} onChange={(e) => setSize(Number(e.target.value))}>{[100, 200, 500].map((n) => <option key={n} value={n}>{n}</option>)}</select></label>}
     </div>
   );
 }

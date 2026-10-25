@@ -1,0 +1,38 @@
+{
+  "summary": "Iteration 4 tested the full glossary list in the manager console. Paging, search, filters, page size, edit and permissions all work. Backend: new pytest file with 20 tests, 17 passed. The 3 failures are one real data gap: 3 CSV rows whose 'Target term 1' is '-' are dropped on import. Frontend: checked with Playwright. glossary-total shows 11,387 and glossary-range shows '1–200 of 11,387'. There are 57 pages at 200 rows. The last page has 187 rows ending at #11,387 'zoology'. The top and bottom First, Prev, Next and Last buttons and both page inputs work, and the buttons disable correctly at the first and last page. Page size 100/200/500 works and resets to page 1 (114 pages at size 100; the last page has 87 rows). Row numbers continue across pages (page 10 starts at 1,801). 'staff' shows 'Railways' under the English. Searches return 'audit' 227, 'लेखापरीक्षा' 161 and 'संपरीक्षा' 1 (the audit row), and a new search resets the page to 1. The flagged filter returns 372; audit with flagged returns 0. 5 random CSV terms matched in the UI (Hotch Potch, commonwealth countries, loss making, Annual charges, authority). An API sample of 25 also matched. A script compared all 11,686 CSV rows with the database: every source term is present except 'above' and 'account for'. Every target form is present except civil's दीवानी, नागरिक and असैनिक. The other differences were only NFC normalisation, trailing '-' cleanup and curly vs straight apostrophe merges, which are expected. The edit dialog saved a change to 'Annual charges' variants, and I reverted it (DB confirmed). The import card is present and Replace is unticked by default. API: the paged call returns {items,total,page,size}. The legacy ?q=audit call returns an array of 100 or fewer. Bad page/size values return 400. A player gets 403 on both forms.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "glossaryRowsFromCsv (apps/api/src/seed.ts:66-71) via POST /api/admin/glossary/import and the seed", "issue": "3 CSV rows with Target term 1 = '-' are dropped: 'above' and 'account for' are missing from the glossary. 'civil' loses दीवानी, नागरिक and असैनिक; only 'Civil' → सिविल survives. Cause: clean() strips the trailing dash, so hi becomes '' and `if (!en || !hi) continue` skips the row. If these rows were imported, the total would rise from 11,387 to 11,389."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Pager page input", "issue": "The input only accepts values within range on each keystroke. Typing '60' when there are 57 pages jumps to page 6. The field can't be cleared to type a new number, so the user has to select all and overtype. Commit on Enter/blur, or clamp the value.", "selector": "[data-testid=glossary-pager-input]", "priority": "LOW"},
+      {"component": "Glossary table while loading", "issue": "keepPreviousData keeps the old page's rows on screen with the new page's row numbers until the fetch finishes (e.g. #201 shown next to '(F.E.-R.A.)…'). Dim the table or compute row numbers from the page of the returned data.", "selector": "[data-testid=glossary-row]", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/manager/glossary pager", "issues": ["Even at 1920px, 'Page [input] of 57' wraps onto 3 lines and 'Rows per page' wraps onto 3 lines. Keep the label, input and 'of N' on one line (whitespace-nowrap, inline-flex) and stop the page input from stretching."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_iter4_glossary_paging.py", "/app/test_reports/pytest/pytest_iter4.xml"],
+  "action_items": [
+    "Fix glossaryRowsFromCsv: when Target term 1 is empty or '-', use the first 'Other target terms' value as hi (the rest become accepted), then run a MERGE import (not replace) so 'above', 'account for' and civil's variants are added",
+    "Optional: make the pager page input commit on Enter/blur, and stop 'Page N of M' and 'Rows per page' from wrapping",
+    "Optional: add data-testid to the glossary search input, the flagged checkbox and the edit dialog fields/buttons (tests currently use aria-label/role)"
+  ],
+  "critical_code_review_comments": [
+    "admin.ts paged branch: LIMIT/OFFSET are interpolated, which is safe because zod coerces them to ints. The q wildcards % and _ are not escaped (minor).",
+    "The search query has no NFC normalisation. If the user's Hindi input is in NFD, it won't match the NFC-stored data. Normalise q with q.normalize('NFC') on the server.",
+    "Reference.tsx: every keystroke fires a query (no debounce). The page reset in useEffect also causes one extra fetch with the old page and the new q. A debounce, plus resetting page in the onChange handler, would fix both.",
+    "The legacy non-paged branch searches en/hi only, not accepted_variants, which is inconsistent with the paged branch (minor; check whether anything still uses it)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter4_glossary_paging.py"],
+  "success_rate": {"backend": "85% (17/20; the 3 failures are the same import bug)", "frontend": "100% of the requested flows"},
+  "seed_data_creation": "None. 'Annual charges' was edited and reverted (variants back to {एनुअल चार्ज}, override null).",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Log in by planting a code with test-otp.sh, then POST /api/auth/otp/verify via page.request in Playwright. The app's CSP blocks page.wait_for_function with string expressions, so poll text_content in Python instead. test_dash_target_rows_imported will pass once the '-' fix is in and a merge import has run. The totals in tests (11387, 57 pages, 187 rows on the last page) must then become 11389 (57 pages, 189 on the last page).",
+  "rca of the issue": "seed.ts:66 clean() = replace(/\\s*[-–]\\s*$/, '') turns '-' into ''. At line 71, `if (!en || !hi) continue` then skips the whole row, including its Other target terms. Repro: search 'above' or 'account for' returns no exact row; 'civil' shows only सिविल. Fix: `if (!hi && others.length) hi = others.shift()`. Compute others before the hi check."
+}
