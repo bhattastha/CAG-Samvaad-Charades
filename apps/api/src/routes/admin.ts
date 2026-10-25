@@ -197,8 +197,22 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
   // ---------- glossary ----------
   app.get("/admin/glossary", async (req, reply) => {
     if (!viewer(req, reply)) return;
-    const { q, flagged } = parse(z.object({ q: z.string().max(80).optional(), flagged: z.string().optional() }), req.query);
+    const { q, flagged, page, size } = parse(z.object({
+      q: z.string().max(80).optional(), flagged: z.string().optional(),
+      page: z.coerce.number().int().min(1).optional(), size: z.coerce.number().int().min(10).max(500).default(200),
+    }), req.query);
     const s = `%${(q ?? "").toLowerCase()}%`;
+    if (page) {
+      // paged browse of the whole glossary, A→Z
+      const where = `(lower(en) LIKE $1 OR hi LIKE $2 OR EXISTS (SELECT 1 FROM unnest(accepted_variants) v WHERE v LIKE $2))
+        AND ($3::boolean = false OR cardinality(flags) > 0 OR override IS NOT NULL)`;
+      const args = [s, `%${q ?? ""}%`, flagged === "1"];
+      const total = (await db.one<{ n: number }>(`SELECT count(*)::int AS n FROM glossary_terms WHERE ${where}`, args))?.n ?? 0;
+      const items = await db.query(
+        `SELECT id, en, hi, accepted_variants, avoid_forms, flags, override, sector FROM glossary_terms WHERE ${where}
+         ORDER BY lower(en), en_norm LIMIT ${size ?? 200} OFFSET ${(page - 1) * (size ?? 200)}`, args);
+      return { items, total, page, size: size ?? 200 };
+    }
     return db.query(
       `SELECT id, en, hi, accepted_variants, avoid_forms, flags, override FROM glossary_terms
        WHERE (lower(en) LIKE $1 OR hi LIKE $2) AND ($3::boolean = false OR cardinality(flags) > 0 OR override IS NOT NULL)

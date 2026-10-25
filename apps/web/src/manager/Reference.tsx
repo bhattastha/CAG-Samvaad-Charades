@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useMemo, useState } from "react";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, ApiError } from "../lib/api";
 import { Card, Dialog, Empty, Notice, PageHeader, Pill, btn, input, th, td, tr, useIsManager } from "./ui";
 
@@ -9,7 +9,16 @@ export function Glossary() {
   const isManager = useIsManager();
   const [q, setQ] = useState("");
   const [flagged, setFlagged] = useState(false);
-  const { data = [], isFetching } = useQuery({ queryKey: ["agl", q, flagged], queryFn: () => api<any[]>(`/admin/glossary?q=${encodeURIComponent(q)}&flagged=${flagged ? 1 : 0}`) });
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(200);
+  useEffect(() => setPage(1), [q, flagged, size]);
+  const { data: res, isFetching } = useQuery({
+    queryKey: ["agl", q, flagged, page, size], placeholderData: keepPreviousData,
+    queryFn: () => api<{ items: any[]; total: number }>(`/admin/glossary?q=${encodeURIComponent(q)}&flagged=${flagged ? 1 : 0}&page=${page}&size=${size}`),
+  });
+  const data = res?.items ?? [];
+  const total = res?.total ?? 0;
+  const pages = Math.max(1, Math.ceil(total / size));
   const [edit, setEdit] = useState<any | null>(null);
   const [csv, setCsv] = useState("");
   const [fileName, setFileName] = useState("");
@@ -36,23 +45,25 @@ export function Glossary() {
   });
   return (
     <div>
-      <PageHeader title="Glossary" subtitle={<>CAG standard glossary{stats ? <> · <b data-testid="glossary-total">{stats.terms.toLocaleString("en-IN")}</b> terms, {stats.variants.toLocaleString("en-IN")} alternative forms</> : ""}{stats?.lastImport ? ` · last import ${new Date(stats.lastImport.at).toLocaleString("en-IN")} by ${stats.lastImport.actor}` : ""}. Search shows up to 100 matches.</>} />
+      <PageHeader title="Glossary" subtitle={<>CAG official glossary (Anuvaad export){stats ? <> · <b data-testid="glossary-total">{stats.terms.toLocaleString("en-IN")}</b> terms, {stats.variants.toLocaleString("en-IN")} alternative forms</> : ""}{stats?.lastImport ? ` · last import ${new Date(stats.lastImport.at).toLocaleString("en-IN")} by ${stats.lastImport.actor}` : ""}. Browse every term A→Z, or search English, Hindi or accepted forms.</>} />
       <div className="grid gap-5 xl:grid-cols-[1fr_22rem]">
         <Card pad={false}>
           <div className="flex flex-wrap items-center gap-3 border-b border-slate-100 p-3">
             <input className={`${input} max-w-md`} placeholder="Search English or Hindi" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Search glossary" />
             <label className="flex items-center gap-1.5 whitespace-nowrap text-sm"><input type="checkbox" checked={flagged} onChange={(e) => setFlagged(e.target.checked)} /> Flagged / overrides queue</label>
-            <span className="ml-auto text-xs text-slate-500">{isFetching ? "Searching…" : `${data.length} shown`}</span>
+            <span data-testid="glossary-range" className="ml-auto text-xs text-slate-500">{isFetching ? "Loading…" : total ? `${((page - 1) * size + 1).toLocaleString("en-IN")}–${Math.min(page * size, total).toLocaleString("en-IN")} of ${total.toLocaleString("en-IN")}` : "0 terms"}</span>
           </div>
+          <Pager page={page} pages={pages} size={size} setPage={setPage} setSize={setSize} />
           <div className="max-h-[70vh] overflow-y-auto">
             <table className="w-full text-sm">
-              <thead className="sticky top-0 bg-slate-50"><tr><th className={th}>English</th><th className={th}>Hindi</th><th className={th}>Accepted</th><th className={th}>Avoid</th><th className={th}>Flags / override</th><th className={th} /></tr></thead>
-              <tbody>{data.map((g) => (
-                <tr key={g.id} className={tr}>
-                  <td className={`${td} font-semibold`}>{g.en}</td>
+              <thead className="sticky top-0 bg-slate-50"><tr><th className={th}>#</th><th className={th}>English</th><th className={th}>Hindi</th><th className={th}>Accepted</th><th className={th}>Avoid</th><th className={th}>Flags / override</th><th className={th} /></tr></thead>
+              <tbody>{data.map((g, i) => (
+                <tr key={g.id} className={tr} data-testid="glossary-row">
+                  <td className={`${td} text-xs tabular-nums text-slate-400`}>{((page - 1) * size + i + 1).toLocaleString("en-IN")}</td>
+                  <td className={`${td} font-semibold`}>{g.en}{g.sector && <div className="text-[11px] font-normal text-slate-500">{g.sector}</div>}</td>
                   <td className={td} lang="hi">{g.override && g.override.active !== false ? <><s className="text-slate-400">{g.hi}</s> → <b>{g.override.hi}</b></> : g.hi}</td>
                   <td className={`${td} text-xs`} lang="hi">{g.accepted_variants.join(", ")}</td>
-                  <td className={`${td} text-xs text-slate-500`} lang="hi">{g.avoid_forms.slice(0, 4).join(", ")}{g.avoid_forms.length > 4 && ` +${g.avoid_forms.length - 4}`}</td>
+                  <td className={`${td} text-xs text-slate-700`} lang="hi">{g.avoid_forms.slice(0, 4).join(", ")}{g.avoid_forms.length > 4 && ` +${g.avoid_forms.length - 4}`}</td>
                   <td className={`${td} text-xs`}>
                     {g.flags.map((f: string) => <Pill key={f} tone="amber">{f}</Pill>)}
                     {g.override && <div className="mt-1 space-y-1"><Pill tone={g.override.active === false ? "slate" : "gold"}>{g.override.status}{g.override.active === false && " · reverted"}</Pill>
@@ -65,6 +76,7 @@ export function Glossary() {
             </table>
             {data.length === 0 && <div className="p-4"><Empty>No matches.</Empty></div>}
           </div>
+          <Pager page={page} pages={pages} size={size} setPage={setPage} setSize={setSize} bottom />
         </Card>
         {isManager && (
           <Card title="Import glossary" subtitle="Upload the Anuvaad glossary export (Source term, Target term 1, Other target terms, Sector, Status). Target term 1 is the approved Hindi; every other target term is offered to players as an accepted option. The older english_term, hindi_term, accepted_variants format also works.">
@@ -79,6 +91,22 @@ export function Glossary() {
         )}
       </div>
       {edit && <GlossaryEdit g={edit} onClose={() => setEdit(null)} />}
+    </div>
+  );
+}
+
+function Pager({ page, pages, size, setPage, setSize, bottom }: { page: number; pages: number; size: number; setPage(n: number): void; setSize(n: number): void; bottom?: boolean }) {
+  const id = bottom ? "glossary-pager-bottom" : "glossary-pager";
+  return (
+    <div data-testid={id} className={`flex flex-wrap items-center gap-2 px-3 py-2 text-sm ${bottom ? "border-t" : "border-b"} border-slate-100`}>
+      <button data-testid={`${id}-first`} className={btn.ghost} disabled={page <= 1} onClick={() => setPage(1)}>« First</button>
+      <button data-testid={`${id}-prev`} className={btn.ghost} disabled={page <= 1} onClick={() => setPage(page - 1)}>‹ Prev</button>
+      <span className="px-1">Page <input data-testid={`${id}-input`} type="number" min={1} max={pages} className={`${input} inline-block w-20 py-1`} value={page}
+        onChange={(e) => { const n = Number(e.target.value); if (n >= 1 && n <= pages) setPage(n); }} /> of {pages.toLocaleString("en-IN")}</span>
+      <button data-testid={`${id}-next`} className={btn.ghost} disabled={page >= pages} onClick={() => setPage(page + 1)}>Next ›</button>
+      <button data-testid={`${id}-last`} className={btn.ghost} disabled={page >= pages} onClick={() => setPage(pages)}>Last »</button>
+      {!bottom && <label className="ml-auto flex items-center gap-1.5 text-xs text-slate-500">Rows per page
+        <select data-testid="glossary-page-size" className={`${input} w-auto py-1`} value={size} onChange={(e) => setSize(Number(e.target.value))}>{[100, 200, 500].map((n) => <option key={n} value={n}>{n}</option>)}</select></label>}
     </div>
   );
 }
