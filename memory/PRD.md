@@ -18,7 +18,7 @@ User choices: Emergent managed email for OTP; publish seeded Report 38 sample pa
 - BLOCKER: Emergent email proxy now rejects @cag.gov.in (422 undeliverable_recipient). Needs CAG/NIC SMTP_URL.
 - Ops: after rebuilding web dist, restart `frontend` supervisor (static routes registered at boot).
 ## 25 Oct 2026 — iteration 3 (BHASHINI Dhruva + glossary)
-- Dhruva for translation (drafts), transliteration, TTS, LLM, ASR. Console page /manager/services edits service IDs/models (config_overrides key "services", audited, Test buttons). Key DHRUVA_API_KEY in secrets — CURRENT SAVED VALUE IS REJECTED (401), one character mistyped (~23rd: l vs I); user skipped re-entry.
+- Dhruva for translation (drafts), transliteration, TTS, LLM, ASR. Console page /manager/services edits service IDs/models (config_overrides key "services", audited, Test buttons). Key DHRUVA_API_KEY in secrets — Key re-entered 25 Oct; all 4 service tests pass. 99/100 Sahayak lines regenerated with Dhruva male voice.
 - Official glossary = seed/glossary.anuvaad.csv (11,686 rows → 11,387 terms). All "Other target terms" accepted, no auto-avoid. Console import accepts Anuvaad columns; merge (default) or replace (guarded). Page term snapshots now follow the live glossary (menus + scoring).
 - Workbench glossary menu: last option = BHASHINI transliteration of the English term (only shown on a real suggestion).
 - Tests: shared 21/21, api 27/27 (hookTimeout 200 s), testing agent iteration_3 100%.
