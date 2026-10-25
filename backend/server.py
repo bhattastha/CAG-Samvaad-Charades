@@ -61,8 +61,20 @@ def _start_bundled_api():
         env["DATABASE_URL"] = f"pglite:{data}"
         log.warning("DATABASE_URL is not reachable: using embedded PGlite at %s. Data will NOT survive a redeploy or pod restart. Set DATABASE_URL to an external PostgreSQL.", data)
     env.update({"HC_ROOT": HC, "HOST": "127.0.0.1", "PORT": "3000", "WEB_DIST": os.path.join(HC, "no-web"), "SEED_PUBLISH_SAMPLES": env.get("SEED_PUBLISH_SAMPLES", "1")})
-    app.state.api_proc = subprocess.Popen([node, os.path.join(HC, "api.mjs")], cwd=HC, env=env)
+    app.state.api_cmd = ([node, os.path.join(HC, "api.mjs")], env)
+    app.state.api_proc = subprocess.Popen(app.state.api_cmd[0], cwd=HC, env=env)
     app.state.api_lock = lock
+
+
+async def _watch_api():
+    """Restarts the bundled API if it exits (published mode only)."""
+    while True:
+        await asyncio.sleep(5)
+        proc = getattr(app.state, "api_proc", None)
+        if proc and proc.poll() is not None:
+            log.error("bundled API exited with code %s; restarting", proc.returncode)
+            cmd, env = app.state.api_cmd
+            app.state.api_proc = subprocess.Popen(cmd, cwd=HC, env=env)
 
 
 app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
@@ -72,6 +84,8 @@ client = httpx.AsyncClient(base_url=f"http://{UPSTREAM}", timeout=httpx.Timeout(
 @app.on_event("startup")
 async def _startup():
     _start_bundled_api()
+    if getattr(app.state, "api_proc", None):
+        app.state.api_watch = asyncio.create_task(_watch_api())
 
 
 @app.on_event("shutdown")
@@ -87,6 +101,9 @@ async def health():
         r = await client.get("/api/health", timeout=5.0)
         return JSONResponse(r.json(), status_code=r.status_code)
     except (httpx.HTTPError, ValueError):
+        proc = getattr(app.state, "api_proc", None)
+        if proc and proc.poll() is not None:
+            return JSONResponse({"ok": False, "api": "down"}, status_code=503)
         # the API is still seeding on first boot; the shim itself is healthy
         return JSONResponse({"ok": True, "api": "starting"}, status_code=200)
 

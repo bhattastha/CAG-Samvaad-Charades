@@ -27,3 +27,7 @@ User choices: Emergent managed email for OTP; publish seeded Report 38 sample pa
 - P1: "Review build" tag on sample pages; office search ranking; console glossary delete-term action.
 - Deferred by user: Claude integration.
 - Console glossary page lists ALL terms A→Z with paging (100/200/500 per page), search across English/Hindi/accepted forms (25 Oct).
+## 25 Oct 2026 — Emergent publish packaging
+- scripts/emergent/package.sh (run before every publish): bundles API → backend/hc/api.mjs (+config/content/seed/assets, vendored pglite & pdfjs), web → frontend/site. frontend `yarn build` copies site→build. backend/server.py spawns bundle with pip Node (nodejs-wheel-binaries) when monorepo absent; watchdog restarts; PGlite fallback if DATABASE_URL unreachable (NON-PERSISTENT); SEED_PUBLISH_SAMPLES publishes 5 samples on fresh DB.
+- Certificate PDF/PNG falls back to HTML when playwright-core absent. Glossary override:null fix.
+- P0: external PostgreSQL DATABASE_URL (live slot) for persistence in production.

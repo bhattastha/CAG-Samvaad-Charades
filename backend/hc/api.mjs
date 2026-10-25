@@ -164286,7 +164286,7 @@ async function adminRoutes(app2, db2) {
     }), req.body);
     await db2.query(
       "UPDATE glossary_terms SET hi=$2, accepted_variants=$3, avoid_forms=$4, flags=COALESCE($5, flags), override=$6 WHERE id=$1",
-      [id, body.hi, body.variants, body.avoid, body.flags ?? null, body.override === void 0 ? null : JSON.stringify(body.override)]
+      [id, body.hi, body.variants, body.avoid, body.flags ?? null, body.override == null ? null : JSON.stringify(body.override)]
     );
     await loadGlossary(db2);
     await audit(db2, who, "glossary.update", id, body);
@@ -165045,7 +165045,9 @@ function chromePath() {
 async function renderCertificate(html, format2) {
   const exe = chromePath();
   if (!exe) return null;
-  const { chromium } = await import("playwright-core");
+  const pw = await import("playwright-core").catch(() => null);
+  if (!pw) return null;
+  const { chromium } = pw;
   const browser = await chromium.launch({ executablePath: exe, headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 1123, height: 794 }, deviceScaleFactor: format2 === "png" ? 2 : 1 });

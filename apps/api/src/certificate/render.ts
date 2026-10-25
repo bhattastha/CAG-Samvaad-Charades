@@ -80,7 +80,10 @@ function chromePath(): string | undefined {
 export async function renderCertificate(html: string, format: "pdf" | "png"): Promise<Buffer | null> {
   const exe = chromePath();
   if (!exe) return null;
-  const { chromium } = await import("playwright-core");
+  // the published bundle ships without playwright-core: fall back to the HTML certificate
+  const pw = await import("playwright-core").catch(() => null);
+  if (!pw) return null;
+  const { chromium } = pw;
   const browser = await chromium.launch({ executablePath: exe, headless: true });
   try {
     const page = await browser.newPage({ viewport: { width: 1123, height: 794 }, deviceScaleFactor: format === "png" ? 2 : 1 });

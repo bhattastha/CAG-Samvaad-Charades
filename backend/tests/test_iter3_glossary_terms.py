@@ -26,7 +26,9 @@ def login(email, code):
 
 @pytest.fixture(scope="module")
 def mgr():
-    return login(MANAGER, "615243")
+    yield login(MANAGER, "615243")
+    # teardown: remove the merge-import test row so glossary totals stay at the official count
+    subprocess.run(["su", "postgres", "-c", f'psql -q -d hindi_charades -c "DELETE FROM glossary_terms WHERE en=\'{TEST_EN}\'"'], capture_output=True)
 
 
 @pytest.fixture(scope="module")
@@ -100,7 +102,7 @@ def test_merge_import_keeps_avoid(mgr):
 def test_glossary_total(mgr):
     n = mgr.get(f"{API}/admin/glossary/stats").json()["terms"]
     print("terms", n)
-    assert n in (11387, 11388)
+    assert n in (11389, 11390)  # 11389 after dash-row fix (+1 while zzqa test row exists)
 
 
 # regression

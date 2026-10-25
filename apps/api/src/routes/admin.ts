@@ -230,7 +230,7 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
       override: z.object({ hi: z.string(), variants: z.array(z.string()), avoid: z.array(z.string()), reason: z.string(), status: z.string(), active: z.boolean() }).nullable().optional(),
     }), req.body);
     await db.query("UPDATE glossary_terms SET hi=$2, accepted_variants=$3, avoid_forms=$4, flags=COALESCE($5, flags), override=$6 WHERE id=$1",
-      [id, body.hi, body.variants, body.avoid, body.flags ?? null, body.override === undefined ? null : JSON.stringify(body.override)]);
+      [id, body.hi, body.variants, body.avoid, body.flags ?? null, body.override == null ? null : JSON.stringify(body.override)]);
     await loadGlossary(db);
     await audit(db, who, "glossary.update", id, body);
     return { ok: true };

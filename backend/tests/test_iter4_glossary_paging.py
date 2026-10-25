@@ -50,21 +50,21 @@ def test_paged_shape_and_total(mgr):
     assert r.status_code == 200
     d = r.json()
     assert set(["items", "total", "page", "size"]) <= set(d)
-    assert d["total"] == 11387 and d["page"] == 1 and d["size"] == 200
+    assert d["total"] == 11389 and d["page"] == 1 and d["size"] == 200
     assert len(d["items"]) == 200
     assert "sector" in d["items"][0]
 
 
 def test_stats_total(mgr):
-    assert mgr.get(f"{API}/admin/glossary/stats").json()["terms"] == 11387
+    assert mgr.get(f"{API}/admin/glossary/stats").json()["terms"] == 11389
 
 
 def test_last_page(mgr):
     d = mgr.get(f"{API}/admin/glossary", params={"page": 57, "size": 200}).json()
-    assert len(d["items"]) == 187
+    assert len(d["items"]) == 189
     assert d["items"][-1]["en"].lower() == "zoology"
     d2 = mgr.get(f"{API}/admin/glossary", params={"page": 58, "size": 200}).json()
-    assert d2["items"] == [] and d2["total"] == 11387
+    assert d2["items"] == [] and d2["total"] == 11389
 
 
 def test_full_walk_unique_and_sorted(mgr):
@@ -73,7 +73,7 @@ def test_full_walk_unique_and_sorted(mgr):
         d = mgr.get(f"{API}/admin/glossary", params={"page": p, "size": 500}).json()
         ids += [x["id"] for x in d["items"]]
         ens += [x["en"].lower() for x in d["items"]]
-    assert len(ids) == 11387 and len(set(ids)) == 11387
+    assert len(ids) == 11389 and len(set(ids)) == 11389
     assert ens == sorted(ens) or sum(1 for a, b in zip(ens, ens[1:]) if a > b) == 0
 
 
@@ -99,7 +99,7 @@ def test_search(mgr, q):
 
 def test_flagged_filter(mgr):
     d = mgr.get(f"{API}/admin/glossary", params={"flagged": 1, "page": 1, "size": 200}).json()
-    assert d["total"] < 11387
+    assert d["total"] < 11389
     for it in d["items"]:
         assert it["flags"] or it["override"] is not None
 
