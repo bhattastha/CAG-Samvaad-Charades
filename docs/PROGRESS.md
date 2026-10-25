@@ -1,28 +1,71 @@
-# Progress — 23 Oct 2026
+# Progress board — 25 Oct 2026
 
-| Milestone | Status | Evidence |
+Status by area. **Done** = built and exercised in development (Chrome desktop and a Chrome phone-size profile, embedded PGlite). **Partial** = works with stated gaps. **Not done** = does not exist. **Not verified** = code exists but was never run in the stated environment. The history of how each area got here is in `docs/DECISIONS.md`; what to do next is in `docs/HANDOVER.md`.
+
+## Player journey
+| Area | Status | Notes |
 |---|---|---|
-| M0 monorepo, config/strings/script loaders, seed, forbidden-words CI | ✅ (Compose written, not run: no Docker on build machine) | `pnpm seed`, `pnpm scan:forbidden` |
-| M1 shared rules + scoring with §11 tests | ✅ | `packages/shared/test` — 14 tests incl. 12/12, 11/12, time 1.0/0.8/0.6, credits 2.5/4.4/13.2/23 → 45.1 |
-| M2 OTP auth, registration, how-to-play, rules, returning resume | ✅ | API tests + Chrome e2e |
-| M3 attempts, timer, autosave (2 s / 10 s / beacon / IndexedDB), auto-submit job, one live window, freeze screen, TipTap with locked chips, InScript, glossary drawer | ✅ | API tests (stale version, other window, 4th chance 409, locked tokens re-inserted); e2e refresh keeps text |
-| M4 transliteration helper + proxy, ASR relay + fallback, batch NMT, TTS | ✅ code / ⚠ keys | Live xlit verified; NMT/ASR/TTS/LLM need Dhruva keys |
-| M5 report card, review, total, credits, stars, tips, certificate | ✅ | Certificate PDF/PNG rendered via Chrome with correct conjuncts |
-| M6 Sahayika: lines wired to triggers, audio fallback, hint engine, chat + guards | ✅ | "Translate paragraph 2 for me" refused (API test) |
-| M7 console: dashboard, pages, ingest (PDF text-layer segmentation), reference/draft/slips/terms editors, publish gate, glossary + overrides, offices, Sahayika lines/audio/chat log, results + xlsx, audited credit caps | ✅ / ⚠ OCR | OCR runs only in the Docker image (tesseract hin) — returns 501 locally |
-| M8 cross-device + accessibility | 🟡 | Chrome desktop + phone-size (touch) e2e pass. Playwright WebKit crashes on this Mac (bus error) — run `--project=webkit --project=iphone` in CI on Linux; manual check on real iPhone/iPad/Safari still needed |
+| Landing, sign-up and sign-in (email OTP), returning-player resume | Done | Real SMTP needed in production (not configured) |
+| Training Ground, Rules, level map, briefing with mic check and countdown | Done | |
+| Workbench (all four levels) | Done | Document layout, inline glossary menus, rich-text subset, Mark as done, QA strip, status bar with page control and zoom |
+| Roman to Hindi helper | Done | Live endpoint verified 23 Oct; phone suggestion strip not verified on devices |
+| Voice typing (Trial) | Not verified | Code and fallbacks exist; never tested with a real microphone and key; Dhruva frame event name unconfirmed |
+| Fair play (paste block, leave counting, fullscreen, one live window, autosave, auto-submit) | Done | iPhone has no fullscreen API by design |
+| Report card, review of own answer, Hall of Fame, profile, leaderboard | Done | Leaderboard privacy is an open decision |
+| Certificate (PDF/PNG/HTML) | Partial | Works with Chrome; first-iteration styling, "specimen" signatory, no verification page |
+| Level 5 PhD Shodharthi | Not done | Preview only; not playable by design (Phase 2) |
+| UI in Hindi | Partial | UI is English; Hindi expected from the BHASHINI website-translation plugin hook, which is disabled and never tested with a real plugin |
 
-## Iteration 2 — English, voice control, game feel (23 Oct)
-✅ English UI (strings.en.json), BHASHINI plugin hook with the workbench protected · ✅ Sahayika voice under player control (default: tap to listen) · ✅ journey map, briefing + countdown, HUD, mission-complete/scoring interstitials, rewards, Hall of Fame, SFX/haptics, settings · ⚠ waiting for `DHRUVA_API_KEY` in `.env` to switch drafts/TTS/ASR/LLM to live BHASHINI.
+## Game engine and scoring
+| Area | Status | Notes |
+|---|---|---|
+| Rules, chances, credits, stars, unlock rules (all-open and Trial-first) | Done | Unit and API tests |
+| Local deterministic scorer | Done | Known loophole: an unedited draft scores high (decision open) |
+| Anuvad scoring adapter | Not done | Contract never supplied |
+| Sahayak script (195 lines), report-card and in-round triggers, hint engine, guarded chat | Done | LLM path needs `DHRUVA_API_KEY`; chat prompt still says "female" |
+| Sahayak voice (male) | Partial | Live TTS and browser fallback work; no pre-generated audio files exist yet |
 
-## Iteration 4 — professional portal + real bundles (23 Oct)
-✅ Professional portal UI (tokens, icons, insignia, header profile menu, profile + leaderboard pages) · ✅ recruitment-style landing and gamified registration · ✅ all levels open (console switch) · ✅ Report 38 bundles: Primary 10 / Secondary 20 / Pro 30 pages with CAG Hindi references + Anuvaad-pipeline drafts · ✅ Anuvaad glossary algorithm · ✅ Anuvaad-style workbench (segment rows + context panel + QA) · ✅ manager console dashboard/KPIs/settings/players/library · ✅ copy rewrite (UI + Sahayak) · ⚠ bundle references need manager verification.
+## Content
+| Area | Status | Notes |
+|---|---|---|
+| Report 38 bundles: Primary 10, Secondary 20, Professional 30 pages; 2 Trial passages | Done (built) | **Not verified by CAG**: all parts `needs_verification`; production serves published pages only |
+| Published, verified content | Not done | Nothing is publishable until a manager verifies and publishes |
+| Repeated content across chances | Not done | One bundle per level |
+| Railway Finance content | Not done | Supplied English and Hindi are different editions |
+| Glossary (11,391 rows), offices (231), D3 overrides | Done | D3 pending CAG confirmation; office Hindi names pending |
 
-## Test commands
-- `corepack pnpm --filter @hc/shared test` · `corepack pnpm --filter @hc/api test`
-- e2e (needs `pnpm dev` running): `corepack pnpm exec playwright test --project=chrome --project=phone-chrome`
+## Console
+| Area | Status | Notes |
+|---|---|---|
+| Overview KPIs, players, results and xlsx export, audit log, settings overrides, danger zone | Done | |
+| Content library, bundle editor, publish gate, glossary, offices, Sahayak lines and chat log | Done | `pages.sample` is never cleared (see HANDOVER 11) |
+| Ingest | Partial | PDF text-layer segmentation and manual entry; OCR route is a stub (501); no automatic Hindi pairing; bundles came from the offline pipeline |
 
-## Needs a decision
-1. **Unedited-draft scores** (see DECISIONS.md): suggested fix — score अनुवाद for main rounds as *improvement over the draft* (`(chrF(answer) − chrF(draft)) / (1 − chrF(draft))`, floored at 0), and give time marks only to parts actually edited/ticked. Behind a config switch.
-2. Real BHASHINI keys (NMT, ASR, TTS + service ID, LLM) for the 27 Oct demo.
-3. Manager verification of the four seed pages, plus 2 more pages per round.
+## BHASHINI integration
+| Area | Status | Notes |
+|---|---|---|
+| Anuvaad draft translation with `{n}` masks, batching, transliteration proxy | Done | About 60 of ~580 drafts miss a number |
+| Dhruva TTS, ASR (stream and file), LLM | Not verified | Need `DHRUVA_API_KEY`; not exercised end to end with the rotated key |
+| Resilience (timeouts, retries, circuit breaker) | Done | Console shows health |
+
+## Quality and platforms
+| Area | Status | Notes |
+|---|---|---|
+| Shared and API unit/contract tests | Done | Run with `--filter` (the web package has no tests) |
+| Forbidden-words scan | Done | `corepack pnpm scan:forbidden` after a build |
+| Playwright e2e (3 tests, Chrome and phone-size Chrome) | Done | WebKit and iPhone projects defined but never run |
+| Safari, iPhone, iPad, Edge, real devices | Not verified | |
+| Accessibility settings (text size, contrast, reduced motion, sound, vibration) | Done | No formal audit |
+
+## Deployment
+| Area | Status | Notes |
+|---|---|---|
+| Local run (PGlite, `corepack pnpm dev`) | Done | |
+| Production boot rules (JWT secret, no fixed OTP, no sample content flag) | Done | Checked 25 Oct with `NODE_ENV=production` on a temp DB |
+| PostgreSQL via `DATABASE_URL` | Not verified | Written, never run against a real Postgres |
+| Docker Compose, Dockerfiles, nginx, Caddy | Not verified | Never built; Docker not installed on the build machine |
+| HTTPS/HSTS, India-region hosting, real SMTP | Not done | Deployment tasks |
+| Secrets | Done | No secrets in tracked files or git history (25 Oct); the dev `.env` key must be rotated |
+
+## Decisions waiting for CAG
+Scoring improvement-over-draft; timers for 20/30-page levels; repeated content; leaderboard privacy; Level 5 credits and format; D3 glossary overrides; contest-name mentions and certificate template; matching Railway Finance edition.

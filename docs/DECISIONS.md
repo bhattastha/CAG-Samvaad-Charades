@@ -1,5 +1,7 @@
 # Decisions and deviations
 
+> **Note (25 Oct 2026).** This file is a chronological log of decisions and deviations, in the order they were made (iterations 1-7); later entries can supersede earlier ones. It does not describe the product as a whole. **`CLAUDE.md` v2.0 supersedes the old v1.1 specification** and describes the current product; start with `docs/HANDOVER.md`. Where this log says "Spec = CLAUDE.md v1.1" it means the old spec.
+
 Format: what · why · how to undo. Spec = CLAUDE.md v1.1.
 
 ## Stack
