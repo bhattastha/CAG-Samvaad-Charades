@@ -3,3 +3,4 @@
 - Manager: bhattastha.dibd@gmail.com (ADMIN_EMAILS in /app/backend/.env).
 - QA: plant a code with `/app/scripts/emergent/test-otp.sh <email> <6-digit code>`, then verify via UI or POST /api/auth/otp/verify (skip /otp/request: it overwrites the code).
 - Test player created by QA: qa.tester1@cag.gov.in (1 Trial attempt, 1 Primary attempt).
+- Second QA player: qa.tester2@gmail.com (Trial attempts used: 2 of 3).

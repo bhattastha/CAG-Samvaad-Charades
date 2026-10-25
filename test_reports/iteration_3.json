@@ -1,0 +1,29 @@
+{
+  "summary": "Iteration 3 retest of the 4 fixes plus a regression pass. All passed. Backend: new pytest file with 10 tests, 10 passed. Frontend: checked with Playwright. (1) The workbench menu for 'production' on the Trial page shows उत्पादन (APPROVED), निर्माण and प्रोडक्शन (ALSO ACCEPTED), with no Avoid section. Admin page payloads for r38-primary-bundle and seed-trial-r38-2025-conclusion show production and audit taken from the CSV (audit: लेखापरीक्षा + संपरीक्षा, लेखापरीक्षा करना, ऑडिट; avoid empty), and the watch words contain neither प्रोडक्शन nor ऑडिट. (2) The menu has no 'Transliteration' option while the key is invalid (/api/xlit was called and returned no suggestions). (3) The test buttons for translation, transliteration, TTS and LLM all show 'BHASHINI rejected the key (not authenticated). Re-enter the Dhruva key…'. Status pills read 'key set · use Test' before testing and 'N recent failures' after; no 'ready' pill. A bad service ID shows an error banner; Discard clears it and restores the value. (4) The Replace checkbox is unticked by default. With it ticked, a 1-row CSV opens a 'Type REPLACE' prompt; I dismissed it and nothing changed. A merge of 1 row shows 'Imported 1 term'. A merge keeps a manual avoid form and drops one that the CSV now accepts. Regression: Trial submit works through the API (score 20) and the UI (two-step submit → /report scoring screen). Manager Overview and Settings load. /api/health returns 200.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/manager/glossary table", "issues": ["The AVOID column text is very light grey and small, so contrast is low"]},
+      {"screen": "Workbench HUD", "issues": ["The Submit button has no data-testid; its accessible name changes to 'Submit anyway?' during confirmation (minor testability issue)"]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_iter3_glossary_terms.py", "/app/test_reports/pytest/pytest_iter3.xml"],
+  "action_items": [
+    "Optional: add a data-testid to the workbench Submit button and the GlossMenu items",
+    "Optional: darken the AVOID column text in the manager glossary table",
+    "Remove the QA test glossary term 'zzqa iter three term' (id g-zzqa iter three term). There is no delete endpoint; re-importing the official CSV with replace would remove it"
+  ],
+  "critical_code_review_comments": [
+    "pages.ts loadPage: page terms now take the current glossary entry (allByEn), and loadGlossary clears pageCache, so imports take effect straight away. Good.",
+    "seed.ts merge: avoid_forms = old avoid EXCEPT (new accepted || new hi). Correct. Note that EXCEPT also removes duplicates and does not keep the original order.",
+    "Reference.tsx: replacing with a file of at least 80% of the current size only needs a confirm(). That is acceptable for the official CSV."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter3_glossary_terms.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "seed_data_creation": "Glossary test term added: 'zzqa iter three term' (hi परीक्षणपद, accepted परख, जाँचपद; avoid गलतपद). The glossary total is now 11,388 (11,387 + 1). Trial attempts used: qa.tester2@gmail.com chance 2 (via API, score 20); qa.tester1@cag.gov.in chance 2 (attempt 0aa31151-b0b5-4c3b-ad0f-4782d5d73a38, via UI). Each tester has 1 Trial chance left.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The 'audit' term is only on the primary/pro/secondary bundles, not on the Trial page, so check it through GET /api/admin/pages/r38-primary-bundle (terms and extras.sourceTerms). The Trial page underlines 'production' (.hc-source-term elements; the menu has role=menu). Submit is two steps: 'Submit Translation', then 'Submit anyway?'. The Dhruva key is still invalid. The pytest file is re-runnable; the merge test re-imports the same zzqa term (idempotent). The trial test uses up one qa.tester2 Trial chance per run."
+}
