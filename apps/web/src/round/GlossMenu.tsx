@@ -34,7 +34,8 @@ function useTranslit(en: string) {
     const words = en.split(/[^A-Za-z]+/).filter(Boolean);
     if (translitCache.has(en) || !words.length || words.length > 6 || words.some((w) => w.length > 30)) return;
     let live = true;
-    Promise.all(words.map((w) => api<{ suggestions: string[]; fallback?: string }>(`/xlit?word=${encodeURIComponent(w)}`).then((r) => r.suggestions[0] ?? r.fallback ?? "")))
+    // only a real BHASHINI suggestion is offered; the rough local fallback is never shown or cached
+    Promise.all(words.map((w) => api<{ suggestions: string[] }>(`/xlit?word=${encodeURIComponent(w)}`).then((r) => r.suggestions[0] ?? "")))
       .then((parts) => { if (parts.every(Boolean)) { const tr = parts.join(" "); translitCache.set(en, tr); if (live) setV(tr); } })
       .catch(() => {});
     return () => { live = false; };

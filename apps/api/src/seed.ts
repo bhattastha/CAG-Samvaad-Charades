@@ -102,7 +102,8 @@ export async function importGlossaryCsv(db: Db, csv: string, mode: "merge" | "re
       });
       await q.query(
         `INSERT INTO glossary_terms (id, en, en_norm, hi, accepted_variants, avoid_forms, flags, sector) VALUES ${ph.join(",")}
-         ON CONFLICT (en_norm) DO UPDATE SET en=EXCLUDED.en, hi=EXCLUDED.hi, accepted_variants=EXCLUDED.accepted_variants, avoid_forms=EXCLUDED.avoid_forms, flags=EXCLUDED.flags, sector=EXCLUDED.sector`, vals);
+         ON CONFLICT (en_norm) DO UPDATE SET en=EXCLUDED.en, hi=EXCLUDED.hi, accepted_variants=EXCLUDED.accepted_variants, flags=EXCLUDED.flags, sector=EXCLUDED.sector,
+           avoid_forms=${mode === "replace" ? "EXCLUDED.avoid_forms" : "ARRAY(SELECT unnest(glossary_terms.avoid_forms) EXCEPT SELECT unnest(EXCLUDED.accepted_variants || EXCLUDED.hi))"}`, vals);
     }
   });
   return { rows: rows.length, removed, inserted: rows.length };

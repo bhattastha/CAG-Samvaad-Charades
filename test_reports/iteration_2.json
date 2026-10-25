@@ -1,0 +1,44 @@
+{
+  "summary": "Tested the BHASHINI services console, the services test buttons, RBAC on the new endpoints, the glossary list/stats/merge-import, the player workbench glossary menu (English and Hindi side, pick inserts/replaces, submit gives a score) and regressions (landing, Rules profile dropdown, manager Overview, Settings, /api/health). Backend: 13/13 pytest passed. Frontend: all requested flows work. Two functional problems in the workbench glossary menu: (1) the per-page page_terms snapshot overrides the imported CSV glossary in menus and in scoring, and (2) the rough local Devanagari fallback is shown and tagged 'Transliteration'.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "GET /api/play page payload (pages.ts computeExtras/loadPage) + packages/shared/src/scoring.ts", "issue": "For terms that are in page_terms, the workbench menus and scoring use the page_terms snapshot (96 rows, built from the old bundle seed), not the imported 11K CSV glossary. Example: in the CSV, 'production' accepts निर्माण and प्रोडक्शन. In the DB, page_terms has variants {निर्माण} and avoid {प्रोडक्शन}, so the player menu shows प्रोडक्शन struck out under AVOID instead of as an option. The same goes for 'audit': ऑडिट is accepted in the CSV but in page_terms it is an avoid form. scoring.ts checkTerm(page.terms) will penalise these CSV-accepted forms. Glossary imports also never reach these terms.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "POST /api/admin/config/services/test (transliteration)", "issue": "With the invalid key, it returns 'no suggestions returned' and hides the real 401 'Not authenticated'. The other three tasks show the 401. The friendlier message in admin.ts ('Check the Dhruva key and the service ID') is never reached because xlit throws first."},
+      {"endpoint": "importGlossaryCsv merge mode", "issue": "ON CONFLICT DO UPDATE resets avoid_forms to [] and recomputes flags. A merge import silently wipes any avoid forms a manager added by hand on matching terms."},
+      {"endpoint": "GET /api/admin/config/services health", "issue": "Every card shows 'ready' even though the key is invalid (the badge only checks that something is configured). This could mislead managers."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "GlossMenu useTranslit", "issue": "When Dhruva fails, /api/xlit returns {suggestions:[], fallback}. GlossMenu uses r.suggestions[0] ?? r.fallback, so a letter-by-letter rendering is shown as the last option and tagged TRANSLITERATION (production → प्रोदुकतिओन, audit → औदित). The spec says this option should appear only when transliteration succeeds. The bad result is also cached in translitCache for the whole session.", "selector": "[role=menu] [role=menuitem]", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/manager/glossary import card", "issues": ["'Replace the whole glossary' is ticked by default. A manager who pastes a small CSV is one confirm click away from wiping 11K terms. Untick it by default, or require typing a confirmation when the row count is far below the current total.", "'Imported 1 terms' should be '1 term'."]},
+      {"screen": "/manager/services", "issues": ["The validation error banner stays after 'Discard changes'.", "Failure lines show raw JSON (translation HTTP 401: {\"detail\":{\"message\":\"Not authenticated\"}}). It is readable, but a friendlier message such as 'BHASHINI rejected the key (401)' would be better."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_services_glossary.py", "/app/test_reports/pytest/pytest_iter2.xml"],
+  "action_items": [
+    "Make workbench menus and scoring use the CSV glossary for page terms. Either rebuild page_terms hi/variants/avoid from glossary_terms (after import and at boot), or in computeExtras/loadPage merge page.terms with the current glossary entry (CSV variants win; drop any avoid form that the CSV accepts).",
+    "GlossMenu: use only r.suggestions[0] for the 'Transliteration' option. Do not use the fallback there, and do not cache a failed or fallback result.",
+    "Transliteration services test: pass the HTTP status and message through (401 Not authenticated) instead of 'no suggestions returned'.",
+    "Untick glossary replace mode by default, or add a stronger guard.",
+    "Optional: keep manual avoid_forms during a merge import."
+  ],
+  "critical_code_review_comments": [
+    "pages.ts:92 index.set(glossaryKey(t.en), t) and :99 make page.terms always win over the live glossary, so the imported CSV is ignored for the 96 page-term rows.",
+    "seed.ts importGlossaryCsv: avoid_forms is overwritten with [] on conflict.",
+    "admin.ts /admin/config/services/test: good. It returns 422 JSON and avoids the Cloudflare 5xx HTML page. Verified for all 4 tasks.",
+    "Services PUT validation (zod regex, int ranges) works and is audited with before/after values."
+  ],
+  "updated_files": ["/app/backend/tests/test_services_glossary.py"],
+  "success_rate": {"backend": "100% (13/13 tests); 1 HIGH data-source issue found by code/DB inspection", "frontend": "~90% (all requested flows work; translit fallback mislabelled; stale page_terms options)"},
+  "seed_data_creation": "Registered player qa.tester2@gmail.com (QA Tester Two, Delhi office), who has 1 Trial attempt (score 28). Merge-imported glossary term 'zzqa testterm' → परीक्षणशब्द (variants विकल्प एक, विकल्प दो); total is now 11,388. Transliteration suggestions toggled 5 and back to 4, which left 2 config.services audit entries.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Login: plant a code with test-otp.sh, then page.request.post /api/auth/otp/verify (the cookie is shared with the page). The Dhruva key is invalid, so /api/xlit returns suggestions [] plus fallback. To check the page_terms issue, open the Trial workbench and click 'production'. Expected after the fix: प्रोडक्शन listed as an accepted option, not under AVOID. SQL: select * from page_terms where en='production'. Services selectors: svc-<field>, svc-save, svc-msg, svc-discard, svc-test-<task>, svc-test-<task>-result. Glossary selectors: glossary-total, glossary-import-text, glossary-import-replace (ticked by default!), glossary-import-btn, glossary-import-msg; search input aria-label 'Search glossary'.",
+  "rca of the issue": "Stale options in the glossary menu: page_terms rows were written by build-bundles/savePage from the older seed glossary (variants/avoid split automatically). loadPage → computeExtras puts page.terms into the match index above glossary.byEn and uses [entry] as scoped, so the menu shows page_terms variants/avoid. scoring.ts also uses page.terms. Reproduce: Trial → click the underlined 'production' → AVOID प्रोडक्शन, but glossary_terms has प्रोडक्शन as an accepted variant. Fix: refresh page_terms from glossary_terms, or merge at load time. Transliteration label: GlossMenu.useTranslit falls back to the server's local 'fallback' string when Dhruva returns no suggestions."
+}

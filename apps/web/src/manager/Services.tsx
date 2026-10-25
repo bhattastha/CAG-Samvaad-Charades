@@ -74,12 +74,12 @@ export function Services() {
   const status = (task: string) => {
     const h = health[task];
     if (!h) return null;
-    return <Pill tone={!h.configured ? "slate" : h.open ? "amber" : "green"}>{!h.configured ? "key not set" : h.open ? "paused after failures" : "ready"}</Pill>;
+    return <Pill tone={!h.configured ? "slate" : h.open || h.recentFailures ? "amber" : "green"}>{!h.configured ? "key not set" : h.open ? "paused after failures" : h.recentFailures ? `${h.recentFailures} recent failure${h.recentFailures > 1 ? "s" : ""}` : "key set · use Test"}</Pill>;
   };
   return (
     <div data-testid="services-page">
       <PageHeader title="BHASHINI services" subtitle="Service IDs and models used for translation, transliteration, Sahayak's voice and chat. Changes apply immediately, are validated and recorded in the audit trail. The API key itself stays in the server's secrets."
-        actions={isManager && <><button data-testid="svc-discard" className={btn.ghost} disabled={!dirty} onClick={() => setF(data.current)}>Discard changes</button>
+        actions={isManager && <><button data-testid="svc-discard" className={btn.ghost} disabled={!dirty} onClick={() => { setF(data.current); setMsg(null); }}>Discard changes</button>
           <button data-testid="svc-defaults" className={btn.ghost} onClick={() => setF(data.defaults)}>Load file defaults</button>
           <button data-testid="svc-save" className={btn.primary} disabled={!dirty} onClick={save}>Save services</button></>} />
       {ro && <div className="mb-4"><ReadOnlyNote /></div>}

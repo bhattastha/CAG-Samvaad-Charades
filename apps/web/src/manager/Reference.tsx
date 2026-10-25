@@ -13,16 +13,19 @@ export function Glossary() {
   const [edit, setEdit] = useState<any | null>(null);
   const [csv, setCsv] = useState("");
   const [fileName, setFileName] = useState("");
-  const [replace, setReplace] = useState(true);
+  const [replace, setReplace] = useState(false);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
   const { data: stats } = useQuery({ queryKey: ["agl-stats"], queryFn: () => api<{ terms: number; variants: number; lastImport: any }>("/admin/glossary/stats") });
   const runImport = async () => {
-    if (replace && !window.confirm("Replace the whole glossary with this file? Terms that are not in the file will be removed (manager overrides on kept terms stay).")) return;
+    const lines = csv.split("\n").filter((l) => l.trim()).length - 1;
+    if (replace && stats && lines < stats.terms * 0.8) {
+      if (window.prompt(`This file has about ${lines.toLocaleString("en-IN")} rows but the glossary has ${stats.terms.toLocaleString("en-IN")} terms. Replacing removes every term not in the file. Type REPLACE to continue.`) !== "REPLACE") return;
+    } else if (replace && !window.confirm("Replace the whole glossary with this file? Terms that are not in the file will be removed (manager overrides on kept terms stay).")) return;
     setBusy(true);
     try {
       const r = await api<any>("/admin/glossary/import", { body: { csv, mode: replace ? "replace" : "merge" } });
-      setMsg(`Imported ${r.rows.toLocaleString("en-IN")} terms${r.mode === "replace" ? `, removed ${r.removed.toLocaleString("en-IN")} not in the file` : ""}. Players see them on their next page load.`);
+      setMsg(`Imported ${r.rows.toLocaleString("en-IN")} ${r.rows === 1 ? "term" : "terms"}${r.mode === "replace" ? `, removed ${r.removed.toLocaleString("en-IN")} not in the file` : ""}. Players see them on their next page load.`);
       setCsv(""); setFileName("");
       qc.invalidateQueries({ queryKey: ["agl"] }); qc.invalidateQueries({ queryKey: ["agl-stats"] });
     } catch (e) { setMsg((e as ApiError).body?.message ?? (e as ApiError).code); } finally { setBusy(false); }

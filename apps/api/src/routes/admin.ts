@@ -436,13 +436,18 @@ export async function adminRoutes(app: FastifyInstance, db: Db) {
     try {
       let sample = "";
       if (task === "translation") sample = (await translateBatch([{ text: "The audit observed irregularities in procurement.", locked: [] }]))[0]?.text ?? "";
-      if (task === "transliteration") { const r = await transliterate("lekha"); if (!r.suggestions.length) throw new Error("No suggestions returned. Check the Dhruva key and the service ID."); sample = r.suggestions.join(", "); }
+      if (task === "transliteration") { const r = await transliterate("lekha"); if (!r.suggestions.length) throw new Error(r.error ?? "No suggestions returned. Check the service ID."); sample = r.suggestions.join(", "); }
       if (task === "tts") { const b = await tts(config().bhashiniServices.ttsLanguage === "hi" ? "नमस्ते, मैं सहायक हूँ।" : "Hello, I am Sahayak."); sample = `${Math.round(b.length / 1024)} KB of audio`; return { ok: true, ms: Date.now() - t0, sample, audio: b.toString("base64") }; }
       if (task === "llm") sample = await llm("Reply in one short sentence.", "Say hello to a CAG officer.");
       if (!sample) throw new Error("empty response");
       return { ok: true, ms: Date.now() - t0, sample };
     } catch (e: any) {
-      return reply.code(422).send({ ok: false, ms: Date.now() - t0, error: "service_failed", message: String(e?.message ?? e).slice(0, 300) });
+      const m = String(e?.message ?? e);
+      const friendly = /HTTP 401|HTTP 403/.test(m) ? "BHASHINI rejected the key (not authenticated). Re-enter the Dhruva key in the server secrets."
+        : /circuit open/.test(m) ? "Paused for 30 s after repeated failures. Try again shortly."
+        : /aborted|timeout/i.test(m) ? "No reply from BHASHINI within the time limit. Check the key and service ID, then try again."
+        : /HTTP 4\d\d/.test(m) ? `BHASHINI refused the request. Check the service ID. (${m.slice(0, 160)})` : m.slice(0, 300);
+      return reply.code(422).send({ ok: false, ms: Date.now() - t0, error: "service_failed", message: friendly });
     }
   });
 

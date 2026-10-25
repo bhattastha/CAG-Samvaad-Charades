@@ -130,7 +130,11 @@ export async function loadPage(db: Db, id: string): Promise<{ page: PageData; se
       fields: p.fields, ...(p.en_sentences ? { enSentences: p.en_sentences } : {}), ...(p.page_no ? { pageNo: p.page_no } : {}),
     })),
     slips: slips.map((s) => ({ partId: s.part_id, kind: s.kind, wrongText: s.wrong_text, enTerm: s.en_term, fixHint: s.fix_hint })),
-    terms: applyOverrides(terms.map((t) => ({ en: t.en, hi: t.hi, variants: t.variants, avoid: t.avoid })), glossary?.overrides ?? []),
+    // the official glossary is the source of truth: a page's term snapshot takes its current Hindi, options and avoid-forms
+    terms: applyOverrides(terms.map((t) => {
+      const g = glossary?.allByEn.get(glossaryKey(t.en));
+      return g ? { en: t.en, hi: g.hi, variants: g.variants, avoid: g.avoid } : { en: t.en, hi: t.hi, variants: t.variants, avoid: t.avoid };
+    }), glossary?.overrides ?? []),
   };
   const v = { version: row.version, page, sector: row.sector, extras: computeExtras(page, row.sector) };
   pageCache.set(id, v);

@@ -44,7 +44,7 @@ export function cleanSuggestions(target: unknown, cap: number): string[] {
   return out;
 }
 
-export async function transliterate(word: string, signal?: AbortSignal): Promise<{ suggestions: string[]; fallback?: string }> {
+export async function transliterate(word: string, signal?: AbortSignal): Promise<{ suggestions: string[]; fallback?: string; error?: string }> {
   const w = `${config().transliteration.serviceId}|${word.toLowerCase()}`;
   const hit = cacheGet(w);
   if (hit) return { suggestions: hit };
@@ -70,7 +70,7 @@ export async function transliterate(word: string, signal?: AbortSignal): Promise
       return { suggestions: s };
     }
     return { suggestions: [], fallback: romanToDevanagari(word) };
-  } catch {
-    return { suggestions: [], fallback: romanToDevanagari(word) };
+  } catch (e: any) {
+    return { suggestions: [], fallback: romanToDevanagari(word), error: String(e?.message ?? e) };
   }
 }
