@@ -99,6 +99,7 @@ async def _shutdown():
         proc.terminate()
 
 
+@app.api_route("/health", methods=["GET", "HEAD"])
 @app.api_route("/api/health", methods=["GET", "HEAD"])
 async def health():
     try:

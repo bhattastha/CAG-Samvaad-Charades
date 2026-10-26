@@ -1,7 +1,8 @@
-/* global AudioWorkletProcessor, registerProcessor, sampleRate */
 // Downsamples mic audio to 16 kHz mono PCM16 and posts ~100 ms frames (§9.1 ASR streaming).
-class Pcm16 extends AudioWorkletProcessor {
-  constructor() { super(); this.buf = []; this.ratio = sampleRate / 16000; this.acc = 0; }
+// AudioWorkletGlobalScope globals, read from globalThis
+const { AudioWorkletProcessor: Processor, registerProcessor: register } = globalThis;
+class Pcm16 extends Processor {
+  constructor() { super(); this.buf = []; this.ratio = globalThis.sampleRate / 16000; this.acc = 0; }
   process(inputs) {
     const ch = inputs[0] && inputs[0][0];
     if (!ch) return true;
@@ -20,4 +21,4 @@ class Pcm16 extends AudioWorkletProcessor {
     return true;
   }
 }
-registerProcessor("pcm16", Pcm16);
+register("pcm16", Pcm16);

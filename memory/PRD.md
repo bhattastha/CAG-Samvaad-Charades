@@ -31,3 +31,7 @@ User choices: Emergent managed email for OTP; publish seeded Report 38 sample pa
 - scripts/emergent/package.sh (run before every publish): bundles API → backend/hc/api.mjs (+config/content/seed/assets, vendored pglite & pdfjs), web → frontend/site. frontend `yarn build` copies site→build. backend/server.py spawns bundle with pip Node (nodejs-wheel-binaries) when monorepo absent; watchdog restarts; PGlite fallback if DATABASE_URL unreachable (NON-PERSISTENT); SEED_PUBLISH_SAMPLES publishes 5 samples on fresh DB.
 - Certificate PDF/PNG falls back to HTML when playwright-core absent. Glossary override:null fix.
 - P0: external PostgreSQL DATABASE_URL (live slot) for persistence in production.
+## 26 Oct 2026 — load + cross-browser readiness
+- Load test (preview): 10/20/25 concurrent players, 0 app errors, p95 well under 1 s for game calls; BHASHINI stable. Test players qa.load01-25, qa.xb01-15, qa.xc01-07 @gmail.com left in DB.
+- Fixes: Esc keyboard lock in fullscreen (Chrome/Edge); Firefox/Safari full-screen exits not counted (tab/blur still are); GlossMenu outside-click listener stable; header nav at lg, name chip at xl; register card fits 360px; landing Sign in on mobile; TTS 30 uncached/user/10 min; xlit timeouts don't trip breaker; /health alias in shim.
+- Production deploy: build passes now; pod OOM at tier_0 512Mi because embedded PGlite (peak ~770 MB). With external Postgres the API measured ~100 MB steady / ~190 MB peak. Needs external DATABASE_URL (live) and/or higher tier.

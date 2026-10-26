@@ -1,0 +1,48 @@
+{
+  "summary": "Retest of the 5 issues from iteration 7, plus health and a Chromium 1366 regression run. Used new players qa.xc01-xc07. PASS: (1) Fair-play. In Firefox and WebKit, Esc exits fullscreen with no modal and no /events call. Tab-hidden is still counted in all 3 engines. Window blur is counted in Chromium and WebKit. In headless Firefox blur is not counted only because headless Firefox reports pointer:none (a test artefact; logic unchanged). In Chromium, Esc in the menu and in the editor keeps fullscreen and shows no modal. (2) GlossMenu: outside click closed the menu 5 of 5 times in every engine while the timer ran; Arrow keys + Enter inserted the approved term; Esc closes it in Chromium. (3) Mobile landing-signin works at 390 and 360 in all engines and opens /register?returning=1 'Welcome back' with the email field only. (4) GET and HEAD /api/health return 200 healthy. (5) Regression at 1366x768 Chromium: full Trial run, score 20, no console errors. The header passes at 768 and 820 in all engines. STILL FAILING: header at 1024x768 (all engines); /register and the returning form at 360px (all engines, card now about 30px too wide); /health returns the SPA HTML, not health JSON.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET/HEAD /health", "issue": "Returns 200 but text/html (the SPA index.html), not {status:'healthy'}. server.py only defines /api/health; /health falls through to the proxy and the web app. On the public URL the ingress sends non-/api paths to port 3000 anyway, which also serves the SPA. If an external monitor needs /health JSON, add a route in the Node API/static server for port 3000, or point the monitor at /api/health (which works: 200 JSON healthy for both GET and HEAD)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Header (Layout.tsx) at 1024px", "issue": "Still off-screen at 1024x768 in all 3 engines. At lg the nav (lg:flex) and the name/office chip (hidden lg:block) both show. The profile-menu button spans x=923-1132 on a 1024 viewport, and its dropdown spans 872-1128, so about 100px (the chevron and right side of the menu, including part of 'Sign out') is clipped. 768x1024 and 820x1180 now PASS (button 676-744 / 728-796; dropdown fully visible; the Leaderboard item navigates). 1366 PASS.", "selector": "[data-testid=profile-menu]", "priority": "MEDIUM"},
+      {"component": "Register / returning sign-in card at 360px", "issue": "NOT fixed; it is worse (about 30px overflow; it was 9px). At 360x740 the form.card spans x=16-389 and the H1 'Enlist for the challenge', all inputs, the textarea and the Listen button (297-373) are clipped on the right. The returning 'Welcome back' email input and the 'Your Rewards Journey' panel (50 UP TO CREDITS) are clipped too. RCA: the parent `div.grid.lg:grid-cols-[1.1fr_1fr].gap-6` has no explicit column template below lg, so its implicit auto track is 373.6px (the min-content of a child) while the container is 328px. min-w-0 on the form cannot shrink an implicit auto track. Fix: add `grid-cols-1` (repeat(1,minmax(0,1fr))) to that grid div, or min-w-0 on all its grid children, including the rewards panel. 390px renders fine (16-390 but within the viewport, so there is no right gutter).", "selector": "main > div.grid > form.card", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Trial workbench, Firefox/WebKit", "issues": ["Expected limitation: the browser uses Esc to exit fullscreen, so in WebKit Esc does not close the glossary menu, and in Firefox Esc does not close the xlit suggestions (5 remain). It is no longer counted or shown as a modal. Officers on Firefox/Safari can click outside or pick 'keep as typed'. Consider showing the 'Esc = keep as typed' hint only when navigator.keyboard.lock exists."]}
+    ]
+  },
+  "verified_pass": {
+    "fairplay_firefox_1366 (xc01)": "fs True, kb False; Esc in menu -> fs False, no modal, menu closed; Esc in editor -> fs False, no modal; 0 events from Esc; tab hidden -> modal + left_tab (count 1); blur not counted (headless FF matchMedia('(pointer: fine)')=false, artefact); score 20",
+    "fairplay_webkit_1366 (xc02)": "fs True, kb False; Esc x2 -> fs False, no modal, 0 events; tab -> left_tab 1, blur -> left_blur 2, both show the modal; score 27",
+    "fairplay_chromium_1366 (xc03)": "fs True, kb True; Esc in menu closes the menu, stays fs, no modal; Esc in editor clears suggestions, stays fs, no modal; tab -> left_tab 1, blur -> left_blur 2; score 20",
+    "glossmenu": "outside click 5/5 opened and closed in chromium, firefox and webkit (random 50-1100ms delay during the timer); ArrowDown/ArrowUp + Enter inserted the approved option and closed the menu in all 3",
+    "header": "768x1024, 820x1180, 1366x768, 390x844, 360x740 PASS in all 3 engines (xc04 chromium, xc05 firefox, xc06 webkit); 1024x768 FAIL",
+    "landing_signin": "390x844 and 360x740 in all 3 engines: [data-testid=landing-signin] visible in the viewport -> /register?returning=1 'Welcome back', email only, no name field",
+    "regression_chromium_1366 (xc07)": "ui_matrix2.py all steps PASS: logos, sign-in, journey, Trial fullscreen, underlines, glossary menu, outside close, xlit 0.3s, Hindi, Bold, submit score 20, no console errors, no overlap or hscroll",
+    "health": "GET and HEAD /api/health 200 application/json {ok:true,status:'healthy'}; /health 200 text/html (SPA)"
+  },
+  "test_report_links": ["/app/tests/load/fix8_round.py", "/app/tests/load/fix8_layout.py", "/app/tests/load/probe_register.py", "/app/tests/load/probe_pointer.py", "/app/tests/load/setup_xc.py", "/app/tests/load/ui_matrix2.py", "/app/tests/load/f8_ff.log", "/app/tests/load/f8_wk.log", "/app/tests/load/f8_cr.log", "/app/tests/load/f8l_cr.log", "/app/tests/load/f8l_ff.log", "/app/tests/load/f8l_wk.log", "/app/tests/load/f8_reg.log"],
+  "action_items": [
+    "Register.tsx: add `grid-cols-1` to the outer `grid lg:grid-cols-[1.1fr_1fr] gap-6` wrapper (or min-w-0 on every child) so the card and the rewards panel fit 360px. Check both the enlist and the returning (?returning=1) views.",
+    "Layout.tsx: at 1024px the header still overflows. Use `xl:flex` for the nav (or `xl:block` for the name/office chip), or hide the brand wordmark at lg, so the profile-menu button and dropdown stay on screen at 1024x768 (iPad landscape).",
+    "Optional: add a real /health JSON route if a monitor needs it (today it returns SPA HTML); /api/health is fine.",
+    "Optional: show the 'Esc = keep as typed' editor hint only when navigator.keyboard.lock exists."
+  ],
+  "critical_code_review_comments": [
+    "useFairPlay fs handler: the early return when navigator.keyboard.lock is missing is correct. Note that it also stops counting a deliberate fullscreen exit via F11 or the browser UI in Firefox/Safari; tab and blur still catch real departures. Blur counting depends on matchMedia('(pointer: fine)'), so touch-only and pointer:none devices never count blur (by design).",
+    "GlossMenu: the latest-ref pattern with an effect that runs once (deps []) is correct, and the outside-click flake is gone. Minor: the effect closes over the `base` menu only through refs. If the same GlossMenu instance is reused for a new term without remounting, `hi` is not reset (it was not observed)."
+  ],
+  "updated_files": ["/app/tests/load/fix8_round.py", "/app/tests/load/fix8_layout.py", "/app/tests/load/probe_register.py", "/app/tests/load/probe_pointer.py", "/app/tests/load/setup_xc.py"],
+  "success_rate": {"backend": "N/A (frontend only; /api/health 100%, /health returns HTML)", "frontend": "3 of 5 retested issues fully fixed (fair-play Esc, GlossMenu, mobile sign-in); header fixed at 768/820 but not 1024; register 360 overflow not fixed. Regression 100%."},
+  "test_credentials": "OTP planted via /app/scripts/emergent/test-otp.sh and verified with POST /api/auth/otp/verify; /otp/request never called.",
+  "seed_data_creation": "Created players qa.xc01..qa.xc12@gmail.com ('QA Cross Check NN', mobile 96000000NN, first Delhi office). Trial attempts used (each submitted): xc01 (FF, 1 left_tab), xc02 (WK, left_tab + left_blur), xc03 (CR, left_tab + left_blur), xc07 (CR regression). xc04-xc06 were logged in only; xc08-xc12 are unused. No data deleted; no reset or glossary changes.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Env: PLAYWRIGHT_BROWSERS_PATH=/tmp/pwb, /tmp/pwv/bin/python. fix8_round.py <engine> <email> uses one Trial chance (simulates tab-hidden through a visibilityState override plus a synthetic blur). fix8_layout.py <engine> <email> uses no attempts. Use qa.xc08..xc12 for the next retest (fresh). Headless Firefox has pointer:none, so blur is never counted there.",
+  "rca of the issue": "Register 360: the outer grid has no explicit grid-template-columns below lg, so its implicit auto column is sized to the largest child min-content (373.6px) and the 328px container overflows. min-w-0 on the form does not shrink an implicit auto track. Header 1024: at lg (1024) the nav, the brand wordmark, the coin meter and the name chip (hidden lg:block) all appear together and need about 1130px."
+}

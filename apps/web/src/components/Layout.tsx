@@ -114,7 +114,7 @@ function ProfileMenu({ name, office }: { name: string; office?: string }) {
       <button onClick={() => setOpen((o) => !o)} aria-haspopup="menu" aria-expanded={open} data-testid="profile-menu"
         className="flex items-center gap-2 rounded-full pl-1 pr-2 py-1 hover:bg-navy-50 transition">
         <Avatar name={name} size={32} />
-        <span className="hidden lg:block text-left leading-tight max-w-[150px]">
+        <span className="hidden xl:block text-left leading-tight max-w-[150px]">
           <span className="block text-sm font-bold text-navy truncate">{name}</span>
           {office && <span className="block text-[11px] text-muted truncate">{office}</span>}
         </span>

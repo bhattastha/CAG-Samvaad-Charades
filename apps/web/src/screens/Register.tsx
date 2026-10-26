@@ -205,7 +205,7 @@ export function Register() {
     <ObBackdrop>
       <Header />
       <Page>
-        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6 items-start [&>*]:min-w-0">
           <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="card min-w-0 p-4 sm:p-8" noValidate
             onSubmit={(e) => { e.preventDefault(); if (step === "form" && validate()) sendOtp(); if (step === "otp") verify(); }}>
             <Steps at={step === "form" ? 0 : 1} />
