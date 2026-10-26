@@ -35,3 +35,7 @@ User choices: Emergent managed email for OTP; publish seeded Report 38 sample pa
 - Load test (preview): 10/20/25 concurrent players, 0 app errors, p95 well under 1 s for game calls; BHASHINI stable. Test players qa.load01-25, qa.xb01-15, qa.xc01-07 @gmail.com left in DB.
 - Fixes: Esc keyboard lock in fullscreen (Chrome/Edge); Firefox/Safari full-screen exits not counted (tab/blur still are); GlossMenu outside-click listener stable; header nav at lg, name chip at xl; register card fits 360px; landing Sign in on mobile; TTS 30 uncached/user/10 min; xlit timeouts don't trip breaker; /health alias in shim.
 - Production deploy: build passes now; pod OOM at tier_0 512Mi because embedded PGlite (peak ~770 MB). With external Postgres the API measured ~100 MB steady / ~190 MB peak. Needs external DATABASE_URL (live) and/or higher tier.
+## 26 Oct 2026 — external PostgreSQL (Neon)
+- DATABASE_URL (live + test) = Neon pooler (ap-southeast-1). Preview DB copied into Neon (pg_dump→psql). ALTER ROLE/DATABASE search_path=public set (pg_dump had polluted pooled search_path).
+- Preview now also uses Neon (shared with live). ~210 ms per DB round trip from this pod; bundle RSS ~140 MB.
+- test-otp.sh now targets DATABASE_URL.
