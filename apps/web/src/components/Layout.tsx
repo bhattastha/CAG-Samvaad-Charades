@@ -170,7 +170,7 @@ export function Header({ compact = false, hud = true, wide = false }: { compact?
           </span>
         </Link>
         {signedIn && !compact && (
-          <nav className="hidden md:flex items-center gap-1 flex-1 justify-center" aria-label={t("nav.main")}>
+          <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center" aria-label={t("nav.main")}>
             {navItems.map(([to, label, icon]) => {
               const on = pathname === to || (to === "/journey" && pathname.startsWith("/play"));
               return (

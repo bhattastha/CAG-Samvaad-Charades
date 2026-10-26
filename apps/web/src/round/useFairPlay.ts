@@ -40,7 +40,13 @@ export function useFairPlay(attemptId: string | null, active: boolean, onBlocked
     const vis = () => (document.visibilityState === "hidden" ? depart("left_tab") : back());
     const blur = () => { if (window.matchMedia("(pointer: fine)").matches) depart("left_blur"); };
     const focus = () => back();
-    const fs = () => { if (Date.now() < fullscreenExit.until) return; if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) { depart("left_fullscreen"); setTimeout(back, 50); } };
+    const fs = () => {
+      if (Date.now() < fullscreenExit.until) return;
+      // Firefox/Safari cannot keep Esc inside the page, so Esc there drops out of full screen while the player stays on the page;
+      // only Chrome/Edge (keyboard lock) count a full-screen exit. Tab switches and window blur are still counted everywhere.
+      if (!(navigator as any).keyboard?.lock) return;
+      if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) { depart("left_fullscreen"); setTimeout(back, 50); }
+    };
     const stop = (e: Event) => { e.preventDefault(); blocked.current(); };
     const key = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && ["c", "v", "x", "a"].includes(e.key.toLowerCase()) && !(e.target as HTMLElement)?.closest?.("[data-allow-select]")) {

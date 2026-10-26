@@ -1,0 +1,61 @@
+{
+  "summary": "Cross-browser/device matrix finished: 15/15 combos (chromium, firefox, webkit x 1366x768, 1920x1080, 768x1024, 390x844, 360x740) run with the corrected script /app/tests/load/ui_matrix2.py. Every combo got through landing, email screen, journey, Trial round, source underlines, glossary menu with options, Hindi transliteration suggestions (0.2-0.8s), Hindi text, Bold and submit with a score (20-25). No console or page errors (Cloudflare/CSP noise ignored). No horizontal scroll anywhere (the body uses overflow-x:clip). Fix 1: verified in headless Chromium. Fullscreen is really entered, keyboard.lock(['Escape']) is called and resolves, and Escape in the glossary menu and in the editor closes the menu or suggestions with no 'left the mission page' modal (left_page_count 0). Caveat: in headless Chromium, Escape did not exit fullscreen even after navigator.keyboard.unlock(), so headless cannot prove the lock is what stops the exit. That needs one manual check in headed Chrome. Fix 2 verified: 30 distinct texts returned 200 audio/wav, the 31st returned 429 {error:'tts_rate_limited'} in 0.09s, a cached repeat returned 200, and an anonymous call returned 401. The web client falls back to the browser voice on a non-200. Fix 3 passes code review. Final: /api/health 200 healthy and /api/health/db 200 connected. New findings: Esc in Firefox and Safari counts as leaving the page; the user menu is off-screen at 768-1023px; the enlist form overflows at 360px; mobile has no sign-in entry point; outside click sometimes fails to close the glossary menu.",
+  "matrix": {
+    "chromium_1366x768 (xb01)": "all PASS, fullscreen=True, score 25",
+    "chromium_1920x1080 (xb03)": "all PASS, score 25",
+    "chromium_768x1024 (xb04)": "all PASS (pane tabs used), score 20; header user menu off-screen",
+    "chromium_390x844 (xb02)": "all PASS (Start Playing -> /register, tabs), score 20",
+    "chromium_360x740 (xb05)": "all PASS, score 25; /register card overflows about 9px",
+    "firefox_1366x768 (xb06)": "all PASS on re-run (first run: outside click did not close the glossary menu), score 20/25",
+    "firefox_1920x1080 (xb08)": "all PASS, score 20",
+    "firefox_768x1024 (xb09)": "all PASS, score 25 (logo naturalWidth 0 at networkidle is timing only; screenshot shows the logos)",
+    "firefox_390x844 (xb07)": "all PASS, score 25. NOTE: Playwright Firefox has no mobile emulation, and its headless fullscreen resizes to a 1366x768 screen, so the round was tested in desktop layout",
+    "firefox_360x740 (xb10)": "all PASS except outside-click close of the glossary menu (flaky), score 25. Same desktop-layout caveat",
+    "webkit_1366x768 (xb11)": "PASS. First run's email-screen check timed out at 1.5s (WebKit is slow); fixed with a 6s wait. Outside-click close FAILED in 2 of 2 runs",
+    "webkit_1920x1080 (xb13)": "all PASS on the round; the first email-screen check had the same 1.5s timing issue, score 20",
+    "webkit_768x1024 (xb14)": "all PASS, score 25",
+    "webkit_390x844 (xb12)": "all PASS, fullscreen=False (iPhone-like, as intended), score 25/20. Ctrl+A does not select in mobile emulation; Bold works with a real DOM selection plus tap (verified with xb15)",
+    "webkit_360x740 (xb15)": "all PASS (Bold verified with DOM selection plus tap), score 25"
+  },
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "POST /api/sahayika/tts", "issue": "Works as specified. Note: ttsQuota.clear() when size > 5000 resets every user's window (not a concern at about 100 players). The counter is incremented before the BHASHINI call, so failed TTS calls also use up the quota (acceptable)."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Fair-play in Firefox/Safari (useFairPlay + editor hint)", "issue": "keyboard.lock is Chromium-only. In Firefox, Escape (in the glossary menu or the editor) exits fullscreen and does NOT close the menu or suggestions. It shows the 'You left the mission page' modal and increments attempts.left_page_count. Verified: qa.xb09 attempt 2 has left_page_count=3 after 3 Esc presses; Chromium attempts stay 0. The editor placeholder tells everyone 'Esc = keep as typed', so Firefox/Safari officers will be counted as leaving, lose the cleanSheet badge, and see leaves on the report and manager views.", "selector": ".ProseMirror placeholder / [role=menu][aria-label='Glossary options']", "priority": "MEDIUM-HIGH"},
+      {"component": "Header (components/Layout.tsx)", "issue": "At 768-1023px the nav (hidden md:flex) plus logo, wordmark and coin bar push the user menu off-screen. The avatar button's right edge is at about 1003px on a 768 or 820 viewport in all engines. At 1024 the name chip is cut off. Tablet users cannot reach the profile or sign-out menu. Suggest nav 'hidden lg:flex' or hiding the wordmark/coin bar at md.", "selector": "header user menu button (text 'QC')", "priority": "MEDIUM"},
+      {"component": "Register form at 360px", "issue": "The card overflows the viewport by about 8-9px in all engines. The 'Enlist for the challenge' heading and the right edges of the inputs and the 'Listen' button are clipped (hidden by overflow-x:clip, so there is no scroll). Fine at 390px.", "selector": "form.card on /register", "priority": "LOW"},
+      {"component": "Mobile sign-in entry", "issue": "The landing 'Sign in' link is 'hidden sm:inline', and /register has no 'Already registered? Sign in' switch. A returning officer on a phone gets the full enlist form and must fill name, mobile, office and address just to sign in (verify then routes existing users correctly). Suggest a sign-in link on the mobile landing or the register form (/register?returning=1).", "selector": "Title.tsx Link to=/register?returning=1", "priority": "LOW-MEDIUM"},
+      {"component": "GlossMenu outside-click close", "issue": "Intermittent: a mousedown on the editor reaches document but the menu stays open. Reproduced in 1 of 3 isolated WebKit tries and 4 of 10 matrix runs (Firefox and WebKit only). Likely root cause: the effect deps include onClose, an inline arrow from Round that is recreated on every render (the timer re-renders each second). Each re-render removes the mousedown listener and re-adds it in setTimeout(0), so a click in that gap is missed. Fix: useCallback for onClose/onPick or keep them in refs, and attach the listener once. A second click closes the menu.", "selector": "[role=menu][aria-label='Glossary options']", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Round on mobile (390/360) while suggestions are shown", "issues": ["The fixed suggestion strip (z-90) covers the page footer (Page 1 of 1 / zoom); expected while suggesting. The last chip 'sarkar · keep as typed' is off-screen at 360/390 (the strip scrolls sideways)."]}
+    ]
+  },
+  "test_report_links": ["/app/tests/load/ui_matrix2.py", "/app/tests/load/run_ui_matrix2.sh", "/app/tests/load/setup_xb.py", "/app/tests/load/fix1_escape.py", "/app/tests/load/fix2_tts_limit.py", "/app/tests/load/layout_check.py", "/app/tests/load/dbg_menu.py", "/app/tests/load/wk_mobile_bold.py", "/app/tests/load/ui2_chromium.log", "/app/tests/load/ui2_firefox.log", "/app/tests/load/ui2_webkit.log"],
+  "action_items": [
+    "Firefox/Safari: do not count Esc-driven fullscreen exits as leaving the page, or give an alternative to Esc (e.g. a 'keep as typed' click or another key) and show the 'Esc = keep as typed' hint only where navigator.keyboard.lock exists. Otherwise brief officers to use Chrome/Edge for tomorrow's session.",
+    "Header at 768-1023px: keep the user menu on screen (nav hidden below lg, or hide the wordmark/coin bar at md).",
+    "Add a 'Sign in' link for phones (landing below sm and/or on /register).",
+    "Fix the /register card overflow at 360px.",
+    "GlossMenu: memoize onClose/onPick (or use refs) so the outside-click listener is not removed on every timer re-render.",
+    "Manual check in headed Chrome: after Start Mission, press Esc in the editor; the app should stay fullscreen with no modal (headless cannot show this)."
+  ],
+  "critical_code_review_comments": [
+    "Fix 1 (PreRound.enterFullscreen): requestFullscreen, then navigator.keyboard?.lock?.(['Escape']).catch(); 'Back to the mission' calls enterFullscreen again, so the lock is renewed. Correct for Chromium. Firefox and Safari have no Keyboard Lock API, so Esc still exits there (see ui_bugs).",
+    "Fix 2 (services.ts /sahayika/tts): the per-email window {start,n} is mutated in place, limit >30 per 600s applies only on cache misses, cache hits skip the quota, and 401 is returned before the quota for anonymous callers. Correct.",
+    "Fix 3 (bhashini/client.ts callService): timedOut = lastErr.name === 'AbortError'; the breaker increment is skipped only for task==='transliteration' && timedOut, so other xlit failures and all tts/llm/asr/translation failures (timeouts included) still count. A caller abort (opts.signal.aborted) rethrows before the breaker. Node fetch throws DOMException AbortError on ctl.abort(), so the check is valid. Minor: `b` is read before the await loop and written back after, so concurrent calls can overwrite a breaker reset done by another request (a harmless race). Also, if BHASHINI xlit hangs completely, the breaker never opens and every word waits the full timeout before the per-word fallback (an accepted trade-off)."
+  ],
+  "updated_files": ["/app/tests/load/ui_matrix2.py", "/app/tests/load/run_ui_matrix2.sh", "/app/tests/load/setup_xb.py", "/app/tests/load/fix1_escape.py", "/app/tests/load/fix2_tts_limit.py", "/app/tests/load/layout_check.py", "/app/tests/load/dbg_menu.py", "/app/tests/load/wk_mobile_bold.py"],
+  "success_rate": {"backend": "N/A (frontend-only, plus the requested TTS limit and health checks: 100%)", "frontend": "15/15 combos complete the core flow; 5 UX/layout issues found"},
+  "test_credentials": "OTP planted via /app/scripts/emergent/test-otp.sh; /api/auth/otp/request never called. Manager not used.",
+  "seed_data_creation": "Created and kept players qa.xb01@gmail.com to qa.xb15@gmail.com ('QA Cross Browser NN', mobile 97000000NN, first Delhi-search office). Trial attempts used: xb01 3 (one in the matrix plus two Fix 1 runs), xb06 2, xb09 2 (attempt 2 has left_page_count=3 from the Firefox Esc test), xb11 2, xb12 2, xb15 2, others 1. qa.xb13 has one unsubmitted Trial attempt from dbg_menu.py; it expires at its 20-min deadline. TTS: qa.load05 used 30 uncached BHASHINI TTS calls (texts 'Check <n> <i>.'). No data deleted; no reset or glossary changes.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run: REACT_APP_BACKEND_URL=... ./tests/load/run_ui_matrix2.sh (venv /tmp/pwv, PLAYWRIGHT_BROWSERS_PATH=/tmp/pwb, python3 has httpx for setup_xb.py). Each run uses one Trial chance per player (3 max); the script also accepts 'Resume'. Headless artefacts: Firefox has no is_mobile, and its fullscreen resizes to 1366x768 (mobile rows become desktop after Start Mission). WebKit is_mobile does not support Ctrl+A (use a DOM range plus tap). WebKit can take more than 1.5s to show the email field after Sign in. Headless Chromium never exits fullscreen on Esc. Screenshots are in /app/tests/load/shots2/.",
+  "rca of the issue": "Esc in Firefox: the browser handles Esc before the page; without the Keyboard Lock API, fullscreen exits, the fullscreenchange handler in useFairPlay calls depart('left_fullscreen') and the server increments left_page_count. Header overflow: the nav becomes visible at md (768) but the header holds logo, wordmark, nav, coin bar and user chip, which need about 1000px. GlossMenu: the listener is torn down and re-added (setTimeout 0) on every parent render because the inline onClose is a dependency."
+}

@@ -32,7 +32,7 @@ function LandingHeader({ signedIn }: { signedIn: boolean }) {
         <img src={`${A}/bhashini-logo.png`} alt="Digital India BHASHINI" className="h-8 sm:h-11 w-auto" width={330} height={160} />
       </motion.div>
       <div className="ml-auto flex items-center gap-2 sm:gap-3">
-        {!signedIn && <Link to="/register?returning=1" className="hidden sm:inline px-3 py-2 text-[15px] font-semibold text-white/90 hover:text-white drop-shadow">{t("landing.signIn")}</Link>}
+        {!signedIn && <Link data-testid="landing-signin" to="/register?returning=1" className="px-2 sm:px-3 py-2 text-sm sm:text-[15px] font-semibold text-white/90 hover:text-white drop-shadow">{t("landing.signIn")}</Link>}
         <button role="switch" aria-checked={on} aria-label={t("title.voiceToggle")} title={on ? t("landing.soundOn") : t("landing.soundOff")}
           onClick={() => { unlock(); set("voice", on ? "tap" : "auto"); sfx("tap"); if (on) stop(); }} className={glass}>
           <Icon name={on ? "volume" : "mute"} size={20} />

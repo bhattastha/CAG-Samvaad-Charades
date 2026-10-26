@@ -206,14 +206,14 @@ export function Register() {
       <Header />
       <Page>
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-6 items-start">
-          <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="card p-5 sm:p-8" noValidate
+          <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="card min-w-0 p-4 sm:p-8" noValidate
             onSubmit={(e) => { e.preventDefault(); if (step === "form" && validate()) sendOtp(); if (step === "otp") verify(); }}>
             <Steps at={step === "form" ? 0 : 1} />
             {returning
               ? <h1 className="mt-2 text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">{t("registration.headingReturning")}</h1>
               : <h1 className="mt-2 text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">{headWords.join(" ")} <span className="text-primary-strong">{headLast}</span></h1>}
             <p className="mt-1.5 mb-5 text-[1.02rem] text-muted">{returning ? t("registration.subReturning") : t("registration.sub")}</p>
-            <fieldset disabled={step !== "form"} className="grid sm:grid-cols-2 gap-x-5 gap-y-4">
+            <fieldset disabled={step !== "form"} className="grid min-w-0 sm:grid-cols-2 gap-x-5 gap-y-4 [&>*]:min-w-0">
               <div className={hidden}>
                 <Field id="name" icon="user" label={t("registration.name")} error={fieldErr("name")}>
                   <input id="name" className="input ob-input" value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} autoComplete="name" />

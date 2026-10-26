@@ -59,21 +59,27 @@ export function GlossMenu({ s: base, readOnly, onPick, onClose, onSearch }: { s:
     const room = window.innerHeight - s.rect.bottom;
     setPos(room < h + 12 && s.rect.top > h + 12 ? { left, bottom: window.innerHeight - s.rect.top + 4 } : { left, top: s.rect.bottom + 4 });
   }, [s]);
+  // handlers read the latest props through a ref so the listeners are attached once per open menu
+  // (re-attaching on every timer re-render left a gap where an outside click was missed)
+  const latest = useRef({ onClose, onPick, enabled, hi, options: s.options });
+  latest.current = { onClose, onPick, enabled, hi, options: s.options };
   useEffect(() => {
-    const down = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) onClose(); };
+    const L = () => latest.current;
+    const down = (e: MouseEvent) => { if (!ref.current?.contains(e.target as Node)) L().onClose(); };
     const key = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { onClose(); return; }
-      if (!enabled) return;
-      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); setHi((i) => (i + (e.key === "ArrowDown" ? 1 : s.options.length - 1)) % Math.max(1, s.options.length)); }
-      if (e.key === "Enter" && s.options[hi]) { e.preventDefault(); e.stopPropagation(); onPick(s.options[hi].hi); }
+      const { onClose: close, onPick: pick, enabled: on, hi: cur, options } = L();
+      if (e.key === "Escape") { close(); return; }
+      if (!on) return;
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); setHi((i) => (i + (e.key === "ArrowDown" ? 1 : options.length - 1)) % Math.max(1, options.length)); }
+      if (e.key === "Enter" && options[cur]) { e.preventDefault(); e.stopPropagation(); pick(options[cur].hi); }
     };
-    const scroll = (e: Event) => { if (!ref.current?.contains(e.target as Node)) onClose(); };
+    const scroll = (e: Event) => { if (!ref.current?.contains(e.target as Node)) L().onClose(); };
     const tm = setTimeout(() => document.addEventListener("mousedown", down), 0);
     document.addEventListener("keydown", key, true);
     window.addEventListener("scroll", scroll, { capture: true, passive: true });
     window.addEventListener("resize", scroll);
     return () => { clearTimeout(tm); document.removeEventListener("mousedown", down); document.removeEventListener("keydown", key, true); window.removeEventListener("scroll", scroll, { capture: true } as any); window.removeEventListener("resize", scroll); };
-  }, [onClose, onPick, enabled, hi, s.options]);
+  }, []);
 
   return createPortal(
     <div ref={ref} role="menu" aria-label={t("round.glossMenu.label")} translate="no" onMouseDown={(e) => e.preventDefault()}
