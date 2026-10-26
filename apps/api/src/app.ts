@@ -60,7 +60,23 @@ export async function buildApp(db: Db, opts: { logger?: boolean; jobs?: boolean 
     await serviceRoutes(api, db);
     await resultRoutes(api, db);
     await adminRoutes(api, db);
-    api.get("/health", async () => ({ ok: true }));
+    // liveness for uptime monitors: no DB, no auth, nothing sensitive; `ok` kept for existing callers
+    const noStore = { "cache-control": "no-store" };
+    api.get("/health", async (_req, reply) => {
+      reply.headers(noStore);
+      return { ok: true, status: "healthy", message: "Samvaad Charades backend is running", timestamp: new Date().toISOString(), uptime: Math.round(process.uptime()) };
+    });
+    // readiness: one read-only round trip to the database, capped at 3 s
+    api.get("/health/db", async (_req, reply) => {
+      reply.headers(noStore);
+      const t0 = Date.now();
+      try {
+        await Promise.race([db.query("SELECT 1"), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 3000))]);
+        return { ok: true, status: "healthy", database: "connected", latencyMs: Date.now() - t0, timestamp: new Date().toISOString() };
+      } catch {
+        return reply.code(503).send({ ok: false, status: "unhealthy", database: "unreachable", timestamp: new Date().toISOString() });
+      }
+    });
   }, { prefix: "/api" });
 
   // Production: serve the built web app (player + /manager) from the same origin.

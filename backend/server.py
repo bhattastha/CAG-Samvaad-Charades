@@ -6,6 +6,7 @@ import logging
 import os
 import socket
 import subprocess
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 import httpx
@@ -95,17 +96,18 @@ async def _shutdown():
         proc.terminate()
 
 
-@app.get("/api/health")
+@app.api_route("/api/health", methods=["GET", "HEAD"])
 async def health():
     try:
         r = await client.get("/api/health", timeout=5.0)
-        return JSONResponse(r.json(), status_code=r.status_code)
+        return JSONResponse(r.json(), status_code=r.status_code, headers={"cache-control": "no-store"})
     except (httpx.HTTPError, ValueError):
+        now = datetime.now(timezone.utc).isoformat()
         proc = getattr(app.state, "api_proc", None)
         if proc and proc.poll() is not None:
-            return JSONResponse({"ok": False, "api": "down"}, status_code=503)
+            return JSONResponse({"ok": False, "status": "unhealthy", "message": "Samvaad Charades backend is restarting", "timestamp": now}, status_code=503, headers={"cache-control": "no-store"})
         # the API is still seeding on first boot; the shim itself is healthy
-        return JSONResponse({"ok": True, "api": "starting"}, status_code=200)
+        return JSONResponse({"ok": True, "status": "starting", "message": "Samvaad Charades backend is starting", "timestamp": now}, status_code=200, headers={"cache-control": "no-store"})
 
 
 @app.api_route("/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"])

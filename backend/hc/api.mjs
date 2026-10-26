@@ -168728,7 +168728,21 @@ async function buildApp(db2, opts = {}) {
     await serviceRoutes(api, db2);
     await resultRoutes(api, db2);
     await adminRoutes(api, db2);
-    api.get("/health", async () => ({ ok: true }));
+    const noStore = { "cache-control": "no-store" };
+    api.get("/health", async (_req, reply) => {
+      reply.headers(noStore);
+      return { ok: true, status: "healthy", message: "Samvaad Charades backend is running", timestamp: (/* @__PURE__ */ new Date()).toISOString(), uptime: Math.round(process.uptime()) };
+    });
+    api.get("/health/db", async (_req, reply) => {
+      reply.headers(noStore);
+      const t0 = Date.now();
+      try {
+        await Promise.race([db2.query("SELECT 1"), new Promise((_2, rej) => setTimeout(() => rej(new Error("timeout")), 3e3))]);
+        return { ok: true, status: "healthy", database: "connected", latencyMs: Date.now() - t0, timestamp: (/* @__PURE__ */ new Date()).toISOString() };
+      } catch {
+        return reply.code(503).send({ ok: false, status: "unhealthy", database: "unreachable", timestamp: (/* @__PURE__ */ new Date()).toISOString() });
+      }
+    });
   }, { prefix: "/api" });
   if (existsSync5(env2.WEB_DIST)) {
     const { default: statics } = await Promise.resolve().then(() => __toESM(require_static(), 1));
