@@ -92324,7 +92324,8 @@ function wrap2(raw, txImpl, close) {
 async function openDb(url2 = env2.DATABASE_URL) {
   if (url2.startsWith("postgres")) {
     const { default: pg2 } = await Promise.resolve().then(() => (init_esm(), esm_exports));
-    const pool = new pg2.Pool({ connectionString: url2, max: 10 });
+    const conn = /[?&]uselibpqcompat=/.test(url2) ? url2 : url2.replace(/([?&]sslmode=)(prefer|require|verify-ca)\b/, "$1verify-full");
+    const pool = new pg2.Pool({ connectionString: conn, max: 10 });
     const tx2 = async (fn) => {
       const c = await pool.connect();
       try {

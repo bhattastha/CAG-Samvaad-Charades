@@ -1,34 +1,38 @@
-# RCA — bhashini-game (Samvaad Charades) deploy failure
+# RCA — bhashini-game deploy blocked at trigger (insufficient credits)
 
-**Run:** ac1da36a-05d0-482f-bfc0-42de6dfe4ec4 (type: initial)
-**Failing step:** `deploy_k8s` — "deployment failed to become ready: timed out waiting for the condition"
-**Verdict:** NOT a build/manifest bug. The app boots into a crash loop because it has **no reachable PostgreSQL** and the embedded PGlite fallback OOMs on tier_0. Needs a user/config fix + redeploy.
+## Summary
+The requested redeploy never started. The initial deploy trigger (`trigger_indie`) was rejected by the credit gate **before any deploy run was committed**. This is a hard, non-retryable account-billing block — not a code, manifest, secret, or infra fault with the app.
 
-## What the app actually is
-- The deployment uses the FARM template (`fastapi_react_mongo_shadcn_base_image`), but the real backend is a **Node/Fastify + PostgreSQL** monorepo app.
-- `backend/server.py` is only a **FastAPI proxy shim**: it starts the bundled Node API (`backend/hc/api.mjs`) on `127.0.0.1:3000` and forwards `/api` + `/health` to it.
-- `/health` proxies to the Node API's `/api/health`. If the Node process has exited, the shim returns **503** immediately (`proc.poll() is not None`).
+## Evidence
+Trigger response:
+```
+{"error":{"kind":"insufficient_credits","retryable":false,
+  "message":"Not enough credits. Required: 50, Available: 44.57844217920009",
+  "details":{"available":44.57844217920009,"required":50}}}
+```
+- Required: **50** credits
+- Available: **44.58** credits
+- Shortfall: **~5.42** credits
+- `retryable: false` — the pipeline will reject every re-trigger until the balance is topped up.
 
-## Root cause (evidence-backed)
-1. `backend/.env` hardcodes `DATABASE_URL=postgres://hc:***@127.0.0.1:5432/hindi_charades` — a **localhost Postgres that does not exist** in the production pod. (There is no Postgres in the container; the template only provides Mongo.)
-2. Every boot the shim logs: *"DATABASE_URL is not reachable: using embedded PGlite at /app/backend/.data/pglite. Data will NOT survive a redeploy or pod restart. Set DATABASE_URL to an external PostgreSQL."* → it falls back to **embedded PGlite (WASM Postgres)** and cold-initializes schema + seeds sample data on every start.
-3. That cold PGlite init/seed under the production Node runtime (nodejs-wheel v22.20.0) spikes memory **past tier_0's 512Mi limit**, and the Node child is killed before it can bind :3000.
-   - Prod pod logs (run ac1da36a) show the shim's uvicorn + PGlite-fallback lines repeating, but the Node API's **"Server listening at http://127.0.0.1:3000" line never appears** — the Node process never gets up.
-   - Reproduced in an isolated sandbox: running `hc/api.mjs` with the exact prod node (v22.20.0) against a **clean** PGlite dir repeatedly killed (exit 137 / pod OOM) even a sandbox pod that has MORE memory than tier_0's 512Mi. Re-using a pre-seeded `.data` dir under node v20 worked — confirming the cost is the cold WASM-Postgres seed, not the app code.
-4. Node dead → shim `/health` → 503 → nginx `/health` → 503 → k8s readiness/startup probe never passes → **CrashLoopBackOff** (`get_pod_events`: "Back-off restarting failed container", 26 restarts) → `deploy_k8s` times out.
+Because the trigger was rejected, no new DeployRun was created (run_id empty). The most recent committed run is `ac1da36a` (a prior failure), so there is nothing new to inspect for this attempt.
 
-Earlier run 9d351ec2 shows the same signature explicitly: `GET /health 503 Service Unavailable` + nginx `connect() failed (111: Connection refused) ... upstream 127.0.0.1:8001/health`.
+## Status of the earlier DATABASE_URL / OOM fix
+The prior failures (runs `ac1da36a`, `fe3336e4`, `9d351ec2`) show the backend falling back to embedded PGlite:
+`DATABASE_URL is not reachable: using embedded PGlite ...` → startup never became ready (CrashLoop/OOM-class timeout).
 
-## Why it worked in preview but not prod
-In preview the app runs against a real Postgres (and/or a warm, already-seeded PGlite data dir) and has more headroom. In prod there is no Postgres, DATABASE_URL points at localhost, and tier_0 is 50m/250m CPU + 200Mi/512Mi memory with 2 replicas.
+Per the user's report this was addressed by repointing the `DATABASE_URL` secret (live + test slots) to an external Neon PostgreSQL and copying the preview data across. **This deployer could NOT verify that fix**, because the credit gate stopped the run before pods ever started. It remains UNVERIFIED until a run actually launches.
 
-## Fix (required before redeploy)
-**Primary — provide an external PostgreSQL (user action):**
-- Provision a managed Postgres (Neon / Supabase / RDS, etc.).
-- In Deployment Panel → Secrets, set `DATABASE_URL` to that external connection string (e.g. `postgres://USER:PASS@HOST:5432/DBNAME?sslmode=require`). This overrides the baked-in localhost value at deploy time.
-- This is the intended production path (the app itself prints "Set DATABASE_URL to an external PostgreSQL"). It also removes the heavy in-process PGlite WASM, so memory drops well within tier_0, and it fixes a second latent bug: with embedded PGlite + 2 replicas each pod has its own throwaway DB, and all data is lost on every restart/redeploy.
-- Also set the other app config the Node API expects as real secrets: `JWT_SECRET`, `PUBLIC_ORIGIN` (should be the production URL, not the preview URL currently in `.env`), `ADMIN_EMAILS`, `EMERGENT_EMAIL_KEY`, `DHRUVA_API_KEY`.
+## Root cause
+Account credit balance (44.58) is below the per-deploy requirement (50). The deploy is gated at trigger.
 
-**Secondary (optional, not a real fix on its own):** raising the tier gives PGlite enough memory to finish seeding, but PGlite remains ephemeral and per-replica — do NOT rely on this for a production app. External Postgres is the correct fix.
+## Fix required (user)
+Top up the account so the balance is ≥ 50 credits (add at least ~6), then re-trigger the deploy. No code/manifest/secret change is needed for this specific blocker.
 
-After `DATABASE_URL` is set to a reachable external Postgres, redeploy. No source or manifest change is required from the deployer side.
+## After credits are added — verify (as originally requested)
+Once a run goes live, confirm the Neon/DATABASE_URL fix held:
+- `GET /api/health` → 200, status healthy
+- `GET /api/health/db` → 200, database connected
+- `GET /` and `GET /manager/glossary` → index.html
+- `GET /api/stats/public` → bundles = 5
+If `/api/health/db` still reports PGlite/unreachable, re-open the DATABASE_URL investigation.
