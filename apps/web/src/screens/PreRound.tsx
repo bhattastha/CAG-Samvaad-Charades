@@ -20,6 +20,8 @@ export async function enterFullscreen() {
   const el: any = document.documentElement;
   try {
     if (!document.fullscreenElement) await (el.requestFullscreen?.({ navigationUI: "hide" }) ?? el.webkitRequestFullscreen?.());
+    // Chrome/Edge: Esc closes menus and suggestions in the editor instead of dropping out of full screen (hold Esc to exit)
+    await (navigator as any).keyboard?.lock?.(["Escape"]).catch(() => {});
   } catch { /* iPhone Safari: no element fullscreen; visibility tracking covers it (§12) */ }
 }
 

@@ -18,6 +18,7 @@ import { parse } from "./util.js";
 
 const AUDIO_DIR = resolve(ROOT, ".data/audio");
 const ttsCache = new Map<string, Buffer>();
+const ttsQuota = new Map<string, { start: number; n: number }>();
 
 export async function serviceRoutes(app: FastifyInstance, db: Db) {
   // ---------- transliteration proxy (translation editor only) ----------
@@ -77,10 +78,16 @@ export async function serviceRoutes(app: FastifyInstance, db: Db) {
     if (!req.session?.email) return reply.code(401).send({ error: "not_signed_in" });
     const { text } = parse(z.object({ text: z.string().min(1).max(400) }), req.body);
     if (!isConfigured("tts")) return reply.code(503).send({ error: "tts_unavailable" });
+    if (ttsQuota.size > 5000) ttsQuota.clear();
     const k = createHash("sha1").update(`${ttsKey()}|${text}`).digest("hex");
     try {
       let buf = ttsCache.get(k);
       if (!buf) {
+        // uncached voice calls spend BHASHINI quota: at most 30 per signed-in user per 10 minutes
+        const now = Date.now(), w = ttsQuota.get(req.session.email);
+        const q = w && now - w.start < 600_000 ? w : { start: now, n: 0 };
+        if (++q.n > 30) return reply.code(429).send({ error: "tts_rate_limited" });
+        ttsQuota.set(req.session.email, q);
         buf = await tts(text);
         ttsCache.set(k, buf);
         if (ttsCache.size > 500) ttsCache.delete(ttsCache.keys().next().value!);

@@ -70,9 +70,13 @@ export async function callService<T = any>(task: Task, url: string, body: unknow
       opts.signal?.removeEventListener("abort", onAbort);
     }
   }
-  b.fails++;
-  if (b.fails >= 5) b.openUntil = Date.now() + 30_000;
-  breaker.set(task, b);
+  // a slow transliteration reply already falls back per word; it must not switch suggestions off for every player
+  const timedOut = (lastErr as any)?.name === "AbortError";
+  if (!(task === "transliteration" && timedOut)) {
+    b.fails++;
+    if (b.fails >= 5) b.openUntil = Date.now() + 30_000;
+    breaker.set(task, b);
+  }
   throw new ServiceUnavailable(task, String((lastErr as Error)?.message ?? lastErr));
 }
 

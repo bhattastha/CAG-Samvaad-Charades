@@ -1,0 +1,5 @@
+     68 /var/log/supervisor/frontend.err.log
+   6569 /var/log/supervisor/frontend.out.log
+   1161 /var/log/supervisor/backend.err.log
+   1667 /var/log/supervisor/backend.out.log
+   9465 total

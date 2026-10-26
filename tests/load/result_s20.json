@@ -1,0 +1,342 @@
+{
+ "tag": "s20",
+ "players": 20,
+ "duration_s": 240,
+ "wall_s": 248,
+ "endpoints": {
+  "GET /admin/config/services (mgr)": {
+   "n": 15,
+   "p50": 140,
+   "p95": 166,
+   "max": 200,
+   "errors": {}
+  },
+  "GET /attempts/:id": {
+   "n": 20,
+   "p50": 69,
+   "p95": 85,
+   "max": 92,
+   "errors": {}
+  },
+  "GET /attempts/:id/clock": {
+   "n": 428,
+   "p50": 64,
+   "p95": 106,
+   "max": 294,
+   "errors": {}
+  },
+  "GET /attempts/:id/report": {
+   "n": 20,
+   "p50": 74,
+   "p95": 109,
+   "max": 111,
+   "errors": {}
+  },
+  "GET /config": {
+   "n": 20,
+   "p50": 72,
+   "p95": 83,
+   "max": 488,
+   "errors": {}
+  },
+  "GET /glossary": {
+   "n": 20,
+   "p50": 79,
+   "p95": 122,
+   "max": 128,
+   "errors": {}
+  },
+  "GET /leaderboard": {
+   "n": 20,
+   "p50": 99,
+   "p95": 111,
+   "max": 112,
+   "errors": {}
+  },
+  "GET /me/progress": {
+   "n": 40,
+   "p50": 96,
+   "p95": 145,
+   "max": 149,
+   "errors": {}
+  },
+  "GET /rounds/:k/intro": {
+   "n": 20,
+   "p50": 103,
+   "p95": 111,
+   "max": 143,
+   "errors": {}
+  },
+  "GET /sahayika/lines": {
+   "n": 20,
+   "p50": 80,
+   "p95": 117,
+   "max": 140,
+   "errors": {}
+  },
+  "GET /xlit": {
+   "n": 1781,
+   "p50": 66,
+   "p95": 441,
+   "max": 2143,
+   "errors": {}
+  },
+  "POST /attempts/:id/events": {
+   "n": 855,
+   "p50": 68,
+   "p95": 111,
+   "max": 2749,
+   "errors": {}
+  },
+  "POST /attempts/:id/submit": {
+   "n": 20,
+   "p50": 77,
+   "p95": 148,
+   "max": 179,
+   "errors": {}
+  },
+  "POST /rounds/:k/attempts": {
+   "n": 20,
+   "p50": 73,
+   "p95": 87,
+   "max": 98,
+   "errors": {}
+  },
+  "POST /sahayika/chat": {
+   "n": 33,
+   "p50": 70,
+   "p95": 105,
+   "max": 233,
+   "errors": {}
+  },
+  "POST /sahayika/tts": {
+   "n": 16,
+   "p50": 79,
+   "p95": 91,
+   "max": 95,
+   "errors": {}
+  },
+  "PUT /attempts/:id/autosave": {
+   "n": 428,
+   "p50": 67,
+   "p95": 114,
+   "max": 989,
+   "errors": {}
+  }
+ },
+ "results": [
+  {
+   "email": "qa.load01@gmail.com",
+   "attempt": "f306e81e-617e-4008-abd0-f4d7aba89673",
+   "submit_at": 1792992019.269753,
+   "score": 20
+  },
+  {
+   "email": "qa.load02@gmail.com",
+   "attempt": "a625f6ce-8764-4afc-ba82-5da4f51b5f04",
+   "submit_at": 1792992015.5172715,
+   "score": 25
+  },
+  {
+   "email": "qa.load03@gmail.com",
+   "attempt": "138f8d58-9290-42d4-ae74-df46bae950a5",
+   "submit_at": 1792992019.4028072,
+   "score": 20
+  },
+  {
+   "email": "qa.load04@gmail.com",
+   "attempt": "c0b8c4a5-041a-4258-9932-4abd7a795e68",
+   "submit_at": 1792992020.654732,
+   "score": 25
+  },
+  {
+   "email": "qa.load05@gmail.com",
+   "attempt": "72c75b60-12eb-4cad-9e51-f74e957ecf01",
+   "submit_at": 1792992016.4796703,
+   "score": 20
+  },
+  {
+   "email": "qa.load06@gmail.com",
+   "attempt": "538f4566-22f1-4b76-ba05-a3b5b485e4bc",
+   "submit_at": 1792992018.9211302,
+   "score": 25
+  },
+  {
+   "email": "qa.load07@gmail.com",
+   "attempt": "5f2421ac-1485-4f4e-af03-353774360263",
+   "submit_at": 1792992017.7037597,
+   "score": 20
+  },
+  {
+   "email": "qa.load08@gmail.com",
+   "attempt": "5571bf0c-4e26-440c-b262-dd972511bee2",
+   "submit_at": 1792992017.2644258,
+   "score": 25
+  },
+  {
+   "email": "qa.load09@gmail.com",
+   "attempt": "61630125-cd24-49aa-8a38-4673430efea6",
+   "submit_at": 1792992019.1769722,
+   "score": 20
+  },
+  {
+   "email": "qa.load10@gmail.com",
+   "attempt": "606d1110-e9ea-4ee0-9f77-95214fbaa5b8",
+   "submit_at": 1792992018.2656431,
+   "score": 20
+  },
+  {
+   "email": "qa.load11@gmail.com",
+   "attempt": "555e268f-a3bb-4ca6-b32d-446a6950808e",
+   "submit_at": 1792992020.934372,
+   "score": 20
+  },
+  {
+   "email": "qa.load12@gmail.com",
+   "attempt": "3d4e306d-953f-4d91-82ad-9b0590d53ee4",
+   "submit_at": 1792992018.509045,
+   "score": 25
+  },
+  {
+   "email": "qa.load13@gmail.com",
+   "attempt": "ab2cdf78-53eb-4726-827a-b80885be2d2e",
+   "submit_at": 1792992017.4080768,
+   "score": 20
+  },
+  {
+   "email": "qa.load14@gmail.com",
+   "attempt": "d20eb7f1-77ac-4ecb-8b22-a8f3619513e8",
+   "submit_at": 1792992014.8645,
+   "score": 25
+  },
+  {
+   "email": "qa.load15@gmail.com",
+   "attempt": "6562970f-be4d-4745-9fec-b87ef1b7ab44",
+   "submit_at": 1792992016.7543106,
+   "score": 20
+  },
+  {
+   "email": "qa.load16@gmail.com",
+   "attempt": "45c21d1a-f500-49bb-813a-8854459155cb",
+   "submit_at": 1792992018.4679239,
+   "score": 25
+  },
+  {
+   "email": "qa.load17@gmail.com",
+   "attempt": "400767db-e745-4b26-91a1-af1ab501d8c1",
+   "submit_at": 1792992014.7385879,
+   "score": 20
+  },
+  {
+   "email": "qa.load18@gmail.com",
+   "attempt": "400711ef-956d-4341-b716-b556e4114d08",
+   "submit_at": 1792992017.4929879,
+   "score": 25
+  },
+  {
+   "email": "qa.load19@gmail.com",
+   "attempt": "5305be5e-740d-4bd2-a953-d8c99bfda7fd",
+   "submit_at": 1792992018.9282258,
+   "score": 20
+  },
+  {
+   "email": "qa.load20@gmail.com",
+   "attempt": "6c81045d-6748-4191-b5ca-f9f2ca55a836",
+   "submit_at": 1792992017.3049347,
+   "score": 20
+  }
+ ],
+ "xlit_soft_errors": {},
+ "samples": [
+  {
+   "t": "05:16:15",
+   "ps": "5.0 343924 node\n0.0 87332 postgres\n0.0 180860 uvicorn\n",
+   "top": "%Cpu(s): 10.7 us,  2.4 sy,  0.0 ni, 85.9 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,   2243.9 free,   8038.4 used,   6020.0 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:16:33",
+   "ps": "2.0 356968 node\n0.0 106076 postgres\n0.0 180856 uvicorn\n",
+   "top": "%Cpu(s): 13.5 us, 15.3 sy,  0.0 ni, 29.1 id, 42.1 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1519.8 free,   8067.3 used,   6715.6 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:16:50",
+   "ps": "3.0 358220 node\n0.0 106296 postgres\n1.0 181144 uvicorn\n",
+   "top": "%Cpu(s): 15.4 us, 10.1 sy,  0.0 ni, 26.2 id, 48.1 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    575.4 free,   8083.4 used,   7643.9 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:17:08",
+   "ps": "2.0 357440 node\n1.0 105584 postgres\n0.0 180856 uvicorn\n",
+   "top": "%Cpu(s): 22.0 us, 15.6 sy,  0.0 ni, 31.3 id, 30.8 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    165.2 free,   8087.5 used,   8058.1 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:17:25",
+   "ps": "3.0 357004 node\n1.0 121820 postgres\n1.0 180828 uvicorn\n",
+   "top": "%Cpu(s): 28.4 us, 11.8 sy,  0.0 ni, 20.7 id, 38.9 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    125.5 free,   8089.1 used,   8088.0 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:17:43",
+   "ps": "1.0 356988 node\n0.0 103556 postgres\n0.0 180824 uvicorn\n",
+   "top": "%Cpu(s): 32.4 us, 10.5 sy,  0.0 ni, 42.9 id, 14.0 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    178.1 free,   8863.8 used,   7268.9 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:18:00",
+   "ps": "1.0 356696 node\n1.0 103736 postgres\n0.0 180820 uvicorn\n",
+   "top": "%Cpu(s):  5.7 us,  1.1 sy,  0.0 ni, 92.4 id,  0.7 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    335.1 free,   8991.0 used,   6976.6 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:18:18",
+   "ps": "1.0 356916 node\n1.0 104028 postgres\n0.0 180820 uvicorn\n",
+   "top": "%Cpu(s):  5.0 us,  1.5 sy,  0.0 ni, 92.8 id,  0.7 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,    398.0 free,   8927.0 used,   6977.6 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:18:35",
+   "ps": "1.0 357792 node\n0.0 104272 postgres\n1.0 180832 uvicorn\n",
+   "top": "%Cpu(s):  6.7 us,  1.5 sy,  0.0 ni, 91.1 id,  0.7 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,    406.5 free,   8917.3 used,   6978.9 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:18:53",
+   "ps": "3.0 362168 node\n0.0 102864 postgres\n1.0 180836 uvicorn\n",
+   "top": "%Cpu(s):  6.5 us,  1.7 sy,  0.0 ni, 90.9 id,  0.7 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    387.6 free,   8934.5 used,   6980.7 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:19:10",
+   "ps": "2.0 373260 node\n2.0 103440 postgres\n1.0 180836 uvicorn\n",
+   "top": "%Cpu(s):  9.3 us,  1.3 sy,  0.0 ni, 88.7 id,  0.7 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,    382.8 free,   8938.6 used,   6981.4 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:19:28",
+   "ps": "2.0 373392 node\n0.0 103788 postgres\n1.0 180836 uvicorn\n",
+   "top": "%Cpu(s):  7.6 us,  2.4 sy,  0.0 ni, 89.0 id,  0.9 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    464.3 free,   8855.7 used,   6982.8 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:19:45",
+   "ps": "3.0 373496 node\n1.0 104060 postgres\n1.0 180836 uvicorn\n",
+   "top": "%Cpu(s):  8.5 us,  1.5 sy,  0.0 ni, 89.3 id,  0.7 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,    467.4 free,   8846.1 used,   6989.2 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:20:03",
+   "ps": "1.0 373572 node\n0.0 104208 postgres\n0.0 180836 uvicorn\n",
+   "top": "%Cpu(s):  5.6 us,  1.5 sy,  0.0 ni, 92.0 id,  0.7 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    429.3 free,   8882.8 used,   6990.6 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  },
+  {
+   "t": "05:20:20",
+   "ps": "8.0 376616 node\n3.0 104880 postgres\n1.0 180832 uvicorn\n",
+   "top": "%Cpu(s):  9.2 us,  3.9 sy,  0.0 ni, 85.6 id,  1.1 wa,  0.0 hi,  0.2 si,  0.0 st \nMiB Mem :  15971.8 total,    358.4 free,   8952.8 used,   6991.5 buff/cache     \n",
+   "health": "[{\"task\": \"translation\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"transliteration\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"asr\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"tts\", \"configured\": true, \"open\": false, \"recentFailures\": 0}, {\"task\": \"llm\", \"configured\": true, \"open\": false, \"recentFailures\": 0}]"
+  }
+ ]
+}

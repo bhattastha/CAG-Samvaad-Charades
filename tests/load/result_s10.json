@@ -1,0 +1,272 @@
+{
+ "tag": "s10",
+ "players": 10,
+ "duration_s": 180,
+ "wall_s": 187,
+ "endpoints": {
+  "GET /admin/config/services (mgr)": {
+   "n": 13,
+   "p50": 145,
+   "p95": 181,
+   "max": 188,
+   "errors": {}
+  },
+  "GET /attempts/:id": {
+   "n": 10,
+   "p50": 70,
+   "p95": 85,
+   "max": 85,
+   "errors": {}
+  },
+  "GET /attempts/:id/clock": {
+   "n": 153,
+   "p50": 66,
+   "p95": 111,
+   "max": 274,
+   "errors": {}
+  },
+  "GET /attempts/:id/report": {
+   "n": 10,
+   "p50": 65,
+   "p95": 123,
+   "max": 123,
+   "errors": {}
+  },
+  "GET /config": {
+   "n": 10,
+   "p50": 66,
+   "p95": 129,
+   "max": 129,
+   "errors": {}
+  },
+  "GET /glossary": {
+   "n": 10,
+   "p50": 74,
+   "p95": 120,
+   "max": 120,
+   "errors": {}
+  },
+  "GET /leaderboard": {
+   "n": 10,
+   "p50": 69,
+   "p95": 140,
+   "max": 140,
+   "errors": {}
+  },
+  "GET /me/progress": {
+   "n": 20,
+   "p50": 107,
+   "p95": 155,
+   "max": 158,
+   "errors": {}
+  },
+  "GET /rounds/:k/intro": {
+   "n": 10,
+   "p50": 78,
+   "p95": 113,
+   "max": 113,
+   "errors": {}
+  },
+  "GET /sahayika/lines": {
+   "n": 10,
+   "p50": 77,
+   "p95": 114,
+   "max": 114,
+   "errors": {}
+  },
+  "GET /xlit": {
+   "n": 634,
+   "p50": 76,
+   "p95": 917,
+   "max": 2925,
+   "errors": {}
+  },
+  "POST /attempts/:id/events": {
+   "n": 340,
+   "p50": 68,
+   "p95": 115,
+   "max": 296,
+   "errors": {}
+  },
+  "POST /attempts/:id/submit": {
+   "n": 10,
+   "p50": 88,
+   "p95": 118,
+   "max": 118,
+   "errors": {}
+  },
+  "POST /rounds/:k/attempts": {
+   "n": 10,
+   "p50": 77,
+   "p95": 131,
+   "max": 131,
+   "errors": {}
+  },
+  "POST /sahayika/chat": {
+   "n": 15,
+   "p50": 70,
+   "p95": 97,
+   "max": 117,
+   "errors": {}
+  },
+  "POST /sahayika/tts": {
+   "n": 8,
+   "p50": 88,
+   "p95": 3873,
+   "max": 3873,
+   "errors": {}
+  },
+  "PUT /attempts/:id/autosave": {
+   "n": 153,
+   "p50": 71,
+   "p95": 116,
+   "max": 214,
+   "errors": {}
+  }
+ },
+ "results": [
+  {
+   "email": "qa.load01@gmail.com",
+   "attempt": "6aaf74ba-ec31-4667-9460-61e8e074ef5e",
+   "submit_at": 1792991714.4123218,
+   "score": 25
+  },
+  {
+   "email": "qa.load02@gmail.com",
+   "attempt": "abd1363d-4998-4700-a155-933b85c2c765",
+   "submit_at": 1792991717.2737808,
+   "score": 20
+  },
+  {
+   "email": "qa.load03@gmail.com",
+   "attempt": "20a3063a-b3d5-46df-bcfe-193f6bf199a4",
+   "submit_at": 1792991713.8277798,
+   "score": 25
+  },
+  {
+   "email": "qa.load04@gmail.com",
+   "attempt": "d0b73a5c-7738-4eaf-a41b-3282ae6fa38c",
+   "submit_at": 1792991714.2086809,
+   "score": 20
+  },
+  {
+   "email": "qa.load05@gmail.com",
+   "attempt": "8c0b7d3e-ecfc-41ed-8441-56ed44f3c105",
+   "submit_at": 1792991714.0628657,
+   "score": 25
+  },
+  {
+   "email": "qa.load06@gmail.com",
+   "attempt": "5f56921b-29f6-4284-a6fb-0bc42875c6e7",
+   "submit_at": 1792991715.799297,
+   "score": 20
+  },
+  {
+   "email": "qa.load07@gmail.com",
+   "attempt": "cfe64c7d-ded9-4a60-9450-a3c1e40eb462",
+   "submit_at": 1792991718.5928361,
+   "score": 25
+  },
+  {
+   "email": "qa.load08@gmail.com",
+   "attempt": "06a92067-18c6-4828-9b88-68fdadb448a1",
+   "submit_at": 1792991718.3762798,
+   "score": 20
+  },
+  {
+   "email": "qa.load09@gmail.com",
+   "attempt": "086b3480-46f5-4616-aa50-99def51674c2",
+   "submit_at": 1792991717.4518282,
+   "score": 25
+  },
+  {
+   "email": "qa.load10@gmail.com",
+   "attempt": "e11ee8a8-2194-4aac-b3dd-f0f545a19f22",
+   "submit_at": 1792991715.7988746,
+   "score": 25
+  }
+ ],
+ "xlit_soft_errors": {
+  "This operation was aborted": 1
+ },
+ "samples": [
+  {
+   "t": "05:12:12",
+   "ps": "29.6 34724 python3\n 1.1 155592 uvicorn\n 0.3 117620 node\n 0.1 51564 python\n 0.1 98184 node\n 0.0 25264 uvicorn\n 0.0 67676 node\n 0.0 42348 node\n",
+   "top": "top - 05:12:11 up 3 days, 19:02,  0 user,  load average: 1.41, 1.97, 1.52\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us, 50.0 sy,  0.0 ni, 50.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,    303.7 free,   9930.3 used,   6068.1 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6041.5 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:12:27",
+   "ps": " 4.1 45676 python3\n 1.1 155592 uvicorn\n 0.4 144660 node\n 0.2 51880 python\n 0.1 17856 postgres\n 0.1 17332 postgres\n 0.1 98184 node\n 0.0 25264 uvicorn\n",
+   "top": "top - 05:12:27 up 3 days, 19:02,  0 user,  load average: 1.56, 1.97, 1.52\nTasks:  33 total,   1 running,  32 sleeping,   0 stopped,   0 zombie\n%Cpu(s):100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,    489.8 free,   9741.1 used,   6071.5 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6230.7 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:12:42",
+   "ps": " 2.6 45868 python3\n 1.1 155592 uvicorn\n 0.4 139896 node\n 0.2 51904 python\n 0.2 17864 postgres\n 0.1 98188 node\n 0.0 25264 uvicorn\n 0.0 67696 node\n",
+   "top": "top - 05:12:42 up 3 days, 19:02,  0 user,  load average: 1.29, 1.89, 1.50\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1359.8 free,   9197.2 used,   5745.4 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6774.6 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:12:57",
+   "ps": " 2.1 46364 python3\n 1.1 155592 uvicorn\n 0.4 141224 node\n 0.3 51908 python\n 0.1 17864 postgres\n 0.1 98188 node\n 0.0 17180 postgres\n 0.0 25264 uvicorn\n",
+   "top": "top - 05:12:57 up 3 days, 19:02,  0 user,  load average: 1.22, 1.85, 1.50\nTasks:  33 total,   1 running,  32 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1363.4 free,   9192.1 used,   5746.8 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6779.6 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:13:13",
+   "ps": " 1.9 46380 python3\n 1.1 155592 uvicorn\n 0.5 141044 node\n 0.3 51928 python\n 0.1 17936 postgres\n 0.1 98188 node\n 0.1 17252 postgres\n 0.0 25264 uvicorn\n",
+   "top": "top - 05:13:13 up 3 days, 19:03,  0 user,  load average: 0.95, 1.75, 1.47\nTasks:  33 total,   1 running,  32 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1397.0 free,   9157.6 used,   5747.8 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6814.2 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:13:28",
+   "ps": " 1.7 46720 python3\n 1.1 155592 uvicorn\n 0.5 136560 node\n 0.4 51952 python\n 0.1 18088 postgres\n 0.1 98188 node\n 0.0 25264 uvicorn\n 0.0 67724 node\n",
+   "top": "top - 05:13:28 up 3 days, 19:03,  0 user,  load average: 0.82, 1.68, 1.45\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1392.7 free,   9159.8 used,   5750.0 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6812.0 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:13:44",
+   "ps": " 1.6 46808 python3\n 1.1 155592 uvicorn\n 0.5 136056 node\n 0.4 51956 python\n 0.1 18088 postgres\n 0.1 98196 node\n 0.0 25264 uvicorn\n 0.0 67732 node\n",
+   "top": "top - 05:13:43 up 3 days, 19:03,  0 user,  load average: 0.70, 1.62, 1.43\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1557.9 free,   8992.9 used,   5751.6 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6978.9 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:13:59",
+   "ps": " 1.6 46816 python3\n 1.1 155592 uvicorn\n 0.5 136724 node\n 0.4 51956 python\n 0.1 17268 postgres\n 0.1 98196 node\n 0.0 25264 uvicorn\n 0.0 67740 node\n",
+   "top": "top - 05:13:59 up 3 days, 19:03,  0 user,  load average: 0.55, 1.54, 1.41\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1539.5 free,   9009.4 used,   5753.6 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6962.4 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:14:14",
+   "ps": " 1.5 46816 python3\n 1.1 155592 uvicorn\n 0.6 137076 node\n 0.5 51984 python\n 0.2 17508 postgres\n 0.1 98196 node\n 0.0 25264 uvicorn\n 0.0 67752 node\n",
+   "top": "top - 05:14:14 up 3 days, 19:04,  0 user,  load average: 0.49, 1.48, 1.39\nTasks:  33 total,   1 running,  32 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1527.8 free,   9020.5 used,   5754.2 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6951.2 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:14:29",
+   "ps": " 1.5 46852 python3\n 1.1 155592 uvicorn\n 0.6 138012 node\n 0.5 51988 python\n 0.2 17792 postgres\n 0.1 97188 node\n 0.0 25264 uvicorn\n 0.0 67236 node\n",
+   "top": "top - 05:14:29 up 3 days, 19:04,  0 user,  load average: 0.72, 1.46, 1.39\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,  0.0 id,100.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1149.6 free,   9147.0 used,   6006.0 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   6824.7 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:14:45",
+   "ps": " 1.5 46896 python3\n 1.1 155592 uvicorn\n 0.6 138492 node\n 0.5 51992 python\n 0.2 17960 postgres\n 0.1 96516 node\n 0.0 25264 uvicorn\n 0.0 66560 node\n",
+   "top": "top - 05:14:45 up 3 days, 19:04,  0 user,  load average: 1.13, 1.52, 1.41\nTasks:  32 total,   1 running,  31 sleeping,   0 stopped,   0 zombie\n%Cpu(s):100.0 us,  0.0 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1739.0 free,   8126.0 used,   6437.4 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   7845.8 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:15:00",
+   "ps": " 1.5 47060 python3\n 1.0 155592 uvicorn\n 0.6 139892 node\n 0.5 51996 python\n 0.2 17988 postgres\n 0.1 17464 postgres\n 0.1 96516 node\n 0.0 25264 uvicorn\n",
+   "top": "top - 05:15:00 up 3 days, 19:04,  0 user,  load average: 1.39, 1.56, 1.42\nTasks:  33 total,   1 running,  32 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1449.2 free,   8174.2 used,   6679.2 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   7797.6 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  },
+  {
+   "t": "05:15:15",
+   "ps": " 1.5 47132 python3\n 1.0 155592 uvicorn\n 0.7 143212 node\n 0.6 52008 python\n 0.1 18084 postgres\n 0.1 17616 postgres\n 0.1 96516 node\n 0.0 25264 uvicorn\n",
+   "top": "top - 05:15:15 up 3 days, 19:05,  0 user,  load average: 1.61, 1.60, 1.44\nTasks:  34 total,   1 running,  33 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st \nMiB Mem :  15971.8 total,   1016.3 free,   8230.3 used,   7056.1 buff/cache     \nMiB Swap:      0.0 total,      0.0 free,      0.0 used.   7741.5 avail Mem \n",
+   "health": "{\"current\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestions\":4,\"tts\":\"bhashini/bodhan/indic-tts\",\"ttsGender\":\"male\",\"ttsLanguage\":\"en\",\"ttsSamplingRate\":22050,\"asrHindi\":\"ai4bharat/conformer-hi-gpu--t4\",\"llm\":\"bhashini/google/gemma-4-26B-A4B-it\"},\"defaults\":{\"translationProvider\":\"dhruva\",\"translation\":\"ai4bharat/indictrans-v2-all-gpu--t4\",\"transliterationProvider\":\"dhruva\",\"transliteration\":\"ai4bharat/indicxlit--cpu-fsv2\",\"transliterationSuggestio"
+  }
+ ]
+}

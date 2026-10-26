@@ -26,6 +26,7 @@ export function rateOk(player: string, perSecond = 20): boolean {
   const ts = (buckets.get(player) ?? []).filter((t) => now - t < 1000);
   if (ts.length >= perSecond) { buckets.set(player, ts); return false; }
   ts.push(now);
+  if (buckets.size > 5000) buckets.clear(); // drop idle players' windows
   buckets.set(player, ts);
   return true;
 }

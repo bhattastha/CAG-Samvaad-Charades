@@ -163009,9 +163009,12 @@ async function callService(task, url2, body, opts = {}) {
       opts.signal?.removeEventListener("abort", onAbort);
     }
   }
-  b.fails++;
-  if (b.fails >= 5) b.openUntil = Date.now() + 3e4;
-  breaker.set(task, b);
+  const timedOut = lastErr?.name === "AbortError";
+  if (!(task === "transliteration" && timedOut)) {
+    b.fails++;
+    if (b.fails >= 5) b.openUntil = Date.now() + 3e4;
+    breaker.set(task, b);
+  }
   throw new ServiceUnavailable(task, String(lastErr?.message ?? lastErr));
 }
 function mask(text, locked) {
@@ -163567,6 +163570,7 @@ function rateOk(player, perSecond = 20) {
     return false;
   }
   ts.push(now);
+  if (buckets.size > 5e3) buckets.clear();
   buckets.set(player, ts);
   return true;
 }
@@ -168566,6 +168570,7 @@ init_env();
 init_pages();
 var AUDIO_DIR = resolve9(ROOT, ".data/audio");
 var ttsCache = /* @__PURE__ */ new Map();
+var ttsQuota = /* @__PURE__ */ new Map();
 async function serviceRoutes(app2, db2) {
   app2.get("/xlit", async (req, reply) => {
     const pid = requirePlayer(req, reply);
@@ -168620,10 +168625,15 @@ async function serviceRoutes(app2, db2) {
     if (!req.session?.email) return reply.code(401).send({ error: "not_signed_in" });
     const { text } = parse2(external_exports.object({ text: external_exports.string().min(1).max(400) }), req.body);
     if (!isConfigured("tts")) return reply.code(503).send({ error: "tts_unavailable" });
+    if (ttsQuota.size > 5e3) ttsQuota.clear();
     const k = createHash3("sha1").update(`${ttsKey()}|${text}`).digest("hex");
     try {
       let buf = ttsCache.get(k);
       if (!buf) {
+        const now = Date.now(), w = ttsQuota.get(req.session.email);
+        const q = w && now - w.start < 6e5 ? w : { start: now, n: 0 };
+        if (++q.n > 30) return reply.code(429).send({ error: "tts_rate_limited" });
+        ttsQuota.set(req.session.email, q);
         buf = await tts(text);
         ttsCache.set(k, buf);
         if (ttsCache.size > 500) ttsCache.delete(ttsCache.keys().next().value);
