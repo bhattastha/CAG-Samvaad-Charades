@@ -1,0 +1,23 @@
+{
+  "summary": "Backend-only test of the new health endpoints. Preview /api/health GET+HEAD -> 200 {ok,status:'healthy',message:'Samvaad Charades backend is running',timestamp ISO,uptime int} with cache-control no-store; ~0.10-0.15s over the public URL; works with junk cookie/Bearer; no env/version/host/db leakage; the app sets no cookies (only Cloudflare edge adds __cf_bm on the public URL; direct :8001 has no set-cookie). /api/health/db GET+HEAD -> 200 {status:'healthy',database:'connected',latencyMs,timestamp}, code is a read-only SELECT 1 with a 3s cap and 503 fallback. Published-mode sim (bundle on PGlite at 127.0.0.1:3997, env -i) returned the same shapes for both endpoints. Python shim fallback, tested on a copy with UPSTREAM pointed at the unused port 3996: 200 {ok:true,status:'starting',message,timestamp} no-store for GET and HEAD; with app.state.api_proc set to an exited process: 503 {ok:false,status:'unhealthy',message:'...restarting',timestamp}. Regression: landing / and /manager load (200); a planted OTP login works for player qa.tester2 (/api/me/profile 200) and manager (/api/admin/me 200); anonymous /api/admin/* -> 401/403. 17/17 pytest passed. Sim + shim copies killed and removed.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/health (Python shim fallback)", "issue": "When nothing listens upstream and there is no tracked api_proc (preview/supervisor mode), or the bundled process is alive but never binds or hangs, the shim returns 200 status:'starting' with no time limit. An uptime monitor that only checks the status code would miss a real outage. A keyword monitor for 'healthy' would catch it. Suggestion: only return 'starting' within N seconds (e.g. 180s) of shim startup, then return 503."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/test_iter6_health.py", "/app/test_reports/pytest/pytest_iter6.xml"],
+  "action_items": ["Optional: time-bound the shim's 200 'starting' fallback, then return 503 unhealthy"],
+  "critical_code_review_comments": [
+    "Node /health is pure in-memory; /health/db uses SELECT 1 with a 3s race timeout, which is correct and read-only.",
+    "The shim health() proxies with a 5s timeout and catches httpx.HTTPError/ValueError. HEAD works because FastAPI drops the body.",
+    "Note: there is no /api/me route; the player identity endpoints are /api/me/profile and /api/me/summary (the review request mentioned /api/me)."
+  ],
+  "updated_files": ["/app/backend/tests/test_iter6_health.py"],
+  "success_rate": {"backend": "100%", "frontend": "N/A (skipped)"},
+  "seed_data_creation": "Planted OTPs for qa.tester2@gmail.com and bhattastha.dibd@gmail.com (consumed). No other data.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run: REACT_APP_BACKEND_URL=<url> pytest backend/tests/test_iter6_health.py. The TestPublishedHealth tests need the bundle running at PUBSIM_URL (default http://127.0.0.1:3997), otherwise they skip. Shim fallback was tested via a sed-patched copy (UPSTREAM -> 3996) plus TestClient with api_proc set to an exited Popen for the 503 path."
+}

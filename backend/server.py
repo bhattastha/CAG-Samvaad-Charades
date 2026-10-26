@@ -6,6 +6,7 @@ import logging
 import os
 import socket
 import subprocess
+import time
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
@@ -19,6 +20,8 @@ HOP = {"host", "connection", "keep-alive", "transfer-encoding", "upgrade", "te",
 HERE = os.path.dirname(os.path.abspath(__file__))
 HC = os.path.join(HERE, "hc")
 log = logging.getLogger("hc-shim")
+STARTED = time.monotonic()
+STARTUP_GRACE_S = 180
 
 
 def _open(host: str, port: int) -> bool:
@@ -104,8 +107,8 @@ async def health():
     except (httpx.HTTPError, ValueError):
         now = datetime.now(timezone.utc).isoformat()
         proc = getattr(app.state, "api_proc", None)
-        if proc and proc.poll() is not None:
-            return JSONResponse({"ok": False, "status": "unhealthy", "message": "Samvaad Charades backend is restarting", "timestamp": now}, status_code=503, headers={"cache-control": "no-store"})
+        if (proc and proc.poll() is not None) or time.monotonic() - STARTED > STARTUP_GRACE_S:
+            return JSONResponse({"ok": False, "status": "unhealthy", "message": "Samvaad Charades backend is not responding", "timestamp": now}, status_code=503, headers={"cache-control": "no-store"})
         # the API is still seeding on first boot; the shim itself is healthy
         return JSONResponse({"ok": True, "status": "starting", "message": "Samvaad Charades backend is starting", "timestamp": now}, status_code=200, headers={"cache-control": "no-store"})
 
