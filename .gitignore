@@ -19,3 +19,9 @@ scripts/content/work/*/en_*.json
 # Emergent publish package (scripts/emergent/package.sh): vendored runtime deps must be committed
 !backend/hc/vendor/**/dist
 !backend/hc/vendor/**/dist/**
+.env.*
+*.env
+credentials.json
+*.pem
+*.key
+.credentials
